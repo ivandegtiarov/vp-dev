@@ -8,19 +8,20 @@
   GALLERY: custom Swiper.js gallery (main image + thumbnail row). Loaded from
   the same Swiper 11 CDN used by the other vp- sections. No native gallery.
 
-  VARIANT / SUBSCRIPTION  (NATIVE selling plans — app-agnostic, works with Loop):
+  VARIANT / SUBSCRIPTION  (Loop — same flow as main-product.liquid):
     - Bundle cards (1 / 3 / 6 Jar) are styled radios. On change, our own JS
       writes the matching variant id into the form's hidden name="id" input
       (no Section Rendering re-render — keeps Swiper + markup intact) and swaps
       the ATC price. <product-form> handles the actual add-to-cart.
-    - Subscriptions use Shopify's NATIVE selling plans
-      (variant.selling_plan_allocations) — NOT any vendor widget. Each bundle
-      radio carries data-selling-plan="{plan id}" read straight from the variant.
-      The Subscribe checkbox writes that id into a hidden <input name="selling_plan">
-      (or clears it for one-time) and toggles `.single_purchase_option` so the
+    - Subscriptions are handled by the LOOP app's auto-injected purchase-option
+      widget inside this form. The Subscribe checkbox is a PROXY: checked → it
+      clicks Loop's selling-plan group ([data-loop-widget-selling-plan-group]),
+      unchecked → it clicks Loop's one-time option
+      (.loop-widget-purchase-option-onetime). Loop owns the selling_plan and
+      attaches it on /cart/add — we never write a selling_plan input. The
+      checkbox also toggles `.single_purchase_option` so the
       [subs-purchase-pricings] / [single-purchase-pricings] prices switch.
-      This is whatever subscription app created the selling plans — Loop, Appstle,
-      Shopify native — no app-specific DOM, no hardcoded plan-id maps.
+      A MutationObserver re-syncs once Loop's async widget appears.
     - Content rows are section BLOCKS so each is editable in the customizer.
   ============================================================================
 {% endcomment %}
@@ -210,18 +211,6 @@
   .vp-hero__subscribe-meta > span { display: flex; align-items: center; gap: 6px; }
   .vp-hero__subscribe-meta img { width: 18px; height: 18px; }
   .vp-hero__subscribe-meta p { margin: 0; font-size: 12px; color: var(--vp-h-muted); letter-spacing: -0.24px; }
-
-  /* optional native frequency picker (only when a variant has >1 plan) */
-  .vp-hero__frequency { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
-  .vp-hero__sale.single_purchase_option .vp-hero__frequency { display: none; }
-  .vp-hero__frequency-label { font-size: 12px; font-weight: 700; color: var(--vp-h-muted); }
-  .vp-hero__frequency-select {
-    width: 100%; padding: 11px 14px; border: 1px solid var(--vp-h-border-a);
-    border-radius: 8px; font-family: var(--vp-h-sans); font-size: 14px; font-weight: 700;
-    background: #fff; cursor: pointer; appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 14px center;
-  }
 
   /* subs / one-time toggle */
   .vp-hero [single-purchase-pricings] { display: none; }
@@ -427,23 +416,6 @@
                           assign v = value.variant
                           assign input_id = section.id | append: '-bundle-' | append: forloop.index0
                           assign idx = forloop.index
-
-                          # Native subscription selling plan for this variant.
-                          # Prefer a plan matching the block's "default frequency"
-                          # group name; otherwise fall back to the first allocation.
-                          assign sub_plan_id = ''
-                          assign target_group = block.settings.default_plan_group | downcase | strip
-                          for alloc in v.selling_plan_allocations
-                            if sub_plan_id == ''
-                              assign sub_plan_id = alloc.selling_plan.id
-                            endif
-                            if target_group != blank
-                              assign gname = alloc.selling_plan.name | downcase
-                              if gname contains target_group
-                                assign sub_plan_id = alloc.selling_plan.id
-                              endif
-                            endif
-                          endfor
                         -%}
                         <input
                           class="vp-hero__bundle-input"
@@ -453,13 +425,19 @@
                           value="{{ v.id }}"
                           data-variant-id="{{ v.id }}"
                           data-featured-media="{{ v.featured_media.id }}"
-                          data-selling-plan="{{ sub_plan_id }}"
                           {% if value.selected %}checked{% endif %}
                           {% unless value.available %}disabled{% endunless %}
                         >
                         {%- liquid
+                          # Jar image: optional section-setting override wins,
+                          # otherwise the per-variant metafield.
+                          assign jar_image = block.settings.bundle_image_override
+                          if jar_image == blank
+                            assign jar_image = v.metafields.custom.size_featured_image
+                          endif
+
                           assign has_jars = false
-                          if block.settings.show_jars and v.metafields.custom.size_featured_image
+                          if block.settings.show_jars and jar_image != blank
                             assign has_jars = true
                           endif
                           if has_jars
@@ -472,12 +450,8 @@
                           <span class="vp-hero__radio"></span>
 
                           {%- if has_jars -%}
-                            {%- assign jar_count = idx -%}
-                            {%- if jar_count > 3 -%}{%- assign jar_count = 3 -%}{%- endif -%}
-                            <span class="vp-hero__bundle-jars vp-hero__bundle-jars--{{ jar_count }}">
-                              {%- for j in (1..jar_count) -%}
-                                <img src="{{ v.metafields.custom.size_featured_image | image_url: width: 120 }}" alt="" loading="lazy">
-                              {%- endfor -%}
+                            <span class="vp-hero__bundle-jars vp-hero__bundle-jars--1">
+                              <img src="{{ jar_image | image_url: width: 120 }}" alt="" loading="lazy">
                             </span>
                           {%- endif -%}
 
@@ -515,9 +489,17 @@
                     </fieldset>
                   {%- endunless -%}
 
-                  {%- comment -%} SUBSCRIBE CARD {%- endcomment -%}
+                  {%- comment -%}
+                    SUBSCRIBE CARD — Loop proxy.
+                    This checkbox does NOT submit. Our JS uses it to .click()
+                    Loop's auto-injected purchase-option buttons inside this
+                    form (same flow as main-product.liquid), and to toggle the
+                    `single_purchase_option` class that swaps the pricing.
+                    Loop attaches the selling_plan to /cart/add from its own
+                    widget — we never write a selling_plan input ourselves.
+                  {%- endcomment -%}
                   <label class="vp-hero__subscribe" for="vp-auto_refill-{{ section.id }}">
-                    <input type="checkbox" class="vp-hero__subscribe-check" id="vp-auto_refill-{{ section.id }}" name="vp-auto-refill" checked>
+                    <input type="checkbox" class="vp-hero__subscribe-check" id="vp-auto_refill-{{ section.id }}" data-vp-auto-refill checked>
                     <span class="vp-hero__subscribe-text">
                       <span class="vp-hero__subscribe-title">{{ block.settings.subscribe_title | default: 'Subscribe for an extra 20% off' }}</span>
                       <span class="vp-hero__subscribe-meta">
@@ -534,28 +516,12 @@
                   </label>
 
                   {%- comment -%}
-                    Native Shopify selling plan. JS sets this to the selected
-                    variant's data-selling-plan when subscribed, or removes it
-                    (disabled) for one-time. Shopify attaches the subscription
-                    from this input on /cart/add — no app widget required.
+                    Loop's purchase-option widget is auto-injected into this
+                    product form by the Loop app. We give it a target so it
+                    lands here; if Loop renders it elsewhere our JS still finds
+                    it by its Loop-specific selectors.
                   {%- endcomment -%}
-                  <input type="hidden" name="selling_plan" id="vp-selling-plan-{{ section.id }}" value="" data-vp-selling-plan>
-
-                  {%- comment -%}
-                    Optional frequency picker — only rendered if the product has
-                    more than one subscription plan, so the customer can choose.
-                  {%- endcomment -%}
-                  {%- assign first_variant = product.selected_or_first_available_variant -%}
-                  {%- if first_variant.selling_plan_allocations.size > 1 -%}
-                    <div class="vp-hero__frequency" data-vp-frequency>
-                      <label class="vp-hero__frequency-label" for="vp-frequency-{{ section.id }}">{{ block.settings.frequency_label | default: 'Delivery frequency' }}</label>
-                      <select id="vp-frequency-{{ section.id }}" class="vp-hero__frequency-select" data-vp-frequency-select>
-                        {%- for alloc in first_variant.selling_plan_allocations -%}
-                          <option value="{{ alloc.selling_plan.id }}">{{ alloc.selling_plan.name }}</option>
-                        {%- endfor -%}
-                      </select>
-                    </div>
-                  {%- endif -%}
+                  <div class="vp-hero__loop-target" data-vp-loop-target hidden></div>
 
                   {%- comment -%} BUY BUTTON {%- endcomment -%}
                   <div class="vp-hero__buy product-form__buttons">
@@ -568,10 +534,20 @@
                     >
                       <span class="vp-hero__atc-label">
                         <span class="atc-text">{{ block.settings.atc_text | default: 'ADD TO CART' }}</span>
+                        {%- comment -%}
+                          ATC shows the BUNDLE TOTAL (what the customer actually
+                          pays for the selected variant), not the per-jar price.
+                          Subscribe vs one-time totals swap via the pricing attrs.
+                          v.price is the live one-time total; the subscribe total
+                          applies Loop's discount off that same total.
+                        {%- endcomment -%}
+                        {%- assign sub_pct = block.settings.subscribe_discount_percent | default: 20 -%}
+                        {%- assign sub_keep = 100 | minus: sub_pct -%}
                         {%- for v in product.variants -%}
+                          {%- assign sub_total = v.price | times: sub_keep | divided_by: 100 -%}
                           <span class="atc-prices" data-variant-prices="{{ v.id }}" {% unless v.id == product.selected_or_first_available_variant.id %}style="display:none"{% endunless %}>
-                            <span class="atc-now" subs-purchase-pricings>{{ v.metafields.custom.single_jar_price.value | money }}</span>
-                            <span class="atc-now" single-purchase-pricings>{{ v.metafields.custom.single_jar_price_one_time_purchase.value | money }}</span>
+                            <span class="atc-now" subs-purchase-pricings>{{ sub_total | money }}</span>
+                            <span class="atc-now" single-purchase-pricings>{{ v.price | money }}</span>
                             <span class="atc-was">{{ v.compare_at_price | money }}</span>
                           </span>
                         {%- endfor -%}
@@ -666,55 +642,76 @@
         if (slides[i].getAttribute('data-media-id') === String(mediaId)) { main.slideTo(i); break; }
       }
     }
-    /* ---------- SUBSCRIPTION (native selling plans) ---------- */
-    var autoRefill = root.querySelector('#vp-auto_refill-' + SECTION_ID);
-    var sellingPlanInput = root.querySelector('[data-vp-selling-plan]');
-    var freqSelect = root.querySelector('[data-vp-frequency-select]');
+    /* ---------- SUBSCRIPTION (Loop widget proxy) ----------
+       Mirrors the flow in main-product.liquid: the Loop app auto-injects its
+       purchase-option buttons into this product form. Our subscribe checkbox
+       is a proxy — checking it clicks Loop's subscribe group, unchecking it
+       clicks Loop's one-time option. Loop owns the selling_plan; we only
+       toggle `single_purchase_option` on the sale side so the pricing swaps. */
+    var autoRefill = root.querySelector('[data-vp-auto-refill]');
 
-    // Is the customer currently in subscribe mode?
-    function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
-
-    // The selling-plan id to use for the currently-selected variant.
-    // If a frequency <select> exists, prefer it; else use the variant's own
-    // data-selling-plan; honour the chosen frequency across variants by group.
-    function planForCurrentVariant() {
-      var checkedInput = root.querySelector('.vp-hero__bundle-input:checked');
-      var variantPlan = checkedInput ? (checkedInput.getAttribute('data-selling-plan') || '') : '';
-      if (freqSelect && freqSelect.value) return freqSelect.value;
-      return variantPlan;
+    // Loop injects its widget into the product form, but some Loop builds mount
+    // it at document level — query the form first, then fall back to document
+    // (same selectors main-product.liquid uses globally).
+    function loopOnetimeEl() {
+      return (form && form.querySelector('.loop-widget-purchase-option-onetime'))
+        || document.querySelector('.loop-widget-purchase-option-onetime');
+    }
+    function loopSubEl() {
+      return (form && form.querySelector('[data-loop-widget-selling-plan-group]'))
+        || document.querySelector('[data-loop-widget-selling-plan-group]');
     }
 
+    function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
+
     function applyPurchaseMode() {
+      var subEl = loopSubEl();
+      var oneEl = loopOnetimeEl();
       if (isSubscribed()) {
-        var plan = planForCurrentVariant();
-        if (sellingPlanInput) {
-          sellingPlanInput.value = plan;
-          sellingPlanInput.disabled = !plan;            // no plan => behaves as one-time
-        }
+        if (subEl) subEl.click();                        // Loop attaches the plan
         if (sale) sale.classList.remove('single_purchase_option');
       } else {
-        if (sellingPlanInput) { sellingPlanInput.value = ''; sellingPlanInput.disabled = true; }
+        if (oneEl) oneEl.click();                        // Loop reverts to one-time
         if (sale) sale.classList.add('single_purchase_option');
       }
+    }
+
+    // Loop loads async — keep the widget in sync with the checkbox once it
+    // appears, then disconnect.
+    function watchLoopWidget() {
+      if (loopOnetimeEl() && loopSubEl()) { applyPurchaseMode(); return; }
+      var obs = new MutationObserver(function () {
+        if (loopOnetimeEl() && loopSubEl()) { applyPurchaseMode(); obs.disconnect(); }
+      });
+      obs.observe(document.body, { childList: true, subtree: true });
     }
 
     function selectVariant(input) {
       var id = input.getAttribute('data-variant-id');
       if (variantIdInput) variantIdInput.value = id;
+      window.currenSelectedVariantId = id;   // kept for parity with store-wide Loop scripts
       showVariantPrice(id);
       slideToMedia(input.getAttribute('data-featured-media'));
-      applyPurchaseMode();   // refresh the selling plan for the new variant
+      applyPurchaseMode();   // re-sync Loop for the newly-selected variant
     }
     bundleInputs.forEach(function (input) {
       input.addEventListener('change', function () { if (input.checked) selectVariant(input); });
     });
 
     if (autoRefill) autoRefill.addEventListener('change', applyPurchaseMode);
-    if (freqSelect) freqSelect.addEventListener('change', applyPurchaseMode);
 
-    // initialise from the checked bundle (sets variant id, price, plan)
+    // initialise from the checked bundle (sets variant id + price), then sync Loop
     var checked = root.querySelector('.vp-hero__bundle-input:checked');
-    if (checked) { selectVariant(checked); } else { applyPurchaseMode(); }
+    if (checked) {
+      var id = checked.getAttribute('data-variant-id');
+      if (variantIdInput) variantIdInput.value = id;
+      window.currenSelectedVariantId = id;
+      showVariantPrice(id);
+      slideToMedia(checked.getAttribute('data-featured-media'));
+    } else if (sale && !isSubscribed()) {
+      sale.classList.add('single_purchase_option');
+    }
+    watchLoopWidget();
 
     /* ---------- UGC video click-to-play ---------- */
     root.querySelectorAll('.vp-hero__ugc-trigger').forEach(function (btn) {
@@ -773,6 +770,7 @@
       "settings": [
         { "type": "text", "id": "heading", "label": "Separator heading", "default": "Bundle & Save" },
         { "type": "checkbox", "id": "show_jars", "label": "Show jar thumbnails", "default": true },
+        { "type": "image_picker", "id": "bundle_image_override", "label": "Bundle jar image (override)", "info": "Optional. Overrides the per-variant 'size_featured_image' metafield for every bundle card. Leave empty to use the metafield image." },
         { "type": "text", "id": "price_suffix", "label": "Per-jar price suffix", "default": "/jar" },
         { "type": "number", "id": "popular_index", "label": "\"Most popular\" card position (1-based)", "default": 2 },
         { "type": "text", "id": "popular_text", "label": "Most-popular badge", "default": "MOST POPULAR" },
@@ -783,9 +781,8 @@
         { "type": "image_picker", "id": "subscribe_icon_2", "label": "Subscribe icon 2 (cancel)" },
         { "type": "text", "id": "subscribe_title", "label": "Subscribe title", "default": "Subscribe for an extra 20% off" },
         { "type": "text", "id": "subscribe_frequency_label", "label": "Subscribe meta — frequency text", "default": "30 days" },
-        { "type": "header", "content": "Subscription (native selling plans)", "info": "Subscriptions use Shopify's native selling plans (created by Loop / Appstle / etc.). No plan IDs to enter — the section reads each variant's own plans." },
-        { "type": "text", "id": "default_plan_group", "label": "Preferred plan name match", "info": "When a variant has several plans, the one whose name contains this text is used as the default (e.g. \"30 day\", \"month\"). Leave blank to use the first plan." },
-        { "type": "text", "id": "frequency_label", "label": "Frequency picker label", "default": "Delivery frequency" },
+        { "type": "header", "content": "Subscription (Loop)", "info": "Subscriptions are handled by the Loop app's auto-injected widget — same flow as the main product page. The subscribe toggle clicks Loop's purchase options; no plan IDs to enter." },
+        { "type": "range", "id": "subscribe_discount_percent", "min": 0, "max": 60, "step": 1, "unit": "%", "label": "Subscribe discount % (for ATC total)", "info": "Used only to compute the subscribe total shown in the Add-to-cart button. Match this to your Loop discount.", "default": 20 },
         { "type": "text", "id": "atc_text", "label": "Add-to-cart text", "default": "ADD TO CART" }
       ]
     },
