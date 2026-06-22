@@ -12,7 +12,7 @@
     "main": {
       "type": "vp-product-hero",
       "blocks": {
-        "title": { "type": "title", "settings": {} },
+        "title": { "type": "title_reviews", "settings": {} },
         "subtitle": {
           "type": "subtitle",
           "settings": { "text": "<p>60 Multivitamin soft chews for <strong>key nutritional support</strong> & <strong>long-term health</strong> in one daily treat.</p>" }

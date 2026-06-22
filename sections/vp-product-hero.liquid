@@ -375,7 +375,7 @@
         {%- for block in section.blocks -%}
           {%- case block.type -%}
 
-            {%- when 'title' -%}
+            {%- when 'title_reviews' -%}
               <div class="vp-hero__title-group" {{ block.shopify_attributes }}>
                 {% render 'vp-product-hero-title', section: section, product: product %}
               </div>
@@ -745,7 +745,7 @@
     { "type": "textarea", "id": "title", "label": "Title (Amethysta). Blank = product title", "default": "Daily Multivitamin Chews for Dogs" }
   ],
   "blocks": [
-    { "type": "title", "name": "Title + reviews", "limit": 1 },
+    { "type": "title_reviews", "name": "Title + reviews", "limit": 1 },
     {
       "type": "subtitle", "name": "Subtitle", "limit": 1,
       "settings": [ { "type": "richtext", "id": "text", "label": "Subtitle", "default": "<p>60 Multivitamin soft chews for <strong>key nutritional support</strong> & <strong>long-term health</strong> in one daily treat.</p>" } ]
@@ -784,7 +784,7 @@
         { "type": "text", "id": "subscribe_title", "label": "Subscribe title", "default": "Subscribe for an extra 20% off" },
         { "type": "text", "id": "subscribe_frequency_label", "label": "Subscribe meta — frequency text", "default": "30 days" },
         { "type": "header", "content": "Subscription (native selling plans)", "info": "Subscriptions use Shopify's native selling plans (created by Loop / Appstle / etc.). No plan IDs to enter — the section reads each variant's own plans." },
-        { "type": "text", "id": "default_plan_group", "label": "Preferred plan name match", "info": "When a variant has several plans, the one whose name contains this text is used as the default (e.g. \"30 day\", \"month\"). Leave blank to use the first plan.", "default": "" },
+        { "type": "text", "id": "default_plan_group", "label": "Preferred plan name match", "info": "When a variant has several plans, the one whose name contains this text is used as the default (e.g. \"30 day\", \"month\"). Leave blank to use the first plan." },
         { "type": "text", "id": "frequency_label", "label": "Frequency picker label", "default": "Delivery frequency" },
         { "type": "text", "id": "atc_text", "label": "Add-to-cart text", "default": "ADD TO CART" }
       ]
@@ -821,7 +821,7 @@
     {
       "name": "VP - Product Hero",
       "blocks": [
-        { "type": "title" },
+        { "type": "title_reviews" },
         { "type": "subtitle" },
         { "type": "dosage" },
         { "type": "vet" },
