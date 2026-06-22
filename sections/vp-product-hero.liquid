@@ -580,7 +580,8 @@
               </details>
 
             {%- when 'videos' -%}
-              {% render 'vp-product-hero-videos', section: section %}
+              {%- comment -%} Anchor for the SS - Product videos section (ss-product-vidoes). {%- endcomment -%}
+              <div id='ss-product-videos' {{ block.shopify_attributes }}></div>
 
           {%- endcase -%}
         {%- endfor -%}
@@ -805,16 +806,8 @@
       ]
     },
     {
-      "type": "videos", "name": "UGC video grid", "limit": 1,
-      "settings": [ { "type": "paragraph", "content": "Add individual videos with the 'UGC video' block below." } ]
-    },
-    {
-      "type": "ugc_video", "name": "UGC video",
-      "settings": [
-        { "type": "video", "id": "video", "label": "Shopify video" },
-        { "type": "url", "id": "video_url", "label": "Or external MP4 URL" },
-        { "type": "image_picker", "id": "poster", "label": "Poster image" }
-      ]
+      "type": "videos", "name": "Product videos anchor", "limit": 1,
+      "settings": [ { "type": "paragraph", "content": "Outputs <div id='ss-product-videos'></div> — the 'SS - Product videos' section attaches its slider here." } ]
     }
   ],
   "presets": [
@@ -831,10 +824,7 @@
         { "type": "accordion", "settings": { "title": "Ingredient list" } },
         { "type": "accordion", "settings": { "title": "Shipping Information" } },
         { "type": "accordion", "settings": { "title": "Frequently asked questions" } },
-        { "type": "videos" },
-        { "type": "ugc_video" },
-        { "type": "ugc_video" },
-        { "type": "ugc_video" }
+        { "type": "videos" }
       ]
     }
   ]
