@@ -40,6 +40,29 @@
   endfor
 -%}
 
+{%- comment -%}
+  Review banner + title. Captured once and printed in both the mobile head
+  (above the gallery) and the sale-side title group, so the title can sit above
+  the gallery on mobile while staying in the sale column on desktop.
+{%- endcomment -%}
+{%- capture vp_title_html -%}
+  {%- if s.review_text != blank -%}
+    <a href="{{ s.review_link | default: '#' }}" class="vp-hero__reviewbar vp-anim vp-pop" data-vp-delay="1">
+      <span class="vp-hero__stars">
+        <span class="vp-hero__star">★</span>
+        <span class="vp-hero__star">★</span>
+        <span class="vp-hero__star">★</span>
+        <span class="vp-hero__star">★</span>
+        <span class="vp-hero__star">★</span>
+      </span>
+      <span class="vp-hero__reviewbar-text">{{ s.review_text }}</span>
+    </a>
+  {%- endif -%}
+  <h1 class="vp-hero__title vp-anim" data-vp-delay="1">
+    {{ s.title | default: product.title | escape | newline_to_br }}
+  </h1>
+{%- endcapture -%}
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
@@ -315,7 +338,7 @@
     {%- comment -%} ============ LEFT: SWIPER GALLERY ============ {%- endcomment -%}
     <div class="vp-hero__gallery">
       <div class="vp-hero__mobile-head">
-        {% render 'vp-product-hero-title', section: section, product: product %}
+        {{ vp_title_html }}
         {%- if vp_subtitle_text != blank -%}
           <p class="vp-hero__subtitle vp-hero__subtitle--mobile">{{ vp_subtitle_text }}</p>
         {%- endif -%}
@@ -369,7 +392,7 @@
 
             {%- when 'title_reviews' -%}
               <div class="vp-hero__title-group" {{ block.shopify_attributes }}>
-                {% render 'vp-product-hero-title', section: section, product: product %}
+                {{ vp_title_html }}
               </div>
 
             {%- when 'subtitle' -%}
