@@ -295,8 +295,9 @@
     .vp-hero__mobile-head { display: flex; flex-direction: column; gap: 12px; }
     .vp-hero__sale .vp-hero__title-group { display: none; }
     /* description shows in the mobile head (above gallery); hide the sale-side copy */
-    .vp-hero__subtitle--mobile { display: block !important; }
-    .vp-hero__subtitle--sale { display: none !important; }
+    .vp-hero .vp-hero__mobile-head .vp-hero__subtitle--mobile { display: block !important; }
+    .vp-hero .vp-hero__sale .vp-hero__info .vp-hero__subtitle--sale,
+    .vp-hero .vp-hero__subtitle--sale { display: none !important; }
 
     .vp-hero__gallery-inner { gap: 5px; }
     .vp-hero__thumbs .swiper-slide { width: 55px; height: 55px; }
