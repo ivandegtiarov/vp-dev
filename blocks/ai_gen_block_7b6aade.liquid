@@ -1,0 +1,485 @@
+{% doc %}
+  @prompt
+    Create a frequently asked questions (FAQ) section with a centered heading "Frequently Asked Questions" and 8 collapsible question items. Each question should be clickable to expand and show the answer. The questions are: "What if my dog doesn't like the chews?", "At what age can my pup start using these?", "What does 100% Human-Grade mean?", "How long until I start seeing the benefits?", "How many chews come in a jar?", "What flavour is the Multivitamin?", "What happens if I accidentally give my dog too many chews?", and "Can I take this dog multivitamin with other supplements?". Use clean typography with proper spacing, collapsible functionality with smooth animations, and a modern design suitable for a pet health product website.
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .faq-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .faq-heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: {{ block.settings.heading_weight }};
+    color: {{ block.settings.heading_color }};
+  }
+
+  .faq-list-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.item_spacing }}px;
+  }
+
+  .faq-item-{{ ai_gen_id }} {
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    background-color: {{ block.settings.item_background }};
+    transition: box-shadow 0.3s ease;
+  }
+
+  .faq-item-{{ ai_gen_id }}:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .faq-question-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: {{ block.settings.question_size }}px;
+    font-weight: {{ block.settings.question_weight }};
+    color: {{ block.settings.question_color }};
+  }
+
+  .faq-question-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.question_color }};
+    outline-offset: -2px;
+  }
+
+  .faq-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+
+  .faq-icon-{{ ai_gen_id }}::before,
+  .faq-icon-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    background-color: {{ block.settings.icon_color }};
+    transition: transform 0.3s ease;
+  }
+
+  .faq-icon-{{ ai_gen_id }}::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+
+  .faq-icon-{{ ai_gen_id }}::after {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+
+  .faq-item-{{ ai_gen_id }}.active .faq-icon-{{ ai_gen_id }}::after {
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .faq-answer-{{ ai_gen_id }} {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    font-size: {{ block.settings.answer_size }}px;
+    color: {{ block.settings.answer_color }};
+    line-height: 1.6;
+  }
+
+  .faq-item-{{ ai_gen_id }}.active .faq-answer-{{ ai_gen_id }} {
+    padding: 0 20px 20px;
+    max-height: 1000px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .faq-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+      margin-bottom: 30px;
+    }
+    
+    .faq-question-{{ ai_gen_id }} {
+      font-size: {{ block.settings.question_size | times: 0.9 }}px;
+      padding: 15px;
+    }
+    
+    .faq-item-{{ ai_gen_id }}.active .faq-answer-{{ ai_gen_id }} {
+      padding: 0 15px 15px;
+    }
+  }
+{% endstyle %}
+
+<div class="faq-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <h2 class="faq-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+  
+  <div class="faq-list-{{ ai_gen_id }}">
+    {% for i in (1..8) %}
+      {% assign question_key = 'question_' | append: i %}
+      {% assign answer_key = 'answer_' | append: i %}
+      
+      {% if block.settings[question_key] != blank and block.settings[answer_key] != blank %}
+        <div class="faq-item-{{ ai_gen_id }}">
+          <button 
+            class="faq-question-{{ ai_gen_id }}" 
+            aria-expanded="false"
+            aria-controls="faq-answer-{{ ai_gen_id }}-{{ i }}"
+          >
+            {{ block.settings[question_key] }}
+            <span class="faq-icon-{{ ai_gen_id }}"></span>
+          </button>
+          <div 
+            id="faq-answer-{{ ai_gen_id }}-{{ i }}"
+            class="faq-answer-{{ ai_gen_id }}"
+          >
+            {{ block.settings[answer_key] }}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    class FaqAccordion extends HTMLElement {
+      constructor() {
+        super();
+        this.faqItems = this.querySelectorAll('.faq-item-{{ ai_gen_id }}');
+        this.init();
+      }
+      
+      init() {
+        this.faqItems.forEach(item => {
+          const question = item.querySelector('.faq-question-{{ ai_gen_id }}');
+          const answer = item.querySelector('.faq-answer-{{ ai_gen_id }}');
+          
+          question.addEventListener('click', () => {
+            const isExpanded = question.getAttribute('aria-expanded') === 'true';
+            
+            // Close all other items
+            if (!isExpanded && {{ block.settings.close_others }}) {
+              this.faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                  const otherQuestion = otherItem.querySelector('.faq-question-{{ ai_gen_id }}');
+                  otherQuestion.setAttribute('aria-expanded', 'false');
+                }
+              });
+            }
+            
+            // Toggle current item
+            item.classList.toggle('active');
+            question.setAttribute('aria-expanded', !isExpanded);
+          });
+        });
+      }
+    }
+    
+    customElements.define('faq-accordion-{{ ai_gen_id }}', FaqAccordion);
+    
+    // Initialize the component
+    const faqContainer = document.querySelector('.faq-container-{{ ai_gen_id }}');
+    if (faqContainer) {
+      new FaqAccordion();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "question_1",
+      "label": "Question 1",
+      "default": "What if my dog doesn't like the chews?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_1",
+      "label": "Answer 1",
+      "default": "<p>If your dog doesn't enjoy our chews, we offer a 100% satisfaction guarantee. Contact our customer service team within 30 days of purchase for a full refund.</p>"
+    },
+    {
+      "type": "text",
+      "id": "question_2",
+      "label": "Question 2",
+      "default": "At what age can my pup start using these?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_2",
+      "label": "Answer 2",
+      "default": "<p>Our multivitamin chews are suitable for puppies from 12 weeks of age. For puppies younger than 12 weeks, please consult with your veterinarian before use.</p>"
+    },
+    {
+      "type": "text",
+      "id": "question_3",
+      "label": "Question 3",
+      "default": "What does 100% Human-Grade mean?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_3",
+      "label": "Answer 3",
+      "default": "<p>Human-grade means that all our ingredients are sourced, processed, and manufactured according to standards suitable for human consumption. This ensures the highest quality and safety for your pet.</p>"
+    },
+    {
+      "type": "text",
+      "id": "question_4",
+      "label": "Question 4",
+      "default": "How long until I start seeing the benefits?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_4",
+      "label": "Answer 4",
+      "default": "<p>Most pet parents notice improvements in their dog's energy and coat condition within 2-4 weeks of consistent use. For joint health and other benefits, it may take 4-6 weeks to see noticeable results.</p>"
+    },
+    {
+      "type": "text",
+      "id": "question_5",
+      "label": "Question 5",
+      "default": "How many chews come in a jar?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_5",
+      "label": "Answer 5",
+      "default": "<p>Each jar contains 60 chews, which is a 30-day supply for a medium-sized dog (based on the recommended dosage of 2 chews per day for dogs 25-50 lbs).</p>"
+    },
+    {
+      "type": "text",
+      "id": "question_6",
+      "label": "Question 6",
+      "default": "What flavour is the Multivitamin?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_6",
+      "label": "Answer 6",
+      "default": "<p>Our multivitamin chews come in a delicious chicken flavor that dogs love. The natural flavor comes from real chicken, not artificial additives.</p>"
+    },
+    {
+      "type": "text",
+      "id": "question_7",
+      "label": "Question 7",
+      "default": "What happens if I accidentally give my dog too many chews?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_7",
+      "label": "Answer 7",
+      "default": "<p>Our chews are formulated to be safe, but exceeding the recommended dosage isn't advised. If your dog consumes more than the recommended amount, they may experience mild digestive upset. If you're concerned, please contact your veterinarian.</p>"
+    },
+    {
+      "type": "text",
+      "id": "question_8",
+      "label": "Question 8",
+      "default": "Can I take this dog multivitamin with other supplements?"
+    },
+    {
+      "type": "richtext",
+      "id": "answer_8",
+      "label": "Answer 8",
+      "default": "<p>Our multivitamin can generally be given alongside other supplements, but we recommend consulting with your veterinarian when combining multiple products to avoid over-supplementation of certain nutrients.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Container width",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between items",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "close_others",
+      "label": "Close other questions when one is opened",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Question size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "question_weight",
+      "label": "Question weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Answer size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer color",
+      "default": "#505050"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#7bbc72"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "item_background",
+      "label": "Item background",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion"
+    }
+  ]
+}
+{% endschema %}

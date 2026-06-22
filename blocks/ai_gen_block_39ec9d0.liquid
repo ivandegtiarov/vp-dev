@@ -1,0 +1,479 @@
+{% doc %}
+  @prompt
+    Create a benefits section with a light green background featuring a main heading "6 Core Benefits for Long-Term Health" and descriptive text, followed by 6 benefit items. Each benefit should have a green bullet point, a bold title, and descriptive text underneath. The benefits are: Energy & Allergies (increases energy while relieving allergies), Digestion & Gut balance (probiotics support), Skin & Coat (shinier coat & less itching), Hip & Joint (reduced inflammation), Immunity (better gut health for stronger immune function), and Heart Health (CoQ10 cardiovascular support). Use clean typography with good spacing between items and a modern, health-focused design suitable for pet products., Good start, please add an image block above the '6 Core...' heading, with a border radius to make it look like a circular. 
+    
+    Also create a span for the '6 Core Benefits' text and highlight the background of just those words with this color: #D7FAD2FF.
+    
+    For the list of benefits, please put a green dot with this color in front of each benefit: #7BBC72FF.
+    
+    Also make the background-color of the whole section white instead of the current green.
+    
+    For mobile the 1-column design is good, for desktop please use two columns, with on the left only the big image block, and on the right the list of benefits., Please left-align the heading text as well as the heading description text.
+    
+    Also make the image bigger, fill it for 80% relative to the screen size of mobile, and 80% of the column on desktop.
+    
+    Please add green bullet points in front of every benefit title. Use this color for that: #7BBC72FF.
+    
+    Also give me the ability to gap between the benefit items (also below 16).
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .benefits-section-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .benefits-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .benefits-content-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .benefits-header-{{ ai_gen_id }} {
+    text-align: left;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .benefits-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin-bottom: 16px;
+  }
+
+  .benefits-highlight-{{ ai_gen_id }} {
+    background-color: #D7FAD2;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .benefits-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.text_color }};
+    text-align: left;
+  }
+
+  .benefits-image-container-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .benefits-image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .benefits-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .benefits-image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border-radius: 50%;
+  }
+
+  .benefits-image-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+  }
+
+  .benefits-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .benefit-item-{{ ai_gen_id }} {
+    display: flex;
+    margin-bottom: {{ block.settings.item_spacing }}px;
+  }
+
+  .benefit-bullet-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 50%;
+    background-color: #7BBC72;
+    margin-right: 16px;
+    margin-top: 6px;
+  }
+
+  .benefit-content-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .benefit-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.benefit_title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.benefit_title_color }};
+    margin-bottom: 8px;
+  }
+
+  .benefit-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.benefit_text_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+  }
+
+  @media screen and (min-width: 750px) {
+    .benefits-content-wrapper-{{ ai_gen_id }} {
+      flex-direction: row;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .benefits-image-container-{{ ai_gen_id }} {
+      flex: 1;
+      margin-bottom: 0;
+      width: 80%;
+    }
+
+    .benefits-content-{{ ai_gen_id }} {
+      flex: 1;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .benefits-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .benefit-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.benefit_title_size | times: 0.9 }}px;
+    }
+
+    .benefits-section-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="benefits-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="benefits-container-{{ ai_gen_id }}">
+    <div class="benefits-content-wrapper-{{ ai_gen_id }}">
+      <div class="benefits-image-container-{{ ai_gen_id }}">
+        <div class="benefits-image-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.main_image %}
+            <img 
+              src="{{ block.settings.main_image | image_url: width: 600 }}" 
+              alt="{{ block.settings.main_image.alt | escape }}"
+              class="benefits-image-{{ ai_gen_id }}"
+              width="{{ block.settings.main_image.width }}"
+              height="{{ block.settings.main_image.height }}"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="benefits-image-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="benefits-content-{{ ai_gen_id }}">
+        <div class="benefits-header-{{ ai_gen_id }}">
+          <h2 class="benefits-title-{{ ai_gen_id }}">
+            <span class="benefits-highlight-{{ ai_gen_id }}">6 Core Benefits</span> for Long-Term Health
+          </h2>
+          <div class="benefits-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+        </div>
+
+        <div class="benefits-grid-{{ ai_gen_id }}">
+          {% for i in (1..6) %}
+            {% assign title_key = 'benefit_' | append: i | append: '_title' %}
+            {% assign text_key = 'benefit_' | append: i | append: '_text' %}
+            
+            {% if block.settings[title_key] != blank %}
+              <div class="benefit-item-{{ ai_gen_id }}">
+                <div class="benefit-bullet-{{ ai_gen_id }}"></div>
+                <div class="benefit-content-{{ ai_gen_id }}">
+                  <h3 class="benefit-title-{{ ai_gen_id }}">{{ block.settings[title_key] }}</h3>
+                  <div class="benefit-text-{{ ai_gen_id }}">{{ block.settings[text_key] }}</div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Core Benefits",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Our formula is designed to provide comprehensive support for your pet's health with these key benefits.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Benefit 1"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1_title",
+      "label": "Title",
+      "default": "Energy & Allergies"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_1_text",
+      "label": "Text",
+      "default": "<p>Increases energy levels while helping to relieve seasonal and food allergies for a happier, more active pet.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Benefit 2"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2_title",
+      "label": "Title",
+      "default": "Digestion & Gut Balance"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_2_text",
+      "label": "Text",
+      "default": "<p>Probiotics support healthy digestion and maintain optimal gut flora balance for better nutrient absorption.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Benefit 3"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3_title",
+      "label": "Title",
+      "default": "Skin & Coat"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_3_text",
+      "label": "Text",
+      "default": "<p>Promotes a shinier coat and reduces itching with essential fatty acids and targeted nutrients for skin health.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Benefit 4"
+    },
+    {
+      "type": "text",
+      "id": "benefit_4_title",
+      "label": "Title",
+      "default": "Hip & Joint"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_4_text",
+      "label": "Text",
+      "default": "<p>Reduces inflammation and supports joint mobility with glucosamine and chondroitin for better quality of life.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Benefit 5"
+    },
+    {
+      "type": "text",
+      "id": "benefit_5_title",
+      "label": "Title",
+      "default": "Immunity"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_5_text",
+      "label": "Text",
+      "default": "<p>Better gut health leads to stronger immune function, helping your pet stay healthy and resilient year-round.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Benefit 6"
+    },
+    {
+      "type": "text",
+      "id": "benefit_6_title",
+      "label": "Title",
+      "default": "Heart Health"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_6_text",
+      "label": "Text",
+      "default": "<p>CoQ10 provides cardiovascular support for optimal heart function and improved circulation as pets age.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between items",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacing between benefit items",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Header bottom spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "benefit_title_size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Benefit title size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "benefit_text_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Benefit text size",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#2c3e50"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "color",
+      "id": "benefit_title_color",
+      "label": "Benefit title color",
+      "default": "#2c3e50"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Core Benefits"
+    }
+  ]
+}
+{% endschema %}

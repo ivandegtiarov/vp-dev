@@ -1,0 +1,368 @@
+{% comment %}
+  Renders product variant options
+
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
+  - picker_type: {String} type of picker to dispay
+
+
+  Usage:
+  {% render 'product-variant-options',
+    product: product,
+    option: option,
+    block: block
+    picker_type: picker_type
+  %}
+{% endcomment %}
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+{%- for value in option.values -%}
+  {%- liquid
+    assign swatch_focal_point = null
+    if value.swatch.image
+      assign image_url = value.swatch.image | image_url: width: 50
+      assign swatch_value = 'url(' | append: image_url | append: ')'
+      assign swatch_focal_point = value.swatch.image.presentation.focal_point
+    elsif value.swatch.color
+      assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+    else
+      assign swatch_value = null
+    endif
+
+    assign option_disabled = true
+    if value.available
+      assign option_disabled = false
+    endif
+  -%}
+
+  {%- capture input_id -%}
+    {{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}
+  {%- endcapture -%}
+
+  {%- capture input_name -%}
+    {{ option.name }}-{{ option.position }}
+  {%- endcapture -%}
+
+  {%- capture input_dataset -%}
+    data-product-url="{{ value.product_url }}"
+    data-option-value-id="{{ value.id }}"
+  {%- endcapture -%}
+
+  {%- capture label_unavailable -%}
+    <span class="visually-hidden label-unavailable">
+      {{- 'products.product.variant_sold_out_or_unavailable' | t -}}
+    </span>
+  {%- endcapture -%}
+
+  {%- if picker_type == 'swatch' -%}
+    {%- capture help_text -%}
+      <span class="visually-hidden">{{ value | escape }}</span>
+      {{ label_unavailable }}
+    {%- endcapture -%}
+    {%
+      render 'swatch-input',
+      id: input_id,
+      name: input_name,
+      value: value | escape,
+      swatch: value.swatch,
+      product_form_id: product_form_id,
+      checked: value.selected,
+      visually_disabled: option_disabled,
+      shape: block.settings.swatch_shape,
+      help_text: help_text,
+      additional_props: input_dataset
+    %}
+
+  {%- elsif picker_type == 'button' -%}
+    <input
+      type="radio"
+      id="{{ input_id }}"
+      name="{{ input_name | escape }}"
+      value="{{ value | escape }}"
+      form="{{ product_form_id }}"
+      {% if value.selected %}
+        checked
+      {% endif %}
+      {% if option_disabled %}
+        class="disabled"
+      {% endif %}
+      {{ input_dataset }}
+    >
+    <label for="{{ input_id }}" class="product-form__input-size-{{forloop.index}}{% if product.id == 10494982750474 %} featured-label-design{% endif %}">
+      <span class="product-form__input--pill-dot">
+        <span class="product-form__input--pill-dot-inner"></span>
+      </span>
+      <img class="product-form__input--pill-image" src="{{ value.variant.metafields.custom.size_featured_image.value | image_url: width: 200 }}" alt="{{ value | escape }}" width="50" height="50">
+      <div class="product-form__input--pill-title">
+        <div class="product-form__input--pill-title-text">{{- value -}}
+          {% if product.id == 10494982750474 %}
+            <div class="product-form__input--pill-percentages" subs-purchase-pricings>
+              {{- value.variant.metafields.custom.size_jar_discount_value.value }}% OFF!
+            </div>
+            <div class="product-form__input--pill-percentages" single-purchase-pricings>
+              {{- value.variant.metafields.custom.size_jar_dicount_value_one_time_purchase.value }}% OFF!
+            </div>
+          {% endif %}
+        </div>
+        <div class="product-form__input--pill-title-text-desc">{{ value.variant.metafields.custom.size_jar_chews_count.value }}
+          {% if product.metafields.custom.enable_serum_per_day_price == true %}
+            {% if localization.country.iso_code == 'US' %}
+              {% assign price_1 = '$1,4/day' %}
+              {% assign price_2 = '$1,1/day' %}
+              {% assign price_3 = '$0,8/day' %}
+            {% elsif localization.country.iso_code == 'NZ' %}
+              {% assign price_1 = '$2,3/day' %}
+              {% assign price_2 = '$1,8/day' %}
+              {% assign price_3 = '$1,4/day' %}
+            {% elsif localization.country.iso_code == 'AU' %}
+              {% assign price_1 = '$1,9/day' %}
+              {% assign price_2 = '$1,5/day' %}
+              {% assign price_3 = '$1,1/day' %}
+            {% elsif localization.country.iso_code == 'GB' %}
+              {% assign price_1 = '£1,01/day' %}
+              {% assign price_2 = '£0,82/day' %}
+              {% assign price_3 = '£0,63/day' %}
+            {% else %}
+              {% assign price_1 = '€1,17/day' %}
+              {% assign price_2 = '€0,95/day' %}
+              {% assign price_3 = '€0,73/day' %}
+            {% endif %}
+
+            {% if value.variant.id == 52985927729418 or value.variant.id == 52985927827722 %}
+              <span class="product-form__input--pill-title-text-desc-price">({{ price_1 }})</span>
+            {% elsif value.variant.id == 52985927762186 or value.variant.id == 52985927860490 %}
+                <span class="product-form__input--pill-title-text-desc-price">({{ price_2 }})</span>
+            {% elsif value.variant.id == 52985927794954 or value.variant.id == 52985927893258 %}
+                <span class="product-form__input--pill-title-text-desc-price">({{ price_3 }})</span>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="product-form__input--pill-percentages product-form__input--pill-percentages-featured-label-design" subs-purchase-pricings>
+        {{- value.variant.metafields.custom.size_jar_discount_value.value }}% OFF!
+      </div>
+      <div class="product-form__input--pill-percentages product-form__input--pill-percentages-featured-label-design" single-purchase-pricings>
+        {{- value.variant.metafields.custom.size_jar_dicount_value_one_time_purchase.value }}% OFF!
+      </div>
+
+      {% unless template.suffix == 'serum' or template.suffix == 'serum-b' %}
+         {% assign text = '/jar' %}
+        {% else %}
+          {% assign text = '/pc' %}
+      {% endunless %}
+
+      <div class="product-form__input--pill-price">
+        {% if product.id == 10546921439498 %}
+          <div class="product-form__input--pill-title-text-price-compare"> {{ value.variant.compare_at_price | money }}</div>
+          {% assign text = '' %}
+          {% else %}
+          <div class="product-form__input--pill-title-text-price-compare"> {{ product.variants[0].compare_at_price | money }}{{ text }}</div>
+        {% endif %}
+        <div class="product-form__input--pill-title-text-price-current" subs-purchase-pricings>{{ value.variant.metafields.custom.single_jar_price.value | money }}{{ text }}</div>
+        <div class="product-form__input--pill-title-text-price-current" single-purchase-pricings>{{ value.variant.metafields.custom.single_jar_price_one_time_purchase.value | money }}{{ text }}</div>
+      </div>
+      {{ label_unavailable }}
+    </label>
+  {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
+    <option
+      id="{{ input_id }}"
+      value="{{ value | escape }}"
+      {% if value.selected %}
+        selected="selected"
+      {% endif %}
+      {% if swatch_value and picker_type == 'swatch_dropdown' %}
+        data-option-swatch-value="{{ swatch_value }}"
+        {% if swatch_focal_point %}
+          data-option-swatch-focal-point="{{ swatch_focal_point }}"
+        {% endif %}
+      {% endif %}
+      {{ input_dataset }}
+    >
+      {% if option_disabled -%}
+        {{- 'products.product.value_unavailable' | t: option_value: value -}}
+      {%- else -%}
+        {{- value -}}
+      {%- endif %}
+    </option>
+  {%- endif -%}
+{%- endfor -%}
+
+
+{% if request.page_type == 'product' and template.suffix == 'b-test-advanced-plus' or request.page_type == 'product' and template.suffix == 'd-test-advance' or request.page_type == 'product' and template.suffix == 'b-test-advanced-dosage' or request.page_type == 'product' and template.suffix == 'd-test-advance-new' or request.page_type == 'product' and template.suffix == 'serum' or request.page_type == 'product' and template.suffix == 'd-test-advance-newest' or request.page_type == 'product' and template.suffix == 'e-new' or request.page_type == 'product' and template.suffix == 'serum-b' or template.suffix == 'd-test-with-5-option' %}
+  <style>
+    .product-form__price-wrapper-b-plus-inner {
+      display: none !important;
+    }
+
+    .product-form__price-wrapper-b-plus-{{product.selected_or_first_available_variant.id}} {
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .product__info-wrapper.single_purchase_option .product-form__price-wrapper-b-plus-{{product.selected_or_first_available_variant.id}} span[single-purchase-pricings] {
+      display: flex !important;
+    }
+
+  </style>
+
+
+  {% if template.suffix == 'd-test-advance-new' and product.id == 10314483138826 %}
+    <script defer="defer">
+      (function() {
+          const currentSelectedVariant = '{{ product.selected_or_first_available_variant.id }}';
+          window.currenSelectedVariantId = currentSelectedVariant || null;
+          const autoRefillCheckbox = document.querySelector('#auto_refill');
+          const variantPlanMap = {
+            "52152451957002": "5815730442",
+            "52152451989770": "5815763210",
+            "52152452022538": "5815795978",
+          };
+
+          if(currentSelectedVariant == '52152451957002') {
+            document.querySelector('.auto-refill-frequency-time').textContent = 'month';
+          } else if(currentSelectedVariant == '52152451989770') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '2 months';
+          } else if(currentSelectedVariant == '52152452022538') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '3 months';
+          }
+
+          if (variantPlanMap[currentSelectedVariant] && autoRefillCheckbox.checked) {
+            const waitForSelect = setInterval(() => {
+              const freq = document.querySelector('#frequency');
+              if (freq) {
+                clearInterval(waitForSelect);
+                freq.value = variantPlanMap[currentSelectedVariant];
+                freq.dispatchEvent(new Event('change'));
+              }
+            }, 300);
+          }
+        })();
+    </script>
+  {% endif %}
+
+  {% if product.id == 10316636979466 or product.id == 10396349563146 or product.id == 10314483138826 or product.id == 10326775365898 or product.id == 10443398414602 or product.id == 10478806925578 or product.id == 10490050052362 or product.id == 10494982750474 %}
+    <script defer="defer">
+      console.log('serum running');
+      (function() {
+          const currentSelectedVariant = '{{ product.selected_or_first_available_variant.id }}';
+          window.currenSelectedVariantId = currentSelectedVariant || null;
+          const autoRefillCheckbox = document.querySelector('#auto_refill');
+          const variantPlanMap = {
+            "52162322825482": "5822939402",
+            "52162322858250": "5822972170",
+            "52162322891018": "5823004938",
+            "52536835965194": '5822939402',
+            "52536835997962": '5822972170',
+            "52536836030730": '5823004938',
+            "52720647241994": '5822939402',
+            "52720647274762": '5822972170',
+            "52720647307530": '5823004938',
+            "52602279493898": '6068338954',
+            "52602279526666": '6068371722',
+            "52602279559434": '6068404490',
+            "52835744809226": '6068338954',
+            "52835744841994": '6068371722',
+            "52835744874762": '6068404490',
+            "52881813111050": '5822939402',
+            "52881813143818": '5822972170',
+            "52881813176586": '5823004938',
+            "52945602674954": '5822939402',
+            "52945602707722": '5822972170',
+            "52945602740490": '5823004938',
+            "52985927729418": '6068338954',
+            "52985927762186": '6068371722',
+            "52985927794954": '6068404490',
+            "52985927827722": '6068338954',
+            "52985927860490": '6068371722',
+            "52985927893258": '6068404490',
+          };
+
+          if(currentSelectedVariant == '52162322825482' || currentSelectedVariant == '52536835965194' || currentSelectedVariant == '52602279493898' || currentSelectedVariant == '52720647241994' || currentSelectedVariant == '52835744809226' || currentSelectedVariant == '52945602674954' || currentSelectedVariant == '52985927729418' || currentSelectedVariant == '52985927827722' || currentSelectedVariant == '52881813111050') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '30 days';
+          } else if(currentSelectedVariant == '52162322858250' || currentSelectedVariant == '52536835997962' || currentSelectedVariant == '52602279526666' || currentSelectedVariant == '52720647274762' || currentSelectedVariant == '52835744841994' || currentSelectedVariant == '52945602707722' || currentSelectedVariant == '52985927762186' || currentSelectedVariant == '52985927860490' || currentSelectedVariant == '52881813143818') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '3 months';
+          } else if(currentSelectedVariant == '52162322891018' || currentSelectedVariant == '52536836030730' || currentSelectedVariant == '52602279559434' || currentSelectedVariant == '52720647307530' || currentSelectedVariant == '52835744874762' || currentSelectedVariant == '52945602740490' || currentSelectedVariant == '52985927794954' || currentSelectedVariant == '52985927893258' || currentSelectedVariant == '52881813176586') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '6 months';
+          }
+
+          if (variantPlanMap[currentSelectedVariant] && autoRefillCheckbox.checked) {
+            const waitForSelect = setInterval(() => {
+              const freq = document.querySelector('#frequency');
+              if (freq) {
+                clearInterval(waitForSelect);
+                freq.value = variantPlanMap[currentSelectedVariant];
+                freq.dispatchEvent(new Event('change'));
+              }
+            }, 300);
+          }
+        })();
+    </script>
+  {% endif %}
+
+  {% if product.id == 10546921439498 %}
+    <script defer="defer">
+      console.log('d-test-with-5-option running');
+      (function() {
+          const currentSelectedVariant = '{{ product.selected_or_first_available_variant.id }}';
+          window.currenSelectedVariantId = currentSelectedVariant || null;
+          const autoRefillCheckbox = document.querySelector('#auto_refill');
+          const variantPlanMap = {
+            "53236391903498": "5822939402",
+            "53236391936266": "5822972170",
+            "53236391969034": "5823004938",
+          };
+
+          if(currentSelectedVariant == '53236391903498') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '30 days';
+          } else if(currentSelectedVariant == '53236391936266') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '3 months';
+          } else if(currentSelectedVariant == '53236391969034') {
+            document.querySelector('.auto-refill-frequency-time').textContent = '5 months';
+          }
+
+          if (variantPlanMap[currentSelectedVariant] && autoRefillCheckbox.checked) {
+            const waitForSelect = setInterval(() => {
+              const freq = document.querySelector('#frequency');
+              if (freq) {
+                clearInterval(waitForSelect);
+                freq.value = variantPlanMap[currentSelectedVariant];
+                freq.dispatchEvent(new Event('change'));
+              }
+            }, 300);
+          }
+        })();
+    </script>
+  {% endif %}
+{% endif %}
+
+
+{% if request.page_type == 'product' and template.suffix == 'b-test-advanced-plus' or request.page_type == 'product' and template.suffix == 'd-test-advance' or request.page_type == 'product' and template.suffix == 'b-test-advanced-dosage' or request.page_type == 'product' and template.suffix == 'd-test-advance-new' or request.page_type == 'product' and template.suffix == 'serum' or request.page_type == 'product' and template.suffix == 'd-test-advance-newest' or request.page_type == 'product' and template.suffix == 'e-new' or request.page_type == 'product' and template.suffix == 'serum-b' or template.suffix == 'd-test-with-5-option' %}
+  <style>
+    .product-form__input-size input[type=radio] + label:focus-visible{
+      outline: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .product-form__input-size input[type=radio]+label:before  {
+      display: none !important;
+    }
+
+  </style>
+{% endif %}
+
+{% if product.id == 10396349563146 or product.id == 10326775365898 or product.id == 10316636979466 or product.id == 10443398414602 or product.id == 10478806925578 or product.id == 10490050052362 or product.id == 10494982750474 or product.id == 10546921439498 %}
+  <style>
+    .product__buy-buttons-container .free-gifts-ui-container {
+      display: none !important;
+    }
+
+    .product-free-items-text {
+      display: none !important;
+    }
+  </style>
+{% endif %}

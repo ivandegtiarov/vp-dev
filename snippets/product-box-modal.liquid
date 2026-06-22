@@ -1,0 +1,952 @@
+{% assign country_code = request.country | default: localization.country.iso_code | default: "US" %}
+
+<style>
+  .product-box-modal-label-text {
+    font-size: 16px;
+    line-height: 22px;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .product-box-modal-label-options {
+    display: flex;
+    row-gap: 14px;
+    position: relative;
+    align-self: stretch;
+    column-gap: 14px;
+    flex-basis: auto;
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+
+  .product-box-modal-label-option {
+    cursor: pointer;
+    padding: 15px 24px;
+    min-width: auto;
+    min-height: 1px;
+    position: relative;
+    border: 1px solid #000;
+    border-radius: 10px;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .product-box-modal-label-option-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    align-self: stretch;
+    gap: 16px;
+  }
+
+  .product-box-modal-label-option-text {
+    flex-grow: 1;
+    font-size: 18px;
+    text-align: left;
+    transition: inherit;
+    font-weight: 700;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    text-align-last: left;
+    color: #000000;
+    letter-spacing: 0;
+  }
+
+  .product-box-modal-label-option-dot {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #7bbc72ff;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .product-box-modal-label-option-dot div {
+    color: #ffffffff;
+    width: 12px;
+    height: 12px;
+    display: flex !important;
+    position: relative;
+    align-self: center;
+    flex-basis: auto;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+
+  .product-box-modal-label-option-discount {
+    color: #000000ff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    padding-top: 3px;
+    padding-left: 8px;
+    overflow-wrap: break-word;
+    padding-right: 8px;
+    padding-bottom: 3px;
+    background-color: #edede4ff;
+    border-radius: 30px;
+    letter-spacing: 0;
+  }
+
+  .product-box-modal-label-option-pricings {
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    align-items: flex-end;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .product-box-modal-label-option-pricing-sale {
+    color: #0c2340b3;
+    font-size: 14px;
+    flex-basis: auto;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 700;
+    line-height: 16px;
+    overflow-wrap: break-word;
+    letter-spacing: 0;
+    text-align-last: center;
+    text-decoration: line-through;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .product-box-modal-label-option-pricing-regular {
+    font-size: 20px;
+    flex-basis: auto;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 600;
+    line-height: 22px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    text-align-last: center;
+    color: #000000;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .product-box-modal-label-option-discount-wrapper {
+    display: flex;
+    row-gap: 4px;
+    position: relative;
+    max-width: 100%;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 6px;
+    min-height: 1px;
+    margin-top: 4px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .product-box-modal-label-option-2-discount {
+    color: #ffffffff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    padding-top: 2px;
+    padding-left: 8px;
+    overflow-wrap: break-word;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    background-color: #7bbc72ff;
+    letter-spacing: 0;
+    border-radius: 30px;
+  }
+
+  .product-box-modal-label-option-2-discount-text {
+    color: #606060;
+    font-size: 14px;
+    font-style: italic;
+    text-align: left;
+    align-self: stretch;
+    flex-basis: auto;
+    font-weight: 600;
+    line-height: 24px;
+    margin-right: -5px;
+    overflow-wrap: break-word;
+    text-align-last: left;
+  }
+
+  .product-box-modal-label-option-divider {
+    height: 1px;
+    display: flex !important;
+    align-self: stretch;
+    flex-basis: auto;
+    margin-top: 10px;
+    transition: inherit;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+    flex-direction: column;
+    border-top-color: #606060ff;
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+  .product-box-modal-label-option-icons {
+    display: flex;
+    row-gap: 8px;
+    position: relative;
+    max-width: 100%;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 8px;
+    flex-basis: auto;
+    min-height: 1px;
+    transition: inherit;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: flex-start;
+  }
+
+  .product-box-modal-label-option-icons img {
+    object-fit: contain;
+  }
+
+  .product-box-modal-label-option-icons p {
+    flex-grow: 1;
+    font-size: 16px;
+    flex-basis: 0;
+    text-align: left;
+    transition: inherit;
+    flex-shrink: 1;
+    font-family: Inter, ' sans-serif';
+    line-height: 20px;
+    overflow-wrap: break-word;
+    text-align-last: left;
+    color: #000000;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  .product-box-free-labels {
+    max-width: max-content;
+    color: #ffffffff;
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 4px;
+    font-weight: 700;
+    line-height: 20px;
+    padding-top: 3px;
+    padding-left: 12px;
+    overflow-wrap: break-word;
+    padding-right: 12px;
+    padding-bottom: 3px;
+    background-color: #7bbc72ff;
+    border-radius: 30px;
+    letter-spacing: 0;
+  }
+
+  .product-box-modal-label-option-selector {
+    margin-top: 10px;
+    display: none;
+  }
+
+  .product-box-modal-label-option-selector-title {
+    font-size: 16px;
+    align-self: stretch;
+    margin-top: 10px;
+    text-align: left;
+    font-weight: 600;
+    line-height: 1;
+    overflow-wrap: break-word;
+    text-align-last: left;
+    color: #000000;
+    margin: 0 0 8px;
+    letter-spacing: 0;
+  }
+
+  .product-box-modal-label-option-selector-subtitle {
+    font-size: 15px;
+    align-self: stretch;
+    text-align: left;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    text-align-last: left;
+    color: #000000;
+    margin: 0 0 16px;
+  }
+
+  .product-box-modal-label-option-selector-options {
+    display: flex;
+    row-gap: 12px;
+    position: relative;
+    align-self: stretch;
+    column-gap: 12px;
+    flex-basis: auto;
+    margin-top: 10px;
+    transition: inherit;
+    flex-shrink: 0;
+  }
+
+  .product-box-modal-label-option-selector-option-image {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-grow: 1;
+    flex-basis: 0;
+    align-items: center;
+    flex-shrink: 1;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent;
+    border: 1px solid #C8C8C8FF;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .product-box-modal-label-option-selector-option-image svg {
+    width: 70px;
+    height: 70px;
+    margin-inline: auto;
+    margin-block: 6px;
+  }
+
+  .product-box-modal-label-option-selector-option-image p {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  .product-box-modal-label-option-selector-option-text p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .product-box-modal-label-option-selector-option-text p:last-child {
+    font-size: 12px;
+    padding-top: 4px;
+  }
+
+  .product-box-modal-label-option-selector-option {
+    flex: 1;
+  }
+
+  .product-box-modal-label-option-selector-option-image {
+    position: relative;
+  }
+
+  .product-box-modal-label-option-selector-option-image input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .product-box-modal-label-option-selector-option-image:has(input:checked) {
+    background: #E9FFE3;
+    border-color: #000000;
+  }
+
+  .product-box-modal-label-option.active {
+    background: #F9F9F9;
+  }
+
+  .product-box-modal-label-option.active .product-box-modal-label-option-dot div {
+    background-color: #7bbc72ff;
+  }
+
+  .product-box-modal-label-option.active .product-box-modal-label-option-selector {
+    display: block !important;
+  }
+
+  #appstle_subscription_widget0 {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    overflow: hidden;
+  }
+
+  .most-popular-label {
+    top: -8px;
+    color: #FFFFFFFF;
+    right: 10px;
+    z-index: 1;
+    position: absolute;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 3px 12px;
+    background-color: #7BBC72FF;
+    border-radius: 30px;
+  }
+
+  @media screen and (max-width: 749px) {
+
+    .product-box-modal-label-text {
+      font-size: 14px;
+    }
+
+    .product-box-modal-label-option-text {
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    .product-box-modal-label-option-wrapper {
+      gap: 8px;
+    }
+
+    .product-box-modal-label-option {
+      padding: 10px 14px;
+    }
+
+    .product-box-modal-label-option-discount {
+      padding: 3px 8px;
+      font-size: 12px;
+    }
+
+    .product-box-modal-label-option-pricing-regular {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .product-box-modal-label-option-pricing-sale {
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .most-popular-label {
+      line-height: 18px;
+    }
+
+    .product-box-modal-label-option-icons p {
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .product-box-free-labels {
+      font-size: 13px;
+    }
+
+    .product-box-modal-label-option-selector-option-image svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .product-box-modal-label-option-selector-option-image {
+      padding: 10px 6px;
+      margin-bottom: 4px;
+    }
+
+    .product-box-modal-label-option-selector-option-image p {
+      font-size: 14px;
+    }
+
+    .product-box-modal-label-option-selector-option-text p {
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .product-box-modal-label-option-selector-option-text p:last-child {
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .product-box-modal-label-option-pricings {
+      gap: 3px;
+    }
+
+    .custom-content-labels-container {
+      margin-top: 0;
+    }
+
+    .product-box-modal-label-option:last-child {
+      padding-block: 20px;
+    }
+  }
+
+  .product-box-modal-label-option-selected-items {
+    margin-top: 20px;
+  }
+
+  .product-box-modal-label-option-selected-item {
+    border: 1px solid #5d5d5d;
+    margin: 0;
+    background: #ffffffff;
+    border-radius: 14px;
+  }
+
+  .product-box-modal-label-option-selected-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 15px 8px 10px;
+    gap: 8px;
+  }
+
+  .product-box-modal-label-option-selected-item-image {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+  }
+
+  .product-box-modal-label-option-selected-item-text-title {
+    font-size: 14px;
+    line-height: 1;
+    color: #000000;
+    letter-spacing: 0;
+    margin-bottom: 6px;
+  }
+
+  .product-box-modal-label-option-selected-item-duration {
+    font-size: 12px;
+    line-height: 1;
+    font-style: italic;
+    color: #000000;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  .product-box-modal-label-option-selected-item-text {
+    flex: 1;
+  }
+
+  .product-box-modal-label-option-selected-icon-down svg {
+    width: 15px;
+    transform: rotate(180deg);
+    transition: transform 0.1s ease-in-out;
+  }
+
+  .product-box-modal-label-option-dropdown {
+    display: none;
+    border: 1.5px solid #dddddd;
+    border-radius: 10px;
+    background: #ffffffff;
+    margin: 0;
+    margin-top: 5px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .product-box-modal-label-option-selected-items-wrapper {
+    position: relative;
+    display: block;
+    margin-top: 0;
+  }
+
+  .product-box-modal-label-option-dropdown-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid #dddddd;
+    padding: 8px 10px;
+  }
+
+  .product-box-modal-label-option-dropdown-item input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .product-box-modal-label-option-dropdown-item:last-child {
+    border-bottom: 0;
+  }
+
+  .product-box-modal-label-option-dropdown-item:has(input:checked) {
+    background: #dddddd;
+  }
+
+  .product-box-modal-label-option-dropdown-item svg,
+  .product-box-modal-label-option-selected-item-wrapper > svg{
+    width: 45px;
+    height: 45px;
+  }
+
+  .product-box-option-selected-1,
+  .product-box-option-selected-2,
+  .product-box-option-selected-3 {
+    display: none;
+  }
+
+  .product-box-modal-label-option-selected-items-wrapper:has(input[value="5075960074"]:checked) .product-box-option-selected-1,
+  .product-box-modal-label-option-selected-items-wrapper:has(input[value="5075992842"]:checked) .product-box-option-selected-2,
+  .product-box-modal-label-option-selected-items-wrapper:has(input[value="5076025610"]:checked) .product-box-option-selected-3 {
+    display: flex;
+  }
+
+  .product-box-modal-label-option-selected-items-wrapper.activated .product-box-modal-label-option-selected-icon-down svg {
+    transform: rotate(0deg);
+  }
+
+  .product-box-modal-label-option-selected-items-wrapper.activated .product-box-modal-label-option-dropdown {
+    display: block;
+  }
+
+</style>
+
+{% assign discounted_price = product.price | times: 0.8 %}
+
+<div class="product-box-modal-label">
+  <div class="product-box-modal-label-text">Select purchase type:</div>
+  <div class="product-box-modal-label-options">
+    <div class="product-box-modal-label-option active" data-single-purchase-option>
+      <div class="product-box-modal-label-option-wrapper">
+        <div class="product-box-modal-label-option-dot">
+          <div></div>
+        </div>
+        <div class="product-box-modal-label-option-text">One-time purchase</div>
+        <div class="product-box-modal-label-option-discount">
+          {% comment %} {{
+            product.price
+            | minus: product.compare_at_price
+            | times: 100
+            | divided_by: product.compare_at_price
+            | round: 0
+            | abs
+          -}} {% endcomment %}
+          20% OFF
+        </div>
+
+        <div class="product-box-modal-label-option-pricings">
+          <div class="product-box-modal-label-option-pricing-sale">{{ product.compare_at_price | money }}</div>
+          <div class="product-box-modal-label-option-pricing-regular">{{ product.price | money }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-box-modal-label-option" data-multi-purchase-option>
+      <div class="most-popular-label">MOST POPULAR</div>
+      <div class="product-box-modal-label-option-wrapper">
+        <div class="product-box-modal-label-option-dot">
+          <div></div>
+        </div>
+        <div class="product-box-modal-label-option-text">
+          <div>Subscribe & save</div>
+          <div class="product-box-modal-label-option-discount-wrapper">
+            <div class="product-box-modal-label-option-2-discount">SAVE 50%</div>
+            <div class="product-box-modal-label-option-2-discount-text">Lifetime discount!</div>
+          </div>
+        </div>
+        <div class="product-box-modal-label-option-discount"></div>
+        <div class="product-box-modal-label-option-pricings">
+          <div class="product-box-modal-label-option-pricing-sale">{{ product.compare_at_price | money }}</div>
+          <div class="product-box-modal-label-option-pricing-regular">{{ discounted_price | money }}</div>
+        </div>
+      </div>
+      <div class="product-box-modal-label-option-divider"></div>
+      <div class="product-box-modal-label-option-icons">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/fast-delivery.png?v=1733337974&width=50"
+          alt="Fast delivery"
+          width="20"
+          height="20"
+        >
+        <p><strong>Free shipping</strong> on every delivery!</p>
+      </div>
+
+      <div class="product-box-modal-label-option-icons">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/pause.png?v=1733337974&width=50"
+          alt="Cancel anytime"
+          width="20"
+          height="20"
+        >
+        <p><strong>Cancel anytime</strong>, no contract!</p>
+      </div>
+
+      {% unless template.suffix == 'b-test-advanced' or template.suffix == 'b-test-advanced-plus' or template.suffix == 'b-test-advanced-final' or template.suffix == 'd-test-advance' or template.suffix == 'b-test-advanced-dosage' or template.suffix == 'd-test-advance-new' or template.suffix == 'serum' or template.suffix == 'd-test-advance-newest' or template.suffix == 'e-new' or template.suffix == 'serum-b' or template.suffix == 'd-test-with-5-option' %}
+        <div class="product-box-free-labels">+ 🎁 FREE mystery gift for your dog!</div>
+      {% endunless %}
+
+      <div class="product-box-modal-label-option-selector">
+        <h2 class="product-box-modal-label-option-selector-title">Your dog’s weight:</h2>
+        <p class="product-box-modal-label-option-selector-subtitle">(To ensure the correct delivery frequency)</p>
+        {% if block.settings.change_to_dropdown %}
+          <div class="product-box-modal-label-option-selected-items-wrapper product-box-modal-label-option-selector-options">
+            <div class="product-box-modal-label-option-selected-items">
+              <div class="product-box-modal-label-option-selected-item">
+                <div class="product-box-modal-label-option-selected-item-wrapper product-box-option-selected-1">
+                  <img src="{{ 'media-design-dog.svg' | asset_url }}" alt="Dog-1" width="50" height="50" class="product-box-modal-label-option-selected-item-image">
+                  <div class="product-box-modal-label-option-selected-item-text">
+                    <div class="product-box-modal-label-option-selected-item-text-title">
+                      <strong>
+                        {% if country_code == "US" %}
+                          &lt; 26 lbs
+                        {% else %}
+                          &lt; 12kg
+                        {% endif %}
+                      </strong>
+                      (1 chew/day)
+                    </div>
+                    <div class="product-box-modal-label-option-selected-item-duration">
+                      Delivered every 2 months
+                    </div>
+                  </div>
+                  <div class="product-box-modal-label-option-selected-icon-down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-chevron" role="img" aria-label="Collapse/Expand" viewBox="5 8 14 8">
+                      <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="product-box-modal-label-option-selected-item-wrapper product-box-option-selected-2">
+                  <img src="{{ 'media-design-dog-2.svg' | asset_url }}" alt="Dog-1" width="50" height="50" class="product-box-modal-label-option-selected-item-image">
+                  <div class="product-box-modal-label-option-selected-item-text">
+                    <div class="product-box-modal-label-option-selected-item-text-title">
+                      <strong>
+                        {% if country_code == "US" %}
+                          26–75 lbs
+                        {% else %}
+                          12-34kg
+                        {% endif %}
+                      </strong>
+                      (2 chews/day)
+                    </div>
+                    <div class="product-box-modal-label-option-selected-item-duration">
+                      Delivered every month
+                    </div>
+                  </div>
+                  <div class="product-box-modal-label-option-selected-icon-down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-chevron" role="img" aria-label="Collapse/Expand" viewBox="5 8 14 8">
+                      <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="product-box-modal-label-option-selected-item-wrapper product-box-option-selected-3">
+                  {% render 'dog-3' %}
+                  <div class="product-box-modal-label-option-selected-item-text">
+                    <div class="product-box-modal-label-option-selected-item-text-title">
+                      <strong>
+                        {% if country_code == "US" %}
+                          75 lbs >
+                        {% else %}
+                          34kg >
+                        {% endif %}
+                      </strong>
+                      (3 chews/day)
+                    </div>
+                    <div class="product-box-modal-label-option-selected-item-duration">
+                      Delivered every 3 weeks
+                    </div>
+                  </div>
+                  <div class="product-box-modal-label-option-selected-icon-down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-chevron" role="img" aria-label="Collapse/Expand" viewBox="5 8 14 8">
+                      <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product-box-modal-label-option-dropdown">
+              <div class="product-box-modal-label-option-dropdown-item">
+                <img src="{{ 'media-design-dog.svg' | asset_url }}" alt="Dog-1" width="50" height="50" class="product-box-modal-label-option-selected-item-image">
+                <div class="product-box-modal-label-option-selected-item-text">
+                  <div class="product-box-modal-label-option-selected-item-text-title">
+                    <strong>
+                      {% if country_code == "US" %}
+                        &lt; 26 lbs
+                      {% else %}
+                        &lt; 12kg
+                      {% endif %}
+                    </strong>
+                    (1 chew/day)
+                  </div>
+                  <div class="product-box-modal-label-option-selected-item-duration">
+                    Delivered every 2 months
+                  </div>
+                </div>
+                <input type="radio" id="selling_plan_id_dogs-1" name="selling_plan_id_dogs" selling_value="5075960074" value="5075960074" class="product-box-modal-label-option-selector-option-input">
+              </div>
+
+              <div class="product-box-modal-label-option-dropdown-item">
+                <img src="{{ 'media-design-dog-2.svg' | asset_url }}" alt="Dog-1" width="50" height="50" class="product-box-modal-label-option-selected-item-image">
+                <div class="product-box-modal-label-option-selected-item-text">
+                  <div class="product-box-modal-label-option-selected-item-text-title">
+                    <strong>
+                      {% if country_code == "US" %}
+                        26–75 lbs
+                      {% else %}
+                        12-34kg
+                      {% endif %}
+                    </strong>
+                    (2 chews/day)
+                  </div>
+                  <div class="product-box-modal-label-option-selected-item-duration">
+                    Delivered every month
+                  </div>
+                </div>
+                <input type="radio" id="selling_plan_id_dogs-2" name="selling_plan_id_dogs" selling_value="5075992842" value="5075992842" checked="checked" class="product-box-modal-label-option-selector-option-input">
+              </div>
+
+              <div class="product-box-modal-label-option-dropdown-item">
+                {% render 'dog-3' %}
+                <div class="product-box-modal-label-option-selected-item-text">
+                  <div class="product-box-modal-label-option-selected-item-text-title">
+                    <strong>
+                      {% if country_code == "US" %}
+                        75 lbs >
+                      {% else %}
+                        34kg >
+                      {% endif %}
+                    </strong>
+                    (3 chews/day)
+                  </div>
+                  <div class="product-box-modal-label-option-selected-item-duration">
+                    Delivered every 3 weeks
+                  </div>
+                </div>
+                <input type="radio" id="selling_plan_id_dogs-3" name="selling_plan_id_dogs" selling_value="5076025610" value="5076025610" class="product-box-modal-label-option-selector-option-input">
+              </div>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const element = document.querySelector('.product-box-modal-label-option-selected-items-wrapper');
+
+              element.addEventListener('click', (e) => {
+                element.classList.toggle('activated');
+              });
+            });
+          </script>
+
+        {% else %}
+          <div class="product-box-modal-label-option-selector-options">
+            <div class="product-box-modal-label-option-selector-option" for="selling_plan_id_dogs-1">
+              <div class="product-box-modal-label-option-selector-option-image">
+                {% if country_code == "US" %}
+                  <p>&lt; 26 lbs</p>
+                {% else %}
+                  <p>&lt; 12kg</p>
+                {% endif %}
+                {{ 'media-design-dog.svg' | inline_asset_content }}
+                <input type="radio" id="selling_plan_id_dogs-1" name="selling_plan_id_dogs" selling_value="5075960074" value="5075960074" class="product-box-modal-label-option-selector-option-input" checked="checked">
+              </div>
+              <div class="product-box-modal-label-option-selector-option-text">
+                <p><strong>Every 2 months</strong></p>
+                <p>(1 daily chew)</p>
+              </div>
+            </div>
+
+            <div class="product-box-modal-label-option-selector-option" for="selling_plan_id_dogs-2">
+              <div class="product-box-modal-label-option-selector-option-image">
+                {% if country_code == "US" %}
+                  <p>26–75 lbs</p>
+                {% else %}
+                  <p>12-34kg</p>
+                {% endif %}
+                {{ 'media-design-dog-2.svg' | inline_asset_content }}
+                <input type="radio" id="selling_plan_id_dogs-2" name="selling_plan_id_dogs" selling_value="5075992842" value="5075992842" class="product-box-modal-label-option-selector-option-input">
+              </div>
+              <div class="product-box-modal-label-option-selector-option-text">
+                <p><strong>Every month</strong></p>
+                <p>(2 daily chews)</p>
+              </div>
+            </div>
+
+            <div class="product-box-modal-label-option-selector-option" for="selling_plan_id_dogs-3">
+              <div class="product-box-modal-label-option-selector-option-image">
+                {% if country_code == "US" %}
+                  <p>75 lbs ></p>
+                {% else %}
+                  <p>34kg ></p>
+                {% endif %}
+                {% render 'dog-3' %}
+                <input type="radio" id="selling_plan_id_dogs-3" name="selling_plan_id_dogs" selling_value="5076025610" value="5076025610" class="product-box-modal-label-option-selector-option-input">
+              </div>
+              <div class="product-box-modal-label-option-selector-option-text">
+                <p><strong>Every 3 weeks</strong></p>
+                <p>(3 daily chews)</p>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer>
+  const singlePurchaseOption = document.querySelector('[data-single-purchase-option]');
+  const multiPurchaseOption = document.querySelector('[data-multi-purchase-option]');
+
+  singlePurchaseOption.addEventListener('click', () => {
+    multiPurchaseOption.classList.remove('active');
+    singlePurchaseOption.classList.add('active');
+    document.querySelector('#appstle_selling_plan_label_10[name="selling_plan"]').click();
+  });
+
+  multiPurchaseOption.addEventListener('click', () => {
+    singlePurchaseOption.classList.remove('active');
+    multiPurchaseOption.classList.add('active');
+    const value = document.querySelector('.product-box-modal-label-option-selector-options input:checked').value;
+    document.querySelector('#appstle_selling_plan_label_20[name="selling_plan"]').click();
+    document.querySelector('#appstle_selling_plan_label_20[name="selling_plan"]').value = value;
+    document.querySelector('select#appstle_selling_plan0').value = value;
+    document.querySelector('#appstle_subscription_widget0').setAttribute('data-selected-selling-plan', value);
+  });
+
+
+  if(window.location.href.includes('selling_plan')) {
+    singlePurchaseOption.classList.remove('active');
+    multiPurchaseOption.classList.add('active');
+    const interval = setInterval(() => {
+    const element = document.querySelector('select#appstle_selling_plan0');
+      if (element) {
+        const value = document.querySelector('select#appstle_selling_plan0').value;
+        document.querySelector(`.product-box-modal-label-option-selector-options input[selling_value="${value}"]`).checked = true;
+        console.log('value', value);
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const func = (timer) => {
+      setTimeout(() => {
+        const element = document.querySelector('.product-box-modal-label-option:last-child')
+        if (element) {
+          element.click();
+        }
+      }, timer);
+    }
+
+    func(1000);
+    func(2000);
+  });
+
+</script>

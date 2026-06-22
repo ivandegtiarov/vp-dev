@@ -1,0 +1,204 @@
+<style>
+
+  html {
+    scroll-behavior: smooth !important;
+  }
+
+  .pdp-sticky-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    background-color: #ffffff;
+    border-top: 1px solid rgba(44, 68, 127, 0.25);
+    box-shadow: -4px -4px 15px 4px #00000010;
+    /* Hidden by default */
+    visibility: hidden;
+    transition: opacity .4s ease-in-out, transform .6s ease-in-out;
+    transform: translate(0, 100%);
+    opacity: 0;
+  }
+
+  .pdp-sticky-bar.active {
+    transform: translate(0, 0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .pdp-sticky-bar-container {
+    padding: 1rem;
+  }
+
+  .pdp-sticky-bar-content-image {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .pdp-sticky-bar-content-image-title {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .pdp-sticky-bar-content-image-title-stars {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+  }
+
+  .pdp-sticky-bar-content-image-img {
+    border-radius: 4px;
+  }
+
+  .pdp-sticky-bar-content-image-title-stars svg {
+    fill: #7bbc72ff;
+    width: 12px;
+    height: 12px;
+  }
+
+  .pdp-sticky-bar-content-image-title-stars {
+    margin-top: 3px;
+  }
+
+  .pdp-sticky-bar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .pdp-sticky-bar-button {
+    background-color: rgba(123, 188, 114);
+    font-weight: 700;
+    padding: 3px 50px;
+    font-size: 16px;
+    border: 1.5px solid rgba(123, 188, 114);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .pdp-sticky-bar-button::before,
+  .pdp-sticky-bar-button::after {
+    display: none;
+  }
+
+  .pdp-sticky-bar-button:hover {
+    background-color: transparent;
+    color: rgba(123, 188, 114);
+  }
+
+  @media screen and (max-width: 749px) {
+    .pdp-sticky-bar-button {
+      padding: 12px 16px;
+      font-size: 16px;
+      text-transform: uppercase;
+      min-height: auto;
+    }
+
+    .pdp-sticky-bar-content-image-title {
+      font-size: 16px;
+    }
+
+    .pdp-sticky-bar-content-image-img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+</style>
+
+<div class="pdp-sticky-bar">
+  <div class="pdp-sticky-bar-container page-width">
+    <div class="pdp-sticky-bar-content">
+      <div class="pdp-sticky-bar-content-image">
+        {% if section.settings.image != blank %}
+          <img class="pdp-sticky-bar-content-image-img" src="{{ section.settings.image | image_url: width: 300 }}" alt="{{ section.settings.image.alt }}" width="60" height="60">
+          {% else %}
+          <img class="pdp-sticky-bar-content-image-img" src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.featured_image.alt }}" width="60" height="60">
+        {% endif %}
+        <div class="pdp-sticky-bar-content-image-title-container">
+          {% if section.settings.title != blank %}
+            <h3 class="pdp-sticky-bar-content-image-title">{{ section.settings.title | escape }}</h3>
+          {% else %}
+            <h3 class="pdp-sticky-bar-content-image-title">{{ product.title | escape }}</h3>
+          {% endif %}
+          <div class="pdp-sticky-bar-content-image-title-stars">
+            {% for i in (1..5) %}
+              {% render 'icon-star' %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% if section.settings.button_text != blank %}
+        <a href="#scroll-to-top" class="pdp-sticky-bar-button button button--primary">{{ section.settings.button_text | escape }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script defer="defer">
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const target = document.querySelector('.main-product-container-wrapper');
+    const stickyBar = document.querySelector('.pdp-sticky-bar');
+
+    if (!target || !stickyBar) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+
+      if (!entry.isIntersecting) {
+        stickyBar.classList.add('active');
+      } else {
+        stickyBar.classList.remove('active');
+      }
+
+    }, {
+      root: null,
+      threshold: 0,
+      rootMargin: "-100px 0px 0px 0px"
+    });
+
+    observer.observe(target);
+
+  });
+</script>
+
+
+
+{% schema %}
+  {
+    "name": "PDP Sticky Bar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+    ],
+    "presets": [
+      {
+        "name": "PDP Sticky Bar"
+      }
+    ]
+  }
+{% endschema %}

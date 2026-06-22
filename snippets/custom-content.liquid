@@ -1,0 +1,161 @@
+<style>
+  .custom-content-labels-container {
+    margin-top: 20px;
+  }
+
+  .custom-content-labels {
+    display: flex;
+    row-gap: 5px;
+    position: relative;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .custom-content-labels:last-child {
+    margin-top: 10px;
+  }
+
+  .custom-content-label {
+    display: flex;
+    row-gap: 5px;
+    column-gap: 5px;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: flex-start;
+    background-color: #edede4ff;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+
+  .custom-content-label svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .custom-content-label__text {
+    color: #0c240e;
+    overflow: hidden;
+    font-size: 14px;
+    align-self: flex-start;
+    flex-basis: auto;
+    flex-shrink: 0;
+    font-weight: 500;
+    line-height: 30px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+  }
+
+  .progress-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+  }
+
+  .image-container {
+    width: 50px;
+    height: 50px;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .text-container {
+    flex: 1;
+  }
+
+  .text-container p {
+    font-size: 15px;
+    letter-spacing: normal;
+    margin: 0;
+    line-height: 1.2;
+    margin: 0;
+    color: #0c240e;
+  }
+
+  .custom-content-divier {
+    height: 1px;
+    display: flex !important;
+    align-self: stretch;
+    flex-basis: auto;
+    margin-top: 15px;
+    flex-shrink: 0;
+    flex-direction: column;
+    padding-bottom: 15px;
+    border-top-color: #e3e3e3ff;
+    border-top-style: solid;
+    border-top-width: 2px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-content-divier {
+      margin-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+</style>
+
+<div class="custom-content-labels-container">
+  <div class="custom-content-labels">
+    {% if block.settings.label_text_1 != blank %}
+      <div class="custom-content-label">
+        {% render 'checkmark-yes' %}
+        <div class="custom-content-label__text">
+          {{ block.settings.label_text_1 }}
+        </div>
+      </div>
+    {% endif %}
+    {% if block.settings.label_text_2 != blank %}
+      <div class="custom-content-label">
+        {% render 'checkmark-yes' %}
+        <div class="custom-content-label__text">
+          {{ block.settings.label_text_2 }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="custom-content-labels">
+    {% if block.settings.label_text_3 != blank %}
+      <div class="custom-content-label">
+        {% render 'checkmark-yes' %}
+        <div class="custom-content-label__text">
+          {{ block.settings.label_text_3 }}
+        </div>
+      </div>
+    {% endif %}
+    {% if block.settings.label_text_4 != blank %}
+      <div class="custom-content-label">
+        {% render 'checkmark-yes' %}
+        <div class="custom-content-label__text">
+          {{ block.settings.label_text_4 }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="progress-info">
+  <div class="image-container">
+    <img
+      src="{{ block.settings.image | image_url: width: 100 }}"
+      alt="Circle Image"
+      width="100"
+      height="100"
+    >
+  </div>
+  <div class="text-container">
+    <p>{{ block.settings.text }}</p>
+  </div>
+</div>
+
+<div id="scroll-to-top" class="custom-content-divier"></div>

@@ -1,0 +1,416 @@
+<style>
+  .testimonial-cards-wrapper {
+    width: 100%;
+    display: flex;
+    row-gap: 20px;
+    position: relative;
+    max-width: 1260px;
+    min-width: auto;
+    column-gap: 20px;
+    flex-basis: auto;
+    min-height: 1px;
+    align-items: center;
+    flex-shrink: 0;
+    padding-top: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+    flex-direction: column;
+    padding-bottom: 80px;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .testimonial-cards-stars {
+    cursor: pointer;
+    display: flex;
+    row-gap: 10px;
+    position: relative;
+    max-width: 100%;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 10px;
+    flex-basis: auto;
+    min-height: 1px;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+
+  .testimonial-cards-stars svg {
+    fill: #7bbc72ff;
+    width: 16px;
+    height: 16px;
+  }
+
+  .testimonial-cards-stars-star {
+    display: flex;
+    row-gap: 2px;
+    column-gap: 2px;
+    flex-basis: auto;
+    flex-shrink: 0;
+  }
+
+  .testimonial-cards-stars-text {
+    font-size: 16px;
+    flex-basis: auto;
+    flex-shrink: 0;
+    line-height: 20px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    color: #000000;
+    margin: 0;
+  }
+
+  .testimonial-cards-title {
+    font-size: 36px;
+    align-self: stretch;
+    flex-basis: auto;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 600;
+    line-height: 43px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    text-align-last: center;
+    color: #000000;
+    margin: 0;
+    width: 100%;
+  }
+
+  .testimonial-cards-description {
+    font-size: 18px;
+    align-self: stretch;
+    flex-basis: auto;
+    text-align: center;
+    flex-shrink: 0;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    text-align-last: center;
+    color: #000000;
+    margin: 0;
+    width: 100%;
+  }
+
+  .testimonial-cards-cards-wrapper {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  .testimonial-cards-cards {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    transition-duration: 0ms;
+    transition-property: none;
+  }
+
+  .testimonial-cards-card {
+    cursor: pointer;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+    align-self: flex-start;
+    box-shadow: 2px 2px 4px 0px #00000029;
+    flex-basis: 0;
+    min-height: 1px;
+    align-items: center;
+    flex-shrink: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-top-color: #e4f9eaff;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-left-color: #e4f9eaff;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #e4f9eaff;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: #e4f9eaff;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .testimonial-cards-card-image {
+    height: 269px;
+    display: flex;
+    min-width: 0;
+    align-self: stretch;
+    flex-basis: auto;
+    min-height: 0;
+    object-fit: cover;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .testimonial-cards-card-image img {
+    height: 100%;
+    margin: 0;
+    display: block;
+    padding: 0;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+
+  .testimonial-cards-content {
+    display: flex;
+    row-gap: 8px;
+    position: relative;
+    max-width: 100%;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 8px;
+    flex-basis: auto;
+    min-height: 1px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    padding-top: 20px;
+    padding-left: 13px;
+    padding-right: 13px;
+    flex-direction: column;
+    padding-bottom: 20px;
+    justify-content: center;
+    background-color: #ffffff;
+    background-image: none;
+  }
+
+  .testimonial-cards-content-stars {
+    display: flex;
+    row-gap: 2px;
+    column-gap: 2px;
+    flex-basis: auto;
+    flex-shrink: 0;
+  }
+
+  .testimonial-cards-content-stars svg {
+    fill: #7bbc72ff;
+    width: 12px;
+    height: 12px;
+  }
+
+  .testimonial-cards-content-text {
+    font-size: 16px;
+    align-self: stretch;
+    flex-basis: auto;
+    flex-shrink: 0;
+    line-height: 20px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    color: #000000;
+    margin: 0;
+  }
+
+  .testimonial-cards-content-text * {
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .testimonial-cards-wrapper {
+      width: 100%;
+      display: flex;
+      row-gap: 15px;
+      position: relative;
+      max-width: 1260px;
+      min-width: auto;
+      column-gap: 15px;
+      flex-basis: auto;
+      min-height: 1px;
+      align-items: center;
+      flex-shrink: 0;
+      padding-top: 50px;
+      padding-left: 15px;
+      padding-right: 15px;
+      flex-direction: column;
+      padding-bottom: 20px;
+      justify-content: center;
+    }
+
+    .testimonial-cards-stars {
+      cursor: pointer;
+      display: flex;
+      row-gap: 5px;
+      position: relative;
+      max-width: 100%;
+      min-width: auto;
+      align-self: stretch;
+      column-gap: 5px;
+      flex-basis: auto;
+      min-height: 1px;
+      align-items: center;
+      flex-shrink: 0;
+      justify-content: center;
+    }
+
+    .testimonial-cards-title {
+      font-size: 24px;
+      align-self: stretch;
+      flex-basis: auto;
+      text-align: center;
+      flex-shrink: 0;
+      font-weight: 600;
+      line-height: 28px;
+      letter-spacing: 0px;
+      text-align-last: center;
+    }
+
+    .testimonial-cards-description {
+      font-size: 16px;
+      align-self: stretch;
+      flex-basis: auto;
+      text-align: center;
+      flex-shrink: 0;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align-last: center;
+    }
+
+    .testimonial-cards-card-image img {
+      width: 100%;
+    }
+
+    .testimonial-cards-cards-wrapper {
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .testimonial-cards-cards {
+      overflow-x: scroll;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 15px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .testimonial-cards-cards::-webkit-scrollbar {
+      display: none;
+    }
+
+    .testimonial-cards-card {
+      min-width: 70%;
+      scroll-snap-align: start;
+    }
+
+    .testimonial-cards-card-image {
+      height: 180px;
+      display: flex;
+      flex-grow: unset;
+      min-width: 0;
+      align-self: stretch;
+      flex-basis: auto;
+      min-height: 0;
+      object-fit: cover;
+      overflow-x: auto;
+      overflow-y: hidden;
+      align-items: center;
+      flex-shrink: 0;
+    }
+  }
+</style>
+
+<div id="testimonials-anchor" class="testimonial-cards-wrapper">
+  <div class="testimonial-cards-stars">
+    <div class="testimonial-cards-stars-star">
+      {% for i in (1..5) %}
+        {% render 'icon-star' %}
+      {% endfor %}
+    </div>
+    <div class="testimonial-cards-stars-text">
+      {{ section.settings.stars_text }}
+    </div>
+  </div>
+  <h2 class="testimonial-cards-title">
+    {{ section.settings.title }}
+  </h2>
+  <div class="testimonial-cards-description">
+    {{ section.settings.description }}
+  </div>
+  <div class="testimonial-cards-cards-wrapper">
+    <div class="testimonial-cards-cards">
+      {% for block in section.blocks %}
+        <div class="testimonial-cards-card">
+          <div class="testimonial-cards-card-image">
+            <img
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              alt="{{ block.settings.image.alt }}"
+              width="300"
+              height="auto"
+            >
+          </div>
+          <div class="testimonial-cards-content">
+            <div class="testimonial-cards-content-stars">
+              {% for i in (1..5) %}
+                {% render 'icon-star' %}
+              {% endfor %}
+            </div>
+            <div class="testimonial-cards-content-text">
+              {{ block.settings.text }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonial Cards",
+  "settings": [
+    {
+      "type": "text",
+      "id": "stars_text",
+      "label": "Stars Text",
+      "default": "(4.8/5)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "How we have helped 20.000+ furry friends"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Providing dogs with the best possible health worldwide."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial_card",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Cards"
+    }
+  ]
+}
+{% endschema %}

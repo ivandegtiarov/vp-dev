@@ -1,0 +1,43 @@
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordions = document.querySelectorAll('.product__accordion details');
+
+    accordions.forEach((details) => {
+      const summary = details.querySelector('summary');
+      const content = details.querySelector('.accordion__content');
+
+      content.style.overflow = 'hidden';
+      content.style.transition = 'height 0.3s ease';
+
+      summary.addEventListener('click', (e) => {
+        e.preventDefault(); // prevent native toggle
+
+        if (!details.hasAttribute('open')) {
+          // OPEN
+          details.setAttribute('open', 'true');
+          content.style.display = 'block'; // ensure it's visible
+          const height = content.scrollHeight;
+
+          content.style.height = '0px';
+          requestAnimationFrame(() => {
+            content.style.height = `${height}px`;
+          });
+        } else {
+          // CLOSE
+          const height = content.scrollHeight;
+          content.style.height = `${height}px`;
+
+          requestAnimationFrame(() => {
+            content.style.height = '0px';
+          });
+
+          // Remove 'open' after transition ends
+          content.addEventListener('transitionend', function handler() {
+            details.removeAttribute('open');
+            content.removeEventListener('transitionend', handler);
+          });
+        }
+      });
+    });
+  });
+</script>

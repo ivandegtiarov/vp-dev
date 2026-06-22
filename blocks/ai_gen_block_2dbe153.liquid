@@ -1,0 +1,279 @@
+{% doc %}
+  @prompt
+    Create a guarantee banner block with a light background and rounded corners. Layout: left side has a checkmark badge icon (circular badge with checkmark inside), right side has bold heading "Enjoy our 30-day money back guarantee" with italic subtext "less than 1% of customers claim this" below it, both left-aligned. Use flexbox row layout with the icon and text side by side. Include editable settings for heading text, subtext, icon upload option, background color, text colors, border radius, padding, and margin. Make it responsive for mobile with appropriate scaling. The design should be clean and trust-building.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-guarantee-banner-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.padding }}px;
+    margin: {{ block.settings.margin }}px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 100%;
+  }
+
+  .ai-guarantee-banner__icon-wrapper-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-guarantee-banner__icon-wrapper-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-guarantee-banner__icon-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ai-guarantee-banner__default-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    border-radius: 50%;
+    background-color: {{ block.settings.badge_background_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ai-guarantee-banner__default-icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.icon_size }}px * 0.5);
+    height: calc({{ block.settings.icon_size }}px * 0.5);
+    stroke: {{ block.settings.checkmark_color }};
+  }
+
+  .ai-guarantee-banner__content-{{ ai_gen_id }} {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .ai-guarantee-banner__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+  }
+
+  .ai-guarantee-banner__subtext-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtext_size }}px;
+    font-style: italic;
+    color: {{ block.settings.subtext_color }};
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-guarantee-banner-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.75 }}px;
+      gap: 12px;
+    }
+
+    .ai-guarantee-banner__icon-wrapper-{{ ai_gen_id }},
+    .ai-guarantee-banner__default-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.8 }}px;
+      height: {{ block.settings.icon_size | times: 0.8 }}px;
+    }
+
+    .ai-guarantee-banner__default-icon-{{ ai_gen_id }} svg {
+      width: calc({{ block.settings.icon_size | times: 0.8 }}px * 0.5);
+      height: calc({{ block.settings.icon_size | times: 0.8 }}px * 0.5);
+    }
+
+    .ai-guarantee-banner__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.85 }}px;
+    }
+
+    .ai-guarantee-banner__subtext-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtext_size | times: 0.85 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-guarantee-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-guarantee-banner__icon-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.custom_icon %}
+      <img
+        src="{{ block.settings.custom_icon | image_url: width: 200 }}"
+        alt="Guarantee icon"
+        loading="lazy"
+        width="{{ block.settings.icon_size }}"
+        height="{{ block.settings.icon_size }}"
+      >
+    {% else %}
+      <div class="ai-guarantee-banner__default-icon-{{ ai_gen_id }}">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-guarantee-banner__content-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h3 class="ai-guarantee-banner__heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h3>
+    {% endif %}
+    {% if block.settings.subtext != blank %}
+      <p class="ai-guarantee-banner__subtext-{{ ai_gen_id }}">
+        {{ block.settings.subtext }}
+      </p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Guarantee banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Enjoy our 30-day money back guarantee"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "less than 1% of customers claim this"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "badge_background_color",
+      "label": "Badge background",
+      "default": "#7bbc72"
+    },
+    {
+      "type": "color",
+      "id": "checkmark_color",
+      "label": "Checkmark color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtext size",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f9fff7"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "margin",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guarantee banner"
+    }
+  ]
+}
+{% endschema %}

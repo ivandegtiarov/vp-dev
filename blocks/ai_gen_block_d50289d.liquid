@@ -1,0 +1,545 @@
+{% doc %}
+  @prompt
+    Create product blocks structured this way:
+    
+    { 5 stars icon with text on the right }
+    { Title of the product in thick font }
+    { Short description of the product dynamically loaded from Shopify product description }
+    { Image slider dynamically connected to the product's images in Shopify, with arrow on the left and right side of the image container to be able to scroll through the images, as well as clickable thumbnails beneath the main image container. }
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-block-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-product-rating-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .ai-product-stars-{{ ai_gen_id }} {
+    display: flex;
+    color: {{ block.settings.star_color }};
+    margin-right: 10px;
+  }
+
+  .ai-product-rating-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.rating_text_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-product-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: {{ block.settings.title_color }};
+  }
+
+  .ai-product-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    margin-bottom: 20px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+  }
+
+  .ai-product-image-slider-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .ai-product-main-image-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+  }
+
+  .ai-product-slides-container-{{ ai_gen_id }} {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    height: 100%;
+    width: 100%;
+  }
+
+  .ai-product-slide-{{ ai_gen_id }} {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .ai-product-slide-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.5;
+  }
+
+  .ai-product-slider-nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: {{ block.settings.nav_background_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    border: none;
+    color: {{ block.settings.nav_color }};
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-product-slider-nav-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-product-slider-prev-{{ ai_gen_id }} {
+    left: 10px;
+  }
+
+  .ai-product-slider-next-{{ ai_gen_id }} {
+    right: 10px;
+  }
+
+  .ai-product-thumbnails-{{ ai_gen_id }} {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .ai-product-thumbnails-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }} {
+    flex: 0 0 60px;
+    height: 60px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }}.active {
+    opacity: 1;
+    border-color: {{ block.settings.thumbnail_active_border_color }};
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }}:hover {
+    opacity: 0.9;
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-product-thumbnail-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-product-thumbnail-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | minus: 4 }}px;
+    }
+
+    .ai-product-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size | minus: 2 }}px;
+    }
+
+    .ai-product-slider-nav-{{ ai_gen_id }} {
+      width: 30px;
+      height: 30px;
+    }
+
+    .ai-product-thumbnail-{{ ai_gen_id }} {
+      flex: 0 0 50px;
+      height: 50px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-product-block-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-product-rating-{{ ai_gen_id }}">
+    <div class="ai-product-stars-{{ ai_gen_id }}">
+      {% for i in (1..5) %}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+        </svg>
+      {% endfor %}
+    </div>
+    <div class="ai-product-rating-text-{{ ai_gen_id }}">{{ block.settings.rating_text }}</div>
+  </div>
+
+  <h2 class="ai-product-title-{{ ai_gen_id }}">
+    {% if block.settings.product %}
+      {{ block.settings.product.title }}
+    {% else %}
+      {{ block.settings.fallback_title }}
+    {% endif %}
+  </h2>
+
+  <div class="ai-product-description-{{ ai_gen_id }}">
+    {% if block.settings.product %}
+      {% if block.settings.custom_description != blank %}
+        {{ block.settings.custom_description }}
+      {% else %}
+        {{ block.settings.product.description | strip_html | truncatewords: block.settings.description_word_limit }}
+      {% endif %}
+    {% else %}
+      {{ block.settings.fallback_description }}
+    {% endif %}
+  </div>
+
+  <product-image-slider-{{ ai_gen_id }} class="ai-product-image-slider-{{ ai_gen_id }}">
+    <div class="ai-product-main-image-{{ ai_gen_id }}">
+      <div class="ai-product-slides-container-{{ ai_gen_id }}">
+        {% if block.settings.product and block.settings.product.images.size > 0 %}
+          {% for image in block.settings.product.images %}
+            <div class="ai-product-slide-{{ ai_gen_id }}" data-index="{{ forloop.index0 }}">
+              {% if forloop.first %}
+                <img src="{{ image | image_url: width: 800 }}" 
+                     alt="{{ image.alt | escape }}" 
+                     loading="eager" 
+                     width="{{ image.width }}" 
+                     height="{{ image.height }}">
+              {% else %}
+                <img src="{{ image | image_url: width: 800 }}" 
+                     alt="{{ image.alt | escape }}" 
+                     loading="lazy" 
+                     width="{{ image.width }}" 
+                     height="{{ image.height }}">
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="ai-product-slide-{{ ai_gen_id }}" data-index="0">
+            <div class="ai-product-image-placeholder-{{ ai_gen_id }}">
+              {{ 'product-apparel-1' | placeholder_svg_tag }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <button class="ai-product-slider-nav-{{ ai_gen_id }} ai-product-slider-prev-{{ ai_gen_id }}" aria-label="Previous image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="ai-product-slider-nav-{{ ai_gen_id }} ai-product-slider-next-{{ ai_gen_id }}" aria-label="Next image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ai-product-thumbnails-{{ ai_gen_id }}">
+      {% if block.settings.product and block.settings.product.images.size > 0 %}
+        {% for image in block.settings.product.images %}
+          <div class="ai-product-thumbnail-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+            <img src="{{ image | image_url: width: 120 }}" 
+                 alt="{{ image.alt | escape }}" 
+                 loading="lazy" 
+                 width="{{ image.width }}" 
+                 height="{{ image.height }}">
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="ai-product-thumbnail-{{ ai_gen_id }} active" data-index="0">
+          <div class="ai-product-thumbnail-placeholder-{{ ai_gen_id }}">
+            {{ 'product-apparel-1' | placeholder_svg_tag }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </product-image-slider-{{ ai_gen_id }}>
+</div>
+
+<script>
+  (function() {
+    class ProductImageSlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.slideIndex = 0;
+        this.slidesContainer = this.querySelector('.ai-product-slides-container-{{ ai_gen_id }}');
+        this.slides = this.querySelectorAll('.ai-product-slide-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-product-slider-prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-product-slider-next-{{ ai_gen_id }}');
+        this.thumbnails = this.querySelectorAll('.ai-product-thumbnail-{{ ai_gen_id }}');
+        this.totalSlides = this.slides.length;
+      }
+
+      connectedCallback() {
+        if (this.totalSlides <= 1) {
+          this.prevButton.style.display = 'none';
+          this.nextButton.style.display = 'none';
+          return;
+        }
+
+        this.prevButton.addEventListener('click', () => this.changeSlide(-1));
+        this.nextButton.addEventListener('click', () => this.changeSlide(1));
+
+        this.thumbnails.forEach(thumbnail => {
+          thumbnail.addEventListener('click', () => {
+            const index = parseInt(thumbnail.dataset.index);
+            this.goToSlide(index);
+          });
+        });
+
+        this.updateSliderState();
+      }
+
+      changeSlide(direction) {
+        this.slideIndex = (this.slideIndex + direction + this.totalSlides) % this.totalSlides;
+        this.goToSlide(this.slideIndex);
+      }
+
+      goToSlide(index) {
+        this.slideIndex = index;
+        this.updateSliderState();
+      }
+
+      updateSliderState() {
+        this.slidesContainer.style.transform = `translateX(-${this.slideIndex * 100}%)`;
+        
+        this.thumbnails.forEach((thumbnail, index) => {
+          if (index === this.slideIndex) {
+            thumbnail.classList.add('active');
+          } else {
+            thumbnail.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    customElements.define('product-image-slider-{{ ai_gen_id }}', ProductImageSlider{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Block",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Information"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "Based on 100+ reviews"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Fallback title",
+      "default": "Product Title",
+      "info": "Used when no product is selected"
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "This is a short description of the product highlighting its key features and benefits.",
+      "info": "Used when no product is selected"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_description",
+      "label": "Custom description",
+      "info": "Override product description (optional)"
+    },
+    {
+      "type": "range",
+      "id": "description_word_limit",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 30,
+      "label": "Description word limit"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#FFB800"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "default": 24,
+      "unit": "px",
+      "label": "Title font size"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px",
+      "label": "Description font size"
+    },
+    {
+      "type": "range",
+      "id": "rating_text_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14,
+      "unit": "px",
+      "label": "Rating text font size"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 8,
+      "unit": "px",
+      "label": "Block border radius"
+    },
+    {
+      "type": "header",
+      "content": "Image Slider"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "1:1 (Square)"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "16:9"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 8,
+      "unit": "px",
+      "label": "Image border radius"
+    },
+    {
+      "type": "color",
+      "id": "nav_background_color",
+      "label": "Navigation button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_color",
+      "label": "Navigation button color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "thumbnail_active_border_color",
+      "label": "Active thumbnail border color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Block"
+    }
+  ]
+}
+{% endschema %}

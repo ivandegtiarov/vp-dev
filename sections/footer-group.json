@@ -1,0 +1,104 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "image_EDWwaA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/vitalpawslogo.png",
+            "image_width": 195,
+            "alignment": ""
+          }
+        },
+        "text_abfTP8": {
+          "type": "text",
+          "settings": {
+            "heading": "Customer service",
+            "subtext": "<p>info@thevitalpaws.com<br\/><em>Office hours: Mon-Fri: 09:00-17:00<\/em><\/p>"
+          }
+        },
+        "link_list_Jzj8zd": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Menu",
+            "menu": "main-menu"
+          }
+        }
+      },
+      "block_order": [
+        "image_EDWwaA",
+        "text_abfTP8",
+        "link_list_Jzj8zd"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.footer-block-image, .footer-block-image.left, .footer-block-image.center, .footer-block-image.right {justify-content: left; }}",
+        ".section-sections--23963288043786__footer-padding {padding-top: 40px;}",
+        "@media screen and (max-width: 749px) {.footer-block.grid__item {padding: 0; margin: 2rem 0; width: 100%; }}",
+        ".footer-block__details-content {margin-bottom: 0;}",
+        ".footer-block__image-wrapper {margin-bottom: 10px;}",
+        ".footer-block__newsletter {text-align: left;}",
+        ".newsletter-form {align-items: left;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": true,
+        "newsletter_heading": "Join our VitalPaws-Club and receive exclusive deals and a gift on signup!",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "vp-footer-new": {
+      "type": "vp-footer",
+      "settings": {
+        "logo": "shopify:\/\/shop_images\/vitalpawslogo.png",
+        "logo_width": 170,
+        "logo_text": "",
+        "tagline": "Revolutionising pet health",
+        "show_contact": true,
+        "contact_heading": "Customer service",
+        "contact_email": "info@thevitalpaws.com",
+        "contact_hours": "Mon–Fri: 09:00–17:00",
+        "menu_heading": "Menu",
+        "menu": "main-menu",
+        "menu_2_heading": "VitalPaws",
+        "menu_2": "footer",
+        "menu_2_hide_mobile": true,
+        "newsletter_enable": true,
+        "newsletter_heading": "VitalPaws Club",
+        "newsletter_subtext": "Exclusive deals & a gift on signup",
+        "show_social": true,
+        "show_policy": true,
+        "payment_enable": true,
+        "enable_country_selector": true,
+        "enable_language_selector": false,
+        "disclaimer": "The information on this site is not a substitute for professional veterinary advice. VitalPaws is not intended to diagnose, treat, cure or prevent any disease. If your pet has a medical condition, consult your veterinarian. Results may vary. Not for human consumption.",
+        "bg_color": "#ffffff",
+        "text_color": "#0d0d0d",
+        "muted_color": "#737373",
+        "accent_color": "#7bbc72",
+        "accent_dark_color": "#7bbc72",
+        "accent_bar_height": 3,
+        "font_family": "var(--font-body-family)",
+        "max_width": 1160,
+        "margin_top": 0,
+        "padding_top": 48,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "vp-footer-new"
+  ]
+}

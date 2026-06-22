@@ -1,0 +1,906 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+
+{%- style -%}
+  .vp-footer {
+    background: {{ section.settings.bg_color }};
+    border-top: {{ section.settings.accent_bar_height }}px solid {{ section.settings.accent_color }};
+    font-family: {{ section.settings.font_family }};
+    color: {{ section.settings.text_color }};
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .vp-footer { margin-top: {{ section.settings.margin_top }}px; }
+  }
+
+  .vp-footer__inner {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* MAIN ROW */
+  .vp-footer__main {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr 300px;
+    gap: 48px;
+    padding: {{ section.settings.padding_top }}px 0 40px;
+    align-items: start;
+  }
+
+  .vp-footer__main--no-menu2 {
+    grid-template-columns: 220px 1fr 300px;
+  }
+
+  .vp-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .vp-footer__brand-contact {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .vp-footer__brand-contact h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: {{ section.settings.muted_color }};
+    margin-bottom: 6px;
+    margin-top: 0;
+  }
+
+  .vp-footer__brand-contact p,
+  .vp-footer__brand-contact a {
+    font-size: 13px;
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    line-height: 1.5;
+    display: block;
+    margin: 0;
+  }
+
+  .vp-footer__brand-contact p span {
+    color: {{ section.settings.muted_color }};
+  }
+
+  .vp-footer__logo {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    display: block;
+  }
+
+  .vp-footer__logo span {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .vp-footer__tagline {
+    font-size: 11px;
+    color: {{ section.settings.muted_color }};
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* info cols */
+  .vp-footer__col h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: {{ section.settings.muted_color }};
+    margin-bottom: 14px;
+    margin-top: 0;
+  }
+
+  .vp-footer__col p,
+  .vp-footer__col a {
+    font-size: 14px;
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    line-height: 1.5;
+    display: block;
+    margin: 0;
+  }
+
+  .vp-footer__col p span {
+    font-style: italic;
+    color: {{ section.settings.muted_color }};
+  }
+
+  .vp-footer__col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .vp-footer__col ul li + li { margin-top: 7px; }
+
+  .vp-footer__col ul a {
+    color: {{ section.settings.muted_color }};
+    transition: color 0.12s;
+  }
+
+  .vp-footer__col ul a:hover { color: {{ section.settings.text_color }}; }
+
+  /* newsletter */
+  .vp-footer__newsletter h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: {{ section.settings.muted_color }};
+    margin-bottom: 8px;
+    margin-top: 0;
+  }
+
+  .vp-footer__newsletter p {
+    font-size: 13px;
+    font-weight: 600;
+    color: {{ section.settings.text_color }};
+    line-height: 1.4;
+    margin-bottom: 14px;
+    margin-top: 0;
+  }
+
+  .vp-footer__form {
+    display: flex;
+    border: 1.5px solid rgba(13,13,13,0.18);
+    border-radius: 100px;
+    overflow: hidden;
+    background: {{ section.settings.bg_color }};
+    transition: border-color 0.15s;
+  }
+
+  .vp-footer__form:focus-within { border-color: {{ section.settings.accent_color }}; }
+
+  .vp-footer__form input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    font-family: {{ section.settings.font_family }};
+    font-size: 13px;
+    background: transparent;
+    color: {{ section.settings.text_color }};
+    min-width: 0;
+  }
+
+  .vp-footer__form input::placeholder { color: {{ section.settings.muted_color }}; }
+
+  .vp-footer__form button {
+    flex-shrink: 0;
+    background: {{ section.settings.accent_color }};
+    border: none;
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    margin: 3px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: background 0.15s;
+  }
+
+  .vp-footer__form button:hover { background: {{ section.settings.accent_dark_color }}; }
+
+  .vp-footer__form button svg { width: 15px; height: 15px; }
+
+  /* social */
+  .vp-footer__social {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .vp-footer__social a {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(13,13,13,0.09);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .vp-footer__social a:hover {
+    background: {{ section.settings.text_color }};
+    border-color: {{ section.settings.text_color }};
+    color: {{ section.settings.bg_color }};
+  }
+
+  .vp-footer__social svg { width: 14px; height: 14px; }
+
+  /* BOTTOM BAR */
+  .vp-footer__bar {
+    border-top: 1px solid rgba(13,13,13,0.09);
+    padding: 14px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Row 1: policies + locale */
+  .vp-footer__bar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+
+  .vp-footer__policies {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .vp-footer__policies li {
+    display: flex;
+    align-items: center;
+    line-height: 1.8;
+  }
+
+  .vp-footer__policies li + li::before {
+    content: '·';
+    padding: 0 6px;
+    color: {{ section.settings.muted_color }};
+    line-height: 1;
+  }
+
+  .vp-footer__policies a {
+    font-size: 12px;
+    color: {{ section.settings.muted_color }};
+    text-decoration: none;
+    transition: color 0.12s;
+    white-space: nowrap;
+  }
+
+  .vp-footer__policies a:hover { color: {{ section.settings.text_color }}; }
+
+  .vp-footer__locale {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .vp-footer__locale localization-form,
+  .vp-footer__locale .localization-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .vp-footer__locale .localization-form > div {
+    margin: 0;
+    padding: 0;
+  }
+
+  .vp-footer .localization-form:only-child {
+    padding: 0 !important;
+  }
+
+  /* Row 2: payment icons left */
+  .vp-footer__bar-bottom {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .vp-footer__payment {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .vp-footer__pay-icon {
+    height: 20px;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .vp-footer__pay-icon svg {
+    height: 20px;
+    width: auto;
+    display: block;
+  }
+
+  /* DISCLAIMER + COPYRIGHT */
+  .vp-footer__sub {
+    border-top: 1px solid rgba(13,13,13,0.09);
+    padding: 16px 0 {{ section.settings.padding_bottom }}px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .vp-footer__disclaimer {
+    font-size: 11px;
+    color: {{ section.settings.muted_color }};
+    line-height: 1.55;
+    max-width: 860px;
+    margin: 0;
+  }
+
+  .vp-footer__copyright {
+    font-size: 12px;
+    font-weight: 600;
+    color: {{ section.settings.muted_color }};
+  }
+
+  .vp-footer__copyright a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .vp-footer__main,
+    .vp-footer__main--no-menu2 {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      padding-top: 40px;
+    }
+    .vp-footer__newsletter { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 600px) {
+    .vp-footer__main {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-top: 32px;
+    }
+    .vp-footer__newsletter { grid-column: auto; }
+    .vp-footer__col--hide-mobile { display: none; }
+
+    .vp-footer__bar-top {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .vp-footer__policies {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      width: 100%;
+    }
+
+    .vp-footer__policies li { line-height: 1.4; }
+
+    .vp-footer__policies li + li::before {
+      content: none;
+    }
+
+    .vp-footer__policies a {
+      font-size: 12px;
+    }
+
+    .vp-footer__locale {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .vp-footer__bar {
+      gap: 16px;
+    }
+
+    .vp-footer__bar-bottom {
+      justify-content: center;
+    }
+
+    .vp-footer__payment {
+      justify-content: center;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign has_social = false
+  if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_tiktok_link != blank or settings.social_twitter_link != blank or settings.social_pinterest_link != blank
+    assign has_social = true
+  endif
+-%}
+
+<footer class="vp-footer">
+  <div class="vp-footer__inner">
+
+    <!-- MAIN ROW -->
+    <div class="vp-footer__main{% if section.settings.menu_2 == blank %} vp-footer__main--no-menu2{% endif %}">
+
+      <!-- Brand + Customer service -->
+      <div class="vp-footer__brand">
+        {%- if section.settings.logo != blank -%}
+          <a href="{{ routes.root_url }}">
+            {{-
+              section.settings.logo
+              | image_url: width: 360
+              | image_tag:
+                loading: 'lazy',
+                width: section.settings.logo_width,
+                alt: shop.name
+            -}}
+          </a>
+        {%- else -%}
+          <a class="vp-footer__logo" href="{{ routes.root_url }}">
+            {{- section.settings.logo_text | default: shop.name -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.tagline != blank -%}
+          <span class="vp-footer__tagline">{{ section.settings.tagline }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.show_contact -%}
+          <div class="vp-footer__brand-contact">
+            {%- if section.settings.contact_heading != blank -%}
+              <h4>{{ section.settings.contact_heading }}</h4>
+            {%- endif -%}
+            {%- if section.settings.contact_email != blank -%}
+              <p><a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a></p>
+            {%- endif -%}
+            {%- if section.settings.contact_hours != blank -%}
+              <p><span>{{ section.settings.contact_hours }}</span></p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Menu 1 -->
+      {%- if section.settings.menu != blank -%}
+        <div class="vp-footer__col">
+          {%- if section.settings.menu_heading != blank -%}
+            <h4>{{ section.settings.menu_heading }}</h4>
+          {%- endif -%}
+          <ul>
+            {%- for link in linklists[section.settings.menu].links -%}
+              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <!-- Menu 2 -->
+      {%- if section.settings.menu_2 != blank -%}
+        <div class="vp-footer__col{% if section.settings.menu_2_hide_mobile %} vp-footer__col--hide-mobile{% endif %}">
+          {%- if section.settings.menu_2_heading != blank -%}
+            <h4>{{ section.settings.menu_2_heading }}</h4>
+          {%- endif -%}
+          <ul>
+            {%- for link in linklists[section.settings.menu_2].links -%}
+              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <!-- Newsletter + social -->
+      {%- if section.settings.newsletter_enable -%}
+        <div class="vp-footer__newsletter">
+          {%- if section.settings.newsletter_heading != blank -%}
+            <h4>{{ section.settings.newsletter_heading }}</h4>
+          {%- endif -%}
+          {%- if section.settings.newsletter_subtext != blank -%}
+            <p>{{ section.settings.newsletter_subtext }}</p>
+          {%- endif -%}
+          {%- form 'customer', id: 'ContactVPFooter', class: 'vp-footer__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              id="NewsletterFormVP--{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}autofocus aria-invalid="true"{% endif %}
+              placeholder="{{ 'newsletter.label' | t }}"
+              required
+            >
+            <button type="submit" name="commit" aria-label="{{ 'newsletter.button_label' | t }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          {%- endform -%}
+
+          {%- if section.settings.show_social and has_social -%}
+            <div class="vp-footer__social">
+              {%- if settings.social_facebook_link != blank -%}
+                <a href="{{ settings.social_facebook_link }}" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_instagram_link != blank -%}
+                <a href="{{ settings.social_instagram_link }}" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_tiktok_link != blank -%}
+                <a href="{{ settings.social_tiktok_link }}" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_youtube_link != blank -%}
+                <a href="{{ settings.social_youtube_link }}" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_pinterest_link != blank -%}
+                <a href="{{ settings.social_pinterest_link }}" aria-label="Pinterest" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.44 7.63 11.22-.1-.95-.2-2.4.04-3.44l1.5-6.35s-.38-.77-.38-1.9c0-1.78 1.03-3.11 2.32-3.11 1.09 0 1.62.82 1.62 1.8 0 1.1-.7 2.74-1.06 4.26-.3 1.27.63 2.3 1.87 2.3 2.24 0 3.97-2.36 3.97-5.77 0-3.02-2.17-5.13-5.27-5.13-3.59 0-5.7 2.69-5.7 5.48 0 1.08.42 2.24.94 2.87a.38.38 0 01.09.36l-.35 1.43c-.06.23-.2.28-.45.17C4.68 15.54 4 13.66 4 12.1 4 8.32 6.86 4.84 12.39 4.84c4.46 0 7.92 3.18 7.92 7.42 0 4.43-2.79 7.99-6.66 7.99-1.3 0-2.52-.68-2.94-1.48l-.8 2.98c-.29 1.1-1.07 2.48-1.6 3.32.6.19 1.24.29 1.89.29 6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="vp-footer__bar">
+
+      <!-- Row 1: policies + locale -->
+      <div class="vp-footer__bar-top">
+        {%- if section.settings.show_policy -%}
+          <ul class="vp-footer__policies">
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="vp-footer__locale">
+          {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+            <localization-form>
+              {%- form 'localization', id: 'VPFooterCountryForm', class: 'localization-form' -%}
+                {%- render 'country-localization', localPosition: 'VPFooterCountry' -%}
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+            <localization-form>
+              {%- form 'localization', id: 'VPFooterLanguageForm', class: 'localization-form' -%}
+                {%- render 'language-localization', localPosition: 'VPFooterLanguage' -%}
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Row 2: payment icons centered -->
+      {%- if section.settings.payment_enable -%}
+        <div class="vp-footer__bar-bottom">
+          <div class="vp-footer__payment">
+            {%- for type in shop.enabled_payment_types -%}
+              <span class="vp-footer__pay-icon">
+                {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+              </span>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    </div>
+
+    <!-- DISCLAIMER + COPYRIGHT -->
+    <div class="vp-footer__sub">
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="vp-footer__disclaimer">{{ section.settings.disclaimer }}</p>
+      {%- endif -%}
+      <span class="vp-footer__copyright">&copy; {{ 'now' | date: '%Y' }}, <a href="{{ routes.root_url }}">{{ shop.name }}</a></span>
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "VP Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 120
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text (if no image)",
+      "info": "Leave blank to use shop name"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Nutrition for dogs"
+    },
+    {
+      "type": "header",
+      "content": "Customer service column"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Show customer service column",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Column heading",
+      "default": "Customer service"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email address",
+      "default": "info@thevitalpaws.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_hours",
+      "label": "Opening hours",
+      "default": "Mon–Fri: 09:00–17:00"
+    },
+    {
+      "type": "header",
+      "content": "Navigation column 1"
+    },
+    {
+      "type": "text",
+      "id": "menu_heading",
+      "label": "Column heading",
+      "default": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "footer",
+      "label": "Menu",
+      "info": "Select the menu to display in this column"
+    },
+    {
+      "type": "header",
+      "content": "Navigation column 2"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_heading",
+      "label": "Column heading"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Menu",
+      "info": "Leave blank to hide this column"
+    },
+    {
+      "type": "checkbox",
+      "id": "menu_2_hide_mobile",
+      "label": "Hide column 2 on mobile",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Enable newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "VitalPaws Club"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_subtext",
+      "label": "Newsletter subtext",
+      "default": "Exclusive deals & a gift on signup"
+    },
+    {
+      "type": "header",
+      "content": "Social icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons below newsletter",
+      "default": true,
+      "info": "Social links are configured in Theme settings > Social media"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "label": "Show policy links",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "label": "Show country selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "label": "Show language selector",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Disclaimer"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "The information on this site is not a substitute for professional veterinary advice. VitalPaws is not intended to diagnose, treat, cure or prevent any disease. If your pet has a medical condition, consult your veterinarian. Results may vary. Not for human consumption."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted / secondary text",
+      "default": "#737373"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#7DC444"
+    },
+    {
+      "type": "color",
+      "id": "accent_dark_color",
+      "label": "Accent color (hover state)",
+      "default": "#62a832"
+    },
+    {
+      "type": "header",
+      "content": "Top accent bar"
+    },
+    {
+      "type": "range",
+      "id": "accent_bar_height",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Bar height",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font family",
+      "options": [
+        { "value": "var(--font-body-family)", "label": "Theme body font" },
+        { "value": "var(--font-heading-family)", "label": "Theme heading font" },
+        { "value": "'Inter', sans-serif", "label": "Inter" },
+        { "value": "system-ui, sans-serif", "label": "System UI" }
+      ],
+      "default": "var(--font-body-family)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Max content width",
+      "default": 1160
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 20
+    }
+  ],
+  "default": {}
+}
+{% endschema %}

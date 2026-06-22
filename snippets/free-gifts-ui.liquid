@@ -1,0 +1,85 @@
+{{ 'free-gifts-ui.css' | asset_url | stylesheet_tag }}
+
+{% assign total_price = 0 %}
+
+{% for product in collections['free-items'].products %}
+  {% if template.suffix == 'b-test-advanced-final' or template.suffix == 'b-test-advanced-plus' or template.suffix == 'b-test-advanced-dosage' or template.suffix == 'd-test-advance' or template.suffix == 'd-test-advance-new' or template.suffix == 'serum' or template.suffix == 'd-test-advance-newest' or template.suffix == 'e-new' or template.suffix == 'serum-b' or template.suffix == 'd-test-with-5-option' %}
+    {% if product.id == 10215138558218 %}
+      {% continue %}
+    {% endif %}
+  {% endif %}
+  {% assign total_price = total_price | plus: product.compare_at_price %}
+{% endfor %}
+
+
+<div class="free-gifts-ui-container">
+  <div
+    class="premium-attachment-kit"
+    style="
+      --kit-bg-color: #fafafa;
+      --kit-border-color: #13341b;
+      --kit-text-color: #1d1d1d;
+      --kit-header-color: #1d1d1d;
+      --kit-free-bg: #d7ed96;
+      --kit-free-text: #13341b;
+      --kit-item-bg: #ffffff;
+      --kit-item-count-color: #9ca3af;
+      --kit-item-radius: 4px;
+      --kit-container-radius: 4px;
+      --kit-badge-icon-size: 12px;
+      --kit-original-price-color: #9ca3af;
+      --kit-compare-price-color: #9ca3af;
+      --kit-item-border-color: rgba(243, 244, 246, 0.8);
+      margin-top: 0px;
+      margin-bottom: 0px;
+    "
+  >
+    <!-- Header -->
+    <div class="kit-header">
+      <div class="kit-header-left">
+        <div class="kit-title-row">
+          {% assign title = block.settings.free_gifts_title %}
+          {% if template.suffix == 'b-test-advanced-final' or template.suffix == 'b-test-advanced-plus' or template.suffix == 'd-test-advance' or template.suffix == 'b-test-advanced-dosage' or template.suffix == 'd-test-advance-new' or template.suffix == 'serum' or template.suffix == 'd-test-advance-newest' or template.suffix == 'e-new' or template.suffix == 'serum-b' or template.suffix == 'd-test-with-5-option' %}
+            {% assign title = block.settings.free_gifts_title |  replace: '3', '2' %}
+          {% endif %}
+          <h3 class="kit-title">{{ title }}</h3>
+        </div>
+      </div>
+
+      <div class="kit-price">
+        <span class="original-price">{{ total_price | money }}</span>
+        <span class="free-badge">
+          {% render 'free-badge-icon' %}
+          FREE!
+        </span>
+      </div>
+    </div>
+
+    <!-- Items List -->
+    <ul class="kit-items">
+
+
+    {% for product in collections['free-items'].products %}
+      {% if product.id == 10215138558218 and template.suffix == 'b-test-advanced-final'or product.id == 10215138558218 and template.suffix == 'b-test-advanced-plus' or product.id == 10215138558218 and template.suffix == 'd-test-advance' or product.id == 10215138558218 and template.suffix == 'b-test-advanced-dosage' or product.id == 10215138558218 and template.suffix == 'd-test-advance-new' or product.id == 10326775365898 and template.suffix == 'serum' or product.id == 10215138558218 and template.suffix == 'd-test-advance-newest' or product.id == 10215138558218 and template.suffix == 'e-new' or product.id == 10494982750474 and template.suffix == 'serum' or product.id == 10494982750474 and template.suffix == 'serum-b' or product.id == 10546921439498 and template.suffix == 'd-test-with-5-option' %}
+          {% continue %}
+      {% endif %}
+      <li class="kit-item" data-product-id="{{ product.id }}">
+        <div class="item-icon">
+          <img
+            src="{{ product.featured_image | image_url: width: 100 }}"
+            alt="{{ product.title }}"
+            width="45"
+            height="45"
+          >
+        </div>
+        <div class="item-details">
+          <p class="item-name">{{ product.title }}</p>
+          <div class="item-pricing">
+            <span class="item-compare-price"> {{ product.compare_at_price | money }} </span><span class="item-price"> {{ product.price | money }} </span>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>

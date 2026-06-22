@@ -1,0 +1,146 @@
+<style>
+  .countdown {
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+
+  .countdown * {
+    color: inherit;
+  }
+
+  .countdown h3 {
+    color: {{ section.settings.text_color }};
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .countdown-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    gap: 2px;
+  }
+
+  .countdown-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding-bottom: 5px;
+  }
+
+  .countdown-timer-item {
+    color: {{ section.settings.timer_color }};
+  }
+
+</style>
+
+
+<div class="countdown">
+  <div class="countdown-container">
+    <h3>{{ section.settings.title }}</h3>
+    <div
+      class="countdown-timer"
+      data-date="{{ section.settings.end_date }}"
+    >
+      <div class="countdown-timer-item" data-type="hours">00</div>:
+      <div class="countdown-timer-item" data-type="minutes">00</div>:
+      <div class="countdown-timer-item" data-type="seconds">00</div>
+    </div>
+  </div>
+</div>
+
+
+<script defer>
+  document.addEventListener('DOMContentLoaded', function() {
+    const countdownEl = document.querySelector('.countdown-timer');
+    if (!countdownEl) return;
+
+    const endDateStr = countdownEl.dataset.date; // e.g. "2025-12-31"
+    if (!endDateStr) return;
+
+    // Parse the end date as local midnight in the user's timezone
+    const [year, month, day] = endDateStr.split('-').map(Number);
+    const endDate = new Date(year, month - 1, day, 23, 59, 59); // local time
+
+    const hoursEl = countdownEl.querySelector('[data-type="hours"]');
+    const minutesEl = countdownEl.querySelector('[data-type="minutes"]');
+    const secondsEl = countdownEl.querySelector('[data-type="seconds"]');
+
+    function updateTimer() {
+      const now = new Date();
+      let diff = endDate - now;
+
+      // If time is up or past, lock at zero and stop
+      if (diff <= 0) {
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      hoursEl.textContent = `${String(hours).padStart(2, '0')}h`;
+      minutesEl.textContent = `${String(minutes).padStart(2, '0')}m`;
+      secondsEl.textContent = `${String(seconds).padStart(2, '0')}s`;
+    }
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+  });
+</script>
+
+
+{% schema %}
+{
+  "name": "Countdown",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "timer_color",
+      "label": "Timer Color",
+      "default": "#FF3232"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ends in:"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End Date",
+      "default": "2025-12-31"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,402 @@
+<style>
+  #appstle_subscription_widget0 {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    overflow: hidden;
+  }
+
+  .product-box-modal-label-plus {
+    font-size: 16px;
+    line-height: 22px;
+    color: #000;
+    font-weight: 700;
+    /* margin-bottom: 15px; */
+  }
+
+  .product-box-modal-label-plus-options {
+    position: relative;
+    padding-top: 10px;
+  }
+
+  .product-box-modal-label-plus-options select {
+    display: block;
+    width: 100%;
+    margin: 0;
+    border: .1rem solid #000000;
+    border-radius: 4px;
+    padding: 11px 15px 11px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    outline: 0;
+    cursor: pointer;
+    background: transparent;
+    appearance: none;
+    font-style: italic;
+    background: #fff url({{ 'arrow-down-black.svg' | asset_url }}) no-repeat center right 1.5rem;
+    background-size: 14px;
+    color: #000000;
+    font-weight: 700;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  .free-gifts-ui-container {
+    display: block !important;
+  }
+
+  .product-form__price-wrapper-b-plus {
+    display: flex;
+  }
+
+  .product-box-modal-label-plus-delivery-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #f6f6f6;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .product-box-modal-label-option-icons {
+    display: flex;
+    row-gap: 8px;
+    position: relative;
+    max-width: 100%;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 8px;
+    flex-basis: auto;
+    min-height: 1px;
+    transition: inherit;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: flex-start;
+  }
+
+  .product-box-modal-label-option-icons img {
+    object-fit: contain;
+  }
+
+  .product-box-modal-label-option-icons p {
+    flex-grow: 1;
+    font-size: 13px;
+    flex-basis: 0;
+    text-align: left;
+    transition: inherit;
+    flex-shrink: 1;
+    font-family: Inter, ' sans-serif';
+    line-height: 20px;
+    overflow-wrap: break-word;
+    text-align-last: left;
+    color: #000000;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .product-box-modal-label-option-icons p {
+      font-size: 12px;
+    }
+
+    .product-box-modal-label-option-icons img {
+      width: 15px;
+      height: 15px;
+    }
+
+    .product-box-modal-label-option-icons {
+      gap: 4px;
+    }
+
+    .custom-content-labels-container {
+      margin-top: 0;
+    }
+
+    .product-box-modal-label-text-plus {
+      font-size: 14px;
+    }
+  }
+
+  div[single-purchase-pricings],
+  span[single-purchase-pricings] {
+    display: none;
+  }
+
+  .product__info-wrapper.single_purchase_option div[subs-purchase-pricings],
+  .product__info-wrapper.single_purchase_option span[subs-purchase-pricings],
+  .product__info-wrapper.single_purchase_option .free-gifts-ui-container {
+    display: none !important;
+  }
+
+  .product__info-wrapper.single_purchase_option div[single-purchase-pricings]{
+    display: block !important;
+  }
+
+  .product__info-wrapper variant-selects .featured-label-design .product-form__input--pill-percentages-featured-label-design {
+    display: none !important;
+   }
+
+</style>
+
+{% if product.id == 10306128478474 %}
+  <style>
+
+    .product__buy-buttons-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .free-gifts-ui-container {
+      margin-top: 0 !important;
+    }
+
+    .product-box-modal-label-plus {
+      order: 2;
+      margin-top: 15px;
+    }
+
+    .product-box-modal-label-plus-delivery-status {
+      order: 3;
+    }
+
+    .free-gifts-ui-container {
+      order: 1;
+    }
+
+    .product-form-main-container {
+      order: 4;
+    }
+
+    .product__buy-buttons-label {
+      order: 5;
+    }
+
+  </style>
+{% endif %}
+
+
+<div class="product-box-modal-label-plus">
+  <div class="product-box-modal-label-text-plus">Frequency:</div>
+  <div class="product-box-modal-label-plus-wrapper">
+    <div class="product-box-modal-label-plus-options">
+
+    {% unless product.template_suffix == 'b-test-advanced-dosage' or product.metafields.custom.route_product_name == 'bogo-2' %}
+      <select name="frequency" id="frequency">
+        <option value="5075960074">Delivered every: 2 months</option>
+        <option value="5075992842" selected="selected">Delivered every: 30 days (most common)</option>
+        <option value="5076025610">Delivered every: 3 weeks</option>
+        <option value="one-time">One-time purchase - 20% off</option>
+      </select>
+    {% endunless %}
+
+    {% if product.template_suffix == 'b-test-advanced-dosage' or product.id == 10314483138826 %}
+      <select name="frequency" id="frequency">
+        <option value="5815730442" selected="selected">Delivered every: 30 days (most common)</option>
+        <option value="5815763210">Delivered every: 2 months</option>
+        <option value="5815795978">Delivered every: 3 months</option>
+        <option value="one-time">One-time purchase - 20% off</option>
+      </select>
+    {% endif %}
+
+    {% if product.template_suffix == 'b-test-advanced-dosage' or product.id == 10316636979466  or product.id == 10396349563146 or product.id == 10443398414602 or product.id == 10478806925578 or product.id == 10490050052362 %}
+      <select name="frequency" id="frequency"
+      {% if product.id == 10311188447498 %}
+        style="display: none !important;"
+      {% endif %}
+      >
+        <option value="5822939402" selected="selected">Delivered every: 30 days (most common)</option>
+        <option value="5822972170">Delivered every: 3 months</option>
+        <option value="5823004938">Delivered every: 5 months</option>
+        <option value="one-time">One-time purchase - 20% off</option>
+      </select>
+    {% endif %}
+
+    {% if product.id == 10326775365898 or product.id == 10494982750474 %}
+      <select name="frequency" id="frequency">
+        <option value="6068338954" selected="selected">Delivered every: 30 days (most common)</option>
+        <option value="6068371722">Delivered every: 3 months</option>
+        <option value="6068404490">Delivered every: 5 months</option>
+        <option value="one-time">One-time purchase - 20% off</option>
+      </select>
+    {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<div class="product-box-modal-label-plus-delivery-status">
+  <div class="product-box-modal-label-option-icons">
+    <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/fast-delivery.png?v=1733337974&amp;width=50" alt="Fast delivery" width="20" height="20">
+    <p><strong>Free shipping</strong>, always!</p>
+  </div>
+  <div class="product-box-modal-label-option-icons">
+    <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/pause.png?v=1733337974&amp;width=50" alt="Cancel anytime" width="20" height="20">
+    <p><strong>Cancel anytime</strong>, no contract!</p>
+  </div>
+</div>
+
+
+<script defer="defer">
+  document.addEventListener("DOMContentLoaded", () => {
+    function syncValues(fromFrequency = true) {
+      const freq = document.querySelector("#frequency");
+      const planLabelSub = document.querySelector('#appstle_selling_plan_label_20[name="selling_plan"]');
+      const planLabelOneTime = document.querySelector('#appstle_selling_plan_label_10[name="selling_plan"]');
+      const mainProductWrapper = document.querySelector('.product__info-wrapper');
+      const planSelect = document.querySelector("select#appstle_selling_plan0");
+      const widget = document.querySelector("#appstle_subscription_widget0");
+
+      if (!freq || !planLabelSub || !planSelect || !widget) return false;
+
+      const value = fromFrequency ? freq.value : planSelect.value;
+
+      // Keep everything in sync
+      freq.value = value;
+      planSelect.value = value;
+      widget.setAttribute("data-selected-selling-plan", value);
+
+      // --- Handle which radio to click ---
+      if (value === "one-time" && planLabelOneTime) {
+        planLabelOneTime.click();
+        mainProductWrapper.classList.add('single_purchase_option');
+      } else {
+        planLabelSub.value = value;
+        planLabelSub.click();
+        mainProductWrapper.classList.remove('single_purchase_option');
+      }
+
+      return true;
+    }
+
+    // Keep checking until elements are ready
+    const initInterval = setInterval(() => {
+      if (syncValues()) {
+        clearInterval(initInterval);
+
+        // --- Event binding once everything exists ---
+        document.querySelector("#frequency").addEventListener("change", () => {
+          syncValues(true);
+        });
+
+        document.querySelector("select#appstle_selling_plan0").addEventListener("change", () => {
+          syncValues(false);
+        });
+      }
+    }, 500);
+
+    // If selling_plan is in URL, wait for elements, then sync
+    if (window.location.href.includes("selling_plan")) {
+      const urlSync = setInterval(() => {
+        if (syncValues(false)) {
+          clearInterval(urlSync);
+        }
+      }, 500);
+    }
+
+    // --- Special logic for d-test-advance template ---
+    const autoRefill = document.querySelector('#auto_refill');
+    const frequencySelect = document.querySelector('#frequency');
+
+    {% if product.id == 10314483138826 %}
+      let frequencySelectValue = '5815763210';
+    {% elsif product.id == 10316636979466 or product.id == 10396349563146 or product.id == 10443398414602 or product.id == 10478806925578 or product.id == 10490050052362 %}
+      let frequencySelectValue = '5822972170';
+    {% elsif product.id == 10326775365898 or product.id == 10494982750474 %}
+        let frequencySelectValue = '6068371722';
+    {% else %}
+      const frequencySelectValue = '5075992842';
+    {% endif %}
+
+    console.log('frequencySelectValue', frequencySelectValue);
+
+    if (autoRefill && frequencySelect) {
+      autoRefill.addEventListener('change', () => {
+        console.log('autoRefill changed');
+
+        if(window.currenSelectedVariantId) {
+          if(window.currenSelectedVariantId == '52152451957002') {
+            frequencySelectValue = '5815730442';
+          } else if(window.currenSelectedVariantId == '52152451989770') {
+            frequencySelectValue = '5815763210';
+          } else if(window.currenSelectedVariantId == '52152452022538') {
+            frequencySelectValue = '5815795978';
+          }
+          else if(window.currenSelectedVariantId == '52162322825482') {
+            frequencySelectValue = '5822939402';
+          } else if(window.currenSelectedVariantId == '52162322858250') {
+            frequencySelectValue = '5822972170';
+          } else if(window.currenSelectedVariantId == '52162322891018') {
+            frequencySelectValue = '5823004938';
+          }
+          else if(window.currenSelectedVariantId == '52602279493898') {
+            frequencySelectValue = '6068338954';
+          } else if(window.currenSelectedVariantId == '52602279526666') {
+            frequencySelectValue = '6068371722';
+          } else if(window.currenSelectedVariantId == '52602279559434') {
+            frequencySelectValue = '6068404490';
+          }
+          else if(window.currenSelectedVariantId == '52835744809226') {
+            frequencySelectValue = '6068338954';
+          } else if(window.currenSelectedVariantId == '52835744841994') {
+            frequencySelectValue = '6068371722';
+          } else if(window.currenSelectedVariantId == '52835744874762') {
+            frequencySelectValue = '6068404490';
+          }
+          else if(window.currenSelectedVariantId == '52720647241994') {
+            frequencySelectValue = '5822939402';
+          } else if(window.currenSelectedVariantId == '52720647274762') {
+            frequencySelectValue = '5822972170';
+          } else if(window.currenSelectedVariantId == '52720647307530') {
+            frequencySelectValue = '5823004938';
+          }
+          else if(window.currenSelectedVariantId == '52881813111050') {
+            frequencySelectValue = '5822939402';
+          } else if(window.currenSelectedVariantId == '52881813143818') {
+            frequencySelectValue = '5822972170';
+          } else if(window.currenSelectedVariantId == '52881813176586') {
+            frequencySelectValue = '5823004938';
+          }
+          else if(window.currenSelectedVariantId == '52945602674954') {
+            frequencySelectValue = '5822939402';
+          } else if(window.currenSelectedVariantId == '52945602707722') {
+            frequencySelectValue = '5822972170';
+          } else if(window.currenSelectedVariantId == '52945602740490') {
+            frequencySelectValue = '5823004938';
+          }
+          else if(window.currenSelectedVariantId == '52985927729418' || window.currenSelectedVariantId == '52985927827722') {
+            frequencySelectValue = '6068338954';
+          } else if(window.currenSelectedVariantId == '52985927762186' || window.currenSelectedVariantId == '52985927860490') {
+            frequencySelectValue = '6068371722';
+          } else if(window.currenSelectedVariantId == '52985927794954' || window.currenSelectedVariantId == '52985927893258') {
+            frequencySelectValue = '6068404490';
+          }
+          else {
+            frequencySelectValue = '5075992842';
+          }
+        }
+
+        if (autoRefill.checked) {
+          // Checked → Select 30 days plan
+          frequencySelect.value = frequencySelectValue; // 30 days plan
+        } else {
+          // Unchecked → One-time purchase
+          frequencySelect.value = 'one-time';
+        }
+        // Trigger change event so your existing sync logic runs
+        frequencySelect.dispatchEvent(new Event('change'));
+      });
+
+      // Optional: ensure correct state on load
+      if (autoRefill.checked) {
+        frequencySelect.value = frequencySelectValue;
+      } else {
+        frequencySelect.value = 'one-time';
+      }
+      frequencySelect.dispatchEvent(new Event('change'));
+    }
+  });
+</script>
+

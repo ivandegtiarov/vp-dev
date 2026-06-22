@@ -1,0 +1,111 @@
+<style>
+  .product-box-modal-label-plus,
+  .product-box-modal-label-plus-delivery-status {
+    display: none !important;
+  }
+
+  .auto-refill {
+    display: flex;
+    background-color: #f8f8f8;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px dashed #b9b9b9;
+    border-radius: 4px;
+    margin-top: 2rem;
+  }
+
+  .auto-refill input[type="checkbox"]:checked {
+    background-color: #7BBC72FF;
+    position: relative;
+  }
+  .auto-refill input[type="checkbox"]:checked::after {
+    content: '✓';
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+  }
+  .auto-refill label {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 2px;
+    padding-left: 12px;
+  }
+
+  .auto-refill input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #7BBC72FF;
+    border-radius: 4px;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+    background: #fff;
+  }
+
+  .subs-content {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .subs-content .product-box-modal-label-option-icons {
+    font-style: italic;
+  }
+
+  .auto-refill-title {
+    margin: 0;
+    line-height: 1;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .auto-refill {
+      margin-top: 2rem;
+      padding: 12px;
+    }
+
+    .auto-refill-title {
+      font-size: 15px;
+    }
+
+    .subs-content .product-box-modal-label-option-icons {
+      font-size: 12px;
+    }
+  }
+
+</style>
+
+<div class="auto-refill">
+  <input type="checkbox" id="auto_refill" name="auto-refill" value="691947471194" checked="">
+  <label for="auto_refill">
+    <p class="auto-refill-title">Subscribe for an extra 20% off</p>
+    <div class="subs-content">
+      <div class="product-box-modal-label-option-icons">
+        <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/fast-delivery.png?v=1733337974&amp;width=50" alt="Fast delivery" width="20" height="20">
+        {% if product.metafields.custom.route_product_name == 'bogo-2' and product.id == 10314483138826 %}
+          <p>Shipped every <span class="auto-refill-frequency-time">2 months</span></p>
+        {% elsif product.id == 10316636979466 or product.id == 10396349563146 or product.id == 10326775365898 or product.id == 10443398414602 or product.id == 10478806925578 or product.id == 10490050052362 or product.id == 10494982750474 or product.id == 10546921439498 %}
+          <p>Shipped every <span class="auto-refill-frequency-time">3 months</span></p>
+        {% else %}
+          <p>Shipped every <span class="auto-refill-frequency-time">30 days</span></p>
+        {% endif %}
+      </div>
+      <div class="product-box-modal-label-option-icons">
+        <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/pause.png?v=1733337974&amp;width=50" alt="Cancel anytime" width="20" height="20">
+        <p>Cancel/adjust anytime</p>
+      </div>
+    </div>
+  </label>
+</div>

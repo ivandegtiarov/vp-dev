@@ -1,0 +1,298 @@
+<style>
+  .clickable-testimonials-wrapper {
+    display: flex;
+    row-gap: 40px;
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 40px;
+    flex-basis: auto;
+    min-height: 1px;
+    align-items: center;
+    flex-shrink: 1;
+    padding-top: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+    flex-direction: column;
+    padding-bottom: 0;
+    justify-content: center;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .clickable-testimonials-title {
+    font-size: 42px;
+    align-self: stretch;
+    flex-basis: auto;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 700;
+    line-height: 130%;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    text-align-last: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  .clickable-testimonials-cards {
+    display: flex;
+    row-gap: 40px;
+    position: relative;
+    flex-grow: 1;
+    max-width: 780px;
+    align-self: auto;
+    column-gap: 40px;
+    flex-basis: auto;
+    align-items: center;
+    flex-shrink: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .clickable-testimonials-card {
+    display: none;
+    row-gap: 24px;
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+    min-width: var(--replo-flex-min-dimension, 0px);
+    align-self: stretch;
+    column-gap: 24px;
+    min-height: 1px;
+    align-items: center;
+    flex-shrink: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .clickable-testimonials-card h2 {
+    font-size: 24px;
+    align-self: stretch;
+    flex-basis: auto;
+    font-style: italic;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 500;
+    line-height: 28px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    text-align-last: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  .clickable-testimonials-card p {
+    font-size: 18px;
+    align-self: stretch;
+    flex-basis: auto;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 400;
+    line-height: 22px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    text-align-last: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  .clickable-testimonials-card-image-wrapper {
+    display: flex;
+    row-gap: 20px;
+    z-index: 2;
+    position: relative;
+    align-self: stretch;
+    column-gap: 20px;
+    flex-basis: auto;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+
+  .clickable-testimonials-card-image {
+    width: 75px;
+    height: 75px;
+    opacity: 100%;
+    overflow: hidden;
+    flex-basis: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+
+  .clickable-testimonials-card-image img {
+    height: 100%;
+    margin: 0;
+    display: block;
+    padding: 0;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+
+  .clickable-testimonials-card-image {
+    opacity: 40%;
+    cursor: pointer;
+  }
+
+  .clickable-testimonials-card-image.active {
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .clickable-testimonials-wrapper {
+      display: flex;
+      row-gap: 20px;
+      position: relative;
+      flex-grow: 1;
+      max-width: 100%;
+      min-width: auto;
+      align-self: stretch;
+      column-gap: 20px;
+      flex-basis: auto;
+      min-height: 1px;
+      align-items: center;
+      flex-shrink: 1;
+      padding-top: 40px;
+      padding-left: 16px;
+      padding-right: 16px;
+      flex-direction: column;
+      padding-bottom: 20px;
+      justify-content: center;
+    }
+
+    .clickable-testimonials-title {
+      font-size: 28px;
+      align-self: stretch;
+      flex-basis: auto;
+      text-align: center;
+      flex-shrink: 0;
+      font-weight: 700;
+      line-height: 130%;
+      letter-spacing: 0px;
+      text-align-last: center;
+    }
+
+    .clickable-testimonials-card h2 {
+      font-size: 20px;
+      align-self: stretch;
+      flex-basis: auto;
+      font-style: italic;
+      text-align: center;
+      flex-shrink: 0;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: 0px;
+      text-align-last: center;
+    }
+  }
+</style>
+
+<div class="clickable-testimonials-wrapper">
+  <h2 class="clickable-testimonials-title">
+    {{ section.settings.title }}
+  </h2>
+  <div class="clickable-testimonials-cards">
+    {% for block in section.blocks %}
+      <div class="clickable-testimonials-card">
+        <h2>"{{ block.settings.testimonial }}"</h2>
+        <p>{{ block.settings.author }}</p>
+      </div>
+    {% endfor %}
+    <div class="clickable-testimonials-card-image-wrapper">
+      {% for block in section.blocks %}
+        <div class="clickable-testimonials-card-image">
+          <img
+            src="{{ block.settings.image | image_url: width: 150 }}"
+            alt="{{ block.settings.image.alt }}"
+            width="75"
+            height="auto"
+          >
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div><img style="padding-top: 20px;"src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/Green_underline.png?v=1752699074" width="200px" height="auto"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.clickable-testimonials-card');
+    const images = document.querySelectorAll('.clickable-testimonials-card-image');
+
+    cards.forEach((card, index) => {
+      card.style.display = index === 0 ? 'flex' : 'none';
+    });
+    images.forEach((img, index) => {
+      if (index === 0) img.classList.add('active');
+      else img.classList.remove('active');
+    });
+
+    // Add click events to all images
+    images.forEach((image, index) => {
+      image.addEventListener('click', function () {
+        cards.forEach((card, i) => {
+          card.style.display = i === index ? 'flex' : 'none';
+        });
+
+        images.forEach((img, i) => {
+          img.classList.toggle('active', i === index);
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Clickable Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Formulated and Praised by Certified Vets"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "testimonial",
+          "label": "Testimonial",
+          "default": "I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Dr. Jane Smith, DVM"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Clickable Testimonials"
+    }
+  ]
+}
+{% endschema %}

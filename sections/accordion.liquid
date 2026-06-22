@@ -1,0 +1,425 @@
+<style>
+  .accordion-wrapper {
+    display: flex;
+    row-gap: 60px;
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 60px;
+    flex-basis: auto;
+    min-height: 1px;
+    align-items: center;
+    flex-shrink: 1;
+    padding-top: 100px;
+    padding-left: 39px;
+    flex-direction: column;
+    padding-bottom: 150px;
+    justify-content: center;
+    background-color: #7bbc7214;
+    background-image: none;
+  }
+
+  .accordion-wrapper-container {
+    width: 100%;
+    display: flex;
+    row-gap: 30px;
+    position: relative;
+    flex-grow: 1;
+    max-width: 1158px;
+    min-width: auto;
+    column-gap: 30px;
+    flex-basis: auto;
+    min-height: 1px;
+    align-items: flex-start;
+    flex-shrink: 1;
+    padding-left: 24px;
+    padding-right: 24px;
+    justify-content: center;
+  }
+
+  .accordion-wrapper-title-wrapper {
+    display: flex;
+    row-gap: 20px;
+    position: relative;
+    flex-grow: 1;
+    max-width: 350px;
+    column-gap: 20px;
+    min-height: 1px;
+    align-items: center;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .accordion-wrapper-title {
+    font-size: 36px;
+    align-self: stretch;
+    flex-basis: auto;
+    flex-shrink: 0;
+    font-weight: 600;
+    line-height: 43px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    margin: 0;
+    width: 100%;
+  }
+
+  .accordion-wrapper-description {
+    font-size: 16px;
+    align-self: stretch;
+    flex-basis: auto;
+    flex-shrink: 0;
+    line-height: 20px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    margin: 0;
+    width: 100%;
+  }
+
+  .accordion-wrapper-description * {
+    margin: 0;
+  }
+
+  .accordion-wrapper-content {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    align-self: stretch;
+    flex-shrink: 1;
+    flex-direction: column;
+  }
+
+  .accordion-wrapper-item {
+    display: flex;
+    row-gap: 14px;
+    position: relative;
+    flex-grow: 1;
+    align-self: stretch;
+    column-gap: 14px;
+    flex-basis: auto;
+    flex-shrink: 1;
+    padding-top: 15px;
+    flex-direction: column;
+    padding-bottom: 15px;
+    border-bottom-color: #000000;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+  }
+
+  .accordion-wrapper-items {
+    cursor: pointer;
+    display: flex;
+    row-gap: 60px;
+    position: relative;
+    min-width: auto;
+    align-self: stretch;
+    column-gap: 60px;
+    flex-basis: auto;
+    min-height: 1px;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: space-between;
+  }
+
+  .accordion-wrapper-items h3 {
+    color: #03152aff;
+    flex-grow: 1;
+    font-size: 16px;
+    font-weight: 400;
+
+    transition: inherit;
+    flex-shrink: 1;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    margin: 0;
+  }
+
+  .accordion-wrapper-items p {
+    color: #03152aff;
+    flex-grow: 1;
+    font-size: 16px;
+    max-width: 140px;
+
+    transition: inherit;
+    flex-shrink: 1;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    margin: 0;
+  }
+
+  .accordion-wrapper-items svg {
+    width: 24px;
+    height: 24px;
+    flex-basis: auto;
+    transition: inherit;
+    flex-shrink: 0;
+    line-height: 100%;
+    color: #03152aff;
+  }
+
+  .accordion-wrapper-items-title {
+    display: flex;
+    row-gap: 20px;
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+    min-width: var(--replo-flex-min-dimension, 0px);
+    column-gap: 20px;
+
+    min-height: 1px;
+    transition: inherit;
+    align-items: center;
+    flex-shrink: 1;
+    justify-content: space-between;
+  }
+
+  .accordion-wrapper-items-content {
+    color: #03152aff;
+    font-size: 16px;
+    align-self: stretch;
+    flex-basis: auto;
+    flex-shrink: 0;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    letter-spacing: 0px;
+    margin: 0;
+  }
+
+  .accordion-wrapper-item.active .accordion-wrapper-items-content {
+    display: flex;
+  }
+
+  .accordion-wrapper-items-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    display: none;
+  }
+
+  .accordion-wrapper .icon-plus,
+  .accordion-wrapper .icon-minus {
+    transition: opacity 0.3s ease;
+  }
+
+  .accordion-wrapper .icon-plus.active {
+    display: flex;
+  }
+
+  .accordion-wrapper .icon-minus {
+    display: none;
+  }
+
+  .accordion-wrapper .icon-minus.active {
+    display: flex;
+  }
+
+  .accordion-wrapper .icon-plus:not(.active) {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .accordion-wrapper {
+      display: flex;
+      row-gap: 70px;
+      position: relative;
+      flex-grow: 1;
+      max-width: 100%;
+      min-width: auto;
+      align-self: stretch;
+      column-gap: 70px;
+      flex-basis: auto;
+      min-height: 1px;
+      align-items: center;
+      flex-shrink: 1;
+      padding-top: 50px;
+      padding-left: 16px;
+      padding-right: 16px;
+      flex-direction: column;
+      padding-bottom: 50px;
+      justify-content: center;
+      background-color: #7bbc7214;
+      background-image: none;
+    }
+
+    .accordion-wrapper-container {
+      width: 100%;
+      display: flex;
+      row-gap: 30px;
+      position: relative;
+      flex-grow: 1;
+      max-width: none;
+      min-width: auto;
+      align-self: auto;
+      column-gap: 30px;
+      flex-basis: auto;
+      min-height: 1px;
+      align-items: flex-start;
+      flex-shrink: 1;
+      padding-top: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      flex-direction: column;
+      padding-bottom: 0px;
+      justify-content: center;
+    }
+
+    .accordion-wrapper-title {
+      font-size: 24px;
+      align-self: stretch;
+      flex-basis: auto;
+      flex-shrink: 0;
+      font-weight: 600;
+      line-height: 28px;
+      letter-spacing: 0px;
+    }
+
+    .accordion-wrapper-items-title {
+      display: flex;
+      row-gap: 4px;
+      position: relative;
+      flex-grow: 1;
+      max-width: 100%;
+      column-gap: 4px;
+      flex-basis: 0;
+      min-height: 1px;
+      transition: inherit;
+      align-items: flex-start;
+      flex-shrink: 1;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+</style>
+
+<div class="accordion-wrapper">
+  <div class="accordion-wrapper-container">
+    <div class="accordion-wrapper-title-wrapper">
+      <h2 class="accordion-wrapper-title">
+        {{ section.settings.title }}
+      </h2>
+      <div class="accordion-wrapper-description">
+        {{ section.settings.description }}
+      </div>
+    </div>
+    <div class="accordion-wrapper-content">
+      {% for block in section.blocks %}
+        <div class="accordion-wrapper-item">
+          <div class="accordion-wrapper-items">
+            <div class="accordion-wrapper-items-title">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.subtitle }}</p>
+            </div>
+            <div class="accordion-wrapper-items-icons">
+              {% render 'icon-plus' %}
+              {% render 'icon-minus' %}
+            </div>
+          </div>
+          <div class="accordion-wrapper-items-content">
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const items = document.querySelectorAll('.accordion-wrapper-item');
+
+    // Initialize: Open the first item
+    items.forEach((item, index) => {
+      const content = item.querySelector('.accordion-wrapper-items-content');
+      const plusIcon = item.querySelector('.icon-plus');
+      const minusIcon = item.querySelector('.icon-minus');
+
+      if (index === 0) {
+        item.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        plusIcon.classList.remove('active');
+        minusIcon.classList.add('active');
+      } else {
+        content.style.maxHeight = null;
+        plusIcon.classList.add('active');
+        minusIcon.classList.remove('active');
+      }
+
+      item.querySelector('.accordion-wrapper-items').addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+
+        items.forEach((otherItem) => {
+          const otherContent = otherItem.querySelector('.accordion-wrapper-items-content');
+          const otherPlus = otherItem.querySelector('.icon-plus');
+          const otherMinus = otherItem.querySelector('.icon-minus');
+
+          otherItem.classList.remove('active');
+          otherContent.style.maxHeight = null;
+          otherPlus.classList.add('active');
+          otherMinus.classList.remove('active');
+        });
+
+        if (!isOpen) {
+          item.classList.add('active');
+          content.style.maxHeight = content.scrollHeight + 'px';
+          plusIcon.classList.remove('active');
+          minusIcon.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Accordion - Product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Formula Backed by Science"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion_item",
+      "name": "Accordion Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "What is the best way to feed my dog?"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Glucosamine HCI"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Content",
+          "default": "Glucosamine Hydrochloride is a natural amino sugar that reduces joint pain for dogs. Glucosamine assists in joint lubrication, helps maintain healthy cartilage, and sustains connective tissue."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion - Product"
+    }
+  ]
+}
+{% endschema %}

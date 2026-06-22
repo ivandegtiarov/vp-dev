@@ -1,0 +1,18 @@
+{
+  "context": {
+    "market": "aus-nz"
+  },
+  "parent": "header-group.json",
+  "sections": {
+    "announcement_bar_gTbGNF": {
+      "settings": {},
+      "blocks": {
+        "announcement_q8TBH8": {
+          "settings": {
+            "text": "👉 DON'T MISS : MORE THAN 50% OFF!"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,616 @@
+<style>
+  .journey-section {
+    background: #faf9f7;
+    padding: 20px 32px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .journey-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .journey-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 40px;
+  }
+
+  .journey-title {
+    font-weight: 800;
+    font-size: clamp(32px, 4.4vw, 52px);
+    color: #1a1a1a;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .journey-title em {
+    font-style: italic;
+    font-weight: 700;
+    color: #7bbc72;
+  }
+
+  .journey-subtitle {
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(15px, 1.2vw, 18px);
+    color: #2a2a2a;
+    margin-top: 18px;
+    line-height: 1.45;
+  }
+
+  /* ===== DESKTOP ===== */
+  .journey-timeline-desktop {
+    display: block;
+    position: relative;
+    padding-top: 8px;
+  }
+
+  .paw-trail-desktop {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .paw-cluster {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .paw-cluster.d-1 { left: 17%; top: 16%; width: 19%; height: auto; }
+  .paw-cluster.d-2 { left: 42%; top: 16%; width: 19%; height: auto; }
+  .paw-cluster.d-3 { left: 67%; top: 16%; width: 19%; height: auto; }
+
+  .journey-timeline-row {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: end;
+  }
+
+  .journey-step {
+    text-align: center;
+    position: relative;
+    padding: 0 8px;
+  }
+
+  .journey-step:nth-child(1) { padding-bottom: 120px; }
+  .journey-step:nth-child(2) { padding-bottom: 0; }
+  .journey-step:nth-child(3) { padding-bottom: 120px; }
+  .journey-step:nth-child(4) { padding-bottom: 0; }
+
+  .journey-step-tile {
+    width: 152px;
+    height: 152px;
+    margin: 0 auto 18px;
+    background: #ffffff;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 28px -16px rgba(31, 58, 28, 0.18);
+  }
+
+  .journey-step-tile svg.dog-icon {
+    width: 84px;
+    height: 84px;
+    stroke: #1f3a1c;
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .journey-step-tile img {
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+  }
+
+  .paw-cluster img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .journey-step-label {
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+
+  .journey-step-body {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 15.5px;
+    line-height: 1.4;
+    color: #2a2a2a;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  /* ===== MOBILE ===== */
+  .journey-timeline-mobile { display: none; }
+
+  @media (max-width: 880px) {
+    .journey-timeline-desktop { display: none; }
+    .journey-timeline-mobile {
+      display: block;
+      position: relative;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+  }
+
+  .paw-trail-mobile {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .paw-cluster.m-1,
+  .paw-cluster.m-2,
+  .paw-cluster.m-3 {
+    width: 50%;
+    height: auto;
+    transform-origin: center center;
+  }
+
+  .paw-cluster.m-1 { left: 28%; top: 7%;  transform: rotate(18deg); }
+  .paw-cluster.m-2 { left: 29%; top: 46%; transform: scaleX(-1) rotate(26deg); }
+  .paw-cluster.m-3 { left: 28%; top: 61%; transform: rotate(18deg); }
+
+  .journey-mobile-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 8px;
+  }
+
+  .journey-mobile-step { text-align: center; }
+  .journey-mobile-step:nth-child(odd)  { grid-column: 1; }
+  .journey-mobile-step:nth-child(even) { grid-column: 2; margin-top: 60px; }
+
+  .journey-mobile-step .journey-step-tile {
+    width: 108px;
+    height: 108px;
+    border-radius: 16px;
+    margin: 0 auto 12px;
+  }
+
+  .journey-mobile-step .journey-step-tile svg.dog-icon,
+  .journey-mobile-step .journey-step-tile img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .journey-mobile-step .journey-step-label { font-size: 16px; margin-bottom: 4px; }
+  .journey-mobile-step .journey-step-body  { font-size: 13.5px; max-width: 160px; }
+
+  @media (max-width: 480px) {
+    .journey-section { padding: 30px 20px 40px; }
+    .journey-header   { margin-bottom: 40px; }
+    .journey-title    { font-size: 30px; line-height: 1.1; }
+  }
+</style>
+
+{%- assign s1 = section.blocks[0].settings -%}
+{%- assign s2 = section.blocks[1].settings -%}
+{%- assign s3 = section.blocks[2].settings -%}
+{%- assign s4 = section.blocks[3].settings -%}
+
+<section class="journey-section">
+  <div class="journey-container">
+
+    <header class="journey-header">
+      <h2 class="journey-title">{{ section.settings.title | replace: '**', '<em>' | replace: '**', '</em>' }}</h2>
+      <p class="journey-subtitle">{{ section.settings.subtitle }}</p>
+    </header>
+
+    <!-- Desktop -->
+    <div class="journey-timeline-desktop">
+
+      <div class="paw-trail-desktop" aria-hidden="true">
+        <!-- paws down: card 1 (high) → card 2 (low) -->
+        {%- if section.settings.paw_d1 != blank -%}
+          <img class="paw-cluster d-1" src="{{ section.settings.paw_d1 | img_url: '400x' }}" alt="" loading="lazy">
+        {%- else -%}
+          <svg class="paw-cluster d-1" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.45" fill="#5a7a55">
+              <!-- paw 1 -->
+              <ellipse cx="20" cy="20" rx="7" ry="9" transform="rotate(-20 20 20)"/>
+              <ellipse cx="10" cy="13" rx="4" ry="5" transform="rotate(-20 10 13)"/>
+              <ellipse cx="30" cy="11" rx="4" ry="5" transform="rotate(-20 30 11)"/>
+              <ellipse cx="36" cy="23" rx="4" ry="5" transform="rotate(-20 36 23)"/>
+              <ellipse cx="5"  cy="26" rx="4" ry="5" transform="rotate(-20 5 26)"/>
+              <!-- paw 2 -->
+              <ellipse cx="80" cy="50" rx="7" ry="9" transform="rotate(-20 80 50)"/>
+              <ellipse cx="70" cy="43" rx="4" ry="5" transform="rotate(-20 70 43)"/>
+              <ellipse cx="90" cy="41" rx="4" ry="5" transform="rotate(-20 90 41)"/>
+              <ellipse cx="96" cy="53" rx="4" ry="5" transform="rotate(-20 96 53)"/>
+              <ellipse cx="65" cy="56" rx="4" ry="5" transform="rotate(-20 65 56)"/>
+              <!-- paw 3 -->
+              <ellipse cx="150" cy="85" rx="7" ry="9" transform="rotate(-20 150 85)"/>
+              <ellipse cx="140" cy="78" rx="4" ry="5" transform="rotate(-20 140 78)"/>
+              <ellipse cx="160" cy="76" rx="4" ry="5" transform="rotate(-20 160 76)"/>
+              <ellipse cx="166" cy="88" rx="4" ry="5" transform="rotate(-20 166 88)"/>
+              <ellipse cx="135" cy="91" rx="4" ry="5" transform="rotate(-20 135 91)"/>
+            </g>
+          </svg>
+        {%- endif -%}
+        <!-- paws up: card 2 (low) → card 3 (high) -->
+        {%- if section.settings.paw_d2 != blank -%}
+          <img class="paw-cluster d-2" src="{{ section.settings.paw_d2 | img_url: '400x' }}" alt="" loading="lazy">
+        {%- else -%}
+          <svg class="paw-cluster d-2" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.45" fill="#5a7a55">
+              <ellipse cx="20" cy="85" rx="7" ry="9" transform="rotate(20 20 85)"/>
+              <ellipse cx="10" cy="92" rx="4" ry="5" transform="rotate(20 10 92)"/>
+              <ellipse cx="30" cy="94" rx="4" ry="5" transform="rotate(20 30 94)"/>
+              <ellipse cx="36" cy="82" rx="4" ry="5" transform="rotate(20 36 82)"/>
+              <ellipse cx="5"  cy="79" rx="4" ry="5" transform="rotate(20 5 79)"/>
+              <ellipse cx="80" cy="55" rx="7" ry="9" transform="rotate(20 80 55)"/>
+              <ellipse cx="70" cy="62" rx="4" ry="5" transform="rotate(20 70 62)"/>
+              <ellipse cx="90" cy="64" rx="4" ry="5" transform="rotate(20 90 64)"/>
+              <ellipse cx="96" cy="52" rx="4" ry="5" transform="rotate(20 96 52)"/>
+              <ellipse cx="65" cy="49" rx="4" ry="5" transform="rotate(20 65 49)"/>
+              <ellipse cx="150" cy="20" rx="7" ry="9" transform="rotate(20 150 20)"/>
+              <ellipse cx="140" cy="27" rx="4" ry="5" transform="rotate(20 140 27)"/>
+              <ellipse cx="160" cy="29" rx="4" ry="5" transform="rotate(20 160 29)"/>
+              <ellipse cx="166" cy="17" rx="4" ry="5" transform="rotate(20 166 17)"/>
+              <ellipse cx="135" cy="14" rx="4" ry="5" transform="rotate(20 135 14)"/>
+            </g>
+          </svg>
+        {%- endif -%}
+        <!-- paws down: card 3 (high) → card 4 (low) -->
+        {%- if section.settings.paw_d3 != blank -%}
+          <img class="paw-cluster d-3" src="{{ section.settings.paw_d3 | img_url: '400x' }}" alt="" loading="lazy">
+        {%- else -%}
+          <svg class="paw-cluster d-3" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.45" fill="#5a7a55">
+              <ellipse cx="20" cy="20" rx="7" ry="9" transform="rotate(-20 20 20)"/>
+              <ellipse cx="10" cy="13" rx="4" ry="5" transform="rotate(-20 10 13)"/>
+              <ellipse cx="30" cy="11" rx="4" ry="5" transform="rotate(-20 30 11)"/>
+              <ellipse cx="36" cy="23" rx="4" ry="5" transform="rotate(-20 36 23)"/>
+              <ellipse cx="5"  cy="26" rx="4" ry="5" transform="rotate(-20 5 26)"/>
+              <ellipse cx="80" cy="50" rx="7" ry="9" transform="rotate(-20 80 50)"/>
+              <ellipse cx="70" cy="43" rx="4" ry="5" transform="rotate(-20 70 43)"/>
+              <ellipse cx="90" cy="41" rx="4" ry="5" transform="rotate(-20 90 41)"/>
+              <ellipse cx="96" cy="53" rx="4" ry="5" transform="rotate(-20 96 53)"/>
+              <ellipse cx="65" cy="56" rx="4" ry="5" transform="rotate(-20 65 56)"/>
+              <ellipse cx="150" cy="85" rx="7" ry="9" transform="rotate(-20 150 85)"/>
+              <ellipse cx="140" cy="78" rx="4" ry="5" transform="rotate(-20 140 78)"/>
+              <ellipse cx="160" cy="76" rx="4" ry="5" transform="rotate(-20 160 76)"/>
+              <ellipse cx="166" cy="88" rx="4" ry="5" transform="rotate(-20 166 88)"/>
+              <ellipse cx="135" cy="91" rx="4" ry="5" transform="rotate(-20 135 91)"/>
+            </g>
+          </svg>
+        {%- endif -%}
+      </div>
+
+      <div class="journey-timeline-row">
+
+        <article class="journey-step" {{ section.blocks[0].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s1.icon != blank -%}
+              <img src="{{ s1.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s1.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s1.label }}</div>
+          <p class="journey-step-body">{{ s1.description }}</p>
+        </article>
+
+        <article class="journey-step" {{ section.blocks[1].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s2.icon != blank -%}
+              <img src="{{ s2.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s2.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s2.label }}</div>
+          <p class="journey-step-body">{{ s2.description }}</p>
+        </article>
+
+        <article class="journey-step" {{ section.blocks[2].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s3.icon != blank -%}
+              <img src="{{ s3.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s3.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s3.label }}</div>
+          <p class="journey-step-body">{{ s3.description }}</p>
+        </article>
+
+        <article class="journey-step" {{ section.blocks[3].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s4.icon != blank -%}
+              <img src="{{ s4.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s4.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s4.label }}</div>
+          <p class="journey-step-body">{{ s4.description }}</p>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="journey-timeline-mobile">
+
+      <div class="paw-trail-mobile" aria-hidden="true">
+        <!-- card 1 → card 2: down-right -->
+        {%- if section.settings.paw_m1 != blank -%}
+          <img class="paw-cluster m-1" src="{{ section.settings.paw_m1 | img_url: '400x' }}" alt="" loading="lazy">
+        {%- else -%}
+          <svg class="paw-cluster m-1" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.45" fill="#5a7a55">
+              <ellipse cx="30" cy="20" rx="7" ry="9" transform="rotate(-15 30 20)"/>
+              <ellipse cx="20" cy="13" rx="4" ry="5" transform="rotate(-15 20 13)"/>
+              <ellipse cx="40" cy="11" rx="4" ry="5" transform="rotate(-15 40 11)"/>
+              <ellipse cx="44" cy="23" rx="4" ry="5" transform="rotate(-15 44 23)"/>
+              <ellipse cx="16" cy="27" rx="4" ry="5" transform="rotate(-15 16 27)"/>
+              <ellipse cx="80" cy="90" rx="7" ry="9" transform="rotate(-15 80 90)"/>
+              <ellipse cx="70" cy="83" rx="4" ry="5" transform="rotate(-15 70 83)"/>
+              <ellipse cx="90" cy="81" rx="4" ry="5" transform="rotate(-15 90 81)"/>
+              <ellipse cx="94" cy="93" rx="4" ry="5" transform="rotate(-15 94 93)"/>
+              <ellipse cx="66" cy="97" rx="4" ry="5" transform="rotate(-15 66 97)"/>
+              <ellipse cx="130" cy="165" rx="7" ry="9" transform="rotate(-15 130 165)"/>
+              <ellipse cx="120" cy="158" rx="4" ry="5" transform="rotate(-15 120 158)"/>
+              <ellipse cx="140" cy="156" rx="4" ry="5" transform="rotate(-15 140 156)"/>
+              <ellipse cx="144" cy="168" rx="4" ry="5" transform="rotate(-15 144 168)"/>
+              <ellipse cx="116" cy="172" rx="4" ry="5" transform="rotate(-15 116 172)"/>
+            </g>
+          </svg>
+        {%- endif -%}
+        <!-- card 2 → card 3: down-left (mirrored) -->
+        {%- if section.settings.paw_m2 != blank -%}
+          <img class="paw-cluster m-2" src="{{ section.settings.paw_m2 | img_url: '400x' }}" alt="" loading="lazy">
+        {%- else -%}
+          <svg class="paw-cluster m-2" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.45" fill="#5a7a55">
+              <ellipse cx="130" cy="20" rx="7" ry="9" transform="rotate(15 130 20)"/>
+              <ellipse cx="120" cy="13" rx="4" ry="5" transform="rotate(15 120 13)"/>
+              <ellipse cx="140" cy="11" rx="4" ry="5" transform="rotate(15 140 11)"/>
+              <ellipse cx="144" cy="23" rx="4" ry="5" transform="rotate(15 144 23)"/>
+              <ellipse cx="116" cy="27" rx="4" ry="5" transform="rotate(15 116 27)"/>
+              <ellipse cx="80" cy="90" rx="7" ry="9" transform="rotate(15 80 90)"/>
+              <ellipse cx="70" cy="83" rx="4" ry="5" transform="rotate(15 70 83)"/>
+              <ellipse cx="90" cy="81" rx="4" ry="5" transform="rotate(15 90 81)"/>
+              <ellipse cx="94" cy="93" rx="4" ry="5" transform="rotate(15 94 93)"/>
+              <ellipse cx="66" cy="97" rx="4" ry="5" transform="rotate(15 66 97)"/>
+              <ellipse cx="30" cy="165" rx="7" ry="9" transform="rotate(15 30 165)"/>
+              <ellipse cx="20" cy="158" rx="4" ry="5" transform="rotate(15 20 158)"/>
+              <ellipse cx="40" cy="156" rx="4" ry="5" transform="rotate(15 40 156)"/>
+              <ellipse cx="44" cy="168" rx="4" ry="5" transform="rotate(15 44 168)"/>
+              <ellipse cx="16" cy="172" rx="4" ry="5" transform="rotate(15 16 172)"/>
+            </g>
+          </svg>
+        {%- endif -%}
+        <!-- card 3 → card 4: down-right again -->
+        {%- if section.settings.paw_m3 != blank -%}
+          <img class="paw-cluster m-3" src="{{ section.settings.paw_m3 | img_url: '400x' }}" alt="" loading="lazy">
+        {%- else -%}
+          <svg class="paw-cluster m-3" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.45" fill="#5a7a55">
+              <ellipse cx="30" cy="20" rx="7" ry="9" transform="rotate(-15 30 20)"/>
+              <ellipse cx="20" cy="13" rx="4" ry="5" transform="rotate(-15 20 13)"/>
+              <ellipse cx="40" cy="11" rx="4" ry="5" transform="rotate(-15 40 11)"/>
+              <ellipse cx="44" cy="23" rx="4" ry="5" transform="rotate(-15 44 23)"/>
+              <ellipse cx="16" cy="27" rx="4" ry="5" transform="rotate(-15 16 27)"/>
+              <ellipse cx="80" cy="90" rx="7" ry="9" transform="rotate(-15 80 90)"/>
+              <ellipse cx="70" cy="83" rx="4" ry="5" transform="rotate(-15 70 83)"/>
+              <ellipse cx="90" cy="81" rx="4" ry="5" transform="rotate(-15 90 81)"/>
+              <ellipse cx="94" cy="93" rx="4" ry="5" transform="rotate(-15 94 93)"/>
+              <ellipse cx="66" cy="97" rx="4" ry="5" transform="rotate(-15 66 97)"/>
+              <ellipse cx="130" cy="165" rx="7" ry="9" transform="rotate(-15 130 165)"/>
+              <ellipse cx="120" cy="158" rx="4" ry="5" transform="rotate(-15 120 158)"/>
+              <ellipse cx="140" cy="156" rx="4" ry="5" transform="rotate(-15 140 156)"/>
+              <ellipse cx="144" cy="168" rx="4" ry="5" transform="rotate(-15 144 168)"/>
+              <ellipse cx="116" cy="172" rx="4" ry="5" transform="rotate(-15 116 172)"/>
+            </g>
+          </svg>
+        {%- endif -%}
+      </div>
+
+      <div class="journey-mobile-grid">
+
+        <article class="journey-mobile-step" {{ section.blocks[0].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s1.icon != blank -%}
+              <img src="{{ s1.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s1.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s1.label }}</div>
+          <p class="journey-step-body">{{ s1.description }}</p>
+        </article>
+
+        <article class="journey-mobile-step" {{ section.blocks[1].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s2.icon != blank -%}
+              <img src="{{ s2.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s2.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s2.label }}</div>
+          <p class="journey-step-body">{{ s2.description }}</p>
+        </article>
+
+        <article class="journey-mobile-step" {{ section.blocks[2].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s3.icon != blank -%}
+              <img src="{{ s3.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s3.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s3.label }}</div>
+          <p class="journey-step-body">{{ s3.description }}</p>
+        </article>
+
+        <article class="journey-mobile-step" {{ section.blocks[3].shopify_attributes }}>
+          <div class="journey-step-tile">
+            {%- if s4.icon != blank -%}
+              <img src="{{ s4.icon | img_url: '200x200' }}" alt="" loading="lazy">
+            {%- else -%}
+              {{ s4.svg_icon }}
+            {%- endif -%}
+          </div>
+          <div class="journey-step-label">{{ s4.label }}</div>
+          <p class="journey-step-body">{{ s4.description }}</p>
+        </article>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Journey Timeline",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The journey to better years <em>together..</em>"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Here's what 90 days of real joint support looks like."
+    },
+    {
+      "type": "header",
+      "content": "Paw clusters — Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "paw_d1",
+      "label": "Desktop paw cluster 1 (cards 1→2)"
+    },
+    {
+      "type": "image_picker",
+      "id": "paw_d2",
+      "label": "Desktop paw cluster 2 (cards 2→3)"
+    },
+    {
+      "type": "image_picker",
+      "id": "paw_d3",
+      "label": "Desktop paw cluster 3 (cards 3→4)"
+    },
+    {
+      "type": "header",
+      "content": "Paw clusters — Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "paw_m1",
+      "label": "Mobile paw cluster 1 (cards 1→2)"
+    },
+    {
+      "type": "image_picker",
+      "id": "paw_m2",
+      "label": "Mobile paw cluster 2 (cards 2→3)"
+    },
+    {
+      "type": "image_picker",
+      "id": "paw_m3",
+      "label": "Mobile paw cluster 3 (cards 3→4)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Month 0:"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "You decided to act, and not ignore the signs."
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image"
+        },
+        {
+          "type": "html",
+          "id": "svg_icon",
+          "label": "SVG icon (fallback)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Journey Timeline",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "label": "Month 0:",
+            "description": "You decided to act, and not ignore the signs.",
+            "svg_icon": "<svg class=\"dog-icon\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><circle cx=\"44\" cy=\"20\" r=\"7\"/><path d=\"M40 14 Q 36 14 38 22\"/><circle cx=\"44\" cy=\"19\" r=\"1\" fill=\"currentColor\"/><path d=\"M50 22 L 54 24 L 52 28 L 48 26 Z\"/><path d=\"M40 26 Q 32 28 28 36\"/><path d=\"M28 36 Q 20 38 18 48 L 18 54 L 26 54 L 26 50 Q 28 48 32 48\"/><path d=\"M36 32 L 36 50 L 40 50\"/><path d=\"M22 42 Q 14 42 14 36 Q 14 30 20 32\"/><path d=\"M44 8 L 44 4\" stroke-linecap=\"round\"/><path d=\"M50 10 L 53 7\" stroke-linecap=\"round\"/><path d=\"M38 10 L 35 7\" stroke-linecap=\"round\"/></svg>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Month 1:",
+            "description": "Getting up a little easier. Moving a little more freely.",
+            "svg_icon": "<svg class=\"dog-icon\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><circle cx=\"46\" cy=\"22\" r=\"8\"/><path d=\"M49 14 L 53 8 L 53 16\"/><circle cx=\"46\" cy=\"21\" r=\"1.1\" fill=\"currentColor\"/><path d=\"M52 24 L 56 25 L 55 29 L 51 28 Z\"/><path d=\"M14 34 Q 14 28 20 28 L 40 28 Q 44 28 44 30 L 44 38 L 14 38 Z\"/><path d=\"M18 38 L 16 48\"/><path d=\"M24 38 L 26 48\"/><path d=\"M34 38 L 32 48\"/><path d=\"M40 38 L 42 48\"/><ellipse cx=\"16\" cy=\"50\" rx=\"2\" ry=\"1.2\" fill=\"currentColor\"/><ellipse cx=\"26\" cy=\"50\" rx=\"2\" ry=\"1.2\" fill=\"currentColor\"/><ellipse cx=\"32\" cy=\"50\" rx=\"2\" ry=\"1.2\" fill=\"currentColor\"/><ellipse cx=\"42\" cy=\"50\" rx=\"2\" ry=\"1.2\" fill=\"currentColor\"/><path d=\"M14 32 Q 8 28 10 22\"/></svg>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Month 2:",
+            "description": "More energy. More enthusiasm. The dog you know and love.",
+            "svg_icon": "<svg class=\"dog-icon\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><circle cx=\"46\" cy=\"22\" r=\"8\"/><path d=\"M49 14 L 56 10 L 52 18\"/><circle cx=\"46\" cy=\"21\" r=\"1.1\" fill=\"currentColor\"/><path d=\"M52 24 L 56 25 L 55 29 L 51 28 Z\"/><path d=\"M54 28 L 56 32 L 53 31 Z\" fill=\"currentColor\"/><path d=\"M12 32 Q 12 26 18 26 L 40 28 Q 44 28 44 30 L 44 38 L 14 36 Z\"/><path d=\"M40 38 L 46 50\"/><path d=\"M34 38 L 38 50\"/><path d=\"M20 38 L 14 50\"/><path d=\"M14 38 L 8 48\"/><path d=\"M12 32 Q 6 30 4 26\"/><path d=\"M50 42 L 56 42\" stroke-linecap=\"round\"/><path d=\"M52 46 L 58 46\" stroke-linecap=\"round\"/></svg>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Month 3:",
+            "description": "Stronger joints. Better movement. More good years ahead!",
+            "svg_icon": "<svg class=\"dog-icon\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><circle cx=\"46\" cy=\"18\" r=\"7\"/><path d=\"M48 12 L 52 6 L 52 14\"/><circle cx=\"46\" cy=\"17\" r=\"1\" fill=\"currentColor\"/><path d=\"M52 20 L 56 21 L 55 25 L 51 24 Z\"/><path d=\"M54 25 Q 56 28 53 28\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M14 38 Q 14 30 22 28 L 38 26 Q 42 26 42 28 L 42 38 Q 38 40 30 40 L 18 40 Z\"/><path d=\"M38 38 L 42 48\"/><path d=\"M32 38 L 36 48\"/><path d=\"M18 38 L 14 46\"/><path d=\"M22 38 L 20 48\"/><path d=\"M14 32 Q 8 28 10 22\"/><path d=\"M28 12 C 26 10 24 11 24 13 C 24 15 26 17 28 18 C 30 17 32 15 32 13 C 32 11 30 10 28 12 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M10 14 L 10 10\" stroke-linecap=\"round\"/><path d=\"M8 12 L 12 12\" stroke-linecap=\"round\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
