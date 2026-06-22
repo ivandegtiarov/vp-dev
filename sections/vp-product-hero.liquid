@@ -29,6 +29,15 @@
 {%- liquid
   assign s = section.settings
   assign product_form_id = 'vp-product-form-' | append: section.id
+
+  # Grab the subtitle block so it can also render in the mobile head, where the
+  # gallery should sit *below* the description.
+  assign vp_subtitle_text = ''
+  for block in section.blocks
+    if block.type == 'subtitle'
+      assign vp_subtitle_text = block.settings.text
+    endif
+  endfor
 -%}
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -77,6 +86,7 @@
   .vp-hero__sale.is-sticky .vp-hero__info { position: sticky; top: 24px; }
 
   .vp-hero__mobile-head { display: none; }
+  .vp-hero__subtitle--mobile { display: none; }   /* shown only in mobile head */
 
   /* ============ SWIPER GALLERY ============ */
   .vp-hero__gallery-inner { display: flex; flex-direction: column; gap: 10px; }
@@ -202,7 +212,7 @@
 
   /* ============ SUBSCRIBE CARD ============ */
   .vp-hero__subscribe { display: flex; align-items: center; gap: 14px; width: 100%; padding: 9px 14px; background: var(--vp-h-surface-2); border: 1px dashed var(--vp-h-border-b); border-radius: 8px; cursor: pointer; margin-top: 4px; }
-  .vp-hero__subscribe-check { -webkit-appearance: none; appearance: none; width: 25px; height: 25px; border: 2px solid #7bbc72; border-radius: 4px; background: #fff; flex-shrink: 0; cursor: pointer; position: relative; margin: 0; }
+  .vp-hero__subscribe-check { -webkit-appearance: none; appearance: none; width: 25px !important; min-width: 25px; height: 25px; border: 2px solid #7bbc72; border-radius: 4px; background: #fff; flex-shrink: 0; cursor: pointer; position: relative; margin: 0; }
   .vp-hero__subscribe-check:checked { background-color: #7bbc72; }
   .vp-hero__subscribe-check:checked::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 14px; height: 11px; background-repeat: no-repeat; background-position: center; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='11' viewBox='0 0 14 11' fill='none'%3E%3Cpath d='M1 6.25L4.75 10L13 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
   .vp-hero__subscribe-text { display: flex; flex-direction: column; gap: 8px; min-width: 0; flex: 1 0 0; }
@@ -264,6 +274,9 @@
 
     .vp-hero__mobile-head { display: flex; flex-direction: column; gap: 12px; }
     .vp-hero__sale .vp-hero__title-group { display: none; }
+    /* description shows in the mobile head (above gallery); hide the sale-side copy */
+    .vp-hero__subtitle--mobile { display: block; }
+    .vp-hero__sale .vp-hero__subtitle:not(.vp-hero__subtitle--mobile) { display: none; }
 
     .vp-hero__gallery-inner { gap: 5px; }
     .vp-hero__thumbs .swiper-slide { width: 55px; height: 55px; }
@@ -316,6 +329,9 @@
     <div class="vp-hero__gallery">
       <div class="vp-hero__mobile-head">
         {% render 'vp-product-hero-title', section: section, product: product %}
+        {%- if vp_subtitle_text != blank -%}
+          <p class="vp-hero__subtitle vp-hero__subtitle--mobile">{{ vp_subtitle_text }}</p>
+        {%- endif -%}
       </div>
 
       <div class="vp-hero__gallery-inner">
