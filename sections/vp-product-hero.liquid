@@ -189,29 +189,28 @@
   .vp-hero__bundle-name b { font-size: 18px; font-weight: 700; letter-spacing: -0.18px; color: var(--vp-h-text); white-space: nowrap; }
   .vp-hero__bundle-supply { font-size: 12px; color: var(--vp-h-muted); white-space: nowrap; }
 
-  /* ----- DESKTOP: inline (1 Jar) — [name above "One jar"] ... [badge] ... [price] ----- */
-  .vp-hero__bundle--inline .vp-hero__bundle-text { align-items: center; justify-content: space-between; gap: 8px; }
-  .vp-hero__bundle--inline .vp-hero__bundle-name { flex-direction: column; align-items: flex-start; gap: 1px; }
-  .vp-hero__bundle--inline .vp-hero__bundle-supply--block { font-style: italic; }
-  .vp-hero__bundle--inline .vp-hero__bundle-supply--inline { display: none; }
+  /* ----- BOTH layouts (desktop + mobile): [name b + green badge] on one row,
+     italic supply line below, strikethrough-over-price on the right ----- */
+  .vp-hero__bundle--stacked .vp-hero__bundle-text,
+  .vp-hero__bundle--inline .vp-hero__bundle-text { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .vp-hero__bundle--stacked .vp-hero__bundle-name,
+  .vp-hero__bundle--inline .vp-hero__bundle-name { flex-direction: row; align-items: center; gap: 7px; }
+  /* hide the inline supply copy; show the block one as the italic 2nd line */
+  .vp-hero__bundle-supply--inline { display: none !important; }
+  .vp-hero__bundle-supply--block { display: block !important; font-style: italic; color: var(--vp-h-muted); }
 
-  /* ----- DESKTOP: stacked (3/6 Jar) — ["3 Jar" + "3-Month Supply"] then [badge] below ----- */
-  .vp-hero__bundle--stacked .vp-hero__bundle-text { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .vp-hero__bundle--stacked .vp-hero__bundle-name { flex-direction: row; align-items: center; gap: 7px; }
-  .vp-hero__bundle--stacked .vp-hero__bundle-supply--block { display: none; }   /* inline copy is used */
+  .vp-hero__off-badge { align-self: flex-start; display: inline-flex; padding: 4px 5px; background: var(--vp-h-accent); border: 0.5px solid var(--vp-h-border-b); border-radius: 3px; font-size: 9px; font-weight: 700; letter-spacing: 0.27px; color: #fff; white-space: nowrap; }
 
-  .vp-hero__off-badge { align-self: flex-start; display: inline-flex; padding: 5px 10px; background: var(--vp-h-badge-bg); border: 0.5px solid var(--vp-h-border-b); border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 0.33px; color: var(--vp-h-text); white-space: nowrap; }
-
-  .vp-hero__bundle-price { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; text-align: right; flex-shrink: 0; }
+  .vp-hero__bundle-price { display: flex; flex-direction: column; align-items: flex-end; gap: 0; text-align: right; flex-shrink: 0; }
   .vp-hero__bundle-price .now { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; color: var(--vp-h-text); }
-  .vp-hero__bundle-price .was { font-size: 16px; color: var(--vp-h-muted); text-decoration: line-through; }
+  .vp-hero__bundle-price .was { order: -1; font-size: 13px; color: var(--vp-h-muted); text-decoration: line-through; }
 
   .vp-hero__card-badge { position: absolute; top: -13px; right: 16px; padding: 5px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; letter-spacing: -0.12px; color: #fafcfa; white-space: nowrap; }
   .vp-hero__card-badge--popular { background: var(--vp-h-accent); }
   .vp-hero__card-badge--value { background: var(--vp-h-accent-2); }
 
   /* ============ SUBSCRIBE CARD ============ */
-  .vp-hero__subscribe { display: flex; align-items: center; gap: 14px; width: 100%; padding: 9px 14px; background: var(--vp-h-surface-2); border: 1px dashed var(--vp-h-border-b); border-radius: 8px; cursor: pointer; margin-top: 4px; }
+  .vp-hero__subscribe { display: flex; align-items: center; gap: 14px; width: 100%; padding: 9px 14px; background: var(--vp-h-surface-2); border: 1px dashed var(--vp-h-border-b); border-radius: 8px; cursor: pointer; margin-top: 15px; }
   .vp-hero__subscribe-check { -webkit-appearance: none; appearance: none; width: 25px !important; min-width: 25px; height: 25px; border: 2px solid #7bbc72; border-radius: 4px; background: #fff; flex-shrink: 0; cursor: pointer; position: relative; margin: 0; }
   .vp-hero__subscribe-check:checked { background-color: #7bbc72; }
   .vp-hero__subscribe-check:checked::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 14px; height: 11px; background-repeat: no-repeat; background-position: center; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='11' viewBox='0 0 14 11' fill='none'%3E%3Cpath d='M1 6.25L4.75 10L13 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
@@ -228,7 +227,7 @@
   .vp-hero .vp-hero__sale.single_purchase_option [single-purchase-pricings] { display: inline !important; }
 
   /* ============ BUY ============ */
-  .vp-hero__buy { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+  .vp-hero__buy { display: flex; flex-direction: column; gap: 20px; align-items: center; margin-top: 15px; }
   .vp-hero__atc { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px 32px; background: var(--vp-h-accent); border: none; border-radius: 8px; color: #fafcfa; font-family: var(--vp-h-sans); font-size: 20px; font-weight: 700; letter-spacing: -0.4px; cursor: pointer; transition: filter 0.15s ease; }
   .vp-hero__atc:hover { filter: brightness(0.95); }
   .vp-hero__atc[disabled] { opacity: 0.6; cursor: not-allowed; }
@@ -285,25 +284,15 @@
     .vp-hero__reviewbar { padding: 0 10px; gap: 8px; }
     .vp-hero__sep span { font-size: 14px; }
 
-    /* Mobile bundles — Figma 320:183 */
+    /* Mobile bundles — Figma 320:183 (layout is now shared with desktop;
+       these are size-only tweaks) */
     .vp-hero__bundles { gap: 14px; }
     .vp-hero__bundle { padding: 5px 10px; gap: 4px; min-height: 71px; border-color: #dbd8d2; }
     .vp-hero__bundle-input:checked + .vp-hero__bundle { border: 1.5px solid var(--vp-h-text-dark); }
     .vp-hero__bundle-jars { width: 70px; }
     .vp-hero__bundle-name b { font-size: 16px; letter-spacing: -0.16px; color: var(--vp-h-text-dark); }
-    /* mobile: BOTH layouts → [name b + green badge] on one row, italic supply line below */
-    .vp-hero__bundle--stacked .vp-hero__bundle-text,
-    .vp-hero__bundle--inline .vp-hero__bundle-text { flex-direction: column; align-items: flex-start; gap: 2px; }
-    .vp-hero__bundle--stacked .vp-hero__bundle-name,
-    .vp-hero__bundle--inline .vp-hero__bundle-name { flex-direction: row; align-items: center; gap: 6px; }
-    /* hide the inline supply copy; show the block one as the italic 2nd line */
-    .vp-hero__bundle-supply--inline { display: none !important; }
-    .vp-hero__bundle-supply--block { display: block !important; font-size: 10.5px; font-style: italic; color: var(--vp-h-muted); }
-    /* green inline save badge on mobile */
-    .vp-hero__off-badge { padding: 4px 5px; font-size: 9px; letter-spacing: 0.27px; background: var(--vp-h-accent); color: #fff; border-color: var(--vp-h-border-b); }
-    /* mobile price: strikethrough on top, price below */
-    .vp-hero__bundle-price { flex-direction: column; gap: 0; }
-    .vp-hero__bundle-price .was { order: -1; font-size: 11px; }
+    .vp-hero__bundle-supply--block { font-size: 10.5px; }
+    .vp-hero__bundle-price .was { font-size: 11px; }
     .vp-hero__bundle-price .now { font-size: 17px; letter-spacing: -0.34px; color: var(--vp-h-text-dark); }
     .vp-hero__card-badge { right: 8px; left: auto; transform: none; padding: 3px 0; width: 98px; justify-content: center; display: flex; align-items: center; top: -10px; font-size: 10px; letter-spacing: -0.1px; }
 
