@@ -1,0 +1,557 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap');
+
+  /* ============ DESKTOP — Figma: frame 1217px, padding 100px, gap 60px ============ */
+  .vp-ingredients {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .vp-ingredients-container {
+    width: 100%;
+    max-width: var(--vp-ingredients-max-width, 1320px);
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  /* TEXT block */
+  .vp-ingredients-text {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+  }
+
+  .vp-ingredients-eyebrow {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    font-style: italic;
+    color: #686868;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .vp-ingredients-heading {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 0.89;
+    letter-spacing: -0.4px;
+    color: #000000;
+  }
+
+  .vp-ingredients-heading .source {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 600;
+    font-size: 70px;
+    letter-spacing: -1px;
+    color: #5a815b;
+  }
+
+  .vp-ingredients-heading .source-suffix {
+    font-size: 70px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: #5a815b;
+  }
+
+  .vp-ingredients-desc {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.2px;
+    color: #000000;
+    width: 100%;
+  }
+
+  /* CARDS (Swiper) */
+  .vp-ingredients-slider {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  .vp-ingredients-slider .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .vp-ingredients-slider .swiper-slide {
+    width: 378.958px;
+    height: auto;
+    display: flex;
+  }
+
+  .vp-ingredients-card {
+    width: 100%;
+    background-color: #ffffff;
+    border: 0.743px solid #d4d4d4;
+    border-radius: 8.713px;
+    box-shadow: 0px 8.917px 6.613px rgba(0, 0, 0, 0.11);
+    display: flex;
+    flex-direction: column;
+    gap: 27.004px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .vp-ingredients-card-image {
+    width: 100%;
+    height: 292.764px;
+    background-color: #f6f6f6;
+    border-bottom: 1.089px solid #9da197;
+    border-top-left-radius: 8.713px;
+    border-top-right-radius: 8.713px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .vp-ingredients-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .vp-ingredients-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16.337px;
+    padding: 0 25.965px 25.965px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .vp-ingredients-card-badge {
+    background-color: #577558;
+    color: #ffffff;
+    padding: 7.624px 10.891px;
+    border-radius: 4.356px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 15.579px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+
+  .vp-ingredients-card-title {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 29.852px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.1493px;
+    color: #000000;
+  }
+
+  .vp-ingredients-card-desc {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 20.353px;
+    font-weight: 400;
+    line-height: 30.53px;
+    color: #534c44;
+  }
+
+  /* Cards + progress group */
+  .vp-ingredients-cards-group {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 100%;
+  }
+
+  /* Progress bar */
+  .vp-ingredients-progress {
+    width: 100%;
+    height: 3px;
+    background-color: #d9d9d9;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .vp-ingredients-progress-bar {
+    height: 100%;
+    background-color: #5a815b;
+    width: 10%;
+    border-radius: 2px;
+    transition: width 0.15s ease-out;
+    will-change: width;
+  }
+
+  /* Re-enable intentionally-empty elements hidden by base.css `:empty` rule */
+  .vp-ingredients-progress-bar:empty,
+  .vp-keep:empty {
+    display: block !important;
+  }
+
+  /* ============ MOBILE — Figma: frame 390px, padding 40px 25px 30px, gap 25px ============ */
+  @media (max-width: 768px) {
+    .vp-ingredients {
+      padding: 40px 25px 30px 25px;
+      border-top: 0.5px solid #9da197;
+    }
+
+    .vp-ingredients-container {
+      gap: 25px;
+    }
+
+    .vp-ingredients-text {
+      gap: 12px;
+    }
+
+    .vp-ingredients-eyebrow {
+      font-size: 13px;
+    }
+
+    .vp-ingredients-heading {
+      font-size: 30px;
+      line-height: 0.95;
+      letter-spacing: -0.4px;
+    }
+
+    /* On mobile the heading flows as one paragraph, no forced break */
+    .vp-ingredients-heading-break {
+      display: none;
+    }
+
+    .vp-ingredients-heading .source {
+      font-size: 38px;
+    }
+
+    .vp-ingredients-heading .source-suffix {
+      font-size: 30px;
+    }
+
+    .vp-ingredients-desc {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    /* The cards + progress sit in their own group with 35px gap */
+    .vp-ingredients-cards-group {
+      gap: 35px;
+    }
+
+    /* Let the cards bleed past the section's right padding to the screen edge */
+    .vp-ingredients-slider {
+      width: calc(100% + 25px);
+      margin-right: -25px;
+    }
+
+    /* White fade on the right edge */
+    .vp-ingredients-slider::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 80px;
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(270deg, #FFF 0%, #FFF 8.89%, rgba(255, 255, 255, 0.00) 42.04%);
+    }
+
+    .vp-ingredients-slider .swiper-slide {
+      width: 255px;
+    }
+
+    .vp-ingredients-card {
+      gap: 18.171px;
+      border-width: 0.5px;
+      border-radius: 5.863px;
+      box-shadow: 0px 6px 4.45px rgba(0, 0, 0, 0.11);
+    }
+
+    .vp-ingredients-card-image {
+      height: 197px;
+      border-bottom-width: 0.733px;
+      border-top-left-radius: 5.863px;
+      border-top-right-radius: 5.863px;
+    }
+
+    .vp-ingredients-card-text {
+      gap: 10.993px;
+      padding: 0 17.472px 17.472px;
+    }
+
+    .vp-ingredients-card-badge {
+      padding: 5.13px 7.329px;
+      border-radius: 2.931px;
+      font-size: 10.483px;
+    }
+
+    .vp-ingredients-card-title {
+      font-size: 20.087px;
+      line-height: 1.3;
+      letter-spacing: -0.1004px;
+    }
+
+    .vp-ingredients-card-desc {
+      font-size: 13.696px;
+      line-height: 20.544px;
+    }
+  }
+</style>
+
+<div class="vp-ingredients" style="--vp-ingredients-max-width: {{ section.settings.max_width }}px;">
+  {% render 'vp-reveal' %}
+
+  <div class="vp-ingredients-container">
+    <!-- TEXT -->
+    <div class="vp-ingredients-text">
+      {% if section.settings.eyebrow != blank %}
+        <p class="vp-ingredients-eyebrow vp-anim" data-vp-delay="1">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class="vp-ingredients-heading vp-anim" data-vp-delay="2">
+        {{ section.settings.heading_pre }}<br class="vp-ingredients-heading-break">{{ section.settings.heading_mid }} <span class="source">{{ section.settings.heading_source }}</span><span class="source-suffix">{{ section.settings.heading_suffix }}</span>
+      </h2>
+      {% if section.settings.description != blank %}
+        <p class="vp-ingredients-desc vp-anim" data-vp-delay="3">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+
+    <!-- CARDS + PROGRESS -->
+    <div class="vp-ingredients-cards-group vp-anim" data-vp-delay="4">
+      <div class="vp-ingredients-slider swiper" id="vp-ingredients-slider-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="vp-ingredients-card swiper-slide" {{ block.shopify_attributes }}>
+              <div class="vp-ingredients-card-image">
+                {% if block.settings.image %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 760 }}"
+                    alt="{{ block.settings.title }}"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                  >
+                {% endif %}
+              </div>
+              <div class="vp-ingredients-card-text">
+                {% if block.settings.badge != blank %}
+                  <span class="vp-ingredients-card-badge">{{ block.settings.badge }}</span>
+                {% endif %}
+                <p class="vp-ingredients-card-title">{{ block.settings.title }}</p>
+                <p class="vp-ingredients-card-desc">{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="vp-ingredients-progress">
+        <div class="vp-ingredients-progress-bar vp-keep" id="vp-ingredients-bar-{{ section.id }}"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  (function () {
+    var SECTION_ID = '{{ section.id }}';
+
+    function build() {
+      var el = document.getElementById('vp-ingredients-slider-' + SECTION_ID);
+      if (!el || el.dataset.swiperReady === '1') return;
+      el.dataset.swiperReady = '1';
+
+      var bar = document.getElementById('vp-ingredients-bar-' + SECTION_ID);
+
+      function setBar(sw) {
+        if (!bar || !sw) return;
+        var prog = typeof sw.progress === 'number' ? sw.progress : 0;
+        prog = Math.min(Math.max(prog, 0), 1);
+        // Start at 10% and fill up to 100% across the swipe
+        bar.style.width = (10 + prog * 90) + '%';
+      }
+
+      var swiper = new Swiper(el, {
+        slidesPerView: 'auto',
+        spaceBetween: 32.694,
+        grabCursor: true,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        breakpoints: {
+          769: { spaceBetween: 32.694 },
+          0:   { spaceBetween: 21.665 }
+        },
+        on: {
+          init: setBar,
+          progress: setBar,
+          setTranslate: setBar,
+          touchMove: setBar,
+          resize: setBar
+        }
+      });
+
+      setBar(swiper);
+      window.requestAnimationFrame(function () { setBar(swiper); });
+    }
+
+    function waitForSwiper(attempts) {
+      if (typeof window.Swiper !== 'undefined') { build(); return; }
+      if (attempts <= 0) return;
+      setTimeout(function () { waitForSwiper(attempts - 1); }, 100);
+    }
+
+    function start() { waitForSwiper(50); }
+
+    if (document.readyState !== 'loading') {
+      start();
+    } else {
+      document.addEventListener('DOMContentLoaded', start);
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      var el = e.target && e.target.querySelector
+        ? e.target.querySelector('#vp-ingredients-slider-' + SECTION_ID)
+        : null;
+      if (el) el.dataset.swiperReady = '';
+      start();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "VP - Ingredients",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "BACKED BY SCIENCE"
+    },
+    {
+      "type": "text",
+      "id": "heading_pre",
+      "label": "Heading — line 1",
+      "default": "A unique blend that"
+    },
+    {
+      "type": "text",
+      "id": "heading_mid",
+      "label": "Heading — line 2 (before highlight)",
+      "default": "targets the"
+    },
+    {
+      "type": "text",
+      "id": "heading_source",
+      "label": "Heading — highlight (Crimson Pro)",
+      "default": "source"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "label": "Heading — suffix after highlight",
+      "default": ".."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "100% premium selected ingredients that target the problem at it’s core."
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1320
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (amount)",
+          "default": "200mg"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Ingredient name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Short description of the ingredient and its benefit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VP - Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "badge": "200mg",
+            "title": "Prebiotic Pumpkin",
+            "description": "High-heat extrusion destroys vitamins, probiotics, and omega-3s before the bag is even sealed."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "badge": "95mg",
+            "title": "Wild Salmon Oil",
+            "description": "Natural omega-3s, reduces inflammation and improves skin & coat"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "badge": "500M CFU",
+            "title": "Probiotic Blend",
+            "description": "Natural probiotics that restore gut balance & support immune health"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "badge": "200mg",
+            "title": "Glucosamine",
+            "description": "Clinically-proven joint support to protect cartilage and improve mobility"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

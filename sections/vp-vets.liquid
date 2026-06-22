@@ -1,0 +1,466 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap');
+
+  /* ============ DESKTOP — Figma: frame 1217px, border 1px, padding 100px ============ */
+  .vp-vets {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #9da197;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .vp-vets-container {
+    width: 100%;
+    max-width: var(--vp-vets-max-width, 1320px);
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* TITLE block — right-aligned, width 700px, gap 18px */
+  .vp-vets-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
+    width: 700px;
+    max-width: 100%;
+  }
+
+  .vp-vets-eyebrow {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    font-style: italic;
+    color: #686868;
+    white-space: nowrap;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .vp-vets-heading {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.6px;
+    color: #000000;
+    text-align: right;
+    width: 100%;
+  }
+
+  .vp-vets-heading .source {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 600;
+    font-size: 70px;
+    color: #5a815b;
+  }
+
+  /* Quote + avatars group — gap 45px */
+  .vp-vets-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 45px;
+    width: 665px;
+    max-width: 100%;
+  }
+
+  .vp-vets-quote-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .vp-vets-quote {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.42;
+    color: #000000;
+    text-align: right;
+    width: 100%;
+  }
+
+  .vp-vets-attribution {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #534c44;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  /* AVATARS — gap 20px, 88px circles */
+  .vp-vets-avatars {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .vp-vets-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.25s ease;
+  }
+
+  .vp-vets-avatar.is-active {
+    opacity: 1;
+  }
+
+  .vp-vets-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Main vet image — 611px, bottom-left */
+  .vp-vets-image {
+    position: absolute;
+    left: 18px;
+    bottom: 0;
+    width: 611px;
+    height: 611px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .vp-vets-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom left;
+    display: none;
+  }
+
+  .vp-vets-image img.is-active {
+    display: block;
+  }
+
+  /* Desktop shows the desktop image stack; mobile stack hidden */
+  .vp-vets-image--mobile {
+    display: none;
+  }
+
+  /* Swap targets toggle visibility */
+  .vp-vets-quote,
+  .vp-vets-attribution {
+    display: none;
+  }
+
+  .vp-vets-quote.is-active,
+  .vp-vets-attribution.is-active {
+    display: block;
+  }
+
+  /* ============ MOBILE — Figma: frame 390px, border 0.5px, padding 56px 25px 48px ============ */
+  @media (max-width: 768px) {
+    .vp-vets {
+      padding: 56px 25px 48px 25px;
+      border-width: 0.5px;
+    }
+
+    .vp-vets-title {
+      width: 100%;
+      gap: 14px;
+    }
+
+    .vp-vets-eyebrow {
+      display: none;
+    }
+
+    .vp-vets-heading {
+      font-size: 30px;
+      line-height: 0.95;
+      letter-spacing: -0.4px;
+    }
+
+    .vp-vets-heading .source {
+      font-size: 38px;
+    }
+
+    .vp-vets-container {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 24px;
+    }
+
+    .vp-vets-detail {
+      width: 100%;
+      gap: 24px;
+    }
+
+    .vp-vets-quote-group {
+      gap: 10px;
+    }
+
+    .vp-vets-quote {
+      font-size: 17px;
+      line-height: 1.45;
+      font-style: normal;
+      width: 250px;
+      max-width: 100%;
+    }
+
+    .vp-vets-attribution {
+      font-size: 15px;
+    }
+
+    .vp-vets-avatars {
+      gap: 10.023px;
+    }
+
+    .vp-vets-avatar {
+      width: 51.546px;
+      height: 51.546px;
+    }
+
+    /* Swap which image stack is visible */
+    .vp-vets-image--desktop {
+      display: none;
+    }
+
+    .vp-vets-image--mobile {
+      display: flex;
+    }
+
+    /* Main image — 248px, bottom-left, partly off-screen */
+    .vp-vets-image {
+      left: -5.5px;
+      width: 248px;
+      height: 248px;
+    }
+  }
+</style>
+
+<div class="vp-vets" style="--vp-vets-max-width: {{ section.settings.max_width }}px;">
+  <!-- Main images (one active at a time) — desktop -->
+  <div class="vp-vets-image vp-vets-image--desktop">
+    {% for block in section.blocks %}
+      {% assign desktop_img = block.settings.main_image_desktop | default: block.settings.main_image %}
+      {% if desktop_img %}
+        <img
+          src="{{ desktop_img | image_url: width: 1200 }}"
+          alt="{{ block.settings.name }}"
+          data-vet-image="{{ forloop.index0 }}"
+          class="{% if forloop.first %}is-active{% endif %}"
+          loading="lazy"
+        >
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- Main images (one active at a time) — mobile -->
+  <div class="vp-vets-image vp-vets-image--mobile">
+    {% for block in section.blocks %}
+      {% assign mobile_img = block.settings.main_image | default: block.settings.main_image_desktop %}
+      {% if mobile_img %}
+        <img
+          src="{{ mobile_img | image_url: width: 600 }}"
+          alt="{{ block.settings.name }}"
+          data-vet-image="{{ forloop.index0 }}"
+          class="{% if forloop.first %}is-active{% endif %}"
+          loading="lazy"
+        >
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% render 'vp-reveal' %}
+
+  <div class="vp-vets-container" data-vp-vets>
+    <div class="vp-vets-title">
+      {% if section.settings.eyebrow != blank %}
+        <p class="vp-vets-eyebrow vp-anim" data-vp-delay="1">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+
+      <h2 class="vp-vets-heading vp-anim" data-vp-delay="2">
+        {{ section.settings.heading_pre }} <span class="source">{{ section.settings.heading_source }}</span>
+      </h2>
+
+      <div class="vp-vets-detail vp-anim" data-vp-delay="3">
+        <div class="vp-vets-quote-group">
+          {% for block in section.blocks %}
+            <p class="vp-vets-quote {% if forloop.first %}is-active{% endif %}" data-vet-quote="{{ forloop.index0 }}">{{ block.settings.quote }}</p>
+          {% endfor %}
+          {% for block in section.blocks %}
+            <p class="vp-vets-attribution {% if forloop.first %}is-active{% endif %}" data-vet-attr="{{ forloop.index0 }}">{{ block.settings.name }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="vp-vets-avatars">
+          {% for block in section.blocks %}
+            <button
+              type="button"
+              class="vp-vets-avatar {% if forloop.first %}is-active{% endif %}"
+              data-vet-avatar="{{ forloop.index0 }}"
+              aria-label="{{ block.settings.name }}"
+              {{ block.shopify_attributes }}
+            >
+              <img
+                src="{{ block.settings.avatar | image_url: width: 176 }}"
+                alt="{{ block.settings.name }}"
+                loading="lazy"
+              >
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.querySelector('#shopify-section-{{ section.id }} [data-vp-vets]');
+    var section = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root || !section) return;
+
+    var avatars = section.querySelectorAll('[data-vet-avatar]');
+    var quotes = section.querySelectorAll('[data-vet-quote]');
+    var attrs = section.querySelectorAll('[data-vet-attr]');
+    var images = section.querySelectorAll('[data-vet-image]');
+
+    function activate(group, index) {
+      group.forEach(function (el) {
+        var i = el.getAttribute('data-vet-avatar')
+          || el.getAttribute('data-vet-quote')
+          || el.getAttribute('data-vet-attr')
+          || el.getAttribute('data-vet-image');
+        el.classList.toggle('is-active', i === String(index));
+      });
+    }
+
+    avatars.forEach(function (avatar) {
+      avatar.addEventListener('click', function () {
+        var index = avatar.getAttribute('data-vet-avatar');
+        activate(avatars, index);
+        activate(quotes, index);
+        activate(attrs, index);
+        activate(images, index);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "VP - Vets",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "FOR ALL BREEDS"
+    },
+    {
+      "type": "text",
+      "id": "heading_pre",
+      "label": "Heading (black part)",
+      "default": "Formulated and Praised by"
+    },
+    {
+      "type": "text",
+      "id": "heading_source",
+      "label": "Heading highlight (Crimson Pro)",
+      "default": "Certified Vets.."
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1320
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vet",
+      "name": "Vet",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar (round thumbnail)"
+        },
+        {
+          "type": "image_picker",
+          "id": "main_image_desktop",
+          "label": "Main Image — Desktop (large)",
+          "info": "Shown on desktop. Falls back to the mobile image if empty."
+        },
+        {
+          "type": "image_picker",
+          "id": "main_image",
+          "label": "Main Image — Mobile",
+          "info": "Shown on mobile. Falls back to the desktop image if empty."
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.\""
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name / Attribution",
+          "default": "Dr. M.A. Raza, DVM"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VP - Vets",
+      "blocks": [
+        {
+          "type": "vet",
+          "settings": {
+            "quote": "\"I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.\"",
+            "name": "Dr. M.A. Raza, DVM"
+          }
+        },
+        {
+          "type": "vet",
+          "settings": {
+            "quote": "\"These chews are a simple, effective way to support a dog's long-term health.\"",
+            "name": "Dr. Jane Smith, DVM"
+          }
+        },
+        {
+          "type": "vet",
+          "settings": {
+            "quote": "\"A high-quality multivitamin should be part of every dog's daily routine.\"",
+            "name": "Dr. Sarah Lee, DVM"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

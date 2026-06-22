@@ -1,0 +1,711 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap');
+
+  /* DESKTOP STYLES — Figma: BENEFITS frame 1217px, padding 100px, gap 50px */
+  .vp-benefits {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #9da197;
+    padding: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Section-level decorative (mobile only) — hidden on desktop */
+  .vp-benefits-decorative--mobile {
+    display: none;
+  }
+
+  .vp-benefits-container {
+    width: 100%;
+    max-width: var(--vp-benefits-max-width, 1320px);
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  /* TITLE — heading (h73) + desc, gap 15px */
+  .vp-benefits-title {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .vp-benefits-heading {
+    margin: 0;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 70px;
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.6px;
+    color: #000000;
+  }
+
+  .vp-benefits-heading .highlight {
+    color: #5a815b;
+    margin-right: 0.25em;
+  }
+
+  /* Suffix — Helvetica, 60px on desktop (Crimson part is 70px) */
+  .vp-benefits-heading .suffix {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 60px;
+  }
+
+  /* On desktop the heading stays on one line — hide the forced break */
+  .vp-benefits-heading-break {
+    display: none;
+  }
+
+  /* desc — 25px, width 754px, line-height 1.35 */
+  .vp-benefits-subtitle {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.5px;
+    color: #000000;
+    max-width: 754px;
+  }
+
+  /* MAIN — border #9da197, radius 12px, padding 25px, height 413px */
+  .vp-benefits-desktop-main {
+    width: 100%;
+    border: 1px solid #9da197;
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    height: 413px;
+  }
+
+  /* TEXT/GRID — centered, row gap 10px */
+  .vp-benefits-grid {
+    flex: 1 0 0;
+    height: 363px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Row — gap 30px, components vertically centered */
+  .vp-benefits-row {
+    flex: 1 0 0;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 0;
+  }
+
+  /* Component — 204.668px wide, 184.72px tall, padding 5.238px, gap 13.829px */
+  .vp-benefits-item {
+    display: flex;
+    flex-direction: column;
+    gap: 13.829px;
+    width: 211.668px;
+    height: 184.72px;
+    flex-shrink: 0;
+    padding: 5.238px;
+    overflow: hidden;
+  }
+
+  .vp-benefits-item-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+  }
+
+  .vp-benefits-item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Content — gap 9.219px */
+  .vp-benefits-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 9.219px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Badge — padding 1.844px 6.454px, radius 3.688px, 18.439px Helvetica Bold */
+  .vp-benefits-item-label {
+    background-color: #5a815b;
+    color: #ffffff;
+    padding: 1.844px 6.454px;
+    border-radius: 3.688px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 18.439px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.2619px;
+    margin: 0;
+    white-space: nowrap;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  /* Description — 15.673px Helvetica Regular */
+  .vp-benefits-item-description {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 15.673px;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.2619px;
+    color: #000000;
+  }
+
+  /* Decorative — Figma: wrapper right edge overflows MAIN by ~303px, top -94.11px,
+     606.921x547.66, inner scaleY(-1) rotate(-152.05deg), image 498.433x355.503.
+     Anchored from the right so it stays in the corner at any MAIN width. */
+  .vp-benefits-decorative {
+    position: absolute;
+    right: -307.92px;
+    top: -79.11px;
+    width: 606.921px;
+    height: 547.66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .vp-benefits-decorative img {
+    width: 498.433px;
+    height: 355.503px;
+    object-fit: cover;
+    border-radius: 4px;
+    transform: scaleY(-1) rotate(-211.05deg);
+  }
+
+  /* MOBILE STYLES */
+  .vp-benefits-mobile-main {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .vp-benefits {
+      padding: 44px 28px 48px 28px;
+      border-bottom: none;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .vp-benefits-container {
+      gap: 26px;
+      position: relative;
+    }
+
+    .vp-benefits-title {
+      gap: 26px;
+      position: relative;
+      z-index: 3;
+      padding-right: 0;
+    }
+
+    /* Line 1 — Crimson Pro, 38px, green */
+    .vp-benefits-heading {
+      font-size: 38px;
+      line-height: 1.05;
+      letter-spacing: -0.4px;
+      white-space: nowrap;
+    }
+
+    .vp-benefits-heading .highlight {
+      margin-right: 0;
+      font-size: 38px;
+    }
+
+    /* Line 2 — Helvetica, 30px, black */
+    .vp-benefits-heading .suffix {
+      font-size: 30px;
+      color: #000000;
+    }
+
+    /* Show the forced line break only on mobile */
+    .vp-benefits-heading-break {
+      display: block;
+    }
+
+    .vp-benefits-subtitle {
+      font-size: 16px;
+      line-height: 1.42;
+      letter-spacing: -0.4px;
+      color: #534c44;
+      max-width: 100%;
+    }
+
+    .vp-benefits-desktop-main {
+      display: none;
+    }
+
+    .vp-benefits-mobile-main {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      position: relative;
+    }
+
+    /* Decorative hand — Figma: x 264px on 390px frame (right edge overflows ~61px) */
+    .vp-benefits-decorative--mobile {
+      position: absolute;
+      top: 0;
+      right: -61px;
+      width: 187px;
+      height: 133px;
+      left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .vp-benefits-decorative--mobile img {
+      width: 187px;
+      height: 133px;
+      object-fit: contain;
+      transform: scaleY(-1) rotate(180deg);
+    }
+
+    /* GRID slider (Swiper) — 2 slides per view */
+    .vp-benefits-slider {
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      padding-bottom: 6px;
+    }
+
+    /* Stretch every slide to the height of the tallest one */
+    .vp-benefits-slider .swiper-wrapper {
+      align-items: stretch;
+    }
+
+    .vp-benefits-slider .swiper-slide {
+      height: auto;        /* let flex-stretch set the height */
+      display: flex;       /* so the inner card can fill 100% */
+    }
+
+    /* Card — fills the full (equalized) slide height */
+    .vp-benefits-card {
+      width: 100%;
+      height: 100%;
+      min-height: 156.608px;
+      border: 1px solid #e4e4e4;
+      border-radius: 8px;
+      background-color: #ffffff;
+      padding: 10px;
+      box-shadow: 0px 4px 6.2px rgba(0, 0, 0, 0.11);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .vp-benefits-card-icon {
+      width: 45.838px;
+      height: 45.838px;
+      flex-shrink: 0;
+      /* Explicit space between icon and the green badge */
+      margin-bottom: 10.743px;
+    }
+
+    .vp-benefits-card-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .vp-benefits-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 7.162px;
+      width: 100%;
+    }
+
+    /* Green badge — fits content (matches Figma inline padded pill) */
+    .vp-benefits-card-label {
+      background-color: #5a815b;
+      color: #ffffff;
+      padding: 1.432px 5.014px;
+      border-radius: 3.688px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      font-size: 12.43px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -0.2034px;
+      margin: 0;
+      display: inline-block;
+      width: fit-content;
+      white-space: nowrap;
+    }
+
+    .vp-benefits-card-description {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      font-size: 12.18px;
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: -0.2619px;
+      color: #000000;
+    }
+
+    /* Progress bar — Figma: full width 334px, 3px, under cards */
+    .vp-benefits-progress {
+      width: 100%;
+      height: 3px;
+      background-color: #d9d9d9;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    .vp-benefits-progress-bar {
+      height: 100%;
+      background-color: #5a815b;
+      width: 10%;
+      border-radius: 2px;
+      transition: width 0.15s ease-out;
+      will-change: width;
+    }
+  }
+
+  /*
+   * The theme's base.css hides every empty element with
+   * `div:empty, section:empty, ... { display: none; }`.
+   * Our progress-bar fill is intentionally empty, so re-enable it.
+   * Reusable convention: add `vp-keep` to any intentionally-empty
+   * element in future sections so the global :empty rule can't hide it.
+   */
+  .vp-benefits-progress-bar:empty,
+  .vp-keep:empty {
+    display: block !important;
+  }
+</style>
+
+<div class="vp-benefits" style="--vp-benefits-max-width: {{ section.settings.max_width }}px;">
+  {% if section.settings.decorative_image %}
+    <div class="vp-benefits-decorative--mobile">
+      <img
+        src="{{ section.settings.decorative_image | image_url: width: 400 }}"
+        alt="Decorative"
+        loading="lazy"
+      >
+    </div>
+  {% endif %}
+
+  {% render 'vp-reveal' %}
+
+  <div class="vp-benefits-container">
+    <!-- Title Section (Both Desktop & Mobile) -->
+    <div class="vp-benefits-title">
+      <h2 class="vp-benefits-heading vp-anim" data-vp-delay="1">
+        <span class="highlight">{{ section.settings.heading_crimson }}</span><br class="vp-benefits-heading-break"><span class="suffix">{{ section.settings.heading_helvetica }}</span>
+      </h2>
+      <p class="vp-benefits-subtitle vp-anim" data-vp-delay="2">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <!-- DESKTOP VERSION -->
+    <div class="vp-benefits-desktop-main">
+      <div class="vp-benefits-grid" data-vp-stagger>
+        <div class="vp-benefits-row">
+          {% for block in section.blocks %}
+            {% if forloop.index <= 3 %}
+              <div class="vp-benefits-item vp-anim">
+                <div class="vp-benefits-item-icon">
+                  <img
+                    src="{{ block.settings.icon | image_url: width: 200 }}"
+                    alt="{{ block.settings.title }}"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="vp-benefits-item-content">
+                  <p class="vp-benefits-item-label">{{ block.settings.title }}</p>
+                  <p class="vp-benefits-item-description">{{ block.settings.description }}</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="vp-benefits-row">
+          {% for block in section.blocks %}
+            {% if forloop.index > 3 %}
+              <div class="vp-benefits-item vp-anim">
+                <div class="vp-benefits-item-icon">
+                  <img
+                    src="{{ block.settings.icon | image_url: width: 200 }}"
+                    alt="{{ block.settings.title }}"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="vp-benefits-item-content">
+                  <p class="vp-benefits-item-label">{{ block.settings.title }}</p>
+                  <p class="vp-benefits-item-description">{{ block.settings.description }}</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if section.settings.decorative_image %}
+        <div class="vp-benefits-decorative">
+          <img
+            src="{{ section.settings.decorative_image | image_url: width: 800 }}"
+            alt="Decorative"
+            loading="lazy"
+          >
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- MOBILE VERSION -->
+    <div class="vp-benefits-mobile-main">
+      <div class="vp-benefits-slider swiper" id="vp-benefits-slider-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="vp-benefits-card swiper-slide" data-index="{{ forloop.index0 }}">
+              <div class="vp-benefits-card-icon">
+                <img
+                  src="{{ block.settings.icon | image_url: width: 150 }}"
+                  alt="{{ block.settings.title }}"
+                  loading="lazy"
+                >
+              </div>
+              <div class="vp-benefits-card-content">
+                <p class="vp-benefits-card-label">{{ forloop.index }}. {{ block.settings.title }}</p>
+                <p class="vp-benefits-card-description">{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="vp-benefits-progress">
+        <div class="vp-benefits-progress-bar vp-keep" id="vp-benefits-bar-{{ section.id }}"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  (function () {
+    var SECTION_ID = '{{ section.id }}';
+
+    function build() {
+      var el = document.getElementById('vp-benefits-slider-' + SECTION_ID);
+      if (!el) return;
+      if (el.dataset.swiperReady === '1') return;
+      el.dataset.swiperReady = '1';
+
+      var bar = document.getElementById('vp-benefits-bar-' + SECTION_ID);
+
+      // Reads the live progress value straight off the instance (0 → 1)
+      // and writes it to the bar. Works for both drag (setTranslate) and snap.
+      function setBar(sw) {
+        if (!bar || !sw) return;
+        var prog = typeof sw.progress === 'number' ? sw.progress : 0;
+        prog = Math.min(Math.max(prog, 0), 1);
+        // Start at 10% and fill up to 100% across the swipe
+        bar.style.width = (10 + prog * 90) + '%';
+      }
+
+      var swiper = new Swiper(el, {
+        slidesPerView: 2,
+        spaceBetween: 16,
+        grabCursor: true,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        on: {
+          init: setBar,
+          progress: setBar,      // fires on snap / programmatic move
+          setTranslate: setBar,  // fires continuously during a drag
+          touchMove: setBar,     // extra safety while finger is down
+          resize: setBar
+        }
+      });
+
+      // Paint the initial state once more after layout settles.
+      setBar(swiper);
+      window.requestAnimationFrame(function () { setBar(swiper); });
+    }
+
+    // Swiper loads from a CDN <script> just above. If the section markup is
+    // parsed/injected before that script finishes (theme editor, async injection),
+    // `Swiper` may be undefined at first. Poll briefly until it's ready instead
+    // of bailing out silently.
+    function waitForSwiper(attempts) {
+      if (typeof window.Swiper !== 'undefined') {
+        build();
+        return;
+      }
+      if (attempts <= 0) return; // give up after ~5s
+      setTimeout(function () { waitForSwiper(attempts - 1); }, 100);
+    }
+
+    function start() { waitForSwiper(50); }
+
+    if (document.readyState !== 'loading') {
+      start();
+    } else {
+      document.addEventListener('DOMContentLoaded', start);
+    }
+
+    // Theme editor re-renders: reset the guard so it rebuilds.
+    document.addEventListener('shopify:section:load', function (e) {
+      var el = e.target && e.target.querySelector
+        ? e.target.querySelector('#vp-benefits-slider-' + SECTION_ID)
+        : null;
+      if (el) el.dataset.swiperReady = '';
+      start();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "VP - Benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_crimson",
+      "label": "Heading (Crimson Pro)",
+      "default": "6 Core Benefits",
+      "info": "Main heading text in Crimson Pro font"
+    },
+    {
+      "type": "text",
+      "id": "heading_helvetica",
+      "label": "Heading Suffix (Helvetica)",
+      "default": "in 1 tasty chew..",
+      "info": "Suffix text in Helvetica font"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Targeting common canine health challenges with natural ingredients, essential for long term health."
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1320
+    },
+    {
+      "type": "image_picker",
+      "id": "decorative_image",
+      "label": "Decorative Image (Product Hand)",
+      "info": "Displayed on the right (desktop) or top-right (mobile)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Benefit Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Benefit Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title",
+          "default": "Benefit Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit Description",
+          "default": "Description of the benefit"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VP - Benefits",
+      "settings": {
+        "heading_crimson": "6 Core Benefits",
+        "heading_helvetica": "in 1 tasty chew..",
+        "subtitle": "Targeting common canine health challenges with natural ingredients, essential for long term health."
+      },
+      "blocks": [
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Gut & Digestion",
+            "description": "Probiotics support a healthier digestive system & balanced gut."
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Skin & Coat",
+            "description": "Fatty acids & vitamins that stimulate healthy skin, shinier coat & less itching."
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Hip & Joint",
+            "description": "Nutrients for reducing inflammation and stiffness, improving hip & joint mobility."
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Allergies",
+            "description": "Relieving allergies from the source, keeping your dog comfortable all year."
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Immunity",
+            "description": "Strengthens immune defenses, protecting against allergens & bad bacteria."
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Energy & Vitality",
+            "description": "Vitamins for improved energy, better mood & more tail-wags."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

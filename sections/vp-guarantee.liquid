@@ -1,0 +1,390 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+  /* ============ DESKTOP — Figma: frame 1217px, padding 50 100, gap 26 ============ */
+  .vp-guarantee {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Full-cover background image */
+  .vp-guarantee-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .vp-guarantee-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Desktop uses the desktop image; mobile image hidden */
+  .vp-guarantee-bg--mobile {
+    display: none;
+  }
+
+  .vp-guarantee-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    width: 100%;
+    max-width: var(--vp-guarantee-max-width, 1320px);
+  }
+
+  /* HEADER */
+  .vp-guarantee-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .vp-guarantee-badge {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+  }
+
+  .vp-guarantee-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .vp-guarantee-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8.666px;
+    text-align: center;
+    position: relative;
+  }
+
+  .vp-guarantee-heading {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 55.596px;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.7413px;
+    color: #000000;
+  }
+
+  .vp-guarantee-heading .source {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 64.862px;
+    letter-spacing: -1.8532px;
+    color: #5a815b;
+  }
+
+  .vp-guarantee-subtext {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 34.666px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.3467px;
+    color: #000000;
+  }
+
+  /* The marked words ("30 days") that carry the underline */
+  .vp-guarantee-uline {
+    position: relative;
+    white-space: nowrap;
+  }
+
+  /* Decorative underline image, anchored under the marked words */
+  .vp-guarantee-uline-img {
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%) rotate(1.25deg);
+    width: 110%;
+    pointer-events: none;
+    line-height: 0;
+  }
+
+  .vp-guarantee-uline-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* USP pills */
+  .vp-guarantee-usps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5.077px;
+  }
+
+  .vp-guarantee-usp {
+    background-color: #5a815b;
+    border-radius: 2.997px;
+    padding: 4.096px 8.191px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .vp-guarantee-usp span {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 21.59px;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: -0.6477px;
+    color: #fafcfa;
+    white-space: nowrap;
+  }
+
+  /* ============ MOBILE — Figma: frame 390px, padding 50 25, gap 26 ============ */
+  @media (max-width: 768px) {
+    .vp-guarantee {
+      padding: 50px 25px;
+    }
+
+    /* Swap to the mobile background image */
+    .vp-guarantee-bg--desktop {
+      display: none;
+    }
+
+    .vp-guarantee-bg--mobile {
+      display: block;
+    }
+
+    .vp-guarantee-inner {
+      gap: 26px;
+    }
+
+    .vp-guarantee-badge {
+      width: 78px;
+      height: 78px;
+    }
+
+    .vp-guarantee-text {
+      gap: 5px;
+    }
+
+    .vp-guarantee-heading {
+      font-size: 32.075px;
+      letter-spacing: -0.4277px;
+    }
+
+    .vp-guarantee-heading .source {
+      font-size: 37.421px;
+      letter-spacing: -1.0692px;
+    }
+
+    .vp-guarantee-subtext {
+      font-size: 20px;
+      letter-spacing: -0.2px;
+    }
+
+    .vp-guarantee-uline-img {
+      bottom: -5px;
+    }
+
+    .vp-guarantee-usps {
+      gap: 4px;
+      max-width: 362px;
+    }
+
+    .vp-guarantee-usp {
+      padding: 3.227px 6.454px;
+      border-radius: 2.361px;
+    }
+
+    .vp-guarantee-usp span {
+      font-size: 17.011px;
+      letter-spacing: -0.5103px;
+    }
+  }
+</style>
+
+<div class="vp-guarantee" style="--vp-guarantee-max-width: {{ section.settings.max_width }}px;">
+  {%- assign bg_desktop = section.settings.bg_desktop | default: section.settings.bg_mobile -%}
+  {%- assign bg_mobile = section.settings.bg_mobile | default: section.settings.bg_desktop -%}
+  {% if bg_desktop != blank %}
+    <div class="vp-guarantee-bg vp-guarantee-bg--desktop" aria-hidden="true">
+      <img src="{{ bg_desktop | image_url: width: 2400 }}" alt="" loading="lazy" width="{{ bg_desktop.width }}" height="{{ bg_desktop.height }}">
+    </div>
+  {% endif %}
+  {% if bg_mobile != blank %}
+    <div class="vp-guarantee-bg vp-guarantee-bg--mobile" aria-hidden="true">
+      <img src="{{ bg_mobile | image_url: width: 1000 }}" alt="" loading="lazy" width="{{ bg_mobile.width }}" height="{{ bg_mobile.height }}">
+    </div>
+  {% endif %}
+
+  {% render 'vp-reveal' %}
+
+  <div class="vp-guarantee-inner">
+    <div class="vp-guarantee-header">
+      {% if section.settings.badge %}
+        <div class="vp-guarantee-badge vp-anim vp-pop" data-vp-delay="1">
+          <img src="{{ section.settings.badge | image_url: width: 240 }}" alt="Guarantee badge" loading="lazy">
+        </div>
+      {% endif %}
+
+      <div class="vp-guarantee-text vp-anim" data-vp-delay="2">
+        <h2 class="vp-guarantee-heading">
+          {%- assign heading_html = section.settings.heading
+            | replace: '[', '<span class="source">'
+            | replace: ']', '</span>' -%}
+          {{ heading_html }}
+        </h2>
+        {% if section.settings.subtext != blank %}
+          {%- capture uline_img -%}
+            {%- if section.settings.underline_image -%}<span class="vp-guarantee-uline-img"><img src="{{ section.settings.underline_image | image_url: width: 300 }}" alt="" aria-hidden="true"></span>{%- endif -%}
+          {%- endcapture -%}
+          {%- assign uline_close = uline_img | append: '</span>' -%}
+          {%- assign subtext_html = section.settings.subtext
+            | replace: '{', '<span class="vp-guarantee-uline">'
+            | replace: '}', uline_close -%}
+          <p class="vp-guarantee-subtext">{{ subtext_html }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="vp-guarantee-usps" data-vp-stagger>
+        {% for block in section.blocks %}
+          <div class="vp-guarantee-usp vp-anim vp-pop" {{ block.shopify_attributes }}>
+            <span>{{ block.settings.text }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "VP - Guarantee",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge",
+      "label": "Badge Image"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Wrap text in [square brackets] to highlight it (green Crimson Pro italic). Example: Try VitalPaws [Risk-Free]",
+      "default": "Try VitalPaws [Risk-Free]"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "info": "Wrap words in {curly braces} to place the underline accent beneath them. Example: See the difference in {30 days}, or get your money back.",
+      "default": "See the difference in {30 days}, or get your money back."
+    },
+    {
+      "type": "image_picker",
+      "id": "underline_image",
+      "label": "Underline Accent (decorative)",
+      "info": "Hand-drawn underline shown beneath the {bracketed} words in the subtext."
+    },
+    {
+      "type": "header",
+      "content": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Background Image — Desktop",
+      "info": "Covers the whole section. Falls back to the mobile image if empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background Image — Mobile",
+      "info": "Covers the whole section on mobile. Falls back to the desktop image if empty."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1320
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "USP Pill",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "FREE Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VP - Guarantee",
+      "settings": {
+        "heading": "Try VitalPaws [Risk-Free]",
+        "subtext": "See the difference in {30 days}, or get your money back."
+      },
+      "blocks": [
+        {
+          "type": "usp",
+          "settings": { "text": "FREE Shipping" }
+        },
+        {
+          "type": "usp",
+          "settings": { "text": "40k+ Healthy Dogs" }
+        },
+        {
+          "type": "usp",
+          "settings": { "text": "Eurofins Certified" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

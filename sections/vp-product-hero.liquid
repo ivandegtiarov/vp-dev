@@ -1,0 +1,842 @@
+{% comment %}
+  ============================================================================
+  VP - Product Hero  (section type: vp-product-hero)
+  ----------------------------------------------------------------------------
+  Fully self-contained product hero (CSS + JS + Liquid + HTML in one file),
+  skinned to Figma "Vital Paws PDP (Copy)" — desktop 3:34 / mobile 295:332.
+
+  GALLERY: custom Swiper.js gallery (main image + thumbnail row). Loaded from
+  the same Swiper 11 CDN used by the other vp- sections. No native gallery.
+
+  VARIANT / SUBSCRIPTION  (NATIVE selling plans — app-agnostic, works with Loop):
+    - Bundle cards (1 / 3 / 6 Jar) are styled radios. On change, our own JS
+      writes the matching variant id into the form's hidden name="id" input
+      (no Section Rendering re-render — keeps Swiper + markup intact) and swaps
+      the ATC price. <product-form> handles the actual add-to-cart.
+    - Subscriptions use Shopify's NATIVE selling plans
+      (variant.selling_plan_allocations) — NOT any vendor widget. Each bundle
+      radio carries data-selling-plan="{plan id}" read straight from the variant.
+      The Subscribe checkbox writes that id into a hidden <input name="selling_plan">
+      (or clears it for one-time) and toggles `.single_purchase_option` so the
+      [subs-purchase-pricings] / [single-purchase-pricings] prices switch.
+      This is whatever subscription app created the selling plans — Loop, Appstle,
+      Shopify native — no app-specific DOM, no hardcoded plan-id maps.
+    - Content rows are section BLOCKS so each is editable in the customizer.
+  ============================================================================
+{% endcomment %}
+
+{%- liquid
+  assign s = section.settings
+  assign product_form_id = 'vp-product-form-' | append: section.id
+-%}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amethysta&family=Headland+One&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+  #shopify-section-{{ section.id }} {
+    --vp-h-accent: #5a815b;
+    --vp-h-accent-2: #61a266;
+    --vp-h-accent-line: #577558;
+    --vp-h-text: #000000;
+    --vp-h-text-dark: #3d3834;
+    --vp-h-muted: #534c44;
+    --vp-h-title: #241f1b;
+    --vp-h-surface: #ffffff;
+    --vp-h-surface-2: #f6f6f6;
+    --vp-h-border-a: #494c45;
+    --vp-h-border-b: #9da197;
+    --vp-h-border-c: #e4e4e4;
+    --vp-h-selected: #f4f4f4;
+    --vp-h-badge-bg: #e5ecdb;
+    --vp-h-guarantee-bg: #f5f9f2;
+    --vp-h-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --vp-h-serif: 'Amethysta', Georgia, 'Times New Roman', serif;
+  }
+
+  /* ============ LAYOUT SHELL ============ */
+  .vp-hero { background: var(--vp-h-surface); font-family: var(--vp-h-sans); color: var(--vp-h-text); }
+  .vp-hero *, .vp-hero *::before, .vp-hero *::after { box-sizing: border-box; }
+
+  .vp-hero__wrap {
+    max-width: var(--vp-h-max-width, 1220px);
+    margin: 0 auto;
+    padding: 50px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .vp-hero__gallery { flex: 1 0 0; min-width: 0; }
+  .vp-hero__sale { width: 475px; max-width: 475px; flex-shrink: 0; padding: 20px; }
+  .vp-hero__info { display: flex; flex-direction: column; gap: 20px; }
+  .vp-hero__sale.is-sticky .vp-hero__info { position: sticky; top: 24px; }
+
+  .vp-hero__mobile-head { display: none; }
+
+  /* ============ SWIPER GALLERY ============ */
+  .vp-hero__gallery-inner { display: flex; flex-direction: column; gap: 10px; }
+
+  .vp-hero__main {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .vp-hero__main .swiper-slide {
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--vp-h-surface-2);
+  }
+  .vp-hero__main .swiper-slide img,
+  .vp-hero__main .swiper-slide video,
+  .vp-hero__main .swiper-slide iframe {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+  }
+
+  .vp-hero__thumbs { width: 100%; }
+  .vp-hero__thumbs .swiper-wrapper { align-items: stretch; }
+  .vp-hero__thumbs .swiper-slide {
+    width: 117px;
+    height: 117px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 1;
+    border: 1.5px solid transparent;
+    transition: border-color 0.18s ease;
+    background: var(--vp-h-surface-2);
+  }
+  .vp-hero__thumbs .swiper-slide img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .vp-hero__thumbs .swiper-slide-thumb-active { border-color: var(--vp-h-accent-line); }
+
+  /* ============ REVIEW BANNER ============ */
+  .vp-hero__reviewbar {
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 30px; padding: 0 20px; background: var(--vp-h-surface-2);
+    border: 0.571px solid var(--vp-h-border-c); border-radius: 8px; width: max-content; text-decoration: none;
+  }
+  .vp-hero__stars { display: flex; gap: 1px; }
+  .vp-hero__star { width: 16px; height: 16px; background: #00b67a; border-radius: 2px; color: #fff; font-size: 11px; line-height: 16px; text-align: center; }
+  .vp-hero__reviewbar-text { font-size: 13px; color: var(--vp-h-text); white-space: nowrap; }
+
+  /* ============ TITLE / SUBTITLE ============ */
+  .vp-hero__title-group { display: flex; flex-direction: column; gap: 10px; }
+  .vp-hero__title { margin: 0; font-family: var(--vp-h-serif); font-weight: 400; color: var(--vp-h-title); font-size: 52.6px; line-height: 1.05; letter-spacing: -2px; }
+  .vp-hero__subtitle { margin: 0; font-size: 18px; line-height: 26px; color: var(--vp-h-text); letter-spacing: -0.2px; }
+  .vp-hero__subtitle strong { font-weight: 700; }
+
+  /* ============ DOSAGE ============ */
+  .vp-hero__dosage { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 5px 18px; background: var(--vp-h-surface-2); border: 1px solid var(--vp-h-border-c); border-radius: 8px; }
+  .vp-hero__dosage-left { display: flex; align-items: center; gap: 16px; }
+  .vp-hero__dosage-left img { width: 50px; height: 50px; object-fit: contain; }
+  .vp-hero__dosage-text { display: flex; flex-direction: column; gap: 6px; }
+  .vp-hero__dosage-title { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.45px; }
+  .vp-hero__dosage-sub { margin: 0; font-size: 12px; color: var(--vp-h-muted); }
+  .vp-hero__dosage-right { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; text-align: right; }
+
+  /* ============ VET TESTIMONIAL ============ */
+  .vp-hero__vet { display: flex; align-items: center; gap: 14px; padding: 10px 4px; }
+  .vp-hero__vet-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .vp-hero__vet-quote { margin: 0; font-size: 15px; line-height: 1.4; letter-spacing: -0.15px; }
+  .vp-hero__vet-name { margin: 0; font-size: 13px; color: var(--vp-h-muted); }
+
+  /* ============ BUNDLE SEPARATOR ============ */
+  .vp-hero__sep { display: flex; align-items: center; gap: 16px; width: 100%; }
+  .vp-hero__sep::before, .vp-hero__sep::after { content: ''; flex: 1 0 0; height: 1px; background: var(--vp-h-border-a); }
+  .vp-hero__sep span { font-size: 17px; font-weight: 700; font-style: italic; white-space: nowrap; }
+
+  /* ============ BUNDLE CARDS ============ */
+  .vp-hero__bundles { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
+  .vp-hero__bundle-input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+  .vp-hero__bundle { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; padding: 10px 16px; background: var(--vp-h-surface); border: 0.5px solid var(--vp-h-border-a); border-radius: 8px; cursor: pointer; transition: border-color 0.18s ease, background 0.18s ease; }
+  .vp-hero__bundle-input:checked + .vp-hero__bundle { background: var(--vp-h-selected); border: 1.5px solid var(--vp-h-text); }
+  .vp-hero__bundle-input:disabled + .vp-hero__bundle { opacity: 0.5; cursor: not-allowed; }
+  .vp-hero__bundle-input:focus-visible + .vp-hero__bundle { outline: 2px solid var(--vp-h-accent); outline-offset: 2px; }
+
+  .vp-hero__radio { width: 26px; height: 26px; border-radius: 50%; border: 0.5px solid var(--vp-h-accent-line); background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .vp-hero__radio::after { content: ''; width: 13px; height: 13px; border-radius: 50%; background: var(--vp-h-accent); transform: scale(0); transition: transform 0.15s ease; }
+  .vp-hero__bundle-input:checked + .vp-hero__bundle .vp-hero__radio::after { transform: scale(1); }
+
+  /* jar thumbnails (overlapping stack) */
+  .vp-hero__bundle-jars { flex-shrink: 0; display: flex; align-items: flex-end; width: 70px; height: 51px; }
+  .vp-hero__bundle-jars img { height: 45px; width: auto; object-fit: contain; margin-left: -28px; filter: drop-shadow(0 0.3px 0.3px rgba(0,0,0,0.25)); }
+  .vp-hero__bundle-jars img:first-child { margin-left: 0; }
+  /* fewer jars sit centred in the 70px slot */
+  .vp-hero__bundle-jars--1 { justify-content: center; }
+
+  .vp-hero__bundle-body { flex: 1 0 0; min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .vp-hero__bundle-text { display: flex; flex: 1 0 0; min-width: 0; }
+
+  .vp-hero__bundle-name { display: flex; }
+  .vp-hero__bundle-name b { font-size: 18px; font-weight: 700; letter-spacing: -0.18px; color: var(--vp-h-text); white-space: nowrap; }
+  .vp-hero__bundle-supply { font-size: 12px; color: var(--vp-h-muted); white-space: nowrap; }
+
+  /* ----- DESKTOP: inline (1 Jar) — [name above "One jar"] ... [badge] ... [price] ----- */
+  .vp-hero__bundle--inline .vp-hero__bundle-text { align-items: center; justify-content: space-between; gap: 8px; }
+  .vp-hero__bundle--inline .vp-hero__bundle-name { flex-direction: column; align-items: flex-start; gap: 1px; }
+  .vp-hero__bundle--inline .vp-hero__bundle-supply--block { font-style: italic; }
+  .vp-hero__bundle--inline .vp-hero__bundle-supply--inline { display: none; }
+
+  /* ----- DESKTOP: stacked (3/6 Jar) — ["3 Jar" + "3-Month Supply"] then [badge] below ----- */
+  .vp-hero__bundle--stacked .vp-hero__bundle-text { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .vp-hero__bundle--stacked .vp-hero__bundle-name { flex-direction: row; align-items: center; gap: 7px; }
+  .vp-hero__bundle--stacked .vp-hero__bundle-supply--block { display: none; }   /* inline copy is used */
+
+  .vp-hero__off-badge { align-self: flex-start; display: inline-flex; padding: 5px 10px; background: var(--vp-h-badge-bg); border: 0.5px solid var(--vp-h-border-b); border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 0.33px; color: var(--vp-h-text); white-space: nowrap; }
+
+  .vp-hero__bundle-price { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; text-align: right; flex-shrink: 0; }
+  .vp-hero__bundle-price .now { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; color: var(--vp-h-text); }
+  .vp-hero__bundle-price .was { font-size: 16px; color: var(--vp-h-muted); text-decoration: line-through; }
+
+  .vp-hero__card-badge { position: absolute; top: -13px; right: 16px; padding: 5px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; letter-spacing: -0.12px; color: #fafcfa; white-space: nowrap; }
+  .vp-hero__card-badge--popular { background: var(--vp-h-accent); }
+  .vp-hero__card-badge--value { background: var(--vp-h-accent-2); }
+
+  /* ============ SUBSCRIBE CARD ============ */
+  .vp-hero__subscribe { display: flex; align-items: center; gap: 14px; width: 100%; padding: 9px 14px; background: var(--vp-h-surface-2); border: 1px dashed var(--vp-h-border-b); border-radius: 8px; cursor: pointer; margin-top: 4px; }
+  .vp-hero__subscribe-check { -webkit-appearance: none; appearance: none; width: 25px; height: 25px; border: 2px solid #7bbc72; border-radius: 4px; background: #fff; flex-shrink: 0; cursor: pointer; position: relative; margin: 0; }
+  .vp-hero__subscribe-check:checked { background: #7bbc72; }
+  .vp-hero__subscribe-check:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #fff; font-size: 14px; font-family: sans-serif; }
+  .vp-hero__subscribe-text { display: flex; flex-direction: column; gap: 8px; min-width: 0; flex: 1 0 0; }
+  .vp-hero__subscribe-title { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+  .vp-hero__subscribe-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .vp-hero__subscribe-meta > span { display: flex; align-items: center; gap: 6px; }
+  .vp-hero__subscribe-meta img { width: 18px; height: 18px; }
+  .vp-hero__subscribe-meta p { margin: 0; font-size: 12px; color: var(--vp-h-muted); letter-spacing: -0.24px; }
+
+  /* optional native frequency picker (only when a variant has >1 plan) */
+  .vp-hero__frequency { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .vp-hero__sale.single_purchase_option .vp-hero__frequency { display: none; }
+  .vp-hero__frequency-label { font-size: 12px; font-weight: 700; color: var(--vp-h-muted); }
+  .vp-hero__frequency-select {
+    width: 100%; padding: 11px 14px; border: 1px solid var(--vp-h-border-a);
+    border-radius: 8px; font-family: var(--vp-h-sans); font-size: 14px; font-weight: 700;
+    background: #fff; cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+  }
+
+  /* subs / one-time toggle */
+  .vp-hero [single-purchase-pricings] { display: none; }
+  .vp-hero .vp-hero__sale.single_purchase_option [subs-purchase-pricings] { display: none !important; }
+  .vp-hero .vp-hero__sale.single_purchase_option [single-purchase-pricings] { display: inline !important; }
+
+  /* ============ BUY ============ */
+  .vp-hero__buy { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+  .vp-hero__atc { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px 32px; background: var(--vp-h-accent); border: none; border-radius: 8px; color: #fafcfa; font-family: var(--vp-h-sans); font-size: 20px; font-weight: 700; letter-spacing: -0.4px; cursor: pointer; transition: filter 0.15s ease; }
+  .vp-hero__atc:hover { filter: brightness(0.95); }
+  .vp-hero__atc[disabled] { opacity: 0.6; cursor: not-allowed; }
+  .vp-hero__atc .atc-was { font-size: 18px; color: var(--vp-h-border-b); text-decoration: line-through; font-weight: 400; }
+  .vp-hero__atc.loading .vp-hero__atc-label { visibility: hidden; }
+  .vp-hero .product-form__buttons { width: 100%; }
+
+  .vp-hero__guarantee { width: 100%; display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: var(--vp-h-guarantee-bg); border: 1px solid var(--vp-h-border-c); border-radius: 8px; }
+  .vp-hero__guarantee img { width: 36px; height: 37px; flex-shrink: 0; }
+  .vp-hero__guarantee-title { margin: 0; font-size: 16px; font-weight: 700; opacity: 0.8; }
+  .vp-hero__guarantee-sub { margin: 0; font-size: 12px; color: var(--vp-h-muted); }
+
+  /* ============ ACCORDIONS ============ */
+  .vp-hero__qa { width: 100%; border: 0.5px solid rgba(83,76,68,0.5); border-radius: 8px; overflow: hidden; }
+  .vp-hero__acc + .vp-hero__acc { border-top: 1px solid var(--vp-h-border-b); }
+  .vp-hero__acc summary { display: flex; align-items: center; gap: 16px; padding: 20px 15px; cursor: pointer; list-style: none; }
+  .vp-hero__acc summary::-webkit-details-marker { display: none; }
+  .vp-hero__acc summary p { margin: 0; flex: 1 0 0; font-size: 18px; font-weight: 700; letter-spacing: -0.18px; }
+  .vp-hero__acc-icon { position: relative; width: 26px; height: 26px; flex-shrink: 0; }
+  .vp-hero__acc-icon::before, .vp-hero__acc-icon::after { content: ''; position: absolute; background: var(--vp-h-text); top: 50%; left: 50%; }
+  .vp-hero__acc-icon::before { width: 14px; height: 2px; transform: translate(-50%,-50%); }
+  .vp-hero__acc-icon::after { width: 2px; height: 14px; transform: translate(-50%,-50%); transition: transform 0.2s ease; }
+  .vp-hero__acc[open] .vp-hero__acc-icon::after { transform: translate(-50%,-50%) scaleY(0); }
+  .vp-hero__acc-content { padding: 0 15px 20px; font-size: 14px; line-height: 1.5; color: var(--vp-h-muted); }
+  .vp-hero__acc-content p { margin: 0 0 10px; }
+
+  /* ============ UGC VIDEOS ============ */
+  .vp-hero__ugc { display: flex; gap: 10px; width: 100%; }
+  .vp-hero__ugc-item { flex: 1 0 0; min-width: 0; }
+  .vp-hero__ugc-media { position: relative; display: block; width: 100%; height: 247px; border-radius: 12px; border: 1px solid var(--vp-h-border-a); overflow: hidden; background: #2e2e2e; }
+  .vp-hero__ugc-trigger { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .vp-hero__ugc-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .vp-hero__ugc-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.35)); pointer-events: none; }
+  .vp-hero__ugc-play { position: absolute; bottom: 12px; left: 11px; width: 40px; height: 40px; z-index: 2; }
+  .vp-hero__ugc-media.is-playing::after, .vp-hero__ugc-media.is-playing .vp-hero__ugc-play, .vp-hero__ugc-media.is-playing .vp-hero__ugc-poster { display: none; }
+  .vp-hero__ugc-media video, .vp-hero__ugc-media iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============ MOBILE — Figma 390px ============ */
+  @media screen and (max-width: 749px) {
+    .vp-hero__wrap { flex-direction: column; padding: 24px 16px; gap: 15px; }
+    .vp-hero__gallery, .vp-hero__sale { width: 100%; max-width: 100%; padding: 0; }
+    .vp-hero__sale.is-sticky .vp-hero__info { position: static; }
+
+    .vp-hero__mobile-head { display: flex; flex-direction: column; gap: 12px; }
+    .vp-hero__sale .vp-hero__title-group { display: none; }
+
+    .vp-hero__gallery-inner { gap: 5px; }
+    .vp-hero__thumbs .swiper-slide { width: 55px; height: 55px; }
+
+    .vp-hero__title { font-size: 40px; line-height: 45px; }
+    .vp-hero__reviewbar { padding: 0 10px; gap: 8px; }
+    .vp-hero__sep span { font-size: 14px; }
+
+    /* Mobile bundles — Figma 320:183 */
+    .vp-hero__bundles { gap: 14px; }
+    .vp-hero__bundle { padding: 5px 10px; gap: 4px; min-height: 71px; border-color: #dbd8d2; }
+    .vp-hero__bundle-input:checked + .vp-hero__bundle { border: 1.5px solid var(--vp-h-text-dark); }
+    .vp-hero__bundle-jars { width: 70px; }
+    .vp-hero__bundle-name b { font-size: 16px; letter-spacing: -0.16px; color: var(--vp-h-text-dark); }
+    /* mobile: BOTH layouts → [name b + green badge] on one row, italic supply line below */
+    .vp-hero__bundle--stacked .vp-hero__bundle-text,
+    .vp-hero__bundle--inline .vp-hero__bundle-text { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .vp-hero__bundle--stacked .vp-hero__bundle-name,
+    .vp-hero__bundle--inline .vp-hero__bundle-name { flex-direction: row; align-items: center; gap: 6px; }
+    /* hide the inline supply copy; show the block one as the italic 2nd line */
+    .vp-hero__bundle-supply--inline { display: none !important; }
+    .vp-hero__bundle-supply--block { display: block !important; font-size: 10.5px; font-style: italic; color: var(--vp-h-muted); }
+    /* green inline save badge on mobile */
+    .vp-hero__off-badge { padding: 4px 5px; font-size: 9px; letter-spacing: 0.27px; background: var(--vp-h-accent); color: #fff; border-color: var(--vp-h-border-b); }
+    /* mobile price: strikethrough on top, price below */
+    .vp-hero__bundle-price { flex-direction: column; gap: 0; }
+    .vp-hero__bundle-price .was { order: -1; font-size: 11px; }
+    .vp-hero__bundle-price .now { font-size: 17px; letter-spacing: -0.34px; color: var(--vp-h-text-dark); }
+    .vp-hero__card-badge { right: 8px; left: auto; transform: none; padding: 3px 0; width: 98px; justify-content: center; display: flex; align-items: center; top: -10px; font-size: 10px; letter-spacing: -0.1px; }
+
+    .vp-hero__atc { height: 64px; padding: 14px 12px; gap: 5px; }
+    .vp-hero__vet-avatar { width: 55px; height: 55px; }
+    .vp-hero__ugc-media { height: 187px; }
+    .vp-hero__ugc-play { width: 32px; height: 32px; bottom: 8px; right: 12px; left: auto; }
+    .vp-hero__acc summary p { font-size: 16px; letter-spacing: -0.16px; }
+  }
+</style>
+
+<div
+  class="vp-hero"
+  id="vp-hero-{{ section.id }}"
+  data-vp-hero
+  style="--vp-h-max-width: {{ s.max_width | default: 1220 }}px;"
+>
+  {% render 'vp-reveal' %}
+
+  <div class="vp-hero__wrap">
+
+    {%- comment -%} ============ LEFT: SWIPER GALLERY ============ {%- endcomment -%}
+    <div class="vp-hero__gallery">
+      <div class="vp-hero__mobile-head">
+        {% render 'vp-product-hero-title', section: section, product: product %}
+      </div>
+
+      <div class="vp-hero__gallery-inner">
+        <div class="vp-hero__main swiper" id="vp-main-{{ section.id }}">
+          <div class="swiper-wrapper">
+            {%- if product.media.size > 0 -%}
+              {%- for media in product.media -%}
+                <div class="swiper-slide" data-media-id="{{ media.id }}">
+                  {%- case media.media_type -%}
+                    {%- when 'image' -%}
+                      <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="1200" height="1200">
+                    {%- when 'video', 'external_video' -%}
+                      {%- if media.media_type == 'video' -%}
+                        {{ media | video_tag: image_size: '1200x', controls: true, playsinline: true }}
+                      {%- else -%}
+                        {{ media | external_video_tag }}
+                      {%- endif -%}
+                    {%- else -%}
+                      <img src="{{ media.preview_image | image_url: width: 1200 }}" alt="{{ media.alt | escape }}" loading="lazy">
+                  {%- endcase -%}
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              <div class="swiper-slide">{{ 'product-1' | placeholder_svg_tag }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="vp-hero__thumbs swiper" id="vp-thumbs-{{ section.id }}">
+            <div class="swiper-wrapper">
+              {%- for media in product.media -%}
+                <div class="swiper-slide" data-media-id="{{ media.id }}">
+                  <img src="{{ media.preview_image | image_url: width: 234 }}" alt="{{ media.alt | escape }}" loading="lazy" width="117" height="117">
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} ============ RIGHT: SALE SIDE ============ {%- endcomment -%}
+    <div class="vp-hero__sale{% if s.enable_sticky %} is-sticky{% endif %}" data-vp-sale>
+      <div class="vp-hero__info">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+            {%- when 'title' -%}
+              <div class="vp-hero__title-group" {{ block.shopify_attributes }}>
+                {% render 'vp-product-hero-title', section: section, product: product %}
+              </div>
+
+            {%- when 'subtitle' -%}
+              <p class="vp-hero__subtitle vp-anim" data-vp-delay="2" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+            {%- when 'dosage' -%}
+              <div class="vp-hero__dosage vp-anim" data-vp-delay="3" {{ block.shopify_attributes }}>
+                <div class="vp-hero__dosage-left">
+                  {%- if block.settings.icon -%}<img src="{{ block.settings.icon | image_url: width: 100 }}" alt="" width="50" height="50" loading="lazy">{%- endif -%}
+                  <div class="vp-hero__dosage-text">
+                    <p class="vp-hero__dosage-title">{{ block.settings.title }}</p>
+                    <p class="vp-hero__dosage-sub">{{ block.settings.subtitle }}</p>
+                  </div>
+                </div>
+                <div class="vp-hero__dosage-right">
+                  <p class="vp-hero__dosage-title">{{ block.settings.amount }}</p>
+                  <p class="vp-hero__dosage-sub">{{ block.settings.frequency }}</p>
+                </div>
+              </div>
+
+            {%- when 'vet' -%}
+              <div class="vp-hero__vet vp-anim" data-vp-delay="4" {{ block.shopify_attributes }}>
+                {%- if block.settings.avatar -%}<img class="vp-hero__vet-avatar" src="{{ block.settings.avatar | image_url: width: 128 }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- endif -%}
+                <div>
+                  <p class="vp-hero__vet-quote">{{ block.settings.quote }}</p>
+                  <p class="vp-hero__vet-name">{{ block.settings.name }}</p>
+                </div>
+              </div>
+
+            {%- when 'bundles' -%}
+              <div class="vp-hero__sep vp-anim" data-vp-delay="5" {{ block.shopify_attributes }}><span>{{ block.settings.heading | default: 'Bundle & Save' }}</span></div>
+
+              <product-form class="product-form" data-section-id="{{ section.id }}">
+                <div class="product-form__error-message-wrapper" role="alert" hidden>
+                  <span class="product-form__error-message"></span>
+                </div>
+
+                {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" class="product-variant-id">
+
+                  {%- unless product.has_only_default_variant -%}
+                    <fieldset class="vp-hero__bundles" data-vp-bundles>
+                      {%- assign opt = product.options_with_values | first -%}
+                      <legend class="visually-hidden">{{ opt.name }}</legend>
+                      {%- for value in opt.values -%}
+                        {%- liquid
+                          assign v = value.variant
+                          assign input_id = section.id | append: '-bundle-' | append: forloop.index0
+                          assign idx = forloop.index
+
+                          # Native subscription selling plan for this variant.
+                          # Prefer a plan matching the block's "default frequency"
+                          # group name; otherwise fall back to the first allocation.
+                          assign sub_plan_id = ''
+                          assign target_group = block.settings.default_plan_group | downcase | strip
+                          for alloc in v.selling_plan_allocations
+                            if sub_plan_id == ''
+                              assign sub_plan_id = alloc.selling_plan.id
+                            endif
+                            if target_group != blank
+                              assign gname = alloc.selling_plan.name | downcase
+                              if gname contains target_group
+                                assign sub_plan_id = alloc.selling_plan.id
+                              endif
+                            endif
+                          endfor
+                        -%}
+                        <input
+                          class="vp-hero__bundle-input"
+                          type="radio"
+                          id="{{ input_id }}"
+                          name="vp-bundle-{{ section.id }}"
+                          value="{{ v.id }}"
+                          data-variant-id="{{ v.id }}"
+                          data-featured-media="{{ v.featured_media.id }}"
+                          data-selling-plan="{{ sub_plan_id }}"
+                          {% if value.selected %}checked{% endif %}
+                          {% unless value.available %}disabled{% endunless %}
+                        >
+                        {%- liquid
+                          assign has_jars = false
+                          if block.settings.show_jars and v.metafields.custom.size_featured_image
+                            assign has_jars = true
+                          endif
+                          if has_jars
+                            assign layout_class = 'vp-hero__bundle--stacked'
+                          else
+                            assign layout_class = 'vp-hero__bundle--inline'
+                          endif
+                        -%}
+                        <label class="vp-hero__bundle {{ layout_class }}" for="{{ input_id }}">
+                          <span class="vp-hero__radio"></span>
+
+                          {%- if has_jars -%}
+                            {%- assign jar_count = idx -%}
+                            {%- if jar_count > 3 -%}{%- assign jar_count = 3 -%}{%- endif -%}
+                            <span class="vp-hero__bundle-jars vp-hero__bundle-jars--{{ jar_count }}">
+                              {%- for j in (1..jar_count) -%}
+                                <img src="{{ v.metafields.custom.size_featured_image | image_url: width: 120 }}" alt="" loading="lazy">
+                              {%- endfor -%}
+                            </span>
+                          {%- endif -%}
+
+                          <span class="vp-hero__bundle-body">
+                            <span class="vp-hero__bundle-text">
+                              <span class="vp-hero__bundle-name">
+                                <b>{{ value }}</b>
+                                {%- comment -%} supply shown inline only in the desktop "stacked" layout {%- endcomment -%}
+                                {%- if has_jars and v.metafields.custom.size_jar_chews_count != blank -%}<span class="vp-hero__bundle-supply vp-hero__bundle-supply--inline">{{ v.metafields.custom.size_jar_chews_count }}</span>{%- endif -%}
+                                {%- if v.metafields.custom.size_jar_discount_value != blank -%}
+                                  <span class="vp-hero__off-badge" subs-purchase-pricings>SAVE {{ v.metafields.custom.size_jar_discount_value }}%</span>
+                                {%- endif -%}
+                                {%- if v.metafields.custom.size_jar_dicount_value_one_time_purchase != blank -%}
+                                  <span class="vp-hero__off-badge" single-purchase-pricings>SAVE {{ v.metafields.custom.size_jar_dicount_value_one_time_purchase }}%</span>
+                                {%- endif -%}
+                              </span>
+                              {%- comment -%} supply as its own line — used by inline (1 Jar) desktop + all mobile {%- endcomment -%}
+                              {%- if v.metafields.custom.size_jar_chews_count != blank -%}<span class="vp-hero__bundle-supply vp-hero__bundle-supply--block">{{ v.metafields.custom.size_jar_chews_count }}</span>{%- endif -%}
+                            </span>
+
+                            <span class="vp-hero__bundle-price">
+                              <span class="now" subs-purchase-pricings>{{ v.metafields.custom.single_jar_price.value | money }}{{ block.settings.price_suffix }}</span>
+                              <span class="now" single-purchase-pricings>{{ v.metafields.custom.single_jar_price_one_time_purchase.value | money }}{{ block.settings.price_suffix }}</span>
+                              <span class="was">{{ product.variants[0].compare_at_price | money }}{{ block.settings.price_suffix }}</span>
+                            </span>
+                          </span>
+
+                          {%- if idx == block.settings.popular_index -%}
+                            <span class="vp-hero__card-badge vp-hero__card-badge--popular">{{ block.settings.popular_text | default: 'MOST POPULAR' }}</span>
+                          {%- elsif idx == block.settings.value_index -%}
+                            <span class="vp-hero__card-badge vp-hero__card-badge--value">{{ block.settings.value_text | default: 'BEST VALUE' }}</span>
+                          {%- endif -%}
+                        </label>
+                      {%- endfor -%}
+                    </fieldset>
+                  {%- endunless -%}
+
+                  {%- comment -%} SUBSCRIBE CARD {%- endcomment -%}
+                  <label class="vp-hero__subscribe" for="vp-auto_refill-{{ section.id }}">
+                    <input type="checkbox" class="vp-hero__subscribe-check" id="vp-auto_refill-{{ section.id }}" name="vp-auto-refill" checked>
+                    <span class="vp-hero__subscribe-text">
+                      <span class="vp-hero__subscribe-title">{{ block.settings.subscribe_title | default: 'Subscribe for an extra 20% off' }}</span>
+                      <span class="vp-hero__subscribe-meta">
+                        <span>
+                          {%- if block.settings.subscribe_icon_1 -%}<img src="{{ block.settings.subscribe_icon_1 | image_url: width: 36 }}" alt="">{%- endif -%}
+                          <p>Shipped every <span class="vp-hero__freq-label">{{ block.settings.subscribe_frequency_label | default: '30 days' }}</span></p>
+                        </span>
+                        <span>
+                          {%- if block.settings.subscribe_icon_2 -%}<img src="{{ block.settings.subscribe_icon_2 | image_url: width: 36 }}" alt="">{%- endif -%}
+                          <p>Cancel/adjust anytime</p>
+                        </span>
+                      </span>
+                    </span>
+                  </label>
+
+                  {%- comment -%}
+                    Native Shopify selling plan. JS sets this to the selected
+                    variant's data-selling-plan when subscribed, or removes it
+                    (disabled) for one-time. Shopify attaches the subscription
+                    from this input on /cart/add — no app widget required.
+                  {%- endcomment -%}
+                  <input type="hidden" name="selling_plan" id="vp-selling-plan-{{ section.id }}" value="" data-vp-selling-plan>
+
+                  {%- comment -%}
+                    Optional frequency picker — only rendered if the product has
+                    more than one subscription plan, so the customer can choose.
+                  {%- endcomment -%}
+                  {%- assign first_variant = product.selected_or_first_available_variant -%}
+                  {%- if first_variant.selling_plan_allocations.size > 1 -%}
+                    <div class="vp-hero__frequency" data-vp-frequency>
+                      <label class="vp-hero__frequency-label" for="vp-frequency-{{ section.id }}">{{ block.settings.frequency_label | default: 'Delivery frequency' }}</label>
+                      <select id="vp-frequency-{{ section.id }}" class="vp-hero__frequency-select" data-vp-frequency-select>
+                        {%- for alloc in first_variant.selling_plan_allocations -%}
+                          <option value="{{ alloc.selling_plan.id }}">{{ alloc.selling_plan.name }}</option>
+                        {%- endfor -%}
+                      </select>
+                    </div>
+                  {%- endif -%}
+
+                  {%- comment -%} BUY BUTTON {%- endcomment -%}
+                  <div class="vp-hero__buy product-form__buttons">
+                    <button
+                      type="submit"
+                      name="add"
+                      class="vp-hero__atc product-form__submit"
+                      id="ProductSubmitButton-{{ section.id }}"
+                      {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                    >
+                      <span class="vp-hero__atc-label">
+                        <span class="atc-text">{{ block.settings.atc_text | default: 'ADD TO CART' }}</span>
+                        {%- for v in product.variants -%}
+                          <span class="atc-prices" data-variant-prices="{{ v.id }}" {% unless v.id == product.selected_or_first_available_variant.id %}style="display:none"{% endunless %}>
+                            <span class="atc-now" subs-purchase-pricings>{{ v.metafields.custom.single_jar_price.value | money }}</span>
+                            <span class="atc-now" single-purchase-pricings>{{ v.metafields.custom.single_jar_price_one_time_purchase.value | money }}</span>
+                            <span class="atc-was">{{ v.compare_at_price | money }}</span>
+                          </span>
+                        {%- endfor -%}
+                      </span>
+                      {%- render 'loading-spinner' -%}
+                    </button>
+                  </div>
+                {%- endform -%}
+              </product-form>
+
+            {%- when 'guarantee' -%}
+              <div class="vp-hero__guarantee vp-anim" data-vp-delay="7" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon -%}<img src="{{ block.settings.icon | image_url: width: 72 }}" alt="" width="36" height="37" loading="lazy">{%- endif -%}
+                <div>
+                  <p class="vp-hero__guarantee-title">{{ block.settings.title }}</p>
+                  <p class="vp-hero__guarantee-sub">{{ block.settings.subtitle }}</p>
+                </div>
+              </div>
+
+            {%- when 'accordion' -%}
+              <details class="vp-hero__acc vp-hero__acc--standalone" {{ block.shopify_attributes }}>
+                <summary>
+                  <p>{{ block.settings.title }}</p>
+                  <span class="vp-hero__acc-icon"></span>
+                </summary>
+                <div class="vp-hero__acc-content rte">{{ block.settings.content }}</div>
+              </details>
+
+            {%- when 'videos' -%}
+              {% render 'vp-product-hero-videos', section: section %}
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer="defer">
+  (function () {
+    var SECTION_ID = '{{ section.id }}';
+    var root = document.getElementById('vp-hero-' + SECTION_ID);
+    if (!root) return;
+    var sale = root.querySelector('[data-vp-sale]');
+
+    /* ---------- Wrap consecutive accordions into one bordered box ---------- */
+    var accs = root.querySelectorAll('.vp-hero__acc--standalone');
+    if (accs.length) {
+      var box = document.createElement('div');
+      box.className = 'vp-hero__qa';
+      accs[0].parentNode.insertBefore(box, accs[0]);
+      accs.forEach(function (a) { box.appendChild(a); });
+    }
+
+    /* ---------- SWIPER GALLERY ---------- */
+    function buildGallery() {
+      if (typeof window.Swiper === 'undefined') { setTimeout(buildGallery, 100); return; }
+      var thumbsEl = document.getElementById('vp-thumbs-' + SECTION_ID);
+      var thumbs = null;
+      if (thumbsEl) {
+        thumbs = new Swiper(thumbsEl, {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+          watchSlidesProgress: true,
+          breakpoints: { 0: { spaceBetween: 5 }, 750: { spaceBetween: 10 } }
+        });
+      }
+      window['vpMainSwiper_' + SECTION_ID] = new Swiper('#vp-main-' + SECTION_ID, {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        thumbs: thumbs ? { swiper: thumbs } : undefined
+      });
+    }
+    buildGallery();
+
+    /* ---------- VARIANT SELECTION (self-contained, no section re-render) ---------- */
+    var form = document.getElementById('{{ product_form_id }}');
+    var variantIdInput = root.querySelector('.product-variant-id');
+    var bundleInputs = root.querySelectorAll('.vp-hero__bundle-input');
+
+    function showVariantPrice(variantId) {
+      root.querySelectorAll('[data-variant-prices]').forEach(function (g) {
+        g.style.display = (g.getAttribute('data-variant-prices') === String(variantId)) ? '' : 'none';
+      });
+    }
+    function slideToMedia(mediaId) {
+      if (!mediaId) return;
+      var main = window['vpMainSwiper_' + SECTION_ID];
+      if (!main) return;
+      var slides = main.slides;
+      for (var i = 0; i < slides.length; i++) {
+        if (slides[i].getAttribute('data-media-id') === String(mediaId)) { main.slideTo(i); break; }
+      }
+    }
+    /* ---------- SUBSCRIPTION (native selling plans) ---------- */
+    var autoRefill = root.querySelector('#vp-auto_refill-' + SECTION_ID);
+    var sellingPlanInput = root.querySelector('[data-vp-selling-plan]');
+    var freqSelect = root.querySelector('[data-vp-frequency-select]');
+
+    // Is the customer currently in subscribe mode?
+    function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
+
+    // The selling-plan id to use for the currently-selected variant.
+    // If a frequency <select> exists, prefer it; else use the variant's own
+    // data-selling-plan; honour the chosen frequency across variants by group.
+    function planForCurrentVariant() {
+      var checkedInput = root.querySelector('.vp-hero__bundle-input:checked');
+      var variantPlan = checkedInput ? (checkedInput.getAttribute('data-selling-plan') || '') : '';
+      if (freqSelect && freqSelect.value) return freqSelect.value;
+      return variantPlan;
+    }
+
+    function applyPurchaseMode() {
+      if (isSubscribed()) {
+        var plan = planForCurrentVariant();
+        if (sellingPlanInput) {
+          sellingPlanInput.value = plan;
+          sellingPlanInput.disabled = !plan;            // no plan => behaves as one-time
+        }
+        if (sale) sale.classList.remove('single_purchase_option');
+      } else {
+        if (sellingPlanInput) { sellingPlanInput.value = ''; sellingPlanInput.disabled = true; }
+        if (sale) sale.classList.add('single_purchase_option');
+      }
+    }
+
+    function selectVariant(input) {
+      var id = input.getAttribute('data-variant-id');
+      if (variantIdInput) variantIdInput.value = id;
+      showVariantPrice(id);
+      slideToMedia(input.getAttribute('data-featured-media'));
+      applyPurchaseMode();   // refresh the selling plan for the new variant
+    }
+    bundleInputs.forEach(function (input) {
+      input.addEventListener('change', function () { if (input.checked) selectVariant(input); });
+    });
+
+    if (autoRefill) autoRefill.addEventListener('change', applyPurchaseMode);
+    if (freqSelect) freqSelect.addEventListener('change', applyPurchaseMode);
+
+    // initialise from the checked bundle (sets variant id, price, plan)
+    var checked = root.querySelector('.vp-hero__bundle-input:checked');
+    if (checked) { selectVariant(checked); } else { applyPurchaseMode(); }
+
+    /* ---------- UGC video click-to-play ---------- */
+    root.querySelectorAll('.vp-hero__ugc-trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var media = btn.closest('.vp-hero__ugc-media');
+        var tpl = media && media.querySelector('template');
+        if (!media || !tpl || media.classList.contains('is-playing')) return;
+        media.appendChild(tpl.content.cloneNode(true));
+        media.classList.add('is-playing');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "VP - Product Hero",
+  "tag": "section",
+  "class": "section vp-product-hero-section",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "enable_sticky", "label": "Sticky sale side (desktop)", "default": true },
+    { "type": "range", "id": "max_width", "min": 1000, "max": 1600, "step": 10, "unit": "px", "label": "Container max width", "default": 1220 },
+    { "type": "header", "content": "Review banner" },
+    { "type": "text", "id": "review_text", "label": "Review text", "default": "(40k+ Happy customers)" },
+    { "type": "text", "id": "review_link", "label": "Review link (e.g. #testimonials-anchor)", "default": "#testimonials-anchor" },
+    { "type": "header", "content": "Title" },
+    { "type": "textarea", "id": "title", "label": "Title (Amethysta). Blank = product title", "default": "Daily Multivitamin Chews for Dogs" }
+  ],
+  "blocks": [
+    { "type": "title", "name": "Title + reviews", "limit": 1 },
+    {
+      "type": "subtitle", "name": "Subtitle", "limit": 1,
+      "settings": [ { "type": "richtext", "id": "text", "label": "Subtitle", "default": "<p>60 Multivitamin soft chews for <strong>key nutritional support</strong> & <strong>long-term health</strong> in one daily treat.</p>" } ]
+    },
+    {
+      "type": "dosage", "name": "Dosage strip", "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Dosage per dog:" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "for all weights and breeds" },
+        { "type": "text", "id": "amount", "label": "Amount", "default": "2 chews daily" },
+        { "type": "text", "id": "frequency", "label": "Frequency", "default": "(1 jar/month)" }
+      ]
+    },
+    {
+      "type": "vet", "name": "Vet testimonial", "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "\"A high-quality multivitamin like this should be part of every dog's daily routine.\"" },
+        { "type": "text", "id": "name", "label": "Name", "default": "- Dr. M.A. Raza, Veterinarian" }
+      ]
+    },
+    {
+      "type": "bundles", "name": "Bundles + buy", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Separator heading", "default": "Bundle & Save" },
+        { "type": "checkbox", "id": "show_jars", "label": "Show jar thumbnails", "default": true },
+        { "type": "text", "id": "price_suffix", "label": "Per-jar price suffix", "default": "/jar" },
+        { "type": "number", "id": "popular_index", "label": "\"Most popular\" card position (1-based)", "default": 2 },
+        { "type": "text", "id": "popular_text", "label": "Most-popular badge", "default": "MOST POPULAR" },
+        { "type": "number", "id": "value_index", "label": "\"Best value\" card position (1-based)", "default": 3 },
+        { "type": "text", "id": "value_text", "label": "Best-value badge", "default": "BEST VALUE" },
+        { "type": "header", "content": "Subscribe card" },
+        { "type": "image_picker", "id": "subscribe_icon_1", "label": "Subscribe icon 1 (shipping)" },
+        { "type": "image_picker", "id": "subscribe_icon_2", "label": "Subscribe icon 2 (cancel)" },
+        { "type": "text", "id": "subscribe_title", "label": "Subscribe title", "default": "Subscribe for an extra 20% off" },
+        { "type": "text", "id": "subscribe_frequency_label", "label": "Subscribe meta — frequency text", "default": "30 days" },
+        { "type": "header", "content": "Subscription (native selling plans)", "info": "Subscriptions use Shopify's native selling plans (created by Loop / Appstle / etc.). No plan IDs to enter — the section reads each variant's own plans." },
+        { "type": "text", "id": "default_plan_group", "label": "Preferred plan name match", "info": "When a variant has several plans, the one whose name contains this text is used as the default (e.g. \"30 day\", \"month\"). Leave blank to use the first plan.", "default": "" },
+        { "type": "text", "id": "frequency_label", "label": "Frequency picker label", "default": "Delivery frequency" },
+        { "type": "text", "id": "atc_text", "label": "Add-to-cart text", "default": "ADD TO CART" }
+      ]
+    },
+    {
+      "type": "guarantee", "name": "Guarantee card", "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "title", "label": "Title", "default": "30-day money back guarantee" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "less than 1% of customers claim it" }
+      ]
+    },
+    {
+      "type": "accordion", "name": "Accordion row",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Feeding instructions" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Serve the chews each morning with food or as a stand-alone treat.</p>" }
+      ]
+    },
+    {
+      "type": "videos", "name": "UGC video grid", "limit": 1,
+      "settings": [ { "type": "paragraph", "content": "Add individual videos with the 'UGC video' block below." } ]
+    },
+    {
+      "type": "ugc_video", "name": "UGC video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Shopify video" },
+        { "type": "url", "id": "video_url", "label": "Or external MP4 URL" },
+        { "type": "image_picker", "id": "poster", "label": "Poster image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VP - Product Hero",
+      "blocks": [
+        { "type": "title" },
+        { "type": "subtitle" },
+        { "type": "dosage" },
+        { "type": "vet" },
+        { "type": "bundles" },
+        { "type": "guarantee" },
+        { "type": "accordion", "settings": { "title": "Feeding instructions" } },
+        { "type": "accordion", "settings": { "title": "Ingredient list" } },
+        { "type": "accordion", "settings": { "title": "Shipping Information" } },
+        { "type": "accordion", "settings": { "title": "Frequently asked questions" } },
+        { "type": "videos" },
+        { "type": "ugc_video" },
+        { "type": "ugc_video" },
+        { "type": "ugc_video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

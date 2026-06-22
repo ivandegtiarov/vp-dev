@@ -1,0 +1,45 @@
+{% comment %}
+  vp-product-hero-videos
+  UGC video grid for the VP Product Hero. Click-to-play handled by the section's
+  own JS (.vp-hero__ugc-trigger + <template>). Prefers a Shopify-hosted video
+  (block.settings.video) rendered with the native {{ video | video_tag }};
+  falls back to an external MP4 URL.
+
+  Accepts: section
+{% endcomment %}
+
+{%- assign ugc_blocks = section.blocks | where: 'type', 'ugc_video' -%}
+{%- if ugc_blocks.size > 0 -%}
+  <div class="vp-hero__ugc vp-anim" data-vp-delay="8">
+    {%- for block in ugc_blocks -%}
+      {%- assign has_video = false -%}
+      {%- if block.settings.video != blank or block.settings.video_url != blank -%}{%- assign has_video = true -%}{%- endif -%}
+      {%- if has_video -%}
+        <div class="vp-hero__ugc-item" {{ block.shopify_attributes }}>
+          <div class="vp-hero__ugc-media">
+            <button type="button" class="vp-hero__ugc-trigger" aria-label="Play video">
+              {%- if block.settings.poster != blank -%}
+                <img class="vp-hero__ugc-poster" src="{{ block.settings.poster | image_url: width: 400 }}" alt="" loading="lazy" width="400" height="711">
+              {%- elsif block.settings.video.preview_image -%}
+                <img class="vp-hero__ugc-poster" src="{{ block.settings.video.preview_image | image_url: width: 400 }}" alt="" loading="lazy" width="400" height="711">
+              {%- endif -%}
+              <span class="vp-hero__ugc-play">
+                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="30" cy="30" r="30" fill="rgba(255,255,255,0.92)"></circle>
+                  <path d="M24 20l16 10-16 10V20z" fill="#1d1d1d"></path>
+                </svg>
+              </span>
+            </button>
+            <template>
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: image_size: '400x', autoplay: true, controls: true, playsinline: true }}
+              {%- else -%}
+                <video src="{{ block.settings.video_url }}" controls autoplay playsinline></video>
+              {%- endif -%}
+            </template>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

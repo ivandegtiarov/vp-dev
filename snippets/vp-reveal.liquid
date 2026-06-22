@@ -1,0 +1,122 @@
+{%- comment -%}
+  vp-reveal
+  Shared scroll-triggered "flashy" reveal animation for VP sections.
+  Include once per section: {% render 'vp-reveal' %}
+
+  Mark elements to animate with class "vp-anim".
+  Optional stagger: add data-vp-delay="1" (2,3...) to order the reveal,
+  or wrap children in a [data-vp-stagger] container to auto-stagger them.
+{%- endcomment -%}
+
+{%- unless vp_reveal_rendered -%}
+  {%- assign vp_reveal_rendered = true -%}
+  <style>
+    /* Initial hidden state */
+    .vp-anim {
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      filter: blur(6px);
+      will-change: opacity, transform, filter;
+      transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Revealed state */
+    .vp-anim.vp-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    /* Stagger via data-vp-delay (1..12) */
+    .vp-anim[data-vp-delay="1"]  { transition-delay: 0.06s; }
+    .vp-anim[data-vp-delay="2"]  { transition-delay: 0.12s; }
+    .vp-anim[data-vp-delay="3"]  { transition-delay: 0.18s; }
+    .vp-anim[data-vp-delay="4"]  { transition-delay: 0.24s; }
+    .vp-anim[data-vp-delay="5"]  { transition-delay: 0.30s; }
+    .vp-anim[data-vp-delay="6"]  { transition-delay: 0.36s; }
+    .vp-anim[data-vp-delay="7"]  { transition-delay: 0.42s; }
+    .vp-anim[data-vp-delay="8"]  { transition-delay: 0.48s; }
+    .vp-anim[data-vp-delay="9"]  { transition-delay: 0.54s; }
+    .vp-anim[data-vp-delay="10"] { transition-delay: 0.60s; }
+    .vp-anim[data-vp-delay="11"] { transition-delay: 0.66s; }
+    .vp-anim[data-vp-delay="12"] { transition-delay: 0.72s; }
+
+    /* A subtle pop emphasis for badges/pills when they land */
+    .vp-anim.vp-pop.vp-in {
+      animation: vp-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      animation-delay: inherit;
+    }
+
+    @keyframes vp-pop {
+      0%   { transform: translateY(0) scale(0.8); }
+      60%  { transform: translateY(0) scale(1.06); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vp-anim,
+      .vp-anim.vp-in {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      function reveal(el) { el.classList.add('vp-in'); }
+
+      function autoStagger(scope) {
+        // Auto-number children inside [data-vp-stagger] that have .vp-anim
+        scope.querySelectorAll('[data-vp-stagger]').forEach(function (group) {
+          var i = 0;
+          group.querySelectorAll('.vp-anim').forEach(function (el) {
+            if (!el.hasAttribute('data-vp-delay')) {
+              i += 1;
+              el.setAttribute('data-vp-delay', Math.min(i, 12));
+            }
+          });
+        });
+      }
+
+      function init(scope) {
+        scope = scope || document;
+        autoStagger(scope);
+
+        var items = scope.querySelectorAll('.vp-anim');
+        if (!items.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+          items.forEach(reveal);
+          return;
+        }
+
+        var io = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              reveal(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+        items.forEach(function (el) { io.observe(el); });
+      }
+
+      if (document.readyState !== 'loading') {
+        init();
+      } else {
+        document.addEventListener('DOMContentLoaded', function () { init(); });
+      }
+
+      // Theme editor: re-init newly loaded sections
+      document.addEventListener('shopify:section:load', function (e) { init(e.target); });
+    })();
+  </script>
+{%- endunless -%}

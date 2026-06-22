@@ -1,0 +1,26 @@
+{% comment %}
+  vp-product-hero-title
+  Review banner + title for the VP Product Hero. Rendered twice (mobile head +
+  sale side) so the title can sit above the gallery on mobile while staying in
+  the sale column on desktop, with no duplicated markup logic.
+
+  Accepts: section, product
+{% endcomment %}
+{%- assign s = section.settings -%}
+
+{%- if s.review_text != blank -%}
+  <a href="{{ s.review_link | default: '#' }}" class="vp-hero__reviewbar vp-anim vp-pop" data-vp-delay="1">
+    <span class="vp-hero__stars">
+      <span class="vp-hero__star">★</span>
+      <span class="vp-hero__star">★</span>
+      <span class="vp-hero__star">★</span>
+      <span class="vp-hero__star">★</span>
+      <span class="vp-hero__star">★</span>
+    </span>
+    <span class="vp-hero__reviewbar-text">{{ s.review_text }}</span>
+  </a>
+{%- endif -%}
+
+<h1 class="vp-hero__title vp-anim" data-vp-delay="1">
+  {{ s.title | default: product.title | escape | newline_to_br }}
+</h1>

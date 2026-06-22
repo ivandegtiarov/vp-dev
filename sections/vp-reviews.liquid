@@ -1,0 +1,574 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap');
+
+  /* ============ DESKTOP — Figma: frame 1217px, padding 100/100/54, gap 60 ============ */
+  .vp-reviews {
+    width: 100%;
+    background-color: #f6f6f6;
+    padding: 100px 100px 54px 100px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .vp-reviews-container {
+    width: 100%;
+    max-width: var(--vp-reviews-max-width, 1320px);
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  /* HEADER */
+  .vp-reviews-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .vp-reviews-banner {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 22px;
+    margin-bottom: 3px;
+  }
+
+  .vp-reviews-banner img {
+    height: 27px;
+    width: auto;
+    display: block;
+  }
+
+  .vp-reviews-banner span {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.5px;
+    color: #7c7c7c;
+    text-transform: uppercase;
+  }
+
+  .vp-reviews-heading {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.6px;
+    color: #000000;
+  }
+
+  .vp-reviews-heading .source {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 600;
+    font-size: 70px;
+    letter-spacing: -1px;
+    color: #5a815b;
+  }
+
+  .vp-reviews-desc {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.5px;
+    color: #000000;
+    width: 100%;
+  }
+
+  /* CARDS (Swiper) */
+  .vp-reviews-cards-group {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    width: 100%;
+  }
+
+  .vp-reviews-slider {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+  }
+
+  .vp-reviews-slider .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .vp-reviews-slider .swiper-slide {
+    width: 350px;
+    height: auto;
+    display: flex;
+  }
+
+  .vp-reviews-card {
+    width: 100%;
+    background-color: #ffffff;
+    border: 0.5px solid #d4d4d4;
+    border-radius: 5.863px;
+    box-shadow: 0px 6px 8.9px rgba(0, 0, 0, 0.11);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .vp-reviews-card-image {
+    width: 100%;
+    height: 300px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: #ececec;
+  }
+
+  .vp-reviews-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .vp-reviews-card-text {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 25px;
+    box-sizing: border-box;
+  }
+
+  .vp-reviews-stars {
+    display: flex;
+    gap: 0.631px;
+    width: 87.167px;
+  }
+
+  .vp-reviews-stars svg {
+    width: 16.93px;
+    height: 16.93px;
+    display: block;
+  }
+
+  .vp-reviews-quote {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #534c44;
+  }
+
+  .vp-reviews-name {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+  }
+
+  /* Progress bar */
+  .vp-reviews-progress {
+    width: 100%;
+    height: 3px;
+    background-color: #d9d9d9;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .vp-reviews-progress-bar {
+    height: 100%;
+    background-color: #5a815b;
+    width: 10%;
+    border-radius: 2px;
+    transition: width 0.15s ease-out;
+    will-change: width;
+  }
+
+  .vp-reviews-progress-bar:empty,
+  .vp-keep:empty {
+    display: block !important;
+  }
+
+  /* Right-edge fade */
+  .vp-reviews-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 120px;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(270deg, #f6f6f6 0%, rgba(246, 246, 246, 0.84) 17.13%, rgba(246, 246, 246, 0) 79.18%);
+  }
+
+  /* Left-edge fade — only when enabled via setting */
+  .vp-reviews-slider.has-left-fade::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 120px;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(90deg, #f6f6f6 0%, rgba(246, 246, 246, 0.84) 17.13%, rgba(246, 246, 246, 0) 79.18%);
+  }
+
+  /* ============ MOBILE — Figma: frame 390px, padding 40/24/44, gap 26 ============ */
+  @media (max-width: 768px) {
+    .vp-reviews {
+      padding: 40px 24px 44px 24px;
+    }
+
+    .vp-reviews-container {
+      gap: 26px;
+    }
+
+    .vp-reviews-header {
+      gap: 12px;
+    }
+
+    .vp-reviews-banner {
+      margin-bottom: 0;
+    }
+
+    .vp-reviews-banner img {
+      height: 20px;
+    }
+
+    .vp-reviews-banner span {
+      font-size: 12px;
+    }
+
+    .vp-reviews-heading {
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.4px;
+    }
+
+    .vp-reviews-heading .source {
+      font-size: 38px;
+    }
+
+    .vp-reviews-desc {
+      font-size: 15px;
+      line-height: 1.4;
+      letter-spacing: -0.2px;
+    }
+
+    .vp-reviews-cards-group {
+      gap: 26px;
+    }
+
+    /* Bleed cards to the right edge */
+    .vp-reviews-slider {
+      width: calc(100% + 24px);
+      margin-right: -24px;
+    }
+
+    .vp-reviews-slider::after {
+      width: 90px;
+      background: linear-gradient(270deg, #f6f6f6 0%, #f6f6f6 8.89%, rgba(246, 246, 246, 0) 42.04%);
+    }
+
+    /* No left fade on mobile — first card sits flush to the left edge */
+    .vp-reviews-slider.has-left-fade::before {
+      display: none;
+    }
+
+    .vp-reviews-slider .swiper-slide {
+      width: 229px;
+    }
+
+    .vp-reviews-card {
+      border-radius: 8px;
+    }
+
+    .vp-reviews-card-image {
+      height: 183px;
+    }
+
+    .vp-reviews-card-text {
+      gap: 10.921px;
+      padding: 14px 18px;
+    }
+
+    .vp-reviews-stars {
+      gap: 0.552px;
+      width: 76.213px;
+    }
+
+    .vp-reviews-stars svg {
+      width: 14.8px;
+      height: 14.8px;
+    }
+
+    .vp-reviews-quote {
+      font-size: 14px;
+    }
+
+    .vp-reviews-name {
+      font-size: 10.921px;
+    }
+  }
+</style>
+
+{%- liquid
+  assign star_color = '#00b67a'
+-%}
+
+<div class="vp-reviews" style="--vp-reviews-max-width: {{ section.settings.max_width }}px;">
+  {% render 'vp-reveal' %}
+
+  <div class="vp-reviews-container">
+    <!-- HEADER -->
+    <div class="vp-reviews-header">
+      <div class="vp-reviews-banner vp-anim" data-vp-delay="1">
+        {% if section.settings.banner_image %}
+          <img src="{{ section.settings.banner_image | image_url: width: 240 }}" alt="{{ section.settings.banner_text }}" loading="lazy">
+        {% endif %}
+        {% if section.settings.banner_text != blank %}
+          <span>{{ section.settings.banner_text }}</span>
+        {% endif %}
+      </div>
+
+      <h2 class="vp-reviews-heading vp-anim" data-vp-delay="2">
+        {%- assign heading_html = section.settings.heading
+          | replace: '[', '<span class="source">'
+          | replace: ']', '</span>' -%}
+        {{ heading_html }}
+      </h2>
+
+      {% if section.settings.description != blank %}
+        <p class="vp-reviews-desc vp-anim" data-vp-delay="3">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+
+    <!-- CARDS + PROGRESS -->
+    <div class="vp-reviews-cards-group vp-anim" data-vp-delay="4">
+      <div class="vp-reviews-slider swiper{% if section.settings.show_left_fade %} has-left-fade{% endif %}" id="vp-reviews-slider-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="vp-reviews-card swiper-slide" {{ block.shopify_attributes }}>
+              <div class="vp-reviews-card-image">
+                {% if block.settings.image %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 700 }}"
+                    alt="{{ block.settings.name }}"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                  >
+                {% endif %}
+              </div>
+              <div class="vp-reviews-card-text">
+                <div class="vp-reviews-stars">
+                  {% assign rating = block.settings.rating | default: 5 %}
+                  {% for i in (1..rating) %}
+                    <svg viewBox="0 0 24 24" fill="{{ star_color }}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="2" fill="{{ star_color }}"/><path d="M12 4.5l2.06 4.6 5.02.45-3.79 3.34 1.13 4.91L12 15.7l-4.42 2.6 1.13-4.91-3.79-3.34 5.02-.45L12 4.5z" fill="#ffffff"/></svg>
+                  {% endfor %}
+                </div>
+                <p class="vp-reviews-quote">{{ block.settings.quote }}</p>
+                <p class="vp-reviews-name">- {{ block.settings.name }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="vp-reviews-progress">
+        <div class="vp-reviews-progress-bar vp-keep" id="vp-reviews-bar-{{ section.id }}"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  (function () {
+    var SECTION_ID = '{{ section.id }}';
+
+    function build() {
+      var el = document.getElementById('vp-reviews-slider-' + SECTION_ID);
+      if (!el || el.dataset.swiperReady === '1') return;
+      el.dataset.swiperReady = '1';
+
+      var bar = document.getElementById('vp-reviews-bar-' + SECTION_ID);
+
+      function setBar(sw) {
+        if (!bar || !sw) return;
+        var prog = typeof sw.progress === 'number' ? sw.progress : 0;
+        prog = Math.min(Math.max(prog, 0), 1);
+        bar.style.width = (10 + prog * 90) + '%';
+      }
+
+      var swiper = new Swiper(el, {
+        slidesPerView: 'auto',
+        spaceBetween: 28,
+        grabCursor: true,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        breakpoints: {
+          769: { spaceBetween: 28 },
+          0:   { spaceBetween: 15 }
+        },
+        on: {
+          init: setBar,
+          progress: setBar,
+          setTranslate: setBar,
+          touchMove: setBar,
+          resize: setBar
+        }
+      });
+
+      setBar(swiper);
+      window.requestAnimationFrame(function () { setBar(swiper); });
+    }
+
+    function waitForSwiper(attempts) {
+      if (typeof window.Swiper !== 'undefined') { build(); return; }
+      if (attempts <= 0) return;
+      setTimeout(function () { waitForSwiper(attempts - 1); }, 100);
+    }
+
+    function start() { waitForSwiper(50); }
+
+    if (document.readyState !== 'loading') {
+      start();
+    } else {
+      document.addEventListener('DOMContentLoaded', start);
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      var el = e.target && e.target.querySelector
+        ? e.target.querySelector('#vp-reviews-slider-' + SECTION_ID)
+        : null;
+      if (el) el.dataset.swiperReady = '';
+      start();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "VP - Reviews",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Logo (e.g. Trustpilot)"
+    },
+    {
+      "type": "text",
+      "id": "banner_text",
+      "label": "Banner Text",
+      "default": "VERIFIED REVIEWS"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Wrap text in [square brackets] to highlight it (green Crimson Pro font). Example: Trusted by [40.000+] caring dog owners..",
+      "default": "Trusted by [40.000+] caring dog owners.."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Don’t just take our word for it.. Read how others are changing their dog’s life with VitalPaws."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_left_fade",
+      "label": "Show left-side fade",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1320
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"My dogs have their meal and sit at my feet waiting for their treat. They just love them.\""
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Arthur"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VP - Reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "\"My dogs have their meal and sit at my feet waiting for their treat. They just love them.\"",
+            "name": "Arthur"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "\"Saw this brand on instagram, didn't expect much, but it has worked wonders for my kelpie's gut, loose stools and grass eating is way less now! Happy customer 😊\"",
+            "name": "Charli"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is healthy now. Plus, I've noticed fewer digestive issues. LOVE the bag! ❤️\"",
+            "name": "Jennifer"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

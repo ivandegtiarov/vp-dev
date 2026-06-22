@@ -1,0 +1,235 @@
+<style>
+  /* ============ DESKTOP — Figma: frame 1217px, padding 0 100 40, gap 25 ============ */
+  .vp-stats {
+    width: 100%;
+    background-color: #f6f6f6;
+    padding: 0 100px 40px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .vp-stats-container {
+    width: 100%;
+    max-width: var(--vp-stats-max-width, 1320px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  /* Row of stat cards */
+  .vp-stats-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 28px;
+    width: 100%;
+  }
+
+  /* Card */
+  .vp-stats-card {
+    flex: 1 1 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 6px 4.45px rgba(0, 0, 0, 0.1);
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Green badge */
+  .vp-stats-badge {
+    background-color: #5a815b;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .vp-stats-badge span {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: -1.05px;
+    color: #fafcfa;
+    white-space: nowrap;
+  }
+
+  /* Label */
+  .vp-stats-label {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.1564px;
+    color: #000000;
+    text-align: center;
+    max-width: 294px;
+  }
+
+  /* Footnote */
+  .vp-stats-footnote {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.42;
+    color: #534c44;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* ============ MOBILE — Figma: frame 390px, padding 0 25 44, gap 26 ============ */
+  @media (max-width: 768px) {
+    .vp-stats {
+      padding: 0 25px 44px 25px;
+    }
+
+    .vp-stats-container {
+      gap: 26px;
+    }
+
+    /* Stack cards vertically */
+    .vp-stats-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    /* Card becomes a horizontal row: badge left, text right */
+    .vp-stats-card {
+      flex: 0 0 auto;
+      width: 340px;
+      max-width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 15px 10px;
+      border: 0.5px solid #e4e4e4;
+    }
+
+    .vp-stats-badge {
+      width: 85px;
+      height: 55px;
+      padding: 8px 7px;
+      border: 1px solid #dcdcdc;
+      flex-shrink: 0;
+    }
+
+    .vp-stats-label {
+      font-size: 18px;
+      text-align: left;
+      max-width: none;
+    }
+
+    .vp-stats-footnote {
+      text-align: left;
+    }
+  }
+</style>
+
+<div class="vp-stats" style="--vp-stats-max-width: {{ section.settings.max_width }}px;">
+  {% render 'vp-reveal' %}
+
+  <div class="vp-stats-container">
+    <div class="vp-stats-row" data-vp-stagger>
+      {% for block in section.blocks %}
+        <div class="vp-stats-card vp-anim" {{ block.shopify_attributes }}>
+          <div class="vp-stats-badge">
+            <span>{{ block.settings.value }}</span>
+          </div>
+          <p class="vp-stats-label">{{ block.settings.label }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.footnote != blank %}
+      <p class="vp-stats-footnote vp-anim" data-vp-delay="6">{{ section.settings.footnote }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "VP - Stats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "*based on survey data"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1320
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value (badge)",
+          "default": "86%"
+        },
+        {
+          "type": "textarea",
+          "id": "label",
+          "label": "Label",
+          "default": "saw a visible improvement in their dog’s life"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VP - Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "value": "86%",
+            "label": "saw a visible improvement in their dog’s life"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "86%",
+            "label": "saw a visible improvement in their dog’s life"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "86%",
+            "label": "saw a visible improvement in their dog’s life"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
