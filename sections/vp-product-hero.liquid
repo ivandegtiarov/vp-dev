@@ -295,8 +295,8 @@
     .vp-hero__mobile-head { display: flex; flex-direction: column; gap: 12px; }
     .vp-hero__sale .vp-hero__title-group { display: none; }
     /* description shows in the mobile head (above gallery); hide the sale-side copy */
-    .vp-hero__subtitle--mobile { display: block; }
-    .vp-hero__sale .vp-hero__subtitle:not(.vp-hero__subtitle--mobile) { display: none; }
+    .vp-hero__subtitle--mobile { display: block !important; }
+    .vp-hero__subtitle--sale { display: none !important; }
 
     .vp-hero__gallery-inner { gap: 5px; }
     .vp-hero__thumbs .swiper-slide { width: 55px; height: 55px; }
@@ -396,7 +396,7 @@
               </div>
 
             {%- when 'subtitle' -%}
-              <p class="vp-hero__subtitle vp-anim" data-vp-delay="2" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+              <p class="vp-hero__subtitle vp-hero__subtitle--sale vp-anim" data-vp-delay="2" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
 
             {%- when 'dosage' -%}
               <div class="vp-hero__dosage vp-anim" data-vp-delay="3" {{ block.shopify_attributes }}>
@@ -561,20 +561,26 @@
                       <span class="vp-hero__atc-label">
                         <span class="atc-text">{{ block.settings.atc_text | default: 'ADD TO CART' }}</span>
                         {%- comment -%}
-                          ATC shows the BUNDLE TOTAL (what the customer actually
-                          pays for the selected variant), not the per-jar price.
-                          Subscribe vs one-time totals swap via the pricing attrs.
-                          v.price is the live one-time total; the subscribe total
-                          applies Loop's discount off that same total.
+                          ATC shows the BUNDLE TOTAL = per-jar metafield price ×
+                          number of jars (parsed from the variant title, e.g.
+                          "3 Jars" → 3), so it uses the same per-jar source as
+                          the cards but renders the full order price. The strike
+                          is the compare-at per jar × jars.
                         {%- endcomment -%}
-                        {%- assign sub_pct = block.settings.subscribe_discount_percent | default: 20 -%}
-                        {%- assign sub_keep = 100 | minus: sub_pct -%}
                         {%- for v in product.variants -%}
-                          {%- assign sub_total = v.price | times: sub_keep | divided_by: 100 -%}
+                          {%- liquid
+                            assign jar_count = v.title | split: ' ' | first | times: 1
+                            if jar_count < 1
+                              assign jar_count = 1
+                            endif
+                            assign sub_total = v.metafields.custom.single_jar_price.value | times: jar_count
+                            assign one_total = v.metafields.custom.single_jar_price_one_time_purchase.value | times: jar_count
+                            assign was_total = product.variants.first.compare_at_price | times: jar_count
+                          -%}
                           <span class="atc-prices" data-variant-prices="{{ v.id }}" {% unless v.id == product.selected_or_first_available_variant.id %}style="display:none"{% endunless %}>
                             <span class="atc-now" subs-purchase-pricings>{{ sub_total | money }}</span>
-                            <span class="atc-now" single-purchase-pricings>{{ v.price | money }}</span>
-                            <span class="atc-was">{{ v.compare_at_price | money }}</span>
+                            <span class="atc-now" single-purchase-pricings>{{ one_total | money }}</span>
+                            <span class="atc-was">{{ was_total | money }}</span>
                           </span>
                         {%- endfor -%}
                       </span>
@@ -809,7 +815,6 @@
         { "type": "text", "id": "subscribe_title", "label": "Subscribe title", "default": "Subscribe for an extra 20% off" },
         { "type": "text", "id": "subscribe_frequency_label", "label": "Subscribe meta — frequency text", "default": "30 days" },
         { "type": "header", "content": "Subscription (Loop)", "info": "Subscriptions are handled by the Loop app's auto-injected widget — same flow as the main product page. The subscribe toggle clicks Loop's purchase options; no plan IDs to enter." },
-        { "type": "range", "id": "subscribe_discount_percent", "min": 0, "max": 60, "step": 1, "unit": "%", "label": "Subscribe discount % (for ATC total)", "info": "Used only to compute the subscribe total shown in the Add-to-cart button. Match this to your Loop discount.", "default": 20 },
         { "type": "text", "id": "atc_text", "label": "Add-to-cart text", "default": "ADD TO CART" }
       ]
     },
