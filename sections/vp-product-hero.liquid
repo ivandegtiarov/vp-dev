@@ -163,7 +163,8 @@
   /* ============ TITLE / SUBTITLE ============ */
   .vp-hero__title-group { display: flex; flex-direction: column; gap: 10px; }
   .vp-hero__title { margin: 0; font-family: var(--vp-h-serif); font-weight: 400; color: var(--vp-h-title); font-size: 52.6px; line-height: 1.05; letter-spacing: -2px; }
-  .vp-hero__subtitle { margin: 0; font-size: 18px; line-height: 26px; color: var(--vp-h-text); letter-spacing: -0.2px; }
+  .vp-hero__subtitle { font-size: 18px; line-height: 26px; color: var(--vp-h-text); letter-spacing: -0.2px; }
+  .vp-hero__subtitle, .vp-hero__subtitle p { margin: 0; }
   .vp-hero__subtitle strong { font-weight: 700; }
 
   /* ============ DOSAGE ============ */
@@ -341,7 +342,7 @@
       <div class="vp-hero__mobile-head">
         {{ vp_title_html }}
         {%- if vp_subtitle_text != blank -%}
-          <p class="vp-hero__subtitle vp-hero__subtitle--mobile">{{ vp_subtitle_text }}</p>
+          <div class="vp-hero__subtitle vp-hero__subtitle--mobile">{{ vp_subtitle_text }}</div>
         {%- endif -%}
       </div>
 
@@ -397,7 +398,7 @@
               </div>
 
             {%- when 'subtitle' -%}
-              <p class="vp-hero__subtitle vp-hero__subtitle--sale vp-anim" data-vp-delay="2" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+              <div class="vp-hero__subtitle vp-hero__subtitle--sale vp-anim" data-vp-delay="2" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
 
             {%- when 'dosage' -%}
               <div class="vp-hero__dosage vp-anim" data-vp-delay="3" {{ block.shopify_attributes }}>
