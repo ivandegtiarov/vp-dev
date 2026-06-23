@@ -1071,6 +1071,127 @@
       {% endif %}
 
     {% when 'newsletter' %}
+      {% if block.settings.klaviyo_mode %}
+        {%- assign kl_scope = '.modal-popup-newsletter-form-' | append: section.id -%}
+        <style>
+          /* Force the Klaviyo embed to match the theme styling (overrides Klaviyo inline styles) */
+          {{ kl_scope }} form {
+            background: transparent !important;
+            background-color: transparent !important;
+            border: 0 !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            width: 100% !important;
+            align-items: {{ content_horizontal_align_mobile }} !important;
+          }
+
+          /* Heading */
+          {{ kl_scope }} form h1,
+          {{ kl_scope }} form h2,
+          {{ kl_scope }} form h3,
+          {{ kl_scope }} form h4 {
+            margin: 0 0 16px !important;
+            font-size: {{ block.settings.email_heading_size_mobile }}px !important;
+            color: {{ block.settings.email_heading_color }} !important;
+            line-height: {{ block.settings.email_heading_height }}% !important;
+            font-weight: 700 !important;
+            text-align: {{ content_align_mobile }} !important;
+            text-transform: unset !important;
+            {% if block.settings.email_heading_custom %}
+              font-family: {{ block.settings.email_heading_font.family }}, {{ block.settings.email_heading_font.fallback_families }} !important;
+              font-weight: {{ block.settings.email_heading_font.weight }} !important;
+              font-style: {{ block.settings.email_heading_font.style }} !important;
+            {% endif %}
+          }
+
+          /* Email input */
+          {{ kl_scope }} form input[type="email"],
+          {{ kl_scope }} form input[type="text"] {
+            margin: 0 !important;
+            box-shadow: none !important;
+            padding: {{ block.settings.input_padding_vertical_mobile }}px {{ block.settings.input_padding_horizontal_mobile }}px !important;
+            font-size: {{ block.settings.input_size_mobile }}px !important;
+            color: {{ block.settings.input_color }} !important;
+            line-height: {{ block.settings.input_height }}% !important;
+            text-transform: unset !important;
+            border-radius: {{ block.settings.input_radius }}px !important;
+            background-color: {{ block.settings.input_bg_color }} !important;
+            border: {{ block.settings.input_border_thickness }}px solid {{ block.settings.input_border_color }} !important;
+            {% if block.settings.input_custom %}
+              font-family: {{ block.settings.input_font.family }}, {{ block.settings.input_font.fallback_families }} !important;
+              font-weight: {{ block.settings.input_font.weight }} !important;
+              font-style: {{ block.settings.input_font.style }} !important;
+            {% endif %}
+          }
+
+          {{ kl_scope }} form input[type="email"]:focus,
+          {{ kl_scope }} form input[type="text"]:focus {
+            border: {{ block.settings.input_border_thickness }}px solid {{ block.settings.input_border_color }} !important;
+          }
+
+          {{ kl_scope }} form input::placeholder {
+            color: {{ block.settings.input_placeholder_color }} !important;
+          }
+
+          /* Submit button */
+          {{ kl_scope }} form button[type="button"],
+          {{ kl_scope }} form button[type="submit"],
+          {{ kl_scope }} form button:not([type]) {
+            font-size: {{ button_size_mobile }}px !important;
+            color: {{ button_color }} !important;
+            line-height: {{ button_height }}% !important;
+            text-align: center !important;
+            text-transform: unset !important;
+            text-decoration: none !important;
+            padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px !important;
+            border-radius: {{ button_radius }}px !important;
+            border: {{ button_border_thickness }}px solid {{ button_border_color }} !important;
+            background-color: {{ button_bg_color }} !important;
+            box-shadow: none !important;
+            cursor: pointer !important;
+            {% if button_custom %}
+              font-family: {{ button_font.family }}, {{ button_font.fallback_families }} !important;
+              font-weight: {{ button_font.weight }} !important;
+              font-style: {{ button_font.style }} !important;
+            {% endif %}
+          }
+
+          {{ kl_scope }} form button[type="button"]:hover,
+          {{ kl_scope }} form button[type="submit"]:hover,
+          {{ kl_scope }} form button:not([type]):hover {
+            color: {{ button_hover_color }} !important;
+            border-color: {{ button_border_hover_color }} !important;
+            background-color: {{ button_bg_hover_color }} !important;
+          }
+
+          @media(min-width: 1024px) {
+            {{ kl_scope }} form {
+              align-items: {{ content_horizontal_align }} !important;
+            }
+
+            {{ kl_scope }} form h1,
+            {{ kl_scope }} form h2,
+            {{ kl_scope }} form h3,
+            {{ kl_scope }} form h4 {
+              font-size: {{ block.settings.email_heading_size }}px !important;
+              text-align: {{ content_align }} !important;
+            }
+
+            {{ kl_scope }} form input[type="email"],
+            {{ kl_scope }} form input[type="text"] {
+              padding: {{ block.settings.input_padding_vertical }}px {{ block.settings.input_padding_horizontal }}px !important;
+              font-size: {{ block.settings.input_size }}px !important;
+            }
+
+            {{ kl_scope }} form button[type="button"],
+            {{ kl_scope }} form button[type="submit"],
+            {{ kl_scope }} form button:not([type]) {
+              padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px !important;
+              font-size: {{ button_size }}px !important;
+            }
+          }
+        </style>
+      {% endif %}
       <style>
         {% if block.settings.input_custom %}{{ block.settings.input_font | font_face: font_display: 'swap' }}{% endif %}
         {% if block.settings.thanks_text_custom %}{{ block.settings.thanks_text_font | font_face: font_display: 'swap' }}{% endif %}
