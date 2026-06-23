@@ -1562,6 +1562,8 @@
         "newsletter_GWa3kq": {
           "type": "newsletter",
           "settings": {
+            "klaviyo_mode": true,
+            "klaviyo_form_class": "klaviyo-form-SQfJmL",
             "email_heading": "<h3>Receive your 10% discount:</h3>",
             "email_heading_custom": false,
             "email_heading_font": "sans_serif_n7",
@@ -1751,16 +1753,6 @@
         "border_thickness": 0,
         "section_radius": 0
       }
-    },
-    "custom_liquid_WgWM6H": {
-      "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
-      "settings": {
-        "custom_liquid": "<div class=\"klaviyo-form-SQfJmL\"></div>",
-        "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
     }
   },
   "order": [
@@ -1781,7 +1773,6 @@
     "testimonial_cards_RezqtQ",
     "accordion_rKNQaq",
     "pdp_sticky_bar_qHyPka",
-    "ss_modal_popup_6_be3ab9_N6hgYk",
-    "custom_liquid_WgWM6H"
+    "ss_modal_popup_6_be3ab9_N6hgYk"
   ]
 }
