@@ -1565,6 +1565,12 @@
 
           {% when 'newsletter' %}
             <div class="modal-popup-newsletter-form-{{ section.id }}">
+              {% if block.settings.klaviyo_mode %}
+                {%- assign klaviyo_class = block.settings.klaviyo_form_class | strip | remove: '.' -%}
+                {% if klaviyo_class != blank %}
+                  <div class="{{ klaviyo_class }}"></div>
+                {% endif %}
+              {% else %}
               {%- assign modal_return_to = request.path | append: '?customer_posted=' | append: section.id -%}
               {% form 'customer',
                 class: 'modal-popup-newsletter-form',
@@ -1677,6 +1683,7 @@
                   {% endif %}
                 {% endif %}
               {% endform %}
+              {% endif %}
             </div>
         {% endcase %}
       {% endfor %}
@@ -3595,7 +3602,27 @@
       "settings": [
         {
           "type": "header",
-          "content": "Heading"
+          "content": "Klaviyo"
+        },
+        {
+          "type": "checkbox",
+          "id": "klaviyo_mode",
+          "label": "Use Klaviyo embedded form",
+          "info": "Replaces the built-in Shopify email form with a Klaviyo embed. Create the form in Klaviyo and paste its form class below.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "klaviyo_form_class",
+          "label": "Klaviyo form class",
+          "info": "From your Klaviyo embed snippet, e.g. klaviyo-form-SQfJmL",
+          "default": "klaviyo-form-SQfJmL",
+          "visible_if": "{{ block.settings.klaviyo_mode }}"
+        },
+        {
+          "type": "header",
+          "content": "Heading",
+          "visible_if": "{{ block.settings.klaviyo_mode == false }}"
         },
         {
           "type": "richtext",
@@ -3682,7 +3709,8 @@
         },
         {
           "type": "header",
-          "content": "Email field"
+          "content": "Email field",
+          "visible_if": "{{ block.settings.klaviyo_mode == false }}"
         },
         {
           "type": "text",
