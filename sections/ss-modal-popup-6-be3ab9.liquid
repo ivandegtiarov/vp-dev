@@ -1073,6 +1073,8 @@
     {% when 'newsletter' %}
       {% if block.settings.klaviyo_mode %}
         {%- assign kl_scope = '.modal-popup-newsletter-form-' | append: section.id -%}
+        {%- assign kl_heading_size = block.settings.email_heading_size | times: 1.4 | round -%}
+        {%- assign kl_heading_size_mobile = block.settings.email_heading_size_mobile | times: 1.4 | round -%}
         <style>
           /* Force the Klaviyo embed to match the theme styling (overrides Klaviyo inline styles) */
           {{ kl_scope }} form {
@@ -1082,7 +1084,22 @@
             box-shadow: none !important;
             padding: 0 !important;
             width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
             align-items: {{ content_horizontal_align_mobile }} !important;
+            gap: 16px !important;
+          }
+
+          /* Force every layout row (input row + button row) to stack in one column */
+          {{ kl_scope }} form > div,
+          {{ kl_scope }} form > div > div {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: {{ content_horizontal_align_mobile }} !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: none !important;
+            gap: 16px !important;
           }
 
           /* Heading */
@@ -1091,7 +1108,7 @@
           {{ kl_scope }} form h3,
           {{ kl_scope }} form h4 {
             margin: 0 0 16px !important;
-            font-size: {{ block.settings.email_heading_size_mobile }}px !important;
+            font-size: {{ kl_heading_size_mobile }}px !important;
             color: {{ block.settings.email_heading_color }} !important;
             line-height: {{ block.settings.email_heading_height }}% !important;
             font-weight: 700 !important;
@@ -1173,7 +1190,7 @@
             {{ kl_scope }} form h2,
             {{ kl_scope }} form h3,
             {{ kl_scope }} form h4 {
-              font-size: {{ block.settings.email_heading_size }}px !important;
+              font-size: {{ kl_heading_size }}px !important;
               text-align: {{ content_align }} !important;
             }
 
