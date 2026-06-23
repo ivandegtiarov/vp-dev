@@ -1101,11 +1101,12 @@
             position: static !important;
             inset: auto !important;
             transform: none !important;
-            row-gap: 16px !important;
+            row-gap: 12px !important;
             flex: 0 0 auto !important;
           }
 
-          /* Each Klaviyo block row sits in normal flow, full width, content height */
+          /* Each Klaviyo block row sits in normal flow, full width, content height.
+             Strip Klaviyo's per-block padding/min-height that creates large gaps. */
           {{ kl_scope }} form [data-testid="form-row"],
           {{ kl_scope }} form [data-testid="form-component"] {
             display: block !important;
@@ -1118,6 +1119,7 @@
             height: auto !important;
             flex: 0 0 auto !important;
             margin: 0 !important;
+            padding: 0 !important;
             order: 5 !important;
           }
 
@@ -1146,12 +1148,21 @@
             order: 3 !important;
           }
 
-          /* Heading */
+          /* Heading — Klaviyo wraps the text in a <span> inside the heading,
+             so target the heading AND its inner text nodes. */
           {{ kl_scope }} form h1,
           {{ kl_scope }} form h2,
           {{ kl_scope }} form h3,
-          {{ kl_scope }} form h4 {
-            margin: 0 0 16px !important;
+          {{ kl_scope }} form h4,
+          {{ kl_scope }} form h1 span,
+          {{ kl_scope }} form h2 span,
+          {{ kl_scope }} form h3 span,
+          {{ kl_scope }} form h4 span,
+          {{ kl_scope }} form h1 *,
+          {{ kl_scope }} form h2 *,
+          {{ kl_scope }} form h3 *,
+          {{ kl_scope }} form h4 * {
+            margin: 0 !important;
             font-size: {{ kl_heading_size_mobile }}px !important;
             color: {{ block.settings.email_heading_color }} !important;
             line-height: {{ block.settings.email_heading_height }}% !important;
@@ -1198,7 +1209,7 @@
           {{ kl_scope }} form button[type="button"],
           {{ kl_scope }} form button[type="submit"],
           {{ kl_scope }} form button:not([type]) {
-            width: auto !important;
+            width: 100% !important;
             max-width: 100% !important;
             min-height: 0 !important;
             height: auto !important;
