@@ -1077,6 +1077,11 @@
         {%- assign kl_heading_size_mobile = block.settings.email_heading_size_mobile | times: 1.4 | round -%}
         <style>
           /* Force the Klaviyo embed to match the theme styling (overrides Klaviyo inline styles) */
+          {{ kl_scope }} form,
+          {{ kl_scope }} form * {
+            box-sizing: border-box !important;
+          }
+
           {{ kl_scope }} form {
             background: transparent !important;
             background-color: transparent !important;
@@ -1146,7 +1151,6 @@
           {{ kl_scope }} form [data-testid="form-row"]:has(button),
           {{ kl_scope }} form [data-testid="form-component"]:has(button) {
             order: 3 !important;
-            margin-top: 12px !important;
           }
 
           /* Heading — Klaviyo wraps the text in a <span> inside the heading,
@@ -1209,14 +1213,17 @@
             color: {{ block.settings.input_placeholder_color }} !important;
           }
 
-          /* Submit button */
+          /* Submit button — match the input width exactly and add a gap above it */
           {{ kl_scope }} form button[type="button"],
           {{ kl_scope }} form button[type="submit"],
           {{ kl_scope }} form button:not([type]) {
+            display: block !important;
             width: 100% !important;
             max-width: 100% !important;
+            min-width: 0 !important;
             min-height: 0 !important;
             height: auto !important;
+            margin: 12px 0 0 !important;
             font-size: {{ button_size_mobile }}px !important;
             color: {{ button_color }} !important;
             line-height: {{ button_height }}% !important;
