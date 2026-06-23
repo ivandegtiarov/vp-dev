@@ -1146,6 +1146,7 @@
           {{ kl_scope }} form [data-testid="form-row"]:has(button),
           {{ kl_scope }} form [data-testid="form-component"]:has(button) {
             order: 3 !important;
+            margin-top: 12px !important;
           }
 
           /* Heading — Klaviyo wraps the text in a <span> inside the heading,
@@ -1163,9 +1164,10 @@
           {{ kl_scope }} form h3 *,
           {{ kl_scope }} form h4 * {
             margin: 0 !important;
+            padding: 0 !important;
             font-size: {{ kl_heading_size_mobile }}px !important;
             color: {{ block.settings.email_heading_color }} !important;
-            line-height: {{ block.settings.email_heading_height }}% !important;
+            line-height: 1.15 !important;
             font-weight: 700 !important;
             text-align: {{ content_align_mobile }} !important;
             text-transform: unset !important;
@@ -1179,6 +1181,8 @@
           /* Email input */
           {{ kl_scope }} form input[type="email"],
           {{ kl_scope }} form input[type="text"] {
+            width: 100% !important;
+            max-width: 100% !important;
             margin: 0 !important;
             box-shadow: none !important;
             padding: {{ block.settings.input_padding_vertical_mobile }}px {{ block.settings.input_padding_horizontal_mobile }}px !important;
@@ -1248,7 +1252,11 @@
             {{ kl_scope }} form h1,
             {{ kl_scope }} form h2,
             {{ kl_scope }} form h3,
-            {{ kl_scope }} form h4 {
+            {{ kl_scope }} form h4,
+            {{ kl_scope }} form h1 *,
+            {{ kl_scope }} form h2 *,
+            {{ kl_scope }} form h3 *,
+            {{ kl_scope }} form h4 * {
               font-size: {{ kl_heading_size }}px !important;
               text-align: {{ content_align }} !important;
             }
