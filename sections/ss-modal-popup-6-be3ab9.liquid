@@ -1084,22 +1084,66 @@
             box-shadow: none !important;
             padding: 0 !important;
             width: 100% !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: {{ content_horizontal_align_mobile }} !important;
-            gap: 16px !important;
           }
 
-          /* Force every layout row (input row + button row) to stack in one column */
+          /* Make the form (and its layout containers) a single vertical column.
+             Klaviyo positions blocks with flex/order, so we neutralise that and
+             re-impose order via explicit `order` on the block types below. */
+          {{ kl_scope }} form,
           {{ kl_scope }} form > div,
           {{ kl_scope }} form > div > div {
             display: flex !important;
             flex-direction: column !important;
             align-items: {{ content_horizontal_align_mobile }} !important;
+            justify-content: flex-start !important;
             width: 100% !important;
             max-width: 100% !important;
-            flex: none !important;
-            gap: 16px !important;
+            position: static !important;
+            inset: auto !important;
+            transform: none !important;
+            row-gap: 16px !important;
+            flex: 0 0 auto !important;
+          }
+
+          /* Each Klaviyo block row sits in normal flow, full width, content height */
+          {{ kl_scope }} form [data-testid="form-row"],
+          {{ kl_scope }} form [data-testid="form-component"] {
+            display: block !important;
+            position: static !important;
+            inset: auto !important;
+            transform: none !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-height: 0 !important;
+            height: auto !important;
+            flex: 0 0 auto !important;
+            margin: 0 !important;
+            order: 5 !important;
+          }
+
+          /* Explicit visual order: heading -> input -> button -> the rest.
+             Applied to whichever wrapper holds each element (row or component). */
+          {{ kl_scope }} form [data-testid="form-row"]:has(h1),
+          {{ kl_scope }} form [data-testid="form-row"]:has(h2),
+          {{ kl_scope }} form [data-testid="form-row"]:has(h3),
+          {{ kl_scope }} form [data-testid="form-row"]:has(h4),
+          {{ kl_scope }} form [data-testid="form-component"]:has(h1),
+          {{ kl_scope }} form [data-testid="form-component"]:has(h2),
+          {{ kl_scope }} form [data-testid="form-component"]:has(h3),
+          {{ kl_scope }} form [data-testid="form-component"]:has(h4) {
+            order: 1 !important;
+          }
+
+          {{ kl_scope }} form [data-testid="form-row"]:has(input[type="email"]),
+          {{ kl_scope }} form [data-testid="form-row"]:has(input[type="text"]),
+          {{ kl_scope }} form [data-testid="form-component"]:has(input[type="email"]),
+          {{ kl_scope }} form [data-testid="form-component"]:has(input[type="text"]) {
+            order: 2 !important;
+          }
+
+          {{ kl_scope }} form [data-testid="form-row"]:has(button),
+          {{ kl_scope }} form [data-testid="form-component"]:has(button) {
+            order: 3 !important;
           }
 
           /* Heading */
@@ -1154,6 +1198,10 @@
           {{ kl_scope }} form button[type="button"],
           {{ kl_scope }} form button[type="submit"],
           {{ kl_scope }} form button:not([type]) {
+            width: auto !important;
+            max-width: 100% !important;
+            min-height: 0 !important;
+            height: auto !important;
             font-size: {{ button_size_mobile }}px !important;
             color: {{ button_color }} !important;
             line-height: {{ button_height }}% !important;
