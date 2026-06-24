@@ -1782,6 +1782,65 @@
                 {% if klaviyo_class != blank %}
                   <div class="{{ klaviyo_class }}"></div>
                 {% endif %}
+
+                {% if block.settings.heading_thanks_text != blank %}
+                  <p class="modal-popup-newsletter-thanks-text-{{ block.id }} modal-popup-newsletter-heading-thanks-text-{{ block.id }} modal-popup-newsletter-heading-thanks-text-{{ section.id }}">
+                    {{ block.settings.heading_thanks_text }}
+                  </p>
+                {% endif %}
+
+                {% if block.settings.thanks_text != blank %}
+                  <p class="modal-popup-newsletter-thanks-text-{{ block.id }} modal-popup-newsletter-thanks-text-{{ section.id }}">
+                    {{ block.settings.thanks_text }}
+                  </p>
+                {% endif %}
+
+                {% if block.settings.discount_code != blank %}
+                  <div class="modal-popup-discount-code-{{ block.id }} modal-popup-discount-code-{{ section.id }}">
+                    <div
+                      class="discount-code-box-{{ block.id }} discount-code-box-{{ section.id }}"
+                      data-code="{{ block.settings.discount_code }}"
+                    >
+                      <span class="discount-code-value-{{ block.id }}">{{ block.settings.discount_code }}</span>
+                      <span class="discount-code-copy-{{ block.id }}">
+                        <svg
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                      </span>
+                    </div>
+                    <span class="discount-code-label-{{ block.id }} discount-code-label-{{ section.id }}">
+                      {{- block.settings.discount_code_label -}}
+                    </span>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.success_close_label != blank %}
+                  {% if block.settings.success_button_url != blank %}
+                    <a
+                      href="{{ block.settings.success_button_url }}"
+                      class="modal-popup-success-close-{{ block.id }} modal-popup-success-close-{{ section.id }}"
+                    >
+                      {{ block.settings.success_close_label }}
+                    </a>
+                  {% else %}
+                    <button
+                      type="button"
+                      class="modal-popup-success-close-{{ block.id }} modal-popup-success-close-{{ section.id }}"
+                      aria-label="{{ block.settings.success_close_label }}"
+                    >
+                      {{ block.settings.success_close_label }}
+                    </button>
+                  {% endif %}
+                {% endif %}
               {% else %}
               {%- assign modal_return_to = request.path | append: '?customer_posted=' | append: section.id -%}
               {% form 'customer',
@@ -2272,6 +2331,26 @@
           {% endif %}
         {% endfor %}
       }
+
+      {% for block in section.blocks %}
+        {% if block.type == 'newsletter' and block.settings.klaviyo_mode %}
+          /* Klaviyo embed success handling — Klaviyo submits via AJAX (no page
+             reload), so listen for its global success event and reveal the
+             discount code / thank-you state inside this modal. */
+          window.addEventListener('klaviyoForms', function(e) {
+            if (!e || !e.detail || e.detail.type !== 'submit') return;
+            {% if block.settings.success_redirect_enabled and block.settings.success_redirect_url != blank %}
+              window.location.href = '{{ block.settings.success_redirect_url }}';
+            {% else %}
+              /* Hide the Klaviyo embed itself, then show our success elements. */
+              const klForm = document.querySelector('.modal-popup-newsletter-form-{{ section.id }} .{{ block.settings.klaviyo_form_class | strip | remove: '.' }}');
+              if (klForm) klForm.style.display = 'none';
+              openModal();
+              showSuccessState();
+            {% endif %}
+          });
+        {% endif %}
+      {% endfor %}
 
       if (toggle) {
         if (buttonClose) {
