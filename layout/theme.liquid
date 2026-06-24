@@ -49,21 +49,8 @@
   {% endunless %}
 {% endif %}
 
-{% if request.page_type == 'product' and template.suffix == 'd-test-advance-new' and product.id == 10314483138826 %}
-  {% unless product.selected_variant.id == 52152451989770 %}
-    <script>
-      window.location.href = '/products/vitalpaws-daily-multivitamin-bfcm2?variant=52152451989770';
-    </script>
-  {% endunless %}
-{% endif %}
 
-{% if request.page_type == 'product' and template.suffix == 'd-test-advance-new' and product.id == 10316636979466 %}
-  {% unless product.selected_variant.id == 52162322858250 %}
-    <script>
-      window.location.href = '/products/vitalpaws-multivitamin-chews?variant=52162322858250';
-    </script>
-  {% endunless %}
-{% endif %}
+
 
 {% if request.page_type == 'product' and template.suffix == 'd-test-advance-newest' and product.id == 10478806925578 %}
   {% unless product.selected_variant.id == 52881813143818 %}
