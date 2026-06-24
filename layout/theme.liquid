@@ -68,21 +68,8 @@
   {% endunless %}
 {% endif %}
 
-{% if request.page_type == 'product' and template.suffix == 'd-test-advance-new' and product.id == 10396349563146 %}
-  {% unless product.selected_variant.id == 52536835997962 %}
-    <script>
-      window.location.href = '/products/vitalpaws-daily-multivitamin-chews-b?variant=52536835997962';
-    </script>
-  {% endunless %}
-{% endif %}
 
-{% if request.page_type == 'product' and template.suffix == 'd-test-advance-new' and product.id == 10443398414602 %}
-  {% unless product.selected_variant.id == 52720647274762 %}
-    <script>
-      window.location.href = '/products/vitalpaws-daily-multivitamin-chews-alt?variant=52720647274762';
-    </script>
-  {% endunless %}
-{% endif %}
+
 
 {% if request.page_type == 'product' and template.suffix == 'e-new' and product.id == 10490050052362 %}
   {% unless product.selected_variant.id == 52945602707722 %}
