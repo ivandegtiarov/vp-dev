@@ -243,6 +243,10 @@
   .vp-hero__subscribe-meta img { width: 18px; height: 18px; }
   .vp-hero__subscribe-meta p { margin: 0; font-size: 12px; color: var(--vp-h-muted); letter-spacing: -0.24px; }
 
+  /* Loop (@app) widget mount — kept in the DOM so Loop can inject + attach the
+     selling_plan, but hidden because our custom subscribe card is the UI. */
+  .vp-hero__app-block { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
   /* subs / one-time toggle */
   .vp-hero [single-purchase-pricings] { display: none; }
   .vp-hero .vp-hero__sale.single_purchase_option [subs-purchase-pricings] { display: none !important; }
@@ -391,6 +395,19 @@
       <div class="vp-hero__info">
         {%- for block in section.blocks -%}
           {%- case block.type -%}
+
+            {%- comment -%}
+              Loop (and other purchase-option apps) inject their widget via a
+              Shopify @app block dragged into this section in the theme editor.
+              Without this case the widget has nowhere to mount, so the
+              subscribe proxy below has nothing to click. We render it but keep
+              it visually hidden — our custom subscribe card is the UI; Loop's
+              widget is only the engine that attaches the selling_plan.
+            {%- endcomment -%}
+            {%- when '@app' -%}
+              <div class="vp-hero__app-block" {{ block.shopify_attributes }}>
+                {% render block %}
+              </div>
 
             {%- when 'title_reviews' -%}
               <div class="vp-hero__title-group" {{ block.shopify_attributes }}>
@@ -777,6 +794,7 @@
     { "type": "textarea", "id": "title", "label": "Title (Amethysta). Blank = product title", "default": "Daily Multivitamin Chews for Dogs" }
   ],
   "blocks": [
+    { "type": "@app" },
     { "type": "title_reviews", "name": "Title + reviews", "limit": 1 },
     {
       "type": "subtitle", "name": "Subtitle", "limit": 1,
@@ -844,6 +862,7 @@
     {
       "name": "VP - Product Hero",
       "blocks": [
+        { "type": "@app" },
         { "type": "title_reviews" },
         { "type": "subtitle" },
         { "type": "dosage" },
