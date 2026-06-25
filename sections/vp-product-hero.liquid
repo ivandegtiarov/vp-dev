@@ -564,6 +564,21 @@
                           if is_checked
                             assign vp_selected_variant_id = v.id
                           endif
+
+                          # Subscribe shipping cadence for this bundle: one jar
+                          # ships per month, so frequency = jars × 30 days. Jar
+                          # count is parsed from the variant title ("3 Jars" → 3),
+                          # matching the ATC total logic. Min 1 so a non-numeric
+                          # title still yields "30 days".
+                          assign jar_count = v.title | split: ' ' | first | times: 1
+                          if jar_count < 1
+                            assign jar_count = 1
+                          endif
+                          assign freq_days = jar_count | times: 30
+                          assign freq_label = freq_days | append: ' days'
+                          if is_checked
+                            assign vp_initial_freq_label = freq_label
+                          endif
                         -%}
                         <input
                           class="vp-hero__bundle-input"
@@ -573,6 +588,7 @@
                           value="{{ v.id }}"
                           data-variant-id="{{ v.id }}"
                           data-featured-media="{{ v.featured_media.id }}"
+                          data-freq="{{ freq_label }}"
                           {% if is_checked %}checked{% endif %}
                           {% unless value.available %}disabled{% endunless %}
                         >
@@ -653,7 +669,8 @@
                       <span class="vp-hero__subscribe-meta">
                         <span>
                           {%- if block.settings.subscribe_icon_1 -%}<img src="{{ block.settings.subscribe_icon_1 | image_url: width: 36 }}" alt="">{%- endif -%}
-                          <p>Shipped every <span class="vp-hero__freq-label">{{ block.settings.subscribe_frequency_label | default: '30 days' }}</span></p>
+                          {%- comment -%} Frequency follows the selected bundle (jars × 30 days); JS keeps it in sync on change. Server-render the pre-selected bundle's value so the first paint matches. {%- endcomment -%}
+                          <p>Shipped every <span class="vp-hero__freq-label">{{ vp_initial_freq_label | default: block.settings.subscribe_frequency_label | default: '30 days' }}</span></p>
                         </span>
                         <span>
                           {%- if block.settings.subscribe_icon_2 -%}<img src="{{ block.settings.subscribe_icon_2 | image_url: width: 36 }}" alt="">{%- endif -%}
@@ -920,12 +937,21 @@
       obs.observe(document.body, { childList: true, subtree: true });
     }
 
+    // Subscribe card frequency follows the picked bundle (data-freq = jars×30).
+    var freqLabels = root.querySelectorAll('.vp-hero__freq-label');
+    function setFreqLabel(input) {
+      var freq = input && input.getAttribute('data-freq');
+      if (!freq) return;
+      freqLabels.forEach(function (el) { el.textContent = freq; });
+    }
+
     function selectVariant(input) {
       var id = input.getAttribute('data-variant-id');
       if (variantIdInput) variantIdInput.value = id;
       window.currenSelectedVariantId = id;   // kept for parity with store-wide Loop scripts
       showVariantPrice(id);
       slideToMedia(input.getAttribute('data-featured-media'));
+      setFreqLabel(input);   // update "Shipped every N days" for this bundle
       setPriceMode();     // keep price mode correct for the new variant (instant)
       syncLoopWidget();   // re-sync Loop for the newly-selected variant
     }
@@ -943,6 +969,7 @@
       window.currenSelectedVariantId = id;
       showVariantPrice(id);
       slideToMedia(checked.getAttribute('data-featured-media'));
+      setFreqLabel(checked);
     }
     // Set the visible price mode from the checkbox immediately (synchronous, no
     // Loop dependency) so the server-painted price never gets swapped on load.
