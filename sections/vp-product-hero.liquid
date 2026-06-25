@@ -860,24 +860,46 @@
 
     function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
 
-    function applyPurchaseMode() {
-      var subEl = loopSubEl();
-      var oneEl = loopOnetimeEl();
+    /* Visible price mode — toggles ONLY our own class, synchronously, from the
+       checkbox. This is what the user sees, so it must never wait on (or be
+       overwritten by) Loop's async widget. Decoupling this from the Loop
+       .click() below is what stops the price flicker on load: previously the
+       price didn't settle until Loop loaded and was re-clicked, and a Loop
+       re-render could momentarily flip us to the one-time span (blank when that
+       variant has no one-time price). */
+    function setPriceMode() {
+      if (!sale) return;
       if (isSubscribed()) {
-        if (subEl) subEl.click();                        // Loop attaches the plan
-        if (sale) sale.classList.remove('single_purchase_option');
+        sale.classList.remove('single_purchase_option');
       } else {
-        if (oneEl) oneEl.click();                        // Loop reverts to one-time
-        if (sale) sale.classList.add('single_purchase_option');
+        sale.classList.add('single_purchase_option');
       }
     }
 
-    // Loop loads async — keep the widget in sync with the checkbox once it
-    // appears, then disconnect.
+    /* Side effect only: tell Loop which purchase option to attach. Never touches
+       the visible price. Safe to call repeatedly / once Loop appears. */
+    function syncLoopWidget() {
+      var subEl = loopSubEl();
+      var oneEl = loopOnetimeEl();
+      if (isSubscribed()) {
+        if (subEl) subEl.click();   // Loop attaches the selling_plan
+      } else {
+        if (oneEl) oneEl.click();   // Loop reverts to one-time
+      }
+    }
+
+    function applyPurchaseMode() {
+      setPriceMode();     // instant, drives the visible price
+      syncLoopWidget();   // async side effect, no visual impact
+    }
+
+    // Loop loads async — push the current checkbox state into the widget once it
+    // appears, then disconnect. Uses syncLoopWidget (NOT setPriceMode) so a late
+    // Loop load can't re-toggle the already-correct visible price.
     function watchLoopWidget() {
-      if (loopOnetimeEl() && loopSubEl()) { applyPurchaseMode(); return; }
+      if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); return; }
       var obs = new MutationObserver(function () {
-        if (loopOnetimeEl() && loopSubEl()) { applyPurchaseMode(); obs.disconnect(); }
+        if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); obs.disconnect(); }
       });
       obs.observe(document.body, { childList: true, subtree: true });
     }
@@ -888,7 +910,8 @@
       window.currenSelectedVariantId = id;   // kept for parity with store-wide Loop scripts
       showVariantPrice(id);
       slideToMedia(input.getAttribute('data-featured-media'));
-      applyPurchaseMode();   // re-sync Loop for the newly-selected variant
+      setPriceMode();     // keep price mode correct for the new variant (instant)
+      syncLoopWidget();   // re-sync Loop for the newly-selected variant
     }
     bundleInputs.forEach(function (input) {
       input.addEventListener('change', function () { if (input.checked) selectVariant(input); });
@@ -904,9 +927,10 @@
       window.currenSelectedVariantId = id;
       showVariantPrice(id);
       slideToMedia(checked.getAttribute('data-featured-media'));
-    } else if (sale && !isSubscribed()) {
-      sale.classList.add('single_purchase_option');
     }
+    // Set the visible price mode from the checkbox immediately (synchronous, no
+    // Loop dependency) so the server-painted price never gets swapped on load.
+    setPriceMode();
     watchLoopWidget();
 
     /* ---------- UGC video click-to-play ---------- */
