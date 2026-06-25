@@ -2004,7 +2004,35 @@
 
       let previouslyFocusedElement = null;
 
+      /* Suppress the whole popup for visitors already on a Klaviyo list.
+         Embedded Klaviyo forms can't self-suppress reliably, so we detect a
+         known subscriber here and block every open trigger (seconds / scroll /
+         exit-intent / click). Two signals, either is enough:
+           1. A local flag set the moment this visitor submits the Klaviyo form
+              on this device (klaviyoSubscribed_{{ section.id }}).
+           2. Klaviyo's own __kla_id cookie, which is present once Klaviyo has
+              identified the visitor as a known profile. */
+      const subscribedKey = 'klaviyoSubscribed_{{ section.id }}';
+
+      function isKnownKlaviyoSubscriber() {
+        try {
+          if (localStorage.getItem(subscribedKey)) return true;
+        } catch (e) {}
+        /* __kla_id is set by Klaviyo once the visitor is an identified profile. */
+        return document.cookie.split('; ').some(function (c) {
+          return c.indexOf('__kla_id=') === 0;
+        });
+      }
+
       function openModal() {
+        if (isKnownKlaviyoSubscriber()) return;
+        forceOpenModal();
+      }
+
+      /* Opens the modal regardless of subscriber state — used for the
+         post-submit success reveal, which must show even though we are about
+         to mark this visitor as a known subscriber. */
+      function forceOpenModal() {
         if (modal) {
           previouslyFocusedElement = document.activeElement;
           modal.classList.add('active');
@@ -2326,7 +2354,7 @@
             {% if block.settings.success_redirect_enabled and block.settings.success_redirect_url != blank %}
               window.location.href = '{{ block.settings.success_redirect_url }}';
             {% else %}
-              openModal();
+              forceOpenModal();
               showSuccessState();
             {% endif %}
           {% endif %}
@@ -2340,13 +2368,18 @@
              discount code / thank-you state inside this modal. */
           window.addEventListener('klaviyoForms', function(e) {
             if (!e || !e.detail || e.detail.type !== 'submit') return;
+            /* Remember the visitor subscribed so the popup is never shown again
+               on this device, even before Klaviyo's __kla_id cookie is set. */
+            try { localStorage.setItem(subscribedKey, new Date().toISOString()); } catch (err) {}
             {% if block.settings.success_redirect_enabled and block.settings.success_redirect_url != blank %}
               window.location.href = '{{ block.settings.success_redirect_url }}';
             {% else %}
-              /* Hide the Klaviyo embed itself, then show our success elements. */
+              /* Hide the Klaviyo embed itself, then show our success elements.
+                 Use forceOpenModal so the just-subscribed visitor still sees the
+                 thank-you / discount state despite the suppression gate. */
               const klForm = document.querySelector('.modal-popup-newsletter-form-{{ section.id }} .{{ block.settings.klaviyo_form_class | strip | remove: '.' }}');
               if (klForm) klForm.style.display = 'none';
-              openModal();
+              forceOpenModal();
               showSuccessState();
             {% endif %}
           });
