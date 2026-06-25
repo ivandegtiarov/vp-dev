@@ -51,6 +51,8 @@
             "popular_text": "MOST POPULAR",
             "value_index": 3,
             "value_text": "BEST VALUE",
+            "subscribe_icon_1": "shopify://shop_images/Frame_32.svg",
+            "subscribe_icon_2": "shopify://shop_images/Frame.svg",
             "subscribe_title": "Subscribe for an extra 20% off",
             "subscribe_frequency_label": "30 days",
             "atc_text": "ADD TO CART"
