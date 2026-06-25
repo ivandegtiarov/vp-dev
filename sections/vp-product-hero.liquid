@@ -224,7 +224,7 @@
   .vp-hero__bundle-supply--inline { display: none !important; }
   .vp-hero__bundle-supply--block { display: block !important; font-style: italic; color: var(--vp-h-muted); }
 
-  .vp-hero__off-badge { align-self: flex-start; display: inline-flex; align-items: center; padding: 1px 5px; background: var(--vp-h-accent); border: 0.5px solid var(--vp-h-border-b); border-radius: 3px; font-size: 9px; line-height: normal; font-weight: 700; letter-spacing: 0.27px; color: #fff; white-space: nowrap; }
+  .vp-hero__off-badge { align-self: center; display: inline-flex; align-items: center; padding: 1px 5px; background: var(--vp-h-accent); border: 0.5px solid var(--vp-h-border-b); border-radius: 3px; font-size: 9px; line-height: normal; font-weight: 700; letter-spacing: 0.27px; color: #fff; white-space: nowrap; }
 
   .vp-hero__bundle-price { display: flex; flex-direction: column; align-items: flex-end; gap: 0; text-align: right; flex-shrink: 0; }
   .vp-hero__bundle-price .now { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; color: var(--vp-h-text); }
@@ -680,8 +680,24 @@
                             if jar_count < 1
                               assign jar_count = 1
                             endif
-                            assign sub_total = v.metafields.custom.single_jar_price.value | times: jar_count
-                            assign one_total = v.metafields.custom.single_jar_price_one_time_purchase.value | times: jar_count
+
+                            # The per-jar metafields can be a money-type object
+                            # ({ amount, currency_code }) or a plain number. The
+                            # `money` filter copes with both, but `times` does
+                            # not work on the object form — multiplying it yields
+                            # nothing, which is why the ATC total rendered blank.
+                            # Normalise to a numeric amount before multiplying.
+                            assign sub_price = v.metafields.custom.single_jar_price.value
+                            if sub_price.amount
+                              assign sub_price = sub_price.amount
+                            endif
+                            assign one_price = v.metafields.custom.single_jar_price_one_time_purchase.value
+                            if one_price.amount
+                              assign one_price = one_price.amount
+                            endif
+
+                            assign sub_total = sub_price | times: jar_count
+                            assign one_total = one_price | times: jar_count
                             assign was_total = product.variants.first.compare_at_price | times: jar_count
                           -%}
                           <span class="atc-prices" data-variant-prices="{{ v.id }}" {% unless v.id == product.selected_or_first_available_variant.id %}style="display:none"{% endunless %}>
