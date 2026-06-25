@@ -401,7 +401,6 @@
         "benefit_5",
         "benefit_6"
       ],
-      "disabled": true,
       "settings": {
         "heading_crimson": "6 Core Benefits",
         "heading_helvetica": "in 1 tasty chew..",
@@ -458,10 +457,8 @@
       ],
       "settings": {
         "eyebrow": "BACKED BY SCIENCE",
-        "heading_pre": "A unique blend that",
-        "heading_mid": "targets the",
-        "heading_source": "source",
-        "heading_suffix": "..",
+        "heading": "A unique blend that targets the source..",
+        "heading_highlight": "source..",
         "description": "100% premium selected ingredients that target the problem at it’s core.",
         "max_width": 1020
       }
@@ -503,8 +500,7 @@
       ],
       "settings": {
         "eyebrow": "FOR ALL BREEDS",
-        "heading_pre": "Formulated and Praised by",
-        "heading_source": "Certified Vets..",
+        "heading": "Formulated and Praised by [Certified Vets..]",
         "max_width": 1020
       }
     },
