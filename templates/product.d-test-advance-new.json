@@ -25,7 +25,7 @@
         "dosage": {
           "type": "dosage",
           "settings": {
-            "icon": "shopify://shop_images/chew-icon.webp",
+            "icon": "shopify://shop_images/single-chew.webp",
             "title": "Dosage per dog:",
             "subtitle": "for all weights and breeds",
             "amount": "2 chews daily",
