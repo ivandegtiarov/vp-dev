@@ -549,6 +549,16 @@
                           elsif idx == target_idx
                             assign is_checked = true
                           endif
+
+                          # Remember which variant is pre-selected so the ATC can
+                          # render its price for THIS variant on the server. If we
+                          # keyed the initial ATC price off selected_or_first_
+                          # available_variant instead, the first paint would show
+                          # a different variant's price than the checked bundle,
+                          # and JS would swap it on load — the visible flash.
+                          if is_checked
+                            assign vp_selected_variant_id = v.id
+                          endif
                         -%}
                         <input
                           class="vp-hero__bundle-input"
@@ -680,8 +690,15 @@
                               to single_jar_price_one_time_purchase
                             - was      : v.compare_at_price
                         {%- endcomment -%}
+                        {%- liquid
+                          # Fall back to Shopify's selected variant only when no
+                          # bundle radio was pre-checked (e.g. default-variant
+                          # products). Otherwise honour the pre-selected bundle so
+                          # the first paint matches the checked radio.
+                          assign vp_initial_variant_id = vp_selected_variant_id | default: product.selected_or_first_available_variant.id
+                        -%}
                         {%- for v in product.variants -%}
-                          <span class="atc-prices" data-variant-prices="{{ v.id }}" {% unless v.id == product.selected_or_first_available_variant.id %}style="display:none"{% endunless %}>
+                          <span class="atc-prices" data-variant-prices="{{ v.id }}" {% unless v.id == vp_initial_variant_id %}style="display:none"{% endunless %}>
                             <span class="atc-now" subs-purchase-pricings>
                               {%- if v.metafields.custom.single_jar_price_subscription_full_price.value != blank -%}
                                 {{ v.metafields.custom.single_jar_price_subscription_full_price.value | money }}
