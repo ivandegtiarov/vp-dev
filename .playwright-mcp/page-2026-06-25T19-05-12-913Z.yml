@@ -1,0 +1,572 @@
+- generic [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#MainContent"
+  - region "Announcement" [ref=e6]:
+    - paragraph [ref=e7]: ☀️SUMMER - MORE THAN 50% OFF!
+  - banner [ref=e10]:
+    - heading "VitalPaws" [level=1] [ref=e11]:
+      - link "VitalPaws" [ref=e12] [cursor=pointer]:
+        - /url: /
+        - img "VitalPaws" [ref=e14]
+    - navigation [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Home" [ref=e18] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e19]: Home
+        - listitem [ref=e20]:
+          - group [ref=e22]:
+            - button "Shop" [ref=e23] [cursor=pointer]:
+              - generic [ref=e24]: Shop
+              - img [ref=e25]
+        - listitem [ref=e27]:
+          - link "The Science" [ref=e28] [cursor=pointer]:
+            - /url: /pages/the-science
+            - generic [ref=e29]: The Science
+        - listitem [ref=e30]:
+          - link "My subscription" [ref=e31] [cursor=pointer]:
+            - /url: https://thevitalpaws.com/a/loop_subscriptions/customer
+            - generic [ref=e32]: My subscription
+        - listitem [ref=e33]:
+          - link "Contact us" [ref=e34] [cursor=pointer]:
+            - /url: /pages/contact
+            - generic [ref=e35]: Contact us
+    - generic [ref=e36]:
+      - generic [ref=e40]:
+        - heading "Country/region" [level=2] [ref=e41]
+        - button "Netherlands | EUR €" [ref=e43] [cursor=pointer]:
+          - generic [ref=e44]: Netherlands | EUR €
+          - img [ref=e45]
+      - generic:
+        - group
+      - link "Log in" [ref=e47] [cursor=pointer]:
+        - /url: /account/login
+        - img [ref=e50]
+        - generic [ref=e52]: Log in
+      - button "Cart" [ref=e53] [cursor=pointer]:
+        - img [ref=e55]
+        - generic [ref=e57]: Cart
+  - main [ref=e58]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - img [ref=e66]
+          - img [ref=e70]
+          - img [ref=e74]
+          - img [ref=e78]
+          - img [ref=e82]
+        - paragraph [ref=e87]:
+          - link "Excellent (20k+ Healthy dogs)" [ref=e88] [cursor=pointer]:
+            - /url: "#shopify-section-template--25678353957130__ss_testimonial_12_dFgNK4"
+            - strong [ref=e89]: Excellent
+            - text: (20k+ Healthy dogs)
+      - paragraph [ref=e91]:
+        - strong [ref=e92]: Revolutionising the
+        - emphasis [ref=e93]:
+          - strong [ref=e94]: Pet Health
+        - strong [ref=e95]: Industry
+      - paragraph [ref=e97]: With our vet-formulated pet supplements, backed by science.
+      - paragraph [ref=e100]: Six essential health benefits in one
+      - paragraph [ref=e103]: 100% Human-grade ingredients
+      - paragraph [ref=e106]: Locally formulated by certified vets
+      - link "Shop Bestsellers" [ref=e107] [cursor=pointer]:
+        - /url: "#vp-cg-section"
+        - paragraph [ref=e108]:
+          - text: Shop Bestsellers
+          - img [ref=e109]
+    - generic [ref=e117]:
+      - heading "As seen on.." [level=2] [ref=e119]
+      - generic [ref=e121]:
+        - img "Forbes_1_2_1.webp" [ref=e126]
+        - img "Forbes_1_2_1.webp" [ref=e131]
+        - img "Forbes_1_2_1.webp" [ref=e136]
+        - img "Forbes_1_2_1.webp" [ref=e141]
+    - generic [ref=e145]:
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - link "Joint Serum Complex® for dogs" [ref=e148] [cursor=pointer]:
+            - /url: /products/joint-serum-complex-for-dogs
+            - img "Joint Serum Complex® for dogs" [ref=e149]
+            - generic [ref=e150]: NEW!
+          - generic [ref=e151]:
+            - heading "Joint Serum Complex® for dogs" [level=3] [ref=e152]:
+              - link "Joint Serum Complex® for dogs" [ref=e153] [cursor=pointer]:
+                - /url: /products/joint-serum-complex-for-dogs
+            - generic "5 out of 5 stars" [ref=e154]:
+              - img [ref=e155]
+              - img [ref=e157]
+              - img [ref=e159]
+              - img [ref=e161]
+              - img [ref=e163]
+            - paragraph [ref=e165]: Daily advanced joint support drops for improved mobility, less stiffness, and reduced inflammation.
+            - paragraph [ref=e166]: ✅ VET-FORMULATED
+            - generic [ref=e167]:
+              - generic [ref=e168]: From
+              - generic [ref=e169]: €44,00
+              - generic [ref=e170]: €35,20
+            - link "Shop Now →" [ref=e171] [cursor=pointer]:
+              - /url: /products/joint-serum-complex-for-dogs
+        - generic [ref=e172]:
+          - link "Daily Multivitamin Chews for Dogs" [ref=e173] [cursor=pointer]:
+            - /url: /products/vitalpaws-multivitamin-chews
+            - img "Daily Multivitamin Chews for Dogs" [ref=e174]
+            - generic [ref=e175]: MOST POPULAR!
+          - generic [ref=e176]:
+            - heading "Daily Multivitamin Chews for Dogs" [level=3] [ref=e177]:
+              - link "Daily Multivitamin Chews for Dogs" [ref=e178] [cursor=pointer]:
+                - /url: /products/vitalpaws-multivitamin-chews
+            - generic "5 out of 5 stars" [ref=e179]:
+              - img [ref=e180]
+              - img [ref=e182]
+              - img [ref=e184]
+              - img [ref=e186]
+              - img [ref=e188]
+            - paragraph [ref=e190]: Daily Soft chews for key nutritional support & long-term health in a daily treat.
+            - paragraph [ref=e191]: ✅ VET-FORMULATED
+            - generic [ref=e192]:
+              - generic [ref=e193]: From
+              - generic [ref=e194]: €42,00
+              - generic [ref=e195]: €33,60
+            - link "Shop Now →" [ref=e196] [cursor=pointer]:
+              - /url: /products/vitalpaws-multivitamin-chews
+      - generic [ref=e197]:
+        - heading "Bestsellers you can't miss.." [level=2] [ref=e198]:
+          - emphasis [ref=e199]: Bestsellers
+          - text: you can't miss..
+        - paragraph [ref=e200]: Vet-formulated supplements for every stage of your dog's life.
+    - generic [ref=e204]:
+      - generic [ref=e205]:
+        - heading "Raising the industry standard.." [level=2] [ref=e207]
+        - paragraph [ref=e209]: At VitalPaws, we combine veterinary research with the highest quality premium-grade ingredients.
+      - generic [ref=e212]:
+        - generic [ref=e213]:
+          - img [ref=e216]
+          - paragraph [ref=e219]: Formulated by local Veterinarians
+        - generic [ref=e220]:
+          - img [ref=e223]
+          - paragraph [ref=e226]: No artificial flavours or fillers
+        - generic [ref=e227]:
+          - img [ref=e230]
+          - paragraph [ref=e233]: Third-party tested
+    - generic [ref=e238]:
+      - heading "Loved by thousands of caring pet owners.." [level=2] [ref=e240]:
+        - text: Loved by
+        - emphasis [ref=e241]: thousands
+        - text: of
+        - text: caring pet owners..
+      - generic [ref=e242]:
+        - img [ref=e244]
+        - generic [ref=e245]:
+          - generic [ref=e246]: Excellent
+          - generic [ref=e247]: (20k+ Healthy dogs)
+      - paragraph [ref=e249]: Read below on how they transformed their furry friend's health!
+      - generic [ref=e250]:
+        - generic [ref=e251]:
+          - group "2 / 4" [ref=e252]:
+            - img "hmi7r9azv0f31zntreejjhywibgt.jpeg" [ref=e254]
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - img [ref=e257]
+                - img [ref=e259]
+                - img [ref=e261]
+                - img [ref=e263]
+                - img [ref=e265]
+              - paragraph [ref=e268]: "\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is super glossy and healthy. Plus, I've noticed fewer digestive issues.\""
+              - paragraph [ref=e270]:
+                - strong [ref=e271]: "- Jennifer"
+          - group "3 / 4" [ref=e272]:
+            - img "6orxvip0vwon6sxo7htby89w63qh.jpeg" [ref=e274]
+            - generic [ref=e275]:
+              - generic [ref=e276]:
+                - img [ref=e277]
+                - img [ref=e279]
+                - img [ref=e281]
+                - img [ref=e283]
+                - img [ref=e285]
+              - paragraph [ref=e288]: "\"A friend recommended this brand, and WOW. Within weeks, she was soft, shiny, and even smelled fresher. I will never let us run out of these.\""
+              - paragraph [ref=e290]:
+                - strong [ref=e291]: "- Léa"
+          - group "4 / 4" [ref=e292]:
+            - img "awhoze2gwxbtn3z2uehkvt35ar72.jpeg" [ref=e294]
+            - generic [ref=e295]:
+              - generic [ref=e296]:
+                - img [ref=e297]
+                - img [ref=e299]
+                - img [ref=e301]
+                - img [ref=e303]
+                - img [ref=e305]
+              - paragraph [ref=e308]: "\"My dogs have their meal and sit at my feet waiting for their treat. They just love them.\""
+              - paragraph [ref=e310]:
+                - strong [ref=e311]: "- Arthur"
+          - group "1 / 4" [ref=e312]:
+            - img "<h2>Loved by <em>thousands</em> of<br/>caring pet owners..</h2>" [ref=e314]
+            - generic [ref=e315]:
+              - generic [ref=e316]:
+                - img [ref=e317]
+                - img [ref=e319]
+                - img [ref=e321]
+                - img [ref=e323]
+                - img [ref=e325]
+              - paragraph [ref=e328]: "\"Saw this brand on instagram, didn't expect much, but it has worked wonders for my kelpie's gut, loose stools and grass eating is way less now! Happy customer ☺️\""
+              - paragraph [ref=e330]:
+                - strong [ref=e331]: "- Charli"
+          - group "2 / 4" [ref=e332]:
+            - img "hmi7r9azv0f31zntreejjhywibgt.jpeg" [ref=e334]
+            - generic [ref=e335]:
+              - generic [ref=e336]:
+                - img [ref=e337]
+                - img [ref=e339]
+                - img [ref=e341]
+                - img [ref=e343]
+                - img [ref=e345]
+              - paragraph [ref=e348]: "\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is super glossy and healthy. Plus, I've noticed fewer digestive issues.\""
+              - paragraph [ref=e350]:
+                - strong [ref=e351]: "- Jennifer"
+          - group "3 / 4" [ref=e352]:
+            - img "6orxvip0vwon6sxo7htby89w63qh.jpeg" [ref=e354]
+            - generic [ref=e355]:
+              - generic [ref=e356]:
+                - img [ref=e357]
+                - img [ref=e359]
+                - img [ref=e361]
+                - img [ref=e363]
+                - img [ref=e365]
+              - paragraph [ref=e368]: "\"A friend recommended this brand, and WOW. Within weeks, she was soft, shiny, and even smelled fresher. I will never let us run out of these.\""
+              - paragraph [ref=e370]:
+                - strong [ref=e371]: "- Léa"
+          - group "4 / 4" [ref=e372]:
+            - img "awhoze2gwxbtn3z2uehkvt35ar72.jpeg" [ref=e374]
+            - generic [ref=e375]:
+              - generic [ref=e376]:
+                - img [ref=e377]
+                - img [ref=e379]
+                - img [ref=e381]
+                - img [ref=e383]
+                - img [ref=e385]
+              - paragraph [ref=e388]: "\"My dogs have their meal and sit at my feet waiting for their treat. They just love them.\""
+              - paragraph [ref=e390]:
+                - strong [ref=e391]: "- Arthur"
+          - group "1 / 4" [ref=e392]:
+            - img "<h2>Loved by <em>thousands</em> of<br/>caring pet owners..</h2>" [ref=e394]
+            - generic [ref=e395]:
+              - generic [ref=e396]:
+                - img [ref=e397]
+                - img [ref=e399]
+                - img [ref=e401]
+                - img [ref=e403]
+                - img [ref=e405]
+              - paragraph [ref=e408]: "\"Saw this brand on instagram, didn't expect much, but it has worked wonders for my kelpie's gut, loose stools and grass eating is way less now! Happy customer ☺️\""
+              - paragraph [ref=e410]:
+                - strong [ref=e411]: "- Charli"
+          - group "2 / 4" [ref=e412]:
+            - img "hmi7r9azv0f31zntreejjhywibgt.jpeg" [ref=e414]
+            - generic [ref=e415]:
+              - generic [ref=e416]:
+                - img [ref=e417]
+                - img [ref=e419]
+                - img [ref=e421]
+                - img [ref=e423]
+                - img [ref=e425]
+              - paragraph [ref=e428]: "\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is super glossy and healthy. Plus, I've noticed fewer digestive issues.\""
+              - paragraph [ref=e430]:
+                - strong [ref=e431]: "- Jennifer"
+          - group "3 / 4" [ref=e432]:
+            - img "6orxvip0vwon6sxo7htby89w63qh.jpeg" [ref=e434]
+            - generic [ref=e435]:
+              - generic [ref=e436]:
+                - img [ref=e437]
+                - img [ref=e439]
+                - img [ref=e441]
+                - img [ref=e443]
+                - img [ref=e445]
+              - paragraph [ref=e448]: "\"A friend recommended this brand, and WOW. Within weeks, she was soft, shiny, and even smelled fresher. I will never let us run out of these.\""
+              - paragraph [ref=e450]:
+                - strong [ref=e451]: "- Léa"
+        - generic [ref=e452]:
+          - button "Previous slide" [ref=e453] [cursor=pointer]:
+            - img [ref=e454]
+          - button "Next slide" [ref=e456] [cursor=pointer]:
+            - img [ref=e457]
+    - link "Shop Bestsellers ->" [ref=e465] [cursor=pointer]:
+      - /url: "#vp-cg-heading"
+    - generic [ref=e467]:
+      - heading "Formulated and Praised by Certified Vets.." [level=2] [ref=e468]
+      - generic [ref=e470]:
+        - heading "\"I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.\"" [level=2] [ref=e471]
+        - paragraph [ref=e472]: Dr. M.A. Raza, DVM
+      - img [ref=e476]
+    - generic [ref=e477]:
+      - generic [ref=e479]:
+        - heading "What's inside, is what really matters.." [level=2] [ref=e481]
+        - paragraph [ref=e483]:
+          - text: Our products only contain carefully selected ingredients with real benefits,
+          - strong [ref=e484]: 100% premium quality.
+        - paragraph [ref=e486]:
+          - link "Full ingredients list ->" [ref=e487] [cursor=pointer]:
+            - /url: /products/vitalpaws-multivitamin-chews
+        - generic [ref=e488]:
+          - generic [ref=e489]:
+            - img [ref=e491]
+            - paragraph [ref=e492]: Pumpkin
+            - paragraph [ref=e494]:
+              - text: A natural, fiber-rich prebiotic that
+              - text: supports healthy digestion
+            - paragraph [ref=e495]: 200mg
+            - img [ref=e497] [cursor=pointer]
+          - generic [ref=e505]:
+            - img [ref=e507]
+            - paragraph [ref=e508]: Wild Salmon Oil
+            - paragraph [ref=e510]:
+              - text: Natural omega-3s, reduces
+              - text: inflammation and improves skin & coat
+            - paragraph [ref=e511]: 95mg
+            - img [ref=e513] [cursor=pointer]
+          - generic [ref=e521]:
+            - img [ref=e523]
+            - paragraph [ref=e524]: Probiotic Blend
+            - paragraph [ref=e526]:
+              - text: Natural probiotics that restore gut
+              - text: balance & support immune health
+            - paragraph [ref=e527]: 500M CFU
+            - img [ref=e529] [cursor=pointer]
+          - generic [ref=e537]:
+            - img [ref=e539]
+            - paragraph [ref=e540]: Glucosamine
+            - paragraph [ref=e542]:
+              - text: Clinically-proven joint support to
+              - text: protect cartilage and improve mobility
+            - paragraph [ref=e543]: 200mg
+            - img [ref=e545] [cursor=pointer]
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - group "1 / 4":
+                - generic:
+                  - generic:
+                    - img
+                  - paragraph: Pumpkin
+                  - generic:
+                    - paragraph: Tell your story
+                  - paragraph: MODAL SUBTITLE
+                  - generic:
+                    - paragraph: Tell your story
+              - group "2 / 4":
+                - generic:
+                  - generic:
+                    - img
+                  - paragraph: Wild Salmon Oil
+                  - generic:
+                    - paragraph: Tell your story
+                  - paragraph: MODAL SUBTITLE
+                  - generic:
+                    - paragraph: Tell your story
+              - group "3 / 4":
+                - generic:
+                  - generic:
+                    - img
+                  - paragraph: Probiotic Blend
+                  - generic:
+                    - paragraph: Tell your story
+                  - paragraph: MODAL SUBTITLE
+                  - generic:
+                    - paragraph: Tell your story
+              - group "4 / 4":
+                - generic:
+                  - generic:
+                    - img
+                  - paragraph: Glucosamine
+                  - generic:
+                    - paragraph: Tell your story
+                  - paragraph: MODAL SUBTITLE
+                  - generic:
+                    - paragraph: Tell your story
+        - generic:
+          - button "Previous slide" [disabled]:
+            - img
+          - generic:
+            - strong: "1"
+            - text: OF
+            - strong: "4"
+          - button "Next slide":
+            - img
+    - link "Shop Bestsellers ->" [ref=e559] [cursor=pointer]:
+      - /url: "#vp-cg-heading"
+    - generic [ref=e561]:
+      - heading "Frequently Asked Questions.." [level=2] [ref=e562]
+      - generic [ref=e563]:
+        - generic [ref=e564]:
+          - generic [ref=e565] [cursor=pointer]:
+            - heading "What if my dog doesn't like the chews?" [level=3] [ref=e566]
+            - img "Collapse/Expand" [ref=e567]
+          - paragraph [ref=e570]: In the rare case that this happens, we’ll issue you a full refund, no problem.
+        - generic [ref=e572] [cursor=pointer]:
+          - heading "At what age can my pup start using these?" [level=3] [ref=e573]
+          - img "Collapse/Expand" [ref=e574]
+        - generic [ref=e577] [cursor=pointer]:
+          - heading "What does 100% Human-Grade mean?" [level=3] [ref=e578]
+          - img "Collapse/Expand" [ref=e579]
+        - generic [ref=e582] [cursor=pointer]:
+          - heading "How long until I start seeing the benefits?" [level=3] [ref=e583]
+          - img "Collapse/Expand" [ref=e584]
+        - generic [ref=e587] [cursor=pointer]:
+          - heading "How many chews come in a jar?" [level=3] [ref=e588]
+          - img "Collapse/Expand" [ref=e589]
+        - generic [ref=e592] [cursor=pointer]:
+          - heading "What flavour is the Multivitamin?" [level=3] [ref=e593]
+          - img "Collapse/Expand" [ref=e594]
+        - generic [ref=e597] [cursor=pointer]:
+          - heading "What happens if I accidentally give my dog too many chews?" [level=3] [ref=e598]
+          - img "Collapse/Expand" [ref=e599]
+        - generic [ref=e602] [cursor=pointer]:
+          - heading "Can I take this dog multivitamin with other supplements?" [level=3] [ref=e603]
+          - img "Collapse/Expand" [ref=e604]
+    - paragraph [ref=e612]:
+      - text: Still left with questions? Feel free to reach out to
+      - emphasis [ref=e613]: info@thevitalpaws.com
+      - text: Our team is always happy to help!
+    - dialog "UNLOCK OFFER" [ref=e614]:
+      - button "Close" [active] [ref=e615] [cursor=pointer]:
+        - img [ref=e616]
+      - generic [ref=e618]:
+        - generic [ref=e619]:
+          - heading "Try Your Luck 👀" [level=3] [ref=e621]
+          - paragraph [ref=e623]: Scratch below to see what you win
+          - generic [ref=e626]:
+            - paragraph [ref=e627]: "💚 You've won:"
+            - paragraph [ref=e628]: 10% OFF
+          - button "No, thanks" [ref=e630] [cursor=pointer]
+        - img [ref=e633]
+  - contentinfo [ref=e638]:
+    - generic [ref=e639]:
+      - generic [ref=e640]:
+        - generic [ref=e641]:
+          - link "VitalPaws" [ref=e642] [cursor=pointer]:
+            - /url: /
+            - img "VitalPaws"
+          - generic [ref=e643]: Revolutionising pet health
+          - generic [ref=e644]:
+            - heading "Customer service" [level=4] [ref=e645]
+            - paragraph [ref=e646]:
+              - link "info@thevitalpaws.com" [ref=e647] [cursor=pointer]:
+                - /url: mailto:info@thevitalpaws.com
+            - paragraph [ref=e648]: "Mon–Fri: 09:00–17:00"
+        - generic [ref=e649]:
+          - heading "Menu" [level=4] [ref=e650]
+          - list [ref=e651]:
+            - listitem [ref=e652]:
+              - link "Home" [ref=e653] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e654]:
+              - link "Shop" [ref=e655] [cursor=pointer]:
+                - /url: /collections/for-dogs
+            - listitem [ref=e656]:
+              - link "The Science" [ref=e657] [cursor=pointer]:
+                - /url: /pages/the-science
+            - listitem [ref=e658]:
+              - link "My subscription" [ref=e659] [cursor=pointer]:
+                - /url: https://thevitalpaws.com/a/loop_subscriptions/customer
+            - listitem [ref=e660]:
+              - link "Contact us" [ref=e661] [cursor=pointer]:
+                - /url: /pages/contact
+        - generic [ref=e662]:
+          - heading "VitalPaws" [level=4] [ref=e663]
+          - list [ref=e664]:
+            - listitem [ref=e665]:
+              - link "Contact" [ref=e666] [cursor=pointer]:
+                - /url: /pages/contact
+            - listitem [ref=e667]:
+              - link "Privacy Policy" [ref=e668] [cursor=pointer]:
+                - /url: /policies/privacy-policy
+            - listitem [ref=e669]:
+              - link "Terms of Service" [ref=e670] [cursor=pointer]:
+                - /url: /policies/terms-of-service
+            - listitem [ref=e671]:
+              - link "Shipping Policy" [ref=e672] [cursor=pointer]:
+                - /url: /policies/shipping-policy
+            - listitem [ref=e673]:
+              - link "Return & Refund Policy" [ref=e674] [cursor=pointer]:
+                - /url: /policies/refund-policy
+            - listitem [ref=e675]:
+              - link "Subscription Policy" [ref=e676] [cursor=pointer]:
+                - /url: /policies/subscription-policy
+        - generic [ref=e677]:
+          - heading "VitalPaws Club" [level=4] [ref=e678]
+          - paragraph [ref=e679]: Exclusive deals & a gift on signup
+          - generic [ref=e680]:
+            - textbox "Email" [ref=e681]
+            - button "Subscribe" [ref=e682] [cursor=pointer]:
+              - img [ref=e683]
+          - generic [ref=e685]:
+            - link "Facebook" [ref=e686] [cursor=pointer]:
+              - /url: https://www.facebook.com/profile.php?id=61567418320275
+              - img [ref=e687]
+            - link "Instagram" [ref=e689] [cursor=pointer]:
+              - /url: https://www.instagram.com/officialvitalpaws/
+              - img [ref=e690]
+      - generic [ref=e694]:
+        - generic [ref=e695]:
+          - list [ref=e696]:
+            - listitem [ref=e697]:
+              - link "Privacy policy" [ref=e698] [cursor=pointer]:
+                - /url: /policies/privacy-policy
+            - listitem [ref=e699]:
+              - text: ·
+              - link "Terms of service" [ref=e700] [cursor=pointer]:
+                - /url: /policies/terms-of-service
+            - listitem [ref=e701]:
+              - text: ·
+              - link "Refund policy" [ref=e702] [cursor=pointer]:
+                - /url: /policies/refund-policy
+            - listitem [ref=e703]:
+              - text: ·
+              - link "Shipping policy" [ref=e704] [cursor=pointer]:
+                - /url: /policies/shipping-policy
+            - listitem [ref=e705]:
+              - text: ·
+              - link "Contact information" [ref=e706] [cursor=pointer]:
+                - /url: /policies/contact-information
+            - listitem [ref=e707]:
+              - text: ·
+              - link "Cancellation policy" [ref=e708] [cursor=pointer]:
+                - /url: /policies/subscription-policy
+          - button "Netherlands | EUR €" [ref=e713] [cursor=pointer]:
+            - generic [ref=e714]: Netherlands | EUR €
+            - img [ref=e715]
+        - generic [ref=e718]:
+          - img "American Express" [ref=e720]
+          - img "Apple Pay" [ref=e726]
+          - img "Bancontact" [ref=e738]
+          - img "Diners Club" [ref=e746]
+          - img "Discover" [ref=e751]
+          - img "Google Pay" [ref=e761]
+          - img "Mastercard" [ref=e770]
+          - img "PayPal" [ref=e778]
+          - img "Shop Pay" [ref=e785]
+          - img "Venmo" [ref=e790]
+          - img "Visa" [ref=e796]
+      - generic [ref=e801]:
+        - paragraph [ref=e802]: The information on this site is not a substitute for professional veterinary advice. VitalPaws is not intended to diagnose, treat, cure or prevent any disease. If your pet has a medical condition, consult your veterinarian. Results may vary. Not for human consumption.
+        - generic [ref=e803]:
+          - text: © 2026,
+          - link "VitalPaws" [ref=e804] [cursor=pointer]:
+            - /url: /
+  - iframe [ref=e806]:
+    - generic [ref=f14e4]:
+      - button [ref=f14e7] [cursor=pointer]:
+        - img [ref=f14e9]
+        - img [ref=f14e12]
+      - generic [ref=f14e15]:
+        - generic [ref=f14e18]:
+          - link "Logo" [ref=f14e19] [cursor=pointer]:
+            - /url: https://admin.shopify.com/store/bquwnn-bz
+            - img "Logo" [ref=f14e20]
+          - generic [ref=f14e22]:
+            - generic [ref=f14e23]: vital-paws-new/main
+            - generic [ref=f14e24]: Draft
+        - generic [ref=f14e26]:
+          - button "Hide bar" [ref=f14e28] [cursor=pointer]:
+            - generic [ref=f14e29]: Hide bar
+          - button "Copy link" [ref=f14e32] [cursor=pointer]:
+            - img [ref=f14e36]
+            - generic [ref=f14e38]: Copy link
