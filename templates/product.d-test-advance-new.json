@@ -316,6 +316,7 @@
         "item_BNxb87",
         "item_gnGPKW"
       ],
+      "disabled": true,
       "name": "SS - Scrolling features",
       "settings": {
         "scroll_on_desktop": true,
