@@ -2018,10 +2018,19 @@
         try {
           if (localStorage.getItem(subscribedKey)) return true;
         } catch (e) {}
-        /* __kla_id is set by Klaviyo once the visitor is an identified profile. */
-        return document.cookie.split('; ').some(function (c) {
-          return c.indexOf('__kla_id=') === 0;
-        });
+        /* Klaviyo sets __kla_id for EVERY visitor, including anonymous ones, so
+           its mere presence means nothing. The cookie is base64-encoded JSON;
+           only an *identified* profile carries a "$exchange_id" key. We treat
+           the visitor as a known subscriber only when that key is present. */
+        var match = document.cookie.match(/(?:^|;\s*)__kla_id=([^;]+)/);
+        if (!match) return false;
+        try {
+          var decoded = atob(decodeURIComponent(match[1]));
+          var data = JSON.parse(decoded);
+          return !!(data && data['$exchange_id']);
+        } catch (e) {
+          return false;
+        }
       }
 
       function openModal() {
