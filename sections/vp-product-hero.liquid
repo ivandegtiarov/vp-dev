@@ -851,12 +851,12 @@
         });
       }
       window['vpMainSwiper_' + SECTION_ID] = new Swiper('#vp-main-' + SECTION_ID, {
-        // Show a small peek of the next image (1.06 per view) on mobile so users
+        // Show a small peek of the next image (1.08 per view) on mobile so users
         // see the gallery is swipeable; full single slide on desktop.
-        slidesPerView: 1.06,
-        spaceBetween: 10,
+        slidesPerView: 1.05,
+        spaceBetween: 5,
         breakpoints: {
-          750: { slidesPerView: 1, spaceBetween: 10 }
+          750: { slidesPerView: 1.05, spaceBetween: 5 }
         },
         thumbs: thumbs ? { swiper: thumbs } : undefined
       });
