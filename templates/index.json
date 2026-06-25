@@ -1,1 +1,1517 @@
-{"sections":{"ss_hero_16_RETCqm":{"type":"ss-hero-16","blocks":{"review_B9Pjx6":{"type":"review","settings":{"review_padding_horizontal":0,"review_padding_horizontal_mobile":0,"review_padding_vertical":6,"review_padding_vertical_mobile":14,"review_radius":10,"review_bg_opacity":0,"review_mt":16,"review_mt_mobile":20,"stars_count":4.5,"stars_size":18,"stars_size_mobile":14,"review":"<p><a href=\"#shopify-section-template--25678353957130__ss_testimonial_12_dFgNK4\" title=\"#shopify-section-template--25678353957130__ss_testimonial_12_dFgNK4\"><strong>Excellent<\/strong> (20k+ Healthy dogs)<\/a><\/p>","review_custom":false,"review_font":"inter_n5","review_size":16,"review_size_mobile":14,"review_height":130,"review_color":"#000000","stars_color":"#ffffff","stars_bg_color":"#00b67a","review_bg_color":"#ffffff"}},"heading_nCFnE3":{"type":"heading","settings":{"heading":"<p><strong>Revolutionising the <br\/><\/strong><em><strong>Pet Health<\/strong><\/em><strong> Industry<\/strong><\/p>","heading_custom":false,"heading_font":"inter_n7","heading_size":42,"heading_size_mobile":28,"heading_height":130,"heading_mt":12,"heading_mt_mobile":0,"heading_color":"#000000"}},"text_A96PhF":{"type":"text","settings":{"text":"<p>With our vet-formulated pet supplements, backed by science.<\/p>","text_custom":false,"text_font":"inter_n4","text_size":18,"text_size_mobile":16,"text_height":150,"text_mt":16,"text_mt_mobile":10,"text_color":"#000000"}},"feature_7VGYQf":{"type":"feature","settings":{"feature_gap":12,"feature_gap_mobile":8,"feature_mt":30,"feature_mt_mobile":20,"hide_mobile":false,"icon":"atc","custom_icon":"shopify:\/\/shop_images\/checkmarkgreen.png","icon_size":20,"icon_size_mobile":16,"text":"Six essential health benefits in one","text_custom":true,"text_font":"inter_n6","text_size":16,"text_size_mobile":14,"text_height":100,"icon_color":"#000000","text_color":"#000000"}},"feature_hpGbdT":{"type":"feature","settings":{"feature_gap":12,"feature_gap_mobile":8,"feature_mt":18,"feature_mt_mobile":16,"hide_mobile":false,"icon":"none","custom_icon":"shopify:\/\/shop_images\/checkmarkgreen.png","icon_size":20,"icon_size_mobile":16,"text":"100% Human-grade ingredients","text_custom":true,"text_font":"inter_n6","text_size":16,"text_size_mobile":14,"text_height":100,"icon_color":"#000000","text_color":"#000000"}},"feature_qDw7mh":{"type":"feature","settings":{"feature_gap":12,"feature_gap_mobile":8,"feature_mt":18,"feature_mt_mobile":16,"hide_mobile":false,"icon":"atc","custom_icon":"shopify:\/\/shop_images\/checkmarkgreen.png","icon_size":20,"icon_size_mobile":16,"text":"Locally formulated by certified vets","text_custom":true,"text_font":"inter_n6","text_size":16,"text_size_mobile":14,"text_height":100,"icon_color":"#000000","text_color":"#000000"}},"button_JHtRCC":{"type":"button","settings":{"button":"Shop Bestsellers","url":"#vp-cg-section","button_custom":false,"button_font":"inter_n7","button_size":16,"button_size_mobile":16,"button_height":100,"button_padding_horizontal":62,"button_padding_horizontal_mobile":30,"button_padding_vertical":26,"button_padding_vertical_mobile":20,"button_radius":60,"button_border_thickness":1,"button_mt":36,"button_mt_mobile":28,"button_style":"non_outline_arrow","button_color":"#ffffff","button_hover_color":"#ffffff","button_bg_color":"#7bbc72","button_bg_hover_color":"#62915c","button_border_color":"#000000","button_border_hover_color":"#000000"}}},"block_order":["review_B9Pjx6","heading_nCFnE3","text_A96PhF","feature_7VGYQf","feature_hpGbdT","feature_qDw7mh","button_JHtRCC"],"custom_css":[],"name":"SS - Hero #16","settings":{"hero_height":"fixed_height","hero_fixed_height":600,"body_layout":"text_image","body_layout_mobile":"image_text","body_gap":52,"body_gap_mobile":0,"content_align":"left","content_align_mobile":"left","content_vertical_align":"center","image":"shopify:\/\/shop_images\/vitalpaws-dog-getting-chew_bf7a5746-6935-4196-9c8d-ad8122f22636.webp","image_width":50,"image_ratio_mobile":"square","image_radius":0,"background_overlay":0,"background_color":"#ffffff","background_overlay_color":"#000000","background_gradient":"","border_color":"#000000","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":0,"padding_bottom":0,"padding_horizontal":0,"padding_horizontal_mobile":0,"full_width":false,"content_width":1400,"border_thickness":0,"section_radius":0,"lazy":false}},"ss_scrolling_logo_cloud_5_MBNX7B":{"type":"ss-scrolling-logo-cloud-5","blocks":{"image_PhMHge":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/petvets-new-logo.png","url":""}},"image_HdMAAA":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/1701508998white-youtube-logo-png.png","url":""}},"image_iPwAmr":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Forbes_1_2_1.webp","url":""}}},"block_order":["image_PhMHge","image_HdMAAA","image_iPwAmr"],"custom_css":[],"name":"SS - Scrolling logo cloud #5","settings":{"layout_radius":0,"layout_border_thickness":0,"heading":"<h2>As seen on..<\/h2>","heading_custom":false,"heading_font":"josefin_sans_n4","heading_size":18,"heading_size_mobile":18,"heading_height":100,"scrolling_velocity":16,"scrolling_velocity_mobile":16,"scrolling_direction":"left","pause_hover":false,"scrolling_gap":70,"scrolling_gap_mobile":20,"card_width_desktop":130,"card_width_mobile":100,"heading_color":"#ffffff","layout_bg_color":"#7bbc72","layout_border_color":"#121212","background_color":"#ffffff","border_color":"#121212","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":0,"padding_bottom":0,"padding_horizontal":0,"padding_horizontal_mobile":0,"full_width":true,"content_width":1200,"border_thickness":0,"section_radius":0,"lazy":true}},"vp_collection_grid_zt9Egd":{"type":"vp-collection-grid","blocks":{"collection_card_ePkaEW":{"type":"collection_card","settings":{"product":"joint-serum-complex-for-dogs","custom_image":"shopify:\/\/shop_images\/joint_serum_2_14.56.26.png","custom_title":"","category_label":"","badge":"NEW!","show_stars":true,"star_count":"5","description":"Daily advanced joint support drops for improved mobility, less stiffness, and reduced inflammation.","free_gift_text":"✅ VET-FORMULATED","btn_label":"Shop Now →"}},"collection_card_4HQht6":{"type":"collection_card","settings":{"product":"vitalpaws-multivitamin-chews","custom_image":"shopify:\/\/shop_images\/VitalPaws-multivitamin-product-img.webp","custom_title":"","category_label":"","badge":"MOST POPULAR!","show_stars":true,"star_count":"5","description":"Daily Soft chews for key nutritional support & long-term health in a daily treat.","free_gift_text":"✅ VET-FORMULATED","btn_label":"Shop Now →"}}},"block_order":["collection_card_ePkaEW","collection_card_4HQht6"],"name":"VP - Collection Grid","settings":{"eyebrow":"","heading":"<em>Bestsellers || |m|<\/em>you can't miss..","subheading":"Vet-formulated supplements for every stage of your dog's life.","header_position":"right","columns_desktop":2,"card_gap":20,"card_border_radius":8,"show_view_all":false,"view_all_url":"","view_all_label":"View All Products","bg_color":"#ffffff","card_bg_color":"#faf9f7","padding_top":64,"padding_bottom":12}},"ss_feature_41_4ELR64":{"type":"ss-feature-41","blocks":{"heading_jMwtyA":{"type":"heading","settings":{"heading":"<h2>Raising the industry standard..<\/h2>","heading_custom":false,"heading_font":"inter_n7","heading_size":42,"heading_size_mobile":28,"heading_height":130,"heading_mt":20,"heading_mt_mobile":20,"heading_color":"#000000"}},"text_c7hGA4":{"type":"text","settings":{"text":"<p>At VitalPaws, we combine veterinary research with the highest quality premium-grade ingredients.<\/p>","text_custom":false,"text_font":"inter_n4","text_size":18,"text_size_mobile":16,"text_height":150,"text_mt":12,"text_mt_mobile":16,"text_color":"#121212"}},"feature_embRtK":{"type":"feature","settings":{"icon":"shield","text":"<p>Formulated by local Veterinarians <\/p>","feature_left_icon_color":"#121212","feature_left_bg_color":"#ffffff","feature_left_border_color":"#121212"}},"feature_y9wj7c":{"type":"feature","settings":{"icon":"shield","text":"<p>No artificial flavours or fillers<\/p>","feature_left_icon_color":"#121212","feature_left_bg_color":"#ffffff","feature_left_border_color":"#121212"}},"feature_pCMYq9":{"type":"feature","settings":{"icon":"shield","text":"<p>Third-party tested<\/p>","feature_left_icon_color":"#121212","feature_left_bg_color":"#ffffff","feature_left_border_color":"#121212"}},"image_RVgLEa":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/single-chew.webp","image_size":250,"image_size_mobile":210,"image_border_thickness":0,"image_radius":20,"image_ratio":"original","image_ratio_mobile":"original","vertical_position":50,"vertical_position_mobile":40,"horizontal_position":52,"horizontal_position_mobile":50,"use_shadow":false,"pulse_animation":true,"image_border_color":"#121212"}}},"block_order":["heading_jMwtyA","text_c7hGA4","feature_embRtK","feature_y9wj7c","feature_pCMYq9","image_RVgLEa"],"custom_css":[],"name":"SS - Feature #41","settings":{"layout":"content_feature","layout_mobile":"content_feature","layout_gap":150,"layout_gap_mobile":100,"content_align":"left","content_align_mobile":"center","content_vertical_align":"center","image":"shopify:\/\/shop_images\/VitalPaws_statics_2.jpg","image_border_thickness":0,"image_radius":8,"image_overlay":0.1,"features_padding_top":100,"features_padding_top_mobile":100,"features_padding_bottom":100,"features_padding_bottom_mobile":38,"features_padding_left":80,"features_padding_left_mobile":40,"features_padding_right":40,"features_padding_right_mobile":40,"features_gap":20,"features_gap_mobile":22,"reveal_scroll":true,"feature_gap":20,"feature_gap_mobile":20,"feature_border_thickness":1,"feature_left_image_size":70,"feature_left_image_size_mobile":46,"feature_left_border_thickness":0,"feature_left_radius":50,"feature_text_custom":false,"feature_text_font":"inter_n7","feature_text_size":22,"feature_text_size_mobile":18,"feature_text_height":120,"feature_text_shadow":true,"feature_text_color":"#ffffff","feature_border_color":"#ffffff","image_border_color":"#121212","image_overlay_color":"#121212","background_color":"#ffffff","background_gradient":"","border_color":"#121212","margin_top":0,"margin_bottom":28,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":36,"padding_bottom":4,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":false,"content_width":1400,"border_thickness":0,"section_radius":0,"lazy":true}},"ss_testimonial_12_dFgNK4":{"type":"ss-testimonial-12","blocks":{"slide_nGDzFK":{"type":"slide","settings":{"media_style":"image","image":"shopify:\/\/shop_images\/vp-testimonial-customer.webp","video_url":"","controls":false,"stars_count":5,"text":"<p>\"Saw this brand on instagram, didn't expect much, but it has worked wonders for my kelpie's gut, loose stools and grass eating is way less now! Happy customer ☺️\"<\/p>","author":"<p><strong>- Charli<\/strong><\/p>"}},"slide_xc47qx":{"type":"slide","settings":{"media_style":"image","image":"shopify:\/\/shop_images\/hmi7r9azv0f31zntreejjhywibgt.jpg","video_url":"","controls":false,"stars_count":5,"text":"<p>\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is super glossy and healthy. Plus, I've noticed fewer digestive issues.\"<\/p>","author":"<p><strong>- Jennifer<\/strong><\/p>"}},"slide_XWJdWC":{"type":"slide","settings":{"media_style":"image","image":"shopify:\/\/shop_images\/6orxvip0vwon6sxo7htby89w63qh.jpg","video_url":"","controls":false,"stars_count":5,"text":"<p>\"A friend recommended this brand, and WOW. Within weeks, she was soft, shiny, and even smelled fresher. I will never let us run out of these.\"<\/p>","author":"<p><strong>- Léa<\/strong><\/p>"}},"slide_HBUXJP":{"type":"slide","settings":{"media_style":"image","image":"shopify:\/\/shop_images\/awhoze2gwxbtn3z2uehkvt35ar72.jpg","video_url":"","controls":false,"stars_count":5,"text":"<p>\"My dogs have their meal and sit at my feet waiting for their treat. They just love them.\"<\/p>","author":"<p><strong>- Arthur<\/strong><\/p>"}}},"block_order":["slide_nGDzFK","slide_xc47qx","slide_XWJdWC","slide_HBUXJP"],"name":"SS - Testimonials #12","settings":{"heading":"<h2>Loved by <em>thousands<\/em> of<br\/>caring pet owners..<\/h2>","heading_custom":false,"heading_font":"josefin_sans_n4","heading_size":42,"heading_size_mobile":28,"heading_height":130,"heading_align":"center","heading_align_mobile":"center","sub_heading":"<p>Read below on how they transformed their furry friend's health!<\/p>","sub_heading_custom":false,"sub_heading_font":"josefin_sans_n4","sub_heading_size":18,"sub_heading_size_mobile":16,"sub_heading_height":150,"sub_heading_mt":12,"sub_heading_align":"center","sub_heading_align_mobile":"center","slider_view":3,"slider_view_mobile":1.3,"slider_gap":28,"slider_gap_mobile":20,"slider_mt":20,"autoplay":false,"autoplay_delay":5,"card_padding_vertical":20,"card_padding_vertical_mobile":16,"card_padding_horizontal":20,"card_padding_horizontal_mobile":16,"card_radius":20,"card_border_thickness":1,"card_shadow":true,"media_radius":20,"media_border_thickness":0,"media_ratio":"square","media_ratio_mobile":"square","content_padding_vertical":0,"content_padding_vertical_mobile":0,"content_padding_horizontal":0,"content_padding_horizontal_mobile":0,"hide_content":false,"stars_size":16,"stars_mt":22,"stars_align":"center","stars_align_mobile":"center","text_custom":false,"text_font":"josefin_sans_n4","text_size":16,"text_size_mobile":16,"text_height":130,"text_mt":12,"text_align":"center","text_align_mobile":"center","author_custom":false,"author_font":"josefin_sans_n4","author_size":14,"author_size_mobile":14,"author_height":130,"author_mt":12,"author_align":"center","author_align_mobile":"center","navigation_mt":40,"navigation_gap":20,"navigation_align":"center","navigation_align_mobile":"center","arrow_size":50,"arrow_size_mobile":50,"arrow_show_desktop":true,"arrow_show_mobile":false,"dots_size":10,"dots_size_mobile":10,"dots_show_desktop":false,"dots_show_mobile":true,"btn_icon_size":50,"btn_icon_size_mobile":40,"card_bg_color":"#ffffff","card_bg_gradient":"","card_border_color":"#bcbcbc","media_border_color":"#121212","stars_color":"#7bbc72","text_color":"#323232","author_color":"#323232","video_icon_bg_color":"#ffffff","video_icon_color":"#121212","arrow_color":"#000000","arrow_hover_color":"#000000","dots_color":"#7bbc72","heading_color":"#000000","sub_heading_color":"#000000","background_color":"#ffffff","background_gradient":"","border_color":"#121212","margin_top":0,"margin_bottom":0,"padding_top":36,"padding_bottom":36,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":true,"content_width":1200,"border_thickness":0,"lazy":true}},"rich_text_4tPhhw":{"type":"rich-text","blocks":{"button_QLef6i":{"type":"button","settings":{"button_label":"Shop Bestsellers ->","button_link":"#vp-cg-heading","button_style_secondary":false,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["button_QLef6i"],"name":"t:sections.rich-text.presets.name","settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-ef0454f4-6d66-43ab-a6d4-310a8da64a6d","full_width":true,"padding_top":32,"padding_bottom":32}},"clickable_testimonials_UQYHgU":{"type":"clickable-testimonials","blocks":{"testimonial_qXGTn6":{"type":"testimonial","settings":{"testimonial":"I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.","author":"Dr. Jane Smith, DVM","image":"shopify:\/\/shop_images\/1516510292595.jpg"}},"testimonial_KVjFzC":{"type":"testimonial","settings":{"testimonial":"\"This is the most effective, comprehensive supplement available. I would recommend it to any dog parent.\"","author":"Dr. Jackie Bogard, DVM","image":"shopify:\/\/shop_images\/70a64411-e1fb-4a80-b3fa-558af0c794d1.webp"}},"testimonial_3PHqxk":{"type":"testimonial","settings":{"testimonial":"\"VitalPaws provides a simple and effective way to improve key components of dog health for the long run.\"","author":"Dr. Jessie Andersen, DVM","image":"shopify:\/\/shop_images\/56d76c11-34d4-40f7-8289-b8c7282b584d.jpg"}}},"block_order":["testimonial_qXGTn6","testimonial_KVjFzC","testimonial_3PHqxk"],"disabled":true,"name":"Clickable Testimonials","settings":{"title":"Formulated and praised by certified vets.."}},"clickable_testimonials_Hned8x":{"type":"clickable-testimonials","blocks":{"testimonial_Qw9Byh":{"type":"testimonial","settings":{"testimonial":"I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.","author":"Dr. M.A. Raza, DVM","image":"shopify:\/\/shop_images\/ahmed-vitalpaws-vet.webp"}},"testimonial_DRDBjz":{"type":"testimonial","disabled":true,"settings":{"testimonial":"This is the most effective, comprehensive supplement available. I would recommend it to any dog parent.","author":"Dr. Jackie Bogard, DVM","image":"shopify:\/\/shop_images\/70a64411-e1fb-4a80-b3fa-558af0c794d1.webp"}},"testimonial_T3xrJX":{"type":"testimonial","disabled":true,"settings":{"testimonial":"VitalPaws provides a simple and effective way to improve key components of dog health for the long run.","author":"Dr. Jessie Andersen, DVM","image":"shopify:\/\/shop_images\/brunette-girl-vet-clinic-examine-with-stethoscope-dog-breed-yorkshire-terrier.webp"}}},"block_order":["testimonial_Qw9Byh","testimonial_DRDBjz","testimonial_T3xrJX"],"name":"Clickable Testimonials","settings":{"title":"Formulated and Praised by Certified Vets.."}},"ss_product_ingredients_6_yPU8Ep":{"type":"ss-product-ingredients-6","blocks":{"heading_6CFDpq":{"type":"heading","settings":{"heading":"<h2>What's inside, is what really matters..<\/h2>","heading_custom":false,"heading_font":"josefin_sans_n4","heading_size":42,"heading_size_mobile":28,"heading_height":130,"heading_mt":24,"heading_mt_mobile":20,"heading_color":"#000000"}},"text_GwMzPq":{"type":"text","settings":{"text":"<p>Our products only contain carefully selected ingredients with real benefits, <br\/><strong>100% premium quality.<\/strong><\/p>","text_custom":false,"text_font":"josefin_sans_n4","text_size":18,"text_size_mobile":16,"text_height":150,"text_mt":16,"text_mt_mobile":12,"text_color":"#121212"}},"card_K3Lw8K":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/VitalPaws_statics_41.webp","title":"Pumpkin","text":"<p>A natural, fiber-rich prebiotic that<br\/>supports healthy digestion<\/p>","source":"200mg","modal_text":"<p>Tell your story<\/p>","modal_subtitle":"MODAL SUBTITLE","modal_sub_text":"<p>Tell your story<\/p>","url":""}},"card_QELMcy":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/VitalPaws_statics_42.webp","title":"Wild Salmon Oil","text":"<p>Natural omega-3s, reduces<br\/>inflammation and improves skin & coat<\/p>","source":"95mg","modal_text":"<p>Tell your story<\/p>","modal_subtitle":"MODAL SUBTITLE","modal_sub_text":"<p>Tell your story<\/p>","url":""}},"card_ywqQQY":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/VitalPaws_statics_44.webp","title":"Probiotic Blend","text":"<p>Natural probiotics that restore gut<br\/>balance & support immune health<\/p>","source":"500M CFU","modal_text":"<p>Tell your story<\/p>","modal_subtitle":"MODAL SUBTITLE","modal_sub_text":"<p>Tell your story<\/p>","url":""}},"card_qaP3ty":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/VitalPaws_statics_40.webp","title":"Glucosamine","text":"<p>Clinically-proven joint support to <br\/>protect cartilage and improve mobility<\/p>","source":"200mg","modal_text":"<p>Tell your story<\/p>","modal_subtitle":"MODAL SUBTITLE","modal_sub_text":"<p>Tell your story<\/p>","url":""}},"text_LKdWyk":{"type":"text","settings":{"text":"<p><a href=\"\/products\/vitalpaws-multivitamin-chews\" title=\"VitalPaws™ Daily Multivitamin\">Full ingredients list -&gt;<\/a><\/p>","text_custom":false,"text_font":"josefin_sans_n4","text_size":16,"text_size_mobile":13,"text_height":150,"text_mt":16,"text_mt_mobile":12,"text_color":"#121212"}}},"block_order":["heading_6CFDpq","text_GwMzPq","card_K3Lw8K","card_QELMcy","card_ywqQQY","card_qaP3ty","text_LKdWyk"],"custom_css":[".ingredients-plus-icon-template--25678353957130__ss_product_ingredients_6_yPU8Ep {display: none;}"],"name":"SS - Product ingredients #6","settings":{"content_align":"left","content_align_mobile":"center","content_maxwidth":700,"cards_view":2,"cards_view_mobile":1,"cards_gap":30,"cards_gap_mobile":16,"cards_mt":42,"cards_mt_mobile":42,"cards_limits":6,"card_padding_horizontal":24,"card_padding_horizontal_mobile":24,"card_padding_vertical":24,"card_padding_vertical_mobile":24,"card_radius":8,"card_border_thickness":0,"card_align":"left","card_align_mobile":"left","title_custom":false,"title_font":"inter_n7","title_size":26,"title_size_mobile":22,"title_height":130,"text_custom":false,"text_font":"josefin_sans_n4","text_size":16,"text_size_mobile":14,"text_height":130,"text_mt":8,"text_mt_mobile":8,"source_custom":false,"source_font":"josefin_sans_n4","source_size":14,"source_size_mobile":14,"source_height":130,"source_mt":48,"source_mt_mobile":40,"plus_icon_size":24,"plus_icon_size_mobile":24,"see_all":"See all","see_less":"See less","see_custom":false,"see_font":"josefin_sans_n4","see_size":14,"see_size_mobile":14,"see_height":130,"slides_per_view":2,"modal_slide_padding_horizontal":56,"modal_slide_padding_horizontal_mobile":24,"modal_slide_padding_vertical":56,"modal_slide_padding_vertical_mobile":24,"modal_slide_radius":0,"modal_slide_border_thickness":0,"modal_slide_align":"left","modal_slide_align_mobile":"left","modal_close_size":16,"modal_close_size_mobile":16,"slide_text_custom":false,"slide_text_font":"josefin_sans_n4","slide_text_size":14,"slide_text_size_mobile":14,"slide_text_height":150,"slide_text_mt":24,"slide_text_mt_mobile":16,"slide_title_custom":false,"slide_title_font":"josefin_sans_n4","slide_title_size":12,"slide_title_size_mobile":12,"slide_title_height":150,"slide_title_mt":32,"slide_title_mt_mobile":24,"slide_sub_text_custom":false,"slide_sub_text_font":"josefin_sans_n4","slide_sub_text_size":14,"slide_sub_text_size_mobile":14,"slide_sub_text_height":150,"slide_sub_text_mt":8,"slide_sub_text_mt_mobile":8,"button":"Learn more","button_custom":false,"button_font":"josefin_sans_n4","button_size":14,"button_size_mobile":14,"button_height":100,"button_padding_vertical":16,"button_padding_vertical_mobile":16,"button_padding_horizontal":24,"button_padding_horizontal_mobile":24,"button_radius":100,"button_border_thickness":1,"button_mt":32,"button_mt_mobile":24,"button_style":"link","pagination_custom":false,"pagination_font":"josefin_sans_n4","pagination_size":14,"pagination_size_mobile":14,"pagination_height":130,"title_color":"#121212","text_color":"#121212","source_color":"#121212","plus_icon_color":"#ffffff","plus_icon_bg_color":"#7bbc72","card_bg_color":"#ffffff","card_border_color":"#121212","see_color":"#121212","slide_text_color":"#121212","slide_title_color":"#a7afc9","slide_sub_text_color":"#121212","modal_close_color":"#121212","modal_slide_bg_color":"#ffffff","modal_slide_border_color":"#121212","button_color":"#121212","button_hover_color":"#121212","button_bg_color":"#f3f3f3","button_bg_hover_color":"#f3f3f3","button_border_color":"#121212","button_border_hover_color":"#121212","pagination_color":"#ffffff","pagination_arrow_color":"#ffffff","modal_overlay_color":"#121212","background_color":"#f8f8f8","background_gradient":"linear-gradient(0deg, rgba(123, 188, 114, 0.15) 51%, rgba(255, 255, 255, 1) 91%)","border_color":"#121212","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":36,"padding_bottom":36,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":false,"content_width":1200,"border_thickness":0,"section_radius":0,"lazy":true}},"rich_text_EtJ4Eq":{"type":"rich-text","blocks":{"button_n7w4kW":{"type":"button","settings":{"button_label":"Shop Bestsellers ->","button_link":"#vp-cg-heading","button_style_secondary":false,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["button_n7w4kW"],"custom_css":[".rich-text {background-color: #f8f8f8; background-image: linear-gradient( 0deg, rgba(123, 188, 114, 0.15) 51%, rgba(255, 255, 255, 1) 91% );}"],"name":"t:sections.rich-text.presets.name","settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-ef0454f4-6d66-43ab-a6d4-310a8da64a6d","full_width":true,"padding_top":0,"padding_bottom":32}},"faq_mTdmGf":{"type":"faq","blocks":{"accordion_item_bGALCn":{"type":"accordion_item","settings":{"title":"What if my dog doesn't like the chews?","content":"<p>In the rare case that this happens, we’ll issue you a full refund, no problem.<\/p>"}},"accordion_item_b9knPJ":{"type":"accordion_item","settings":{"title":"At what age can my pup start using these?","content":"<p>The Multivitamin is suitable for dogs of all ages and breeds. However, we do recommend dogs begin to incorporate the chews into their daily routine starting at an age of 3 months or older.<\/p>"}},"accordion_item_KWbhjy":{"type":"accordion_item","settings":{"title":"What does 100% Human-Grade mean?","content":"<p>Most pet supplements from other brands contain palm oil, fillers, artificial flavouring, preservatives, etc. At VitalPaws, we’re raising the standards of pet health by only using the highest quality human-grade ingredients, which is what our best friends deserve.<\/p>"}},"accordion_item_Lg3zdm":{"type":"accordion_item","settings":{"title":"How long until I start seeing the benefits?","content":"<p>The benefits that most dogs feel—less itching, more activity, better mood—are just bonuses to improving their long-term health. If taken consistently on a daily basis, most dogs will start to see positive effects in about 6-8 weeks.<\/p>"}},"accordion_item_gETcnz":{"type":"accordion_item","settings":{"title":"How many chews come in a jar?","content":"<p>There are <strong>60 Chews in each jar<\/strong>, which is a<\/p><ul><li>2-Monthly supply for Small Dogs (0-12kg).<\/li><li>Monthly supply for Medium dogs (12-34kg).<\/li><li>3-Weekly supply for Bigger dogs (34kg+).<\/li><\/ul>"}},"accordion_item_e3Gwbh":{"type":"accordion_item","settings":{"title":"What flavour is the Multivitamin?","content":"<p>Our Multivitamin is made with the highest quality human-grade duck meat, a flavour that dogs absolutely love. <\/p>"}},"accordion_item_yqfbg9":{"type":"accordion_item","settings":{"title":"What happens if I accidentally give my dog too many chews?","content":"<p>In the event that your dog accidentally consumes significantly more than the daily recommended dose, consult your vet for advice.<\/p>"}},"accordion_item_HCwNwE":{"type":"accordion_item","settings":{"title":"Can I take this dog multivitamin with other supplements?","content":"<p>Our veterinary team formulated our Daily Vitamin with natural ingredients that can be taken both alone or as a complementary product with other common and more targeted pet supplements. Nevertheless, we still recommend checking with your vet.<\/p>"}}},"block_order":["accordion_item_bGALCn","accordion_item_b9knPJ","accordion_item_KWbhjy","accordion_item_Lg3zdm","accordion_item_gETcnz","accordion_item_e3Gwbh","accordion_item_yqfbg9","accordion_item_HCwNwE"],"name":"Accordion - FAQ","settings":{"title":"Frequently Asked Questions.."}},"rich_text_FbmdNC":{"type":"rich-text","blocks":{"text_QxEAJQ":{"type":"text","settings":{"text":"<p>Still left with questions? Feel free to reach out to <em>info@thevitalpaws.com<\/em> <br\/>Our team is always happy to help!<\/p>"}}},"block_order":["text_QxEAJQ"],"custom_css":["@media (max-width: 640px) {.rich-text {background-color: #f9f9f9; }}"],"name":"t:sections.rich-text.presets.name","settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":0,"padding_bottom":52}},"177740572862ab6955":{"type":"_blocks","disabled":true,"settings":{}},"1777405802158111ad":{"type":"_blocks","blocks":{"ai_gen_block_8d8dddd_XWGhEx":{"type":"ai_gen_block_8d8dddd","disabled":true,"settings":{"collection":"for-dogs","products_to_show":6,"section_padding_top":36,"section_padding_bottom":36,"horizontal_padding":16,"card_width":80,"card_width_desktop":30,"card_gap":16,"card_gap_desktop":24,"card_background":"#faf9f7","card_border_radius":16,"card_padding":16,"card_inner_gap":12,"content_gap":8,"image_aspect_ratio":"1 \/ 1","image_border_radius":12,"show_badge":true,"badge_text":"Free gift over €50","badge_background":"#7bbc72","badge_text_color":"#ffffff","badge_font_size":11,"badge_font_weight":600,"badge_padding_vertical":4,"badge_padding_horizontal":8,"badge_border_radius":4,"badge_position_top":8,"badge_position_left":8,"title_font_size":18,"title_font_weight":700,"title_color":"#000000","show_rating":true,"rating_value":5,"star_size":16,"star_color":"#ffc107","star_empty_color":"#e0e0e0","show_description":true,"description_length":100,"description_font_size":14,"description_color":"#666666","show_price_label":true,"price_label_text":"From","price_label_font_size":12,"price_label_font_weight":500,"price_label_color":"#666666","original_price_font_size":14,"original_price_color":"#999999","sale_price_font_size":18,"sale_price_font_weight":700,"sale_price_color":"#7bbc72","button_text":"Shop Now ->","button_background":"#7bbc72","button_hover_background":"#6aab61","button_text_color":"#ffffff","button_font_size":16,"button_font_weight":600,"button_border_radius":8,"button_padding_vertical":8,"button_padding_horizontal":24},"blocks":{}}},"block_order":["ai_gen_block_8d8dddd_XWGhEx"],"disabled":true,"settings":{}}},"order":["ss_hero_16_RETCqm","ss_scrolling_logo_cloud_5_MBNX7B","vp_collection_grid_zt9Egd","ss_feature_41_4ELR64","ss_testimonial_12_dFgNK4","rich_text_4tPhhw","clickable_testimonials_UQYHgU","clickable_testimonials_Hned8x","ss_product_ingredients_6_yPU8Ep","rich_text_EtJ4Eq","faq_mTdmGf","rich_text_FbmdNC","177740572862ab6955","1777405802158111ad"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ss_hero_16_RETCqm": {
+      "type": "ss-hero-16",
+      "blocks": {
+        "review_B9Pjx6": {
+          "type": "review",
+          "settings": {
+            "review_padding_horizontal": 0,
+            "review_padding_horizontal_mobile": 0,
+            "review_padding_vertical": 6,
+            "review_padding_vertical_mobile": 14,
+            "review_radius": 10,
+            "review_bg_opacity": 0,
+            "review_mt": 16,
+            "review_mt_mobile": 20,
+            "stars_count": 4.5,
+            "stars_size": 18,
+            "stars_size_mobile": 14,
+            "review": "<p><a href=\"#shopify-section-template--25678353957130__ss_testimonial_12_dFgNK4\" title=\"#shopify-section-template--25678353957130__ss_testimonial_12_dFgNK4\"><strong>Excellent</strong> (20k+ Healthy dogs)</a></p>",
+            "review_custom": false,
+            "review_font": "inter_n5",
+            "review_size": 16,
+            "review_size_mobile": 14,
+            "review_height": 130,
+            "review_color": "#000000",
+            "stars_color": "#ffffff",
+            "stars_bg_color": "#00b67a",
+            "review_bg_color": "#ffffff"
+          }
+        },
+        "heading_nCFnE3": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p><strong>Revolutionising the <br/></strong><em><strong>Pet Health</strong></em><strong> Industry</strong></p>",
+            "heading_custom": false,
+            "heading_font": "inter_n7",
+            "heading_size": 42,
+            "heading_size_mobile": 28,
+            "heading_height": 130,
+            "heading_mt": 12,
+            "heading_mt_mobile": 0,
+            "heading_color": "#000000"
+          }
+        },
+        "text_A96PhF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>With our vet-formulated pet supplements, backed by science.</p>",
+            "text_custom": false,
+            "text_font": "inter_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_height": 150,
+            "text_mt": 16,
+            "text_mt_mobile": 10,
+            "text_color": "#000000"
+          }
+        },
+        "feature_7VGYQf": {
+          "type": "feature",
+          "settings": {
+            "feature_gap": 12,
+            "feature_gap_mobile": 8,
+            "feature_mt": 30,
+            "feature_mt_mobile": 20,
+            "hide_mobile": false,
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/checkmarkgreen.png",
+            "icon_size": 20,
+            "icon_size_mobile": 16,
+            "text": "Six essential health benefits in one",
+            "text_custom": true,
+            "text_font": "inter_n6",
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "text_height": 100,
+            "icon_color": "#000000",
+            "text_color": "#000000"
+          }
+        },
+        "feature_hpGbdT": {
+          "type": "feature",
+          "settings": {
+            "feature_gap": 12,
+            "feature_gap_mobile": 8,
+            "feature_mt": 18,
+            "feature_mt_mobile": 16,
+            "hide_mobile": false,
+            "icon": "none",
+            "custom_icon": "shopify://shop_images/checkmarkgreen.png",
+            "icon_size": 20,
+            "icon_size_mobile": 16,
+            "text": "100% Human-grade ingredients",
+            "text_custom": true,
+            "text_font": "inter_n6",
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "text_height": 100,
+            "icon_color": "#000000",
+            "text_color": "#000000"
+          }
+        },
+        "feature_qDw7mh": {
+          "type": "feature",
+          "settings": {
+            "feature_gap": 12,
+            "feature_gap_mobile": 8,
+            "feature_mt": 18,
+            "feature_mt_mobile": 16,
+            "hide_mobile": false,
+            "icon": "atc",
+            "custom_icon": "shopify://shop_images/checkmarkgreen.png",
+            "icon_size": 20,
+            "icon_size_mobile": 16,
+            "text": "Locally formulated by certified vets",
+            "text_custom": true,
+            "text_font": "inter_n6",
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "text_height": 100,
+            "icon_color": "#000000",
+            "text_color": "#000000"
+          }
+        },
+        "button_JHtRCC": {
+          "type": "button",
+          "settings": {
+            "button": "Shop Bestsellers",
+            "url": "#vp-cg-section",
+            "button_custom": false,
+            "button_font": "inter_n7",
+            "button_size": 16,
+            "button_size_mobile": 16,
+            "button_height": 100,
+            "button_padding_horizontal": 62,
+            "button_padding_horizontal_mobile": 30,
+            "button_padding_vertical": 26,
+            "button_padding_vertical_mobile": 20,
+            "button_radius": 60,
+            "button_border_thickness": 1,
+            "button_mt": 36,
+            "button_mt_mobile": 28,
+            "button_style": "non_outline_arrow",
+            "button_color": "#ffffff",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "#7bbc72",
+            "button_bg_hover_color": "#62915c",
+            "button_border_color": "#000000",
+            "button_border_hover_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "review_B9Pjx6",
+        "heading_nCFnE3",
+        "text_A96PhF",
+        "feature_7VGYQf",
+        "feature_hpGbdT",
+        "feature_qDw7mh",
+        "button_JHtRCC"
+      ],
+      "custom_css": [],
+      "name": "SS - Hero #16",
+      "settings": {
+        "hero_height": "fixed_height",
+        "hero_fixed_height": 600,
+        "body_layout": "text_image",
+        "body_layout_mobile": "image_text",
+        "body_gap": 52,
+        "body_gap_mobile": 0,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "center",
+        "image": "shopify://shop_images/vitalpaws-dog-getting-chew_bf7a5746-6935-4196-9c8d-ad8122f22636.webp",
+        "image_width": 50,
+        "image_ratio_mobile": "square",
+        "image_radius": 0,
+        "background_overlay": 0,
+        "background_color": "#ffffff",
+        "background_overlay_color": "#000000",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": false,
+        "content_width": 1400,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": false
+      }
+    },
+    "ss_scrolling_logo_cloud_5_MBNX7B": {
+      "type": "ss-scrolling-logo-cloud-5",
+      "blocks": {
+        "image_PhMHge": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/petvets-new-logo.png",
+            "url": ""
+          }
+        },
+        "image_HdMAAA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1701508998white-youtube-logo-png.png",
+            "url": ""
+          }
+        },
+        "image_iPwAmr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Forbes_1_2_1.webp",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_PhMHge",
+        "image_HdMAAA",
+        "image_iPwAmr"
+      ],
+      "custom_css": [],
+      "name": "SS - Scrolling logo cloud #5",
+      "settings": {
+        "layout_radius": 0,
+        "layout_border_thickness": 0,
+        "heading": "<h2>As seen on..</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 18,
+        "heading_size_mobile": 18,
+        "heading_height": 100,
+        "scrolling_velocity": 16,
+        "scrolling_velocity_mobile": 16,
+        "scrolling_direction": "left",
+        "pause_hover": false,
+        "scrolling_gap": 70,
+        "scrolling_gap_mobile": 20,
+        "card_width_desktop": 130,
+        "card_width_mobile": 100,
+        "heading_color": "#ffffff",
+        "layout_bg_color": "#7bbc72",
+        "layout_border_color": "#121212",
+        "background_color": "#ffffff",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "vp_collection_grid_zt9Egd": {
+      "type": "vp-collection-grid",
+      "blocks": {
+        "collection_card_ePkaEW": {
+          "type": "collection_card",
+          "settings": {
+            "product": "joint-serum-complex-for-dogs",
+            "custom_image": "shopify://shop_images/joint_serum_2_14.56.26.png",
+            "custom_title": "",
+            "category_label": "",
+            "badge": "NEW!",
+            "show_stars": true,
+            "star_count": "5",
+            "description": "Daily advanced joint support drops for improved mobility, less stiffness, and reduced inflammation.",
+            "free_gift_text": "✅ VET-FORMULATED",
+            "btn_label": "Shop Now →"
+          }
+        },
+        "collection_card_4HQht6": {
+          "type": "collection_card",
+          "settings": {
+            "product": "vitalpaws-multivitamin-chews",
+            "custom_image": "shopify://shop_images/VitalPaws-multivitamin-product-img.webp",
+            "custom_title": "",
+            "category_label": "",
+            "badge": "MOST POPULAR!",
+            "show_stars": true,
+            "star_count": "5",
+            "description": "Daily Soft chews for key nutritional support & long-term health in a daily treat.",
+            "free_gift_text": "✅ VET-FORMULATED",
+            "btn_label": "Shop Now →"
+          }
+        }
+      },
+      "block_order": [
+        "collection_card_ePkaEW",
+        "collection_card_4HQht6"
+      ],
+      "name": "VP - Collection Grid",
+      "settings": {
+        "eyebrow": "",
+        "heading": "<em>Bestsellers || |m|</em>you can't miss..",
+        "subheading": "Vet-formulated supplements for every stage of your dog's life.",
+        "header_position": "right",
+        "columns_desktop": 2,
+        "card_gap": 20,
+        "card_border_radius": 8,
+        "show_view_all": false,
+        "view_all_url": "",
+        "view_all_label": "View All Products",
+        "bg_color": "#ffffff",
+        "card_bg_color": "#faf9f7",
+        "padding_top": 64,
+        "padding_bottom": 12
+      }
+    },
+    "ss_feature_41_4ELR64": {
+      "type": "ss-feature-41",
+      "blocks": {
+        "heading_jMwtyA": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Raising the industry standard..</h2>",
+            "heading_custom": false,
+            "heading_font": "inter_n7",
+            "heading_size": 42,
+            "heading_size_mobile": 28,
+            "heading_height": 130,
+            "heading_mt": 20,
+            "heading_mt_mobile": 20,
+            "heading_color": "#000000"
+          }
+        },
+        "text_c7hGA4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At VitalPaws, we combine veterinary research with the highest quality premium-grade ingredients.</p>",
+            "text_custom": false,
+            "text_font": "inter_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 16,
+            "text_color": "#121212"
+          }
+        },
+        "feature_embRtK": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "text": "<p>Formulated by local Veterinarians </p>",
+            "feature_left_icon_color": "#121212",
+            "feature_left_bg_color": "#ffffff",
+            "feature_left_border_color": "#121212"
+          }
+        },
+        "feature_y9wj7c": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "text": "<p>No artificial flavours or fillers</p>",
+            "feature_left_icon_color": "#121212",
+            "feature_left_bg_color": "#ffffff",
+            "feature_left_border_color": "#121212"
+          }
+        },
+        "feature_pCMYq9": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "text": "<p>Third-party tested</p>",
+            "feature_left_icon_color": "#121212",
+            "feature_left_bg_color": "#ffffff",
+            "feature_left_border_color": "#121212"
+          }
+        },
+        "image_RVgLEa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/single-chew.webp",
+            "image_size": 250,
+            "image_size_mobile": 210,
+            "image_border_thickness": 0,
+            "image_radius": 20,
+            "image_ratio": "original",
+            "image_ratio_mobile": "original",
+            "vertical_position": 50,
+            "vertical_position_mobile": 40,
+            "horizontal_position": 52,
+            "horizontal_position_mobile": 50,
+            "use_shadow": false,
+            "pulse_animation": true,
+            "image_border_color": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jMwtyA",
+        "text_c7hGA4",
+        "feature_embRtK",
+        "feature_y9wj7c",
+        "feature_pCMYq9",
+        "image_RVgLEa"
+      ],
+      "custom_css": [],
+      "name": "SS - Feature #41",
+      "settings": {
+        "layout": "content_feature",
+        "layout_mobile": "content_feature",
+        "layout_gap": 150,
+        "layout_gap_mobile": 100,
+        "content_align": "left",
+        "content_align_mobile": "center",
+        "content_vertical_align": "center",
+        "image": "shopify://shop_images/VitalPaws_statics_2.jpg",
+        "image_border_thickness": 0,
+        "image_radius": 8,
+        "image_overlay": 0.1,
+        "features_padding_top": 100,
+        "features_padding_top_mobile": 100,
+        "features_padding_bottom": 100,
+        "features_padding_bottom_mobile": 38,
+        "features_padding_left": 80,
+        "features_padding_left_mobile": 40,
+        "features_padding_right": 40,
+        "features_padding_right_mobile": 40,
+        "features_gap": 20,
+        "features_gap_mobile": 22,
+        "reveal_scroll": true,
+        "feature_gap": 20,
+        "feature_gap_mobile": 20,
+        "feature_border_thickness": 1,
+        "feature_left_image_size": 70,
+        "feature_left_image_size_mobile": 46,
+        "feature_left_border_thickness": 0,
+        "feature_left_radius": 50,
+        "feature_text_custom": false,
+        "feature_text_font": "inter_n7",
+        "feature_text_size": 22,
+        "feature_text_size_mobile": 18,
+        "feature_text_height": 120,
+        "feature_text_shadow": true,
+        "feature_text_color": "#ffffff",
+        "feature_border_color": "#ffffff",
+        "image_border_color": "#121212",
+        "image_overlay_color": "#121212",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 28,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 4,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 1400,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_testimonial_12_dFgNK4": {
+      "type": "ss-testimonial-12",
+      "blocks": {
+        "slide_nGDzFK": {
+          "type": "slide",
+          "settings": {
+            "media_style": "image",
+            "image": "shopify://shop_images/vp-testimonial-customer.webp",
+            "video_url": "",
+            "controls": false,
+            "stars_count": 5,
+            "text": "<p>\"Saw this brand on instagram, didn't expect much, but it has worked wonders for my kelpie's gut, loose stools and grass eating is way less now! Happy customer ☺️\"</p>",
+            "author": "<p><strong>- Charli</strong></p>"
+          }
+        },
+        "slide_xc47qx": {
+          "type": "slide",
+          "settings": {
+            "media_style": "image",
+            "image": "shopify://shop_images/hmi7r9azv0f31zntreejjhywibgt.jpg",
+            "video_url": "",
+            "controls": false,
+            "stars_count": 5,
+            "text": "<p>\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is super glossy and healthy. Plus, I've noticed fewer digestive issues.\"</p>",
+            "author": "<p><strong>- Jennifer</strong></p>"
+          }
+        },
+        "slide_XWJdWC": {
+          "type": "slide",
+          "settings": {
+            "media_style": "image",
+            "image": "shopify://shop_images/6orxvip0vwon6sxo7htby89w63qh.jpg",
+            "video_url": "",
+            "controls": false,
+            "stars_count": 5,
+            "text": "<p>\"A friend recommended this brand, and WOW. Within weeks, she was soft, shiny, and even smelled fresher. I will never let us run out of these.\"</p>",
+            "author": "<p><strong>- Léa</strong></p>"
+          }
+        },
+        "slide_HBUXJP": {
+          "type": "slide",
+          "settings": {
+            "media_style": "image",
+            "image": "shopify://shop_images/awhoze2gwxbtn3z2uehkvt35ar72.jpg",
+            "video_url": "",
+            "controls": false,
+            "stars_count": 5,
+            "text": "<p>\"My dogs have their meal and sit at my feet waiting for their treat. They just love them.\"</p>",
+            "author": "<p><strong>- Arthur</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_nGDzFK",
+        "slide_xc47qx",
+        "slide_XWJdWC",
+        "slide_HBUXJP"
+      ],
+      "name": "SS - Testimonials #12",
+      "settings": {
+        "heading": "<h2>Loved by <em>thousands</em> of<br/>caring pet owners..</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 42,
+        "heading_size_mobile": 28,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "sub_heading": "<p>Read below on how they transformed their furry friend's health!</p>",
+        "sub_heading_custom": false,
+        "sub_heading_font": "josefin_sans_n4",
+        "sub_heading_size": 18,
+        "sub_heading_size_mobile": 16,
+        "sub_heading_height": 150,
+        "sub_heading_mt": 12,
+        "sub_heading_align": "center",
+        "sub_heading_align_mobile": "center",
+        "slider_view": 3,
+        "slider_view_mobile": 1.3,
+        "slider_gap": 28,
+        "slider_gap_mobile": 20,
+        "slider_mt": 20,
+        "autoplay": false,
+        "autoplay_delay": 5,
+        "card_padding_vertical": 20,
+        "card_padding_vertical_mobile": 16,
+        "card_padding_horizontal": 20,
+        "card_padding_horizontal_mobile": 16,
+        "card_radius": 20,
+        "card_border_thickness": 1,
+        "card_shadow": true,
+        "media_radius": 20,
+        "media_border_thickness": 0,
+        "media_ratio": "square",
+        "media_ratio_mobile": "square",
+        "content_padding_vertical": 0,
+        "content_padding_vertical_mobile": 0,
+        "content_padding_horizontal": 0,
+        "content_padding_horizontal_mobile": 0,
+        "hide_content": false,
+        "stars_size": 16,
+        "stars_mt": 22,
+        "stars_align": "center",
+        "stars_align_mobile": "center",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 16,
+        "text_height": 130,
+        "text_mt": 12,
+        "text_align": "center",
+        "text_align_mobile": "center",
+        "author_custom": false,
+        "author_font": "josefin_sans_n4",
+        "author_size": 14,
+        "author_size_mobile": 14,
+        "author_height": 130,
+        "author_mt": 12,
+        "author_align": "center",
+        "author_align_mobile": "center",
+        "navigation_mt": 40,
+        "navigation_gap": 20,
+        "navigation_align": "center",
+        "navigation_align_mobile": "center",
+        "arrow_size": 50,
+        "arrow_size_mobile": 50,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "dots_size": 10,
+        "dots_size_mobile": 10,
+        "dots_show_desktop": false,
+        "dots_show_mobile": true,
+        "btn_icon_size": 50,
+        "btn_icon_size_mobile": 40,
+        "card_bg_color": "#ffffff",
+        "card_bg_gradient": "",
+        "card_border_color": "#bcbcbc",
+        "media_border_color": "#121212",
+        "stars_color": "#7bbc72",
+        "text_color": "#323232",
+        "author_color": "#323232",
+        "video_icon_bg_color": "#ffffff",
+        "video_icon_color": "#121212",
+        "arrow_color": "#000000",
+        "arrow_hover_color": "#000000",
+        "dots_color": "#7bbc72",
+        "heading_color": "#000000",
+        "sub_heading_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "rich_text_4tPhhw": {
+      "type": "rich-text",
+      "blocks": {
+        "button_QLef6i": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Bestsellers ->",
+            "button_link": "#vp-cg-heading",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button_QLef6i"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-ef0454f4-6d66-43ab-a6d4-310a8da64a6d",
+        "full_width": true,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "clickable_testimonials_UQYHgU": {
+      "type": "clickable-testimonials",
+      "blocks": {
+        "testimonial_qXGTn6": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.",
+            "author": "Dr. Jane Smith, DVM",
+            "image": "shopify://shop_images/1516510292595.jpg"
+          }
+        },
+        "testimonial_KVjFzC": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "\"This is the most effective, comprehensive supplement available. I would recommend it to any dog parent.\"",
+            "author": "Dr. Jackie Bogard, DVM",
+            "image": "shopify://shop_images/70a64411-e1fb-4a80-b3fa-558af0c794d1.webp"
+          }
+        },
+        "testimonial_3PHqxk": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "\"VitalPaws provides a simple and effective way to improve key components of dog health for the long run.\"",
+            "author": "Dr. Jessie Andersen, DVM",
+            "image": "shopify://shop_images/56d76c11-34d4-40f7-8289-b8c7282b584d.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_qXGTn6",
+        "testimonial_KVjFzC",
+        "testimonial_3PHqxk"
+      ],
+      "disabled": true,
+      "name": "Clickable Testimonials",
+      "settings": {
+        "title": "Formulated and praised by certified vets.."
+      }
+    },
+    "clickable_testimonials_Hned8x": {
+      "type": "clickable-testimonials",
+      "blocks": {
+        "testimonial_Qw9Byh": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.",
+            "author": "Dr. M.A. Raza, DVM",
+            "image": "shopify://shop_images/ahmed-vitalpaws-vet.webp"
+          }
+        },
+        "testimonial_DRDBjz": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "testimonial": "This is the most effective, comprehensive supplement available. I would recommend it to any dog parent.",
+            "author": "Dr. Jackie Bogard, DVM",
+            "image": "shopify://shop_images/70a64411-e1fb-4a80-b3fa-558af0c794d1.webp"
+          }
+        },
+        "testimonial_T3xrJX": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "testimonial": "VitalPaws provides a simple and effective way to improve key components of dog health for the long run.",
+            "author": "Dr. Jessie Andersen, DVM",
+            "image": "shopify://shop_images/brunette-girl-vet-clinic-examine-with-stethoscope-dog-breed-yorkshire-terrier.webp"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_Qw9Byh",
+        "testimonial_DRDBjz",
+        "testimonial_T3xrJX"
+      ],
+      "name": "Clickable Testimonials",
+      "settings": {
+        "title": "Formulated and Praised by Certified Vets.."
+      }
+    },
+    "ss_product_ingredients_6_yPU8Ep": {
+      "type": "ss-product-ingredients-6",
+      "blocks": {
+        "heading_6CFDpq": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>What's inside, is what really matters..</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 42,
+            "heading_size_mobile": 28,
+            "heading_height": 130,
+            "heading_mt": 24,
+            "heading_mt_mobile": 20,
+            "heading_color": "#000000"
+          }
+        },
+        "text_GwMzPq": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our products only contain carefully selected ingredients with real benefits, <br/><strong>100% premium quality.</strong></p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_height": 150,
+            "text_mt": 16,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        },
+        "card_K3Lw8K": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/VitalPaws_statics_41.webp",
+            "title": "Pumpkin",
+            "text": "<p>A natural, fiber-rich prebiotic that<br/>supports healthy digestion</p>",
+            "source": "200mg",
+            "modal_text": "<p>Tell your story</p>",
+            "modal_subtitle": "MODAL SUBTITLE",
+            "modal_sub_text": "<p>Tell your story</p>",
+            "url": ""
+          }
+        },
+        "card_QELMcy": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/VitalPaws_statics_42.webp",
+            "title": "Wild Salmon Oil",
+            "text": "<p>Natural omega-3s, reduces<br/>inflammation and improves skin & coat</p>",
+            "source": "95mg",
+            "modal_text": "<p>Tell your story</p>",
+            "modal_subtitle": "MODAL SUBTITLE",
+            "modal_sub_text": "<p>Tell your story</p>",
+            "url": ""
+          }
+        },
+        "card_ywqQQY": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/VitalPaws_statics_44.webp",
+            "title": "Probiotic Blend",
+            "text": "<p>Natural probiotics that restore gut<br/>balance & support immune health</p>",
+            "source": "500M CFU",
+            "modal_text": "<p>Tell your story</p>",
+            "modal_subtitle": "MODAL SUBTITLE",
+            "modal_sub_text": "<p>Tell your story</p>",
+            "url": ""
+          }
+        },
+        "card_qaP3ty": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/VitalPaws_statics_40.webp",
+            "title": "Glucosamine",
+            "text": "<p>Clinically-proven joint support to <br/>protect cartilage and improve mobility</p>",
+            "source": "200mg",
+            "modal_text": "<p>Tell your story</p>",
+            "modal_subtitle": "MODAL SUBTITLE",
+            "modal_sub_text": "<p>Tell your story</p>",
+            "url": ""
+          }
+        },
+        "text_LKdWyk": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"/products/vitalpaws-multivitamin-chews\" title=\"VitalPaws™ Daily Multivitamin\">Full ingredients list -&gt;</a></p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 16,
+            "text_size_mobile": 13,
+            "text_height": 150,
+            "text_mt": 16,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "heading_6CFDpq",
+        "text_GwMzPq",
+        "card_K3Lw8K",
+        "card_QELMcy",
+        "card_ywqQQY",
+        "card_qaP3ty",
+        "text_LKdWyk"
+      ],
+      "custom_css": [
+        ".ingredients-plus-icon-template--25678353957130__ss_product_ingredients_6_yPU8Ep {display: none;}"
+      ],
+      "name": "SS - Product ingredients #6",
+      "settings": {
+        "content_align": "left",
+        "content_align_mobile": "center",
+        "content_maxwidth": 700,
+        "cards_view": 2,
+        "cards_view_mobile": 1,
+        "cards_gap": 30,
+        "cards_gap_mobile": 16,
+        "cards_mt": 42,
+        "cards_mt_mobile": 42,
+        "cards_limits": 6,
+        "card_padding_horizontal": 24,
+        "card_padding_horizontal_mobile": 24,
+        "card_padding_vertical": 24,
+        "card_padding_vertical_mobile": 24,
+        "card_radius": 8,
+        "card_border_thickness": 0,
+        "card_align": "left",
+        "card_align_mobile": "left",
+        "title_custom": false,
+        "title_font": "inter_n7",
+        "title_size": 26,
+        "title_size_mobile": 22,
+        "title_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_height": 130,
+        "text_mt": 8,
+        "text_mt_mobile": 8,
+        "source_custom": false,
+        "source_font": "josefin_sans_n4",
+        "source_size": 14,
+        "source_size_mobile": 14,
+        "source_height": 130,
+        "source_mt": 48,
+        "source_mt_mobile": 40,
+        "plus_icon_size": 24,
+        "plus_icon_size_mobile": 24,
+        "see_all": "See all",
+        "see_less": "See less",
+        "see_custom": false,
+        "see_font": "josefin_sans_n4",
+        "see_size": 14,
+        "see_size_mobile": 14,
+        "see_height": 130,
+        "slides_per_view": 2,
+        "modal_slide_padding_horizontal": 56,
+        "modal_slide_padding_horizontal_mobile": 24,
+        "modal_slide_padding_vertical": 56,
+        "modal_slide_padding_vertical_mobile": 24,
+        "modal_slide_radius": 0,
+        "modal_slide_border_thickness": 0,
+        "modal_slide_align": "left",
+        "modal_slide_align_mobile": "left",
+        "modal_close_size": 16,
+        "modal_close_size_mobile": 16,
+        "slide_text_custom": false,
+        "slide_text_font": "josefin_sans_n4",
+        "slide_text_size": 14,
+        "slide_text_size_mobile": 14,
+        "slide_text_height": 150,
+        "slide_text_mt": 24,
+        "slide_text_mt_mobile": 16,
+        "slide_title_custom": false,
+        "slide_title_font": "josefin_sans_n4",
+        "slide_title_size": 12,
+        "slide_title_size_mobile": 12,
+        "slide_title_height": 150,
+        "slide_title_mt": 32,
+        "slide_title_mt_mobile": 24,
+        "slide_sub_text_custom": false,
+        "slide_sub_text_font": "josefin_sans_n4",
+        "slide_sub_text_size": 14,
+        "slide_sub_text_size_mobile": 14,
+        "slide_sub_text_height": 150,
+        "slide_sub_text_mt": 8,
+        "slide_sub_text_mt_mobile": 8,
+        "button": "Learn more",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 24,
+        "button_padding_horizontal_mobile": 24,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_mt": 32,
+        "button_mt_mobile": 24,
+        "button_style": "link",
+        "pagination_custom": false,
+        "pagination_font": "josefin_sans_n4",
+        "pagination_size": 14,
+        "pagination_size_mobile": 14,
+        "pagination_height": 130,
+        "title_color": "#121212",
+        "text_color": "#121212",
+        "source_color": "#121212",
+        "plus_icon_color": "#ffffff",
+        "plus_icon_bg_color": "#7bbc72",
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#121212",
+        "see_color": "#121212",
+        "slide_text_color": "#121212",
+        "slide_title_color": "#a7afc9",
+        "slide_sub_text_color": "#121212",
+        "modal_close_color": "#121212",
+        "modal_slide_bg_color": "#ffffff",
+        "modal_slide_border_color": "#121212",
+        "button_color": "#121212",
+        "button_hover_color": "#121212",
+        "button_bg_color": "#f3f3f3",
+        "button_bg_hover_color": "#f3f3f3",
+        "button_border_color": "#121212",
+        "button_border_hover_color": "#121212",
+        "pagination_color": "#ffffff",
+        "pagination_arrow_color": "#ffffff",
+        "modal_overlay_color": "#121212",
+        "background_color": "#f8f8f8",
+        "background_gradient": "linear-gradient(0deg, rgba(123, 188, 114, 0.15) 51%, rgba(255, 255, 255, 1) 91%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "rich_text_EtJ4Eq": {
+      "type": "rich-text",
+      "blocks": {
+        "button_n7w4kW": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Bestsellers ->",
+            "button_link": "#vp-cg-heading",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button_n7w4kW"
+      ],
+      "custom_css": [
+        ".rich-text {background-color: #f8f8f8; background-image: linear-gradient( 0deg, rgba(123, 188, 114, 0.15) 51%, rgba(255, 255, 255, 1) 91% );}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-ef0454f4-6d66-43ab-a6d4-310a8da64a6d",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 32
+      }
+    },
+    "faq_mTdmGf": {
+      "type": "faq",
+      "blocks": {
+        "accordion_item_bGALCn": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What if my dog doesn't like the chews?",
+            "content": "<p>In the rare case that this happens, we’ll issue you a full refund, no problem.</p>"
+          }
+        },
+        "accordion_item_b9knPJ": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "At what age can my pup start using these?",
+            "content": "<p>The Multivitamin is suitable for dogs of all ages and breeds. However, we do recommend dogs begin to incorporate the chews into their daily routine starting at an age of 3 months or older.</p>"
+          }
+        },
+        "accordion_item_KWbhjy": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What does 100% Human-Grade mean?",
+            "content": "<p>Most pet supplements from other brands contain palm oil, fillers, artificial flavouring, preservatives, etc. At VitalPaws, we’re raising the standards of pet health by only using the highest quality human-grade ingredients, which is what our best friends deserve.</p>"
+          }
+        },
+        "accordion_item_Lg3zdm": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "How long until I start seeing the benefits?",
+            "content": "<p>The benefits that most dogs feel—less itching, more activity, better mood—are just bonuses to improving their long-term health. If taken consistently on a daily basis, most dogs will start to see positive effects in about 6-8 weeks.</p>"
+          }
+        },
+        "accordion_item_gETcnz": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "How many chews come in a jar?",
+            "content": "<p>There are <strong>60 Chews in each jar</strong>, which is a</p><ul><li>2-Monthly supply for Small Dogs (0-12kg).</li><li>Monthly supply for Medium dogs (12-34kg).</li><li>3-Weekly supply for Bigger dogs (34kg+).</li></ul>"
+          }
+        },
+        "accordion_item_e3Gwbh": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What flavour is the Multivitamin?",
+            "content": "<p>Our Multivitamin is made with the highest quality human-grade duck meat, a flavour that dogs absolutely love. </p>"
+          }
+        },
+        "accordion_item_yqfbg9": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What happens if I accidentally give my dog too many chews?",
+            "content": "<p>In the event that your dog accidentally consumes significantly more than the daily recommended dose, consult your vet for advice.</p>"
+          }
+        },
+        "accordion_item_HCwNwE": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Can I take this dog multivitamin with other supplements?",
+            "content": "<p>Our veterinary team formulated our Daily Vitamin with natural ingredients that can be taken both alone or as a complementary product with other common and more targeted pet supplements. Nevertheless, we still recommend checking with your vet.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_bGALCn",
+        "accordion_item_b9knPJ",
+        "accordion_item_KWbhjy",
+        "accordion_item_Lg3zdm",
+        "accordion_item_gETcnz",
+        "accordion_item_e3Gwbh",
+        "accordion_item_yqfbg9",
+        "accordion_item_HCwNwE"
+      ],
+      "name": "Accordion - FAQ",
+      "settings": {
+        "title": "Frequently Asked Questions.."
+      }
+    },
+    "rich_text_FbmdNC": {
+      "type": "rich-text",
+      "blocks": {
+        "text_QxEAJQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Still left with questions? Feel free to reach out to <em>info@thevitalpaws.com</em> <br/>Our team is always happy to help!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_QxEAJQ"
+      ],
+      "custom_css": [
+        "@media (max-width: 640px) {.rich-text {background-color: #f9f9f9; }}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 52
+      }
+    },
+    "177740572862ab6955": {
+      "type": "_blocks",
+      "disabled": true,
+      "settings": {}
+    },
+    "1777405802158111ad": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8d8dddd_XWGhEx": {
+          "type": "ai_gen_block_8d8dddd",
+          "disabled": true,
+          "settings": {
+            "collection": "for-dogs",
+            "products_to_show": 6,
+            "section_padding_top": 36,
+            "section_padding_bottom": 36,
+            "horizontal_padding": 16,
+            "card_width": 80,
+            "card_width_desktop": 30,
+            "card_gap": 16,
+            "card_gap_desktop": 24,
+            "card_background": "#faf9f7",
+            "card_border_radius": 16,
+            "card_padding": 16,
+            "card_inner_gap": 12,
+            "content_gap": 8,
+            "image_aspect_ratio": "1 / 1",
+            "image_border_radius": 12,
+            "show_badge": true,
+            "badge_text": "Free gift over €50",
+            "badge_background": "#7bbc72",
+            "badge_text_color": "#ffffff",
+            "badge_font_size": 11,
+            "badge_font_weight": 600,
+            "badge_padding_vertical": 4,
+            "badge_padding_horizontal": 8,
+            "badge_border_radius": 4,
+            "badge_position_top": 8,
+            "badge_position_left": 8,
+            "title_font_size": 18,
+            "title_font_weight": 700,
+            "title_color": "#000000",
+            "show_rating": true,
+            "rating_value": 5,
+            "star_size": 16,
+            "star_color": "#ffc107",
+            "star_empty_color": "#e0e0e0",
+            "show_description": true,
+            "description_length": 100,
+            "description_font_size": 14,
+            "description_color": "#666666",
+            "show_price_label": true,
+            "price_label_text": "From",
+            "price_label_font_size": 12,
+            "price_label_font_weight": 500,
+            "price_label_color": "#666666",
+            "original_price_font_size": 14,
+            "original_price_color": "#999999",
+            "sale_price_font_size": 18,
+            "sale_price_font_weight": 700,
+            "sale_price_color": "#7bbc72",
+            "button_text": "Shop Now ->",
+            "button_background": "#7bbc72",
+            "button_hover_background": "#6aab61",
+            "button_text_color": "#ffffff",
+            "button_font_size": 16,
+            "button_font_weight": 600,
+            "button_border_radius": 8,
+            "button_padding_vertical": 8,
+            "button_padding_horizontal": 24
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8d8dddd_XWGhEx"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "ss_modal_popup_6_be3ab9_azJm9U": {
+      "type": "ss-modal-popup-6-be3ab9",
+      "blocks": {
+        "logo_RprcNw": {
+          "type": "logo",
+          "settings": {
+            "logo_width": 80,
+            "logo_width_mobile": 80,
+            "logo_mt": 0,
+            "logo_mt_mobile": 0
+          }
+        },
+        "sub_heading_6TxGMA": {
+          "type": "sub_heading",
+          "disabled": true,
+          "settings": {
+            "sub_heading": "<p>EXCLUSIVE OFFER</p>",
+            "sub_heading_custom": false,
+            "sub_heading_font": "sans_serif_n4",
+            "sub_heading_size": 12,
+            "sub_heading_size_mobile": 12,
+            "sub_heading_advanced": false,
+            "sub_heading_height": 130,
+            "sub_heading_mt": 12,
+            "sub_heading_mt_mobile": 12,
+            "sub_heading_color": "#262425"
+          }
+        },
+        "heading_WjczwC": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h3>Try Your Luck 👀</h3>",
+            "heading_custom": false,
+            "heading_font": "sans_serif_n7",
+            "heading_size": 46,
+            "heading_size_mobile": 36,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 40,
+            "heading_mt_mobile": 40,
+            "heading_color": "#262425"
+          }
+        },
+        "text_GGJGYT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Scratch below to see what you win</p>",
+            "text_custom": false,
+            "text_font": "sans_serif_n4",
+            "text_size": 18,
+            "text_size_mobile": 18,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 8,
+            "text_mt_mobile": 8,
+            "text_color": "#262425"
+          }
+        },
+        "scratch_card_Dq48bP": {
+          "type": "scratch_card",
+          "settings": {
+            "scratch_threshold": 45,
+            "card_advanced": false,
+            "card_width": 300,
+            "card_width_mobile": 260,
+            "card_height": 220,
+            "card_height_mobile": 180,
+            "card_radius": 16,
+            "card_mt": 24,
+            "card_mt_mobile": 20,
+            "overlay_text": "SCRATCH HERE",
+            "overlay_text_size": 26,
+            "overlay_text_size_mobile": 26,
+            "reveal_subtitle": "💚 You've won:",
+            "reveal_subtitle_size": 16,
+            "reveal_subtitle_size_mobile": 14,
+            "reveal_title": "10% OFF",
+            "reveal_title_size": 48,
+            "reveal_title_size_mobile": 40,
+            "reveal_custom": false,
+            "reveal_font": "sans_serif_n7",
+            "claim_label": "CLAIM",
+            "card_bg_color": "#f2efe3",
+            "overlay_color": "#bcd7b8",
+            "overlay_text_color": "#8fba89",
+            "reveal_subtitle_color": "#262425",
+            "reveal_title_color": "#262425"
+          }
+        },
+        "newsletter_qckNGx": {
+          "type": "newsletter",
+          "settings": {
+            "klaviyo_mode": true,
+            "klaviyo_form_class": "klaviyo-form-VqbMis",
+            "email_heading": "<h3>Receive your 10% discount:</h3>",
+            "email_heading_custom": false,
+            "email_heading_font": "sans_serif_n7",
+            "email_heading_size": 48,
+            "email_heading_size_mobile": 28,
+            "email_heading_advanced": false,
+            "email_heading_height": 130,
+            "email_heading_mt": 40,
+            "email_heading_mt_mobile": 40,
+            "email_heading_color": "#262425",
+            "placeholder_mail": "Your email address",
+            "input_custom": false,
+            "input_font": "sans_serif_n4",
+            "input_size": 16,
+            "input_size_mobile": 16,
+            "input_advanced": false,
+            "input_height": 100,
+            "input_padding_horizontal": 20,
+            "input_padding_horizontal_mobile": 20,
+            "input_padding_vertical": 18,
+            "input_padding_vertical_mobile": 18,
+            "input_radius": 8,
+            "input_border_thickness": 1,
+            "form_mt": 32,
+            "form_mt_mobile": 24,
+            "submit": "CLAIM 10% OFF",
+            "success_redirect_enabled": false,
+            "success_redirect_url": "",
+            "heading_thanks_text": "You're In!",
+            "thanks_text": "You've unlocked up to 40% off!",
+            "thanks_text_custom": false,
+            "thanks_text_font": "sans_serif_n4",
+            "thanks_text_size": 14,
+            "thanks_text_size_mobile": 14,
+            "thanks_heading_advanced": false,
+            "thanks_text_height": 150,
+            "thanks_text_mt": 16,
+            "thanks_text_mt_mobile": 16,
+            "discount_code": "SCRATCH10",
+            "discount_code_custom": false,
+            "discount_code_font": "sans_serif_n7",
+            "discount_code_label": "Tap to copy",
+            "discount_label_custom": false,
+            "discount_label_font": "sans_serif_n4",
+            "discount_code_size": 18,
+            "discount_code_size_mobile": 16,
+            "discount_code_label_size": 12,
+            "discount_code_label_size_mobile": 11,
+            "discount_code_advanced": false,
+            "discount_code_padding": 14,
+            "discount_code_padding_mobile": 12,
+            "discount_code_radius": 8,
+            "discount_code_border_thickness": 2,
+            "discount_code_border_style": "dotted",
+            "discount_code_mt": 12,
+            "discount_code_mt_mobile": 10,
+            "success_close_label": "CONTINUE SHOPPING",
+            "success_button_url": "",
+            "discount_code_color": "#262425",
+            "discount_code_label_color": "#262425",
+            "discount_code_bg_color": "#f9f7ef",
+            "discount_code_border_color": "#7bbc72",
+            "discount_code_border_hover_color": "#262425",
+            "input_color": "#262425",
+            "input_placeholder_color": "#262425",
+            "input_bg_color": "#fbfbf6",
+            "input_border_color": "#7bbc72",
+            "input_border_focus_color": "rgba(0,0,0,0)",
+            "heading_thanks_text_color": "#262425",
+            "thanks_text_color": "#262425"
+          }
+        },
+        "disclaimer_iAUxPG": {
+          "type": "disclaimer",
+          "settings": {
+            "disclaimer": "<p><em>By signing up you agree to receive email marketing.</em></p>",
+            "disclaimer_custom": false,
+            "disclaimer_font": "sans_serif_n4",
+            "disclaimer_size": 8,
+            "disclaimer_size_mobile": 8,
+            "disclaimer_advanced": false,
+            "disclaimer_height": 150,
+            "disclaimer_mt": 12,
+            "disclaimer_mt_mobile": 12,
+            "disclaimer_color": "#262425"
+          }
+        },
+        "no_thanks_KekxeH": {
+          "type": "no_thanks",
+          "settings": {
+            "no_thanks_text": "No, thanks",
+            "no_thanks_custom": false,
+            "no_thanks_font": "sans_serif_n4",
+            "no_thanks_size": 14,
+            "no_thanks_size_mobile": 14,
+            "no_thanks_advanced": false,
+            "no_thanks_height": 150,
+            "no_thanks_mt": 16,
+            "no_thanks_mt_mobile": 12,
+            "no_thanks_underline": false,
+            "no_thanks_color": "#262425"
+          }
+        }
+      },
+      "block_order": [
+        "logo_RprcNw",
+        "sub_heading_6TxGMA",
+        "heading_WjczwC",
+        "text_GGJGYT",
+        "scratch_card_Dq48bP",
+        "newsletter_qckNGx",
+        "disclaimer_iAUxPG",
+        "no_thanks_KekxeH"
+      ],
+      "name": "SS - Modal popup #6 🎛️ Preset 1",
+      "settings": {
+        "display_options": "after_seconds",
+        "seconds": 5,
+        "percent": 50,
+        "hide_modal_days": 0,
+        "button_fixed": false,
+        "button_align": "center",
+        "button_align_mobile": "center",
+        "button_vertical_align": "bottom",
+        "button_vertical_align_mobile": "bottom",
+        "button_placement_advanced": false,
+        "button_horizontal_dst_to_edge": 24,
+        "button_horizontal_dst_to_edge_mobile": 20,
+        "button_vertical_dst_to_edge": 24,
+        "button_vertical_dst_to_edge_mobile": 20,
+        "button": "UNLOCK OFFER",
+        "button_close_size": 14,
+        "button_close_size_mobile": 14,
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "content_advanced": false,
+        "content_padding_vertical": 50,
+        "content_padding_vertical_mobile": 40,
+        "content_padding_horizontal": 60,
+        "content_padding_horizontal_mobile": 20,
+        "close_size": 20,
+        "close_size_mobile": 20,
+        "close_align": "top_left",
+        "close_offset": 16,
+        "close_offset_mobile": 12,
+        "image_hide_mobile": false,
+        "mobile_overlay_color": "#ffffff",
+        "mobile_overlay_opacity": 80,
+        "image_width": 50,
+        "image_position_desktop": "right",
+        "button_custom": false,
+        "button_font": "sans_serif_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_advanced": false,
+        "button_height": 100,
+        "button_padding_vertical": 20,
+        "button_padding_vertical_mobile": 20,
+        "button_padding_horizontal": 36,
+        "button_padding_horizontal_mobile": 36,
+        "button_radius": 8,
+        "button_border_thickness": 0,
+        "button_color": "#ffffff",
+        "button_hover_color": "#262425",
+        "button_bg_color": "#7bbc72",
+        "button_bg_hover_color": "#f9f7ef",
+        "button_border_color": "#262425",
+        "button_border_hover_color": "#262425",
+        "modal_background_style": "solid",
+        "modal_bg_color": "#fbfbf6",
+        "modal_background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "close_color": "#262425",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(242, 242, 242, 1) 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "full",
+        "content_width": 1400,
+        "border_thickness": 0,
+        "section_radius": 0
+      }
+    }
+  },
+  "order": [
+    "ss_hero_16_RETCqm",
+    "ss_scrolling_logo_cloud_5_MBNX7B",
+    "vp_collection_grid_zt9Egd",
+    "ss_feature_41_4ELR64",
+    "ss_testimonial_12_dFgNK4",
+    "rich_text_4tPhhw",
+    "clickable_testimonials_UQYHgU",
+    "clickable_testimonials_Hned8x",
+    "ss_product_ingredients_6_yPU8Ep",
+    "rich_text_EtJ4Eq",
+    "faq_mTdmGf",
+    "rich_text_FbmdNC",
+    "177740572862ab6955",
+    "1777405802158111ad",
+    "ss_modal_popup_6_be3ab9_azJm9U"
+  ]
+}
