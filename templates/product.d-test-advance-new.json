@@ -119,7 +119,7 @@
       ],
       "settings": {
         "enable_sticky": true,
-        "max_width": 1220,
+        "max_width": 1400,
         "review_text": "(40k+ Happy customers)",
         "review_link": "#testimonials-anchor",
         "title": "Daily Multivitamin Chews for Dogs"
@@ -692,6 +692,9 @@
         "accordion_item_GNzUnr",
         "accordion_item_kWhNyN",
         "accordion_item_3x6dBk"
+      ],
+      "custom_css": [
+        ".accordion-faq-wrapper-title {font-weight: 500;}"
       ],
       "name": "Accordion - FAQ",
       "settings": {
