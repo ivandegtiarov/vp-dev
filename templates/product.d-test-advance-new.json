@@ -125,6 +125,25 @@
         "title": "Daily Multivitamin Chews for Dogs"
       }
     },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
     "ss_product_vidoes_4BdRp4": {
       "type": "ss-product-vidoes",
       "blocks": {
@@ -277,11 +296,78 @@
         "lazy": true
       }
     },
-    "ss_scrolling_features_WAD98a": {
-      "type": "ss-scrolling-features",
-      "disabled": true,
+    "image_w_text_987dnX": {
+      "type": "image-w-text",
       "blocks": {
-        "item_pb8HFb": {
+        "benefit_nRp6Ex": {
+          "type": "benefit",
+          "disabled": true,
+          "settings": {
+            "title": "Energy & Allergies",
+            "description": "Increases energy levels while relieving allergies, keeping your dog active and comfortable."
+          }
+        },
+        "benefit_faKRcG": {
+          "type": "benefit",
+          "disabled": true,
+          "settings": {
+            "title": "Digestion & Gut balance",
+            "description": "Probiotics support a healthier digestive system."
+          }
+        },
+        "benefit_6f6jNB": {
+          "type": "benefit",
+          "disabled": true,
+          "settings": {
+            "title": "Skin & Coat",
+            "description": "Shinier coat & less itching."
+          }
+        },
+        "benefit_chMr6L": {
+          "type": "benefit",
+          "disabled": true,
+          "settings": {
+            "title": "Hip & Joint",
+            "description": "Reduced inflammation for advanced hip & joint support."
+          }
+        },
+        "benefit_KNeGR6": {
+          "type": "benefit",
+          "disabled": true,
+          "settings": {
+            "title": "Immunity",
+            "description": "Better gut health leads to a stronger immune function."
+          }
+        },
+        "benefit_m6nDNE": {
+          "type": "benefit",
+          "disabled": true,
+          "settings": {
+            "title": "Heart Health",
+            "description": "Coq10 provides additional cardiovascular support."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_nRp6Ex",
+        "benefit_faKRcG",
+        "benefit_6f6jNB",
+        "benefit_chMr6L",
+        "benefit_KNeGR6",
+        "benefit_m6nDNE"
+      ],
+      "disabled": true,
+      "name": "Image with text - Product",
+      "settings": {
+        "pre_title": "6 Core Benefits",
+        "title": "for Long-Term Health",
+        "subtitle": "Our veterinary team developed our Daily Vitamin around 6 core areas that are essential for better dog health."
+      }
+    },
+    "ss_scrolling_features_Hb9iMK": {
+      "type": "ss-scrolling-features",
+      "blocks": {
+        "item_c8U7cT": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/check-mark-icon-white.png",
@@ -291,7 +377,7 @@
             "text_color": "#ffffff"
           }
         },
-        "item_BNxb87": {
+        "item_gfJJw6": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/check-mark-icon-white.png",
@@ -301,7 +387,7 @@
             "text_color": "#ffffff"
           }
         },
-        "item_gnGPKW": {
+        "item_4AkkhF": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/check-mark-icon-white.png",
@@ -313,11 +399,10 @@
         }
       },
       "block_order": [
-        "item_pb8HFb",
-        "item_BNxb87",
-        "item_gnGPKW"
+        "item_c8U7cT",
+        "item_gfJJw6",
+        "item_4AkkhF"
       ],
-      "disabled": true,
       "name": "SS - Scrolling features",
       "settings": {
         "scroll_on_desktop": true,
@@ -340,404 +425,6 @@
         "border_color": "#ffffff",
         "padding_top": 8,
         "padding_bottom": 0
-      }
-    },
-    "vp_benefits": {
-      "type": "vp-benefits",
-      "disabled": true,
-      "blocks": {
-        "benefit_1": {
-          "type": "benefit_item",
-          "settings": {
-            "icon": "shopify://shop_images/imgi_31_stomach_1.png",
-            "title": "Gut & Digestion",
-            "description": "Probiotics support a healthier digestive system & balanced gut."
-          }
-        },
-        "benefit_2": {
-          "type": "benefit_item",
-          "settings": {
-            "icon": "shopify://shop_images/imgi_32_hair-black_1.png",
-            "title": "Skin & Coat",
-            "description": "Fatty acids & vitamins that stimulate healthy skin, shinier coat & less itching."
-          }
-        },
-        "benefit_3": {
-          "type": "benefit_item",
-          "settings": {
-            "icon": "shopify://shop_images/imgi_33_arthritis_1.png",
-            "title": "Hip & Joint",
-            "description": "Nutrients for reducing inflammation and stiffness, improving hip & joint mobility."
-          }
-        },
-        "benefit_4": {
-          "type": "benefit_item",
-          "settings": {
-            "icon": "shopify://shop_images/imgi_30_allergies_1.png",
-            "title": "Allergies",
-            "description": "Relieving allergies from the source, keeping your dog comfortable all year."
-          }
-        },
-        "benefit_5": {
-          "type": "benefit_item",
-          "settings": {
-            "icon": "shopify://shop_images/imgi_34_immune-system_1.png",
-            "title": "Immunity",
-            "description": "Strengthens immune defenses, protecting against allergens & bad bacteria."
-          }
-        },
-        "benefit_6": {
-          "type": "benefit_item",
-          "settings": {
-            "icon": "shopify://shop_images/imgi_35_bolt_1.png",
-            "title": "Energy & Vitality",
-            "description": "Vitamins for improved energy, better mood & more tail-wags."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3",
-        "benefit_4",
-        "benefit_5",
-        "benefit_6"
-      ],
-      "settings": {
-        "heading_crimson": "6 Core Benefits",
-        "heading_helvetica": "in 1 tasty chew..",
-        "subtitle": "Targeting common canine health challenges with natural ingredients, essential for long term health.",
-        "max_width": 1020,
-        "decorative_image": "shopify://shop_images/7bd25f6e1e6881ca324f00f4fac09905aec37e95.png"
-      }
-    },
-    "vp_ingredients": {
-      "type": "vp-ingredients",
-      "disabled": true,
-      "blocks": {
-        "ing_1": {
-          "type": "ingredient",
-          "settings": {
-            "image": "shopify://shop_images/be026f333be0b9665369efb89e0d95b022023916.png",
-            "badge": "200mg",
-            "title": "Prebiotic Pumpkin",
-            "description": "High-heat extrusion destroys vitamins, probiotics, and omega-3s before the bag is even sealed."
-          }
-        },
-        "ing_2": {
-          "type": "ingredient",
-          "settings": {
-            "image": "shopify://shop_images/b1b686647022a157f6231a66ff939f76b69fb404.png",
-            "badge": "95mg",
-            "title": "Wild Salmon Oil",
-            "description": "Natural omega-3s, reduces inflammation and improves skin & coat"
-          }
-        },
-        "ing_3": {
-          "type": "ingredient",
-          "settings": {
-            "image": "shopify://shop_images/2916144794914fab16b7d3439fa3934474e92cce.png",
-            "badge": "500M CFU",
-            "title": "Probiotic Blend",
-            "description": "Natural probiotics that restore gut balance & support immune health"
-          }
-        },
-        "ing_4": {
-          "type": "ingredient",
-          "settings": {
-            "image": "shopify://shop_images/35e6fc4cf622ac67215baee4ad76756a3a301e23.png",
-            "badge": "200mg",
-            "title": "Glucosamine",
-            "description": "Clinically-proven joint support to protect cartilage and improve mobility"
-          }
-        }
-      },
-      "block_order": [
-        "ing_1",
-        "ing_2",
-        "ing_3",
-        "ing_4"
-      ],
-      "settings": {
-        "eyebrow": "BACKED BY SCIENCE",
-        "heading": "A unique blend that targets the source..",
-        "heading_highlight": "source..",
-        "description": "100% premium selected ingredients that target the problem at it’s core.",
-        "max_width": 1020
-      }
-    },
-    "vp_vets": {
-      "type": "vp-vets",
-      "disabled": true,
-      "blocks": {
-        "vet_1": {
-          "type": "vet",
-          "settings": {
-            "avatar": "shopify://shop_images/0d5005ecb23142fdeee8c2fb64f20adf886ce7cc.png",
-            "main_image_desktop": "shopify://shop_images/image_152_4.png",
-            "main_image": "shopify://shop_images/image_152_3.png",
-            "quote": "\"I always recommend dog-owners to incorporate these daily chews for extended benefits beyond the diet.\"",
-            "name": "Dr. M.A. Raza, DVM"
-          }
-        },
-        "vet_2": {
-          "type": "vet",
-          "disabled": true,
-          "settings": {
-            "quote": "\"These chews are a simple, effective way to support a dog's long-term health.\"",
-            "name": "Dr. Jane Smith, DVM"
-          }
-        },
-        "vet_3": {
-          "type": "vet",
-          "disabled": true,
-          "settings": {
-            "quote": "\"A high-quality multivitamin should be part of every dog's daily routine.\"",
-            "name": "Dr. Sarah Lee, DVM"
-          }
-        }
-      },
-      "block_order": [
-        "vet_1",
-        "vet_2",
-        "vet_3"
-      ],
-      "settings": {
-        "eyebrow": "FOR ALL BREEDS",
-        "heading": "Formulated and Praised by [Certified Vets..]",
-        "max_width": 1020
-      }
-    },
-    "vp_reviews": {
-      "type": "vp-reviews",
-      "disabled": true,
-      "blocks": {
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/SashaUGCPhoto-reviews.webp",
-            "rating": 5,
-            "quote": "\"My dogs have their meal and sit at my feet waiting for their treat. They just love them.\"",
-            "name": "Arthur"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/nano-banana-pro-51c86a2813f2bfa37185ed5818350acb.webp",
-            "rating": 5,
-            "quote": "\"Saw this brand on instagram, didn't expect much, but it has worked wonders for my kelpie's gut, loose stools and grass eating is way less now! Happy customer 😊\"",
-            "name": "Charli"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/vp-testimonial-customer.webp",
-            "rating": 5,
-            "quote": "\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is healthy now. Plus, I've noticed fewer digestive issues. LOVE the bag! ❤️\"",
-            "name": "Jennifer"
-          }
-        },
-        "review_CnAQ4m": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/700x525_commack_ShavaughnSnipas.webp",
-            "rating": 5,
-            "quote": "\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is healthy now. Plus, I've noticed fewer digestive issues. LOVE the bag! ❤️\"",
-            "name": "Jennifer"
-          }
-        },
-        "review_Tcht3L": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/womangivingdogchew.webp",
-            "rating": 5,
-            "quote": "\"These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is healthy now. Plus, I've noticed fewer digestive issues. LOVE the bag! ❤️\"",
-            "name": "Jennifer"
-          }
-        }
-      },
-      "block_order": [
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_CnAQ4m",
-        "review_Tcht3L"
-      ],
-      "settings": {
-        "banner_image": "shopify://shop_images/image_153_1.png",
-        "banner_text": "VERIFIED REVIEWS",
-        "heading": "Trusted by [40.000+] caring dog owners..",
-        "description": "Don’t just take our word for it.. Read how others are changing their dog’s life with VitalPaws.",
-        "show_left_fade": false,
-        "max_width": 1020
-      }
-    },
-    "vp_stats": {
-      "type": "vp-stats",
-      "disabled": true,
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "value": "86%",
-            "label": "saw a visible improvement in their dog’s life"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "value": "86%",
-            "label": "saw a visible improvement in their dog’s life"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": {
-            "value": "86%",
-            "label": "saw a visible improvement in their dog’s life"
-          }
-        }
-      },
-      "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3"
-      ],
-      "settings": {
-        "footnote": "*based on survey data",
-        "max_width": 1020
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "disabled": true,
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
-    },
-    "faq_PkLr4c": {
-      "type": "faq",
-      "disabled": true,
-      "blocks": {
-        "accordion_item_MwwJeb": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "What if my dog doesn’t like the chews?",
-            "content": "<p>In the rare case that this happens, we’ll issue you a full refund, no problem.</p>"
-          }
-        },
-        "accordion_item_XCiczB": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "At what age can my pup start using these?",
-            "content": "<p>The Multivitamin is suitable for dogs of all ages and breeds. However, we do recommend dogs begin to incorporate the chews into their daily routine starting at an age of 3 months or older.</p>"
-          }
-        },
-        "accordion_item_cDDNeh": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "What does 100% Human-Grade mean?",
-            "content": "<p>Most pet supplements from other brands contain palm oil, fillers, artificial flavoring, preservatives, etc. At VitalPaws, we’re raising the standards of pet health by only using the highest quality human-grade ingredients, which is what our best friends deserve.</p>"
-          }
-        },
-        "accordion_item_hjfFdp": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "How long until I start seeing the benefits?",
-            "content": "<p>The benefits that most dogs feel—less itching, more activity, better mood—are just bonuses to improving their long-term health. If taken consistently on a daily basis, most dogs will start to see positive effects in about 6-8 weeks.</p>"
-          }
-        },
-        "accordion_item_r6nWYM": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "How many chews come in a jar?",
-            "content": "<p>There are <strong>60 Chews in each jar</strong>, which is a monthly supply for dogs of all weights (2 daly chews).</p>"
-          }
-        },
-        "accordion_item_GNzUnr": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "What flavour is the Multivitamin?",
-            "content": "<p>Our Multivitamin is made with the highest quality human-grade duck meat, a flavor that dogs absolutely love.</p>"
-          }
-        },
-        "accordion_item_kWhNyN": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "What happens if I accidentally give my dog too many chews?",
-            "content": "<p>In the event that your dog accidentally consumes significantly more than the daily recommended dose, consult your vet for advice.</p>"
-          }
-        },
-        "accordion_item_3x6dBk": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "Can I take this dog multivitamin with other supplements?",
-            "content": "<p>Our veterinary team formulated our Daily Vitamin with natural ingredients that can be taken both alone or as a complementary product with other common and more targeted pet supplements. Nevertheless, we still recommend checking with your vet.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "accordion_item_MwwJeb",
-        "accordion_item_XCiczB",
-        "accordion_item_cDDNeh",
-        "accordion_item_hjfFdp",
-        "accordion_item_r6nWYM",
-        "accordion_item_GNzUnr",
-        "accordion_item_kWhNyN",
-        "accordion_item_3x6dBk"
-      ],
-      "custom_css": [
-        ".accordion-faq-wrapper-title {font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Helvetica Neue\", sans-serif; font-size: 60px;}",
-        "@media (max-width: 768px) {.accordion-faq-wrapper-title {font-size: 32px; }}"
-      ],
-      "name": "Accordion - FAQ",
-      "settings": {
-        "title": "Frequently Asked Questions.."
-      }
-    },
-    "vp_guarantee": {
-      "type": "vp-guarantee",
-      "disabled": true,
-      "blocks": {
-        "usp_1": {
-          "type": "usp",
-          "settings": {
-            "text": "✅ 40k+ Happy dogs"
-          }
-        },
-        "usp_3": {
-          "type": "usp",
-          "settings": {
-            "text": "✅ Third-party tested"
-          }
-        }
-      },
-      "block_order": [
-        "usp_1",
-        "usp_3"
-      ],
-      "settings": {
-        "badge": "shopify://shop_images/BADGE_3.svg",
-        "heading": "Try it  [Risk-Free]",
-        "subtext": "See the difference in {30 days}, or get your money back.",
-        "underline_image": "shopify://shop_images/Vector_11.svg",
-        "bg_desktop": "shopify://shop_images/GUARANTEE.png",
-        "bg_mobile": "shopify://shop_images/GUARANTEE_1.png",
-        "max_width": 1020
       }
     },
     "1754570442e3e629a9": {
@@ -844,69 +531,6 @@
       ],
       "name": "Benefits section",
       "settings": {}
-    },
-    "ss_scrolling_features_Hb9iMK": {
-      "type": "ss-scrolling-features",
-      "blocks": {
-        "item_c8U7cT": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/check-mark-icon-white.png",
-            "icon": "shield",
-            "text": "3rd-party tested by Eurofins",
-            "icon_color": "#ffffff",
-            "text_color": "#ffffff"
-          }
-        },
-        "item_gfJJw6": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/check-mark-icon-white.png",
-            "icon": "plant",
-            "text": "100% Science-backed ingredients",
-            "icon_color": "#ffffff",
-            "text_color": "#ffffff"
-          }
-        },
-        "item_4AkkhF": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/check-mark-icon-white.png",
-            "icon": "star",
-            "text": "Formulated by industry experts",
-            "icon_color": "#ffffff",
-            "text_color": "#ffffff"
-          }
-        }
-      },
-      "block_order": [
-        "item_c8U7cT",
-        "item_gfJJw6",
-        "item_4AkkhF"
-      ],
-      "name": "SS - Scrolling features",
-      "settings": {
-        "scroll_on_desktop": true,
-        "scroll_speed": 66,
-        "scroll_speed_mobile": 25,
-        "scroll_direction": "left",
-        "scroll_pause": false,
-        "items_gap": 110,
-        "items_gap_mobile": 30,
-        "border_bottom": false,
-        "border_top": false,
-        "text_custom": false,
-        "text_font": "josefin_sans_n4",
-        "text_size": 16,
-        "text_size_mobile": 16,
-        "text_height": 150,
-        "icon_size": 20,
-        "icon_margin": 10,
-        "background-color": "#7bbc72",
-        "border_color": "#ffffff",
-        "padding_top": 8,
-        "padding_bottom": 0
-      }
     },
     "ss_testimonial_12_JfmRUx": {
       "type": "ss-testimonial-12",
@@ -1500,26 +1124,388 @@
         "section_radius": 0,
         "lazy": true
       }
+    },
+    "faq_PkLr4c": {
+      "type": "faq",
+      "blocks": {
+        "accordion_item_MwwJeb": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What if my dog doesn’t like the chews?",
+            "content": "<p>In the rare case that this happens, we’ll issue you a full refund, no problem.</p>"
+          }
+        },
+        "accordion_item_XCiczB": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "At what age can my pup start using these?",
+            "content": "<p>The Multivitamin is suitable for dogs of all ages and breeds. However, we do recommend dogs begin to incorporate the chews into their daily routine starting at an age of 3 months or older.</p>"
+          }
+        },
+        "accordion_item_cDDNeh": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What does 100% Human-Grade mean?",
+            "content": "<p>Most pet supplements from other brands contain palm oil, fillers, artificial flavoring, preservatives, etc. At VitalPaws, we’re raising the standards of pet health by only using the highest quality human-grade ingredients, which is what our best friends deserve.</p>"
+          }
+        },
+        "accordion_item_hjfFdp": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "How long until I start seeing the benefits?",
+            "content": "<p>The benefits that most dogs feel—less itching, more activity, better mood—are just bonuses to improving their long-term health. If taken consistently on a daily basis, most dogs will start to see positive effects in about 6-8 weeks.</p>"
+          }
+        },
+        "accordion_item_r6nWYM": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "How many chews come in a jar?",
+            "content": "<p>There are <strong>60 Chews in each jar</strong>, which is a monthly supply for dogs of all weights (2 daly chews).</p>"
+          }
+        },
+        "accordion_item_GNzUnr": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What flavour is the Multivitamin?",
+            "content": "<p>Our Multivitamin is made with the highest quality human-grade duck meat, a flavor that dogs absolutely love.</p>"
+          }
+        },
+        "accordion_item_kWhNyN": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What happens if I accidentally give my dog too many chews?",
+            "content": "<p>In the event that your dog accidentally consumes significantly more than the daily recommended dose, consult your vet for advice.</p>"
+          }
+        },
+        "accordion_item_3x6dBk": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Can I take this dog multivitamin with other supplements?",
+            "content": "<p>Our veterinary team formulated our Daily Vitamin with natural ingredients that can be taken both alone or as a complementary product with other common and more targeted pet supplements. Nevertheless, we still recommend checking with your vet.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_MwwJeb",
+        "accordion_item_XCiczB",
+        "accordion_item_cDDNeh",
+        "accordion_item_hjfFdp",
+        "accordion_item_r6nWYM",
+        "accordion_item_GNzUnr",
+        "accordion_item_kWhNyN",
+        "accordion_item_3x6dBk"
+      ],
+      "name": "Accordion - FAQ",
+      "settings": {
+        "title": "Frequently Asked Questions.."
+      }
+    },
+    "custom_reviews_T9YVKL": {
+      "type": "custom-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_zQkUKn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        },
+        "review_image_aGxk8q": {
+          "type": "review_image",
+          "settings": {
+            "image": "shopify://shop_images/gsusoify2dcb3rzbn5lvqhg1huxa.jpg"
+          }
+        },
+        "review_image_3W74PE": {
+          "type": "review_image",
+          "settings": {
+            "image": "shopify://shop_images/e295qti2zykifo9xc9rfe6zdtqor.jpg"
+          }
+        },
+        "review_image_tT4dnh": {
+          "type": "review_image",
+          "settings": {
+            "image": "shopify://shop_images/qb7uaachvholacynv1rq3wqbvoxycopy.jpg"
+          }
+        },
+        "review_image_hgeRy4": {
+          "type": "review_image",
+          "settings": {
+            "image": "shopify://shop_images/5d6k6ejvja1fqu1ja5y2warabcdk.jpg"
+          }
+        },
+        "review_item_g44Ygr": {
+          "type": "review_item",
+          "settings": {
+            "review_name": "Luca Blacksmith",
+            "review_verified": "Verified Customer",
+            "review_url": "https://www.trustpilot.com/users/67dfac09459f8015e0770799",
+            "review_text": "\"A friend recommended this brand, and WOW. Within weeks, she was soft, shiny, and even smelled fresher. I will never let us run out of these.\""
+          }
+        },
+        "review_item_KUWimj": {
+          "type": "review_item",
+          "settings": {
+            "review_name": "Lori Candlish",
+            "review_verified": "Verified Customer",
+            "review_url": "https://www.trustpilot.com/users/67dfac09459f8015e0770799",
+            "review_text": "\"Saw this on facebook, didn't really know what to expect, but my my senior doggo really does seem a lot healthier now. less joint pain, a more stable gut, definitely a keeper. I recommend!\""
+          }
+        },
+        "review_item_xVVhet": {
+          "type": "review_item",
+          "settings": {
+            "review_name": "Beneditta",
+            "review_verified": "Verified Customer",
+            "review_url": "https://www.trustpilot.com/users/67dfac09459f8015e0770799",
+            "review_text": "\"I was skeptical because I’ve tried many supplements that did nothing. But this one finally works. Glad to see a brand that actually chooses quality and effective ingredients 👍.\""
+          }
+        },
+        "review_item_7mheV6": {
+          "type": "review_item",
+          "settings": {
+            "review_name": "Marta Alvarez",
+            "review_verified": "Verified Customer",
+            "review_url": "https://www.trustpilot.com/users/67dfac09459f8015e0770799",
+            "review_text": "\"My bulldog’s used to eat grass regularly because of an upset stomach, but now he stopped doing that since starting these chews, it definitely has helped stabilising his gut!\""
+          }
+        },
+        "review_item_ccrBQJ": {
+          "type": "review_item",
+          "settings": {
+            "review_name": "Aisling Buckley",
+            "review_verified": "Verified Customer",
+            "review_url": "https://www.trustpilot.com/users/67dfac09459f8015e0770799",
+            "review_text": "\"My dog would eat random stuff on walks and then have the worst stomach issues. These chews seem to have calmed his gut, no more random diarrhea or gurgling belly sounds!\""
+          }
+        },
+        "review_item_kpJXY6": {
+          "type": "review_item",
+          "settings": {
+            "review_name": "Matilda Dixon",
+            "review_verified": "Verified Customer",
+            "review_url": "https://www.trustpilot.com/users/67dfac09459f8015e0770799",
+            "review_text": "\"If your dog is always licking their paws, try these. My pup used to be obsessed with chewing and licking her paws, and I was constantly putting on anti-itch balms. Ever since we started these, she’s finally relaxed. Huge relief!\""
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zQkUKn",
+        "review_image_aGxk8q",
+        "review_image_3W74PE",
+        "review_image_tT4dnh",
+        "review_image_hgeRy4",
+        "review_item_g44Ygr",
+        "review_item_KUWimj",
+        "review_item_xVVhet",
+        "review_item_7mheV6",
+        "review_item_ccrBQJ",
+        "review_item_kpJXY6"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".jdgm-write-rev-link {border-radius: 30px;}",
+        ".jdgm-widget-actions-wrapper {margin-bottom: 0;}"
+      ],
+      "name": "Custom Reviews",
+      "settings": {
+        "title": "Customer Reviews",
+        "rating_text": "Rated 4.8/5",
+        "review_count_text": "Based on 486+ verified reviews",
+        "judgeme_integrations": ""
+      }
+    },
+    "icon_w_text_bNczYi": {
+      "type": "icon-w-text",
+      "blocks": {
+        "icon_9rJtAQ": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/premium-quality.png",
+            "title": "Human-Grade"
+          }
+        },
+        "icon_8wwtT9": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/map.png",
+            "title": "Locally formulated"
+          }
+        },
+        "icon_7YDMeg": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/no-preservatives.png",
+            "title": "No Artificial Flavors"
+          }
+        },
+        "icon_PxE9NM": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/blood-test.png",
+            "title": "Third-Party Tested"
+          }
+        },
+        "icon_T6jP7W": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/healthy.png",
+            "title": "GMO-free"
+          }
+        }
+      },
+      "block_order": [
+        "icon_9rJtAQ",
+        "icon_8wwtT9",
+        "icon_7YDMeg",
+        "icon_PxE9NM",
+        "icon_T6jP7W"
+      ],
+      "disabled": true,
+      "name": "Icon with text - Product",
+      "settings": {}
+    },
+    "testimonial_cards_RezqtQ": {
+      "type": "testimonial-cards",
+      "blocks": {
+        "testimonial_card_yyRwMw": {
+          "type": "testimonial_card",
+          "settings": {
+            "image": "shopify://shop_images/brunette-girl-vet-clinic-examine-with-stethoscope-dog-breed-yorkshire-terrier.webp",
+            "text": "<p><strong>@vetmedjess </strong>As a vet, I give my own beloved Ollie these chews everyday and he loves it. It’s the best way to optimise a dog's long term health!</p>"
+          }
+        },
+        "testimonial_card_Pk9BU7": {
+          "type": "testimonial_card",
+          "settings": {
+            "image": "shopify://shop_images/56d76c11-34d4-40f7-8289-b8c7282b584d.jpg",
+            "text": "<p>Our dogs were itching, had skin issues and diarrhea for years. Our veterinarian recommended this brand and we’ve been using it since :)</p>"
+          }
+        },
+        "testimonial_card_HNjNNF": {
+          "type": "testimonial_card",
+          "settings": {
+            "image": "shopify://shop_images/hmi7r9azv0f31zntreejjhywibgt.jpg",
+            "text": "<p>These chews have been a game-changer for my dog. Her itching has reduced dramatically, and her coat is super glossy and healthy. Plus, I've noticed fewer digestive issues.</p>"
+          }
+        },
+        "testimonial_card_Y3P8xn": {
+          "type": "testimonial_card",
+          "settings": {
+            "image": "shopify://shop_images/6orxvip0vwon6sxo7htby89w63qh.jpg",
+            "text": "<p>My dog has always been picky about food, but she loves these chews. She's not scratching as much, and her coat has become softer and shinier. It's such a relief to see her feeling better.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_card_yyRwMw",
+        "testimonial_card_Pk9BU7",
+        "testimonial_card_HNjNNF",
+        "testimonial_card_Y3P8xn"
+      ],
+      "disabled": true,
+      "name": "Testimonial Cards",
+      "settings": {
+        "stars_text": "(4.8/5)",
+        "title": "How we have helped 20.000+ furry friends",
+        "description": "Providing dogs with the best possible health worldwide."
+      }
+    },
+    "accordion_rKNQaq": {
+      "type": "accordion",
+      "blocks": {
+        "accordion_item_nEityj": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Glucosamine HCI",
+            "subtitle": "200 mg",
+            "content": "Glucosamine Hydrochloride is a natural amino sugar that reduces joint pain for dogs. Glucosamine assists in joint lubrication, helps maintain healthy cartilage, and sustains connective tissue."
+          }
+        },
+        "accordion_item_AUDqKh": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "MSM",
+            "subtitle": "100 mg",
+            "content": "Methylsulfonylmethane (MSM) is a natural antioxidant that reduces inflammation, stiffness, and hip, joint, and muscle pain in dogs. MSM also provides additional protection against infection."
+          }
+        },
+        "accordion_item_drNNNP": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Proprietary Probiotic Blend",
+            "subtitle": "500 Million CFU",
+            "content": "Probiotics are a friendly kind of bacteria necessary for the proper absorption of vitamins and minerals. They support your dog’s immune system, foster a healthy microbiome, and assist with digestion."
+          }
+        },
+        "accordion_item_hPTnjg": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Wild Alaskan Salmon Oil",
+            "subtitle": "95 mg",
+            "content": "Packed with Omega-3 and Omega-6 fatty acids, Wild Alaskan Salmon Oil provides a range of benefits including improved cognition, healthier skin and coat, and immune system boosts."
+          }
+        },
+        "accordion_item_NT4NQp": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Vitamin A",
+            "subtitle": "1000 IU",
+            "content": "Vitamin A is a necessary vitamin for dogs that supports skin, coat, muscle, and organ system health. Vitamin A heightens your dog’s immune response by increasing mucus levels in the body, providing better protection against infection."
+          }
+        },
+        "accordion_item_RXDyYH": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Other Ingredients",
+            "subtitle": "",
+            "content": "Natural Vitamin E, Vitamin B2 (Riboflavin), Vitamin B6 (Pyridoxine), Vitamin B9 (Folic Acid), Vitamin B12 (Methylcobalamin), Vitamin D3"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_nEityj",
+        "accordion_item_AUDqKh",
+        "accordion_item_drNNNP",
+        "accordion_item_hPTnjg",
+        "accordion_item_NT4NQp",
+        "accordion_item_RXDyYH"
+      ],
+      "disabled": true,
+      "name": "Accordion - Product",
+      "settings": {
+        "title": "The Formula Backed by Science",
+        "description": "<p>Made with only 12 essential active</p><p>ingredients.</p>"
+      }
+    },
+    "pdp_sticky_bar_qHyPka": {
+      "type": "pdp-sticky-bar",
+      "name": "PDP Sticky Bar",
+      "settings": {
+        "title": "",
+        "button_text": "ORDER ->"
+      }
     }
   },
   "order": [
     "main",
-    "ss_product_vidoes_4BdRp4",
-    "ss_scrolling_features_WAD98a",
-    "vp_benefits",
-    "vp_ingredients",
-    "vp_vets",
-    "vp_reviews",
-    "vp_stats",
     "related-products",
-    "faq_PkLr4c",
-    "vp_guarantee",
-    "1754570442e3e629a9",
+    "ss_product_vidoes_4BdRp4",
+    "image_w_text_987dnX",
     "ss_scrolling_features_Hb9iMK",
+    "1754570442e3e629a9",
     "ss_testimonial_12_JfmRUx",
     "ss_scrolling_logo_cloud_5_tQnadi",
     "ss_scrolling_logo_cloud_5_kzNUUp",
     "clickable_testimonials_BeLBNE",
-    "ss_product_ingredients_6_bLFrzg"
+    "ss_product_ingredients_6_bLFrzg",
+    "faq_PkLr4c",
+    "custom_reviews_T9YVKL",
+    "icon_w_text_bNczYi",
+    "testimonial_cards_RezqtQ",
+    "accordion_rKNQaq",
+    "pdp_sticky_bar_qHyPka"
   ]
 }
