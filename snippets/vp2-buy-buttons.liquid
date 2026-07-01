@@ -1,0 +1,324 @@
+{% comment %}
+  ============================================================================
+  VP2 - Buy Buttons  (block type: vp_buy_buttons)  — snippet
+  ----------------------------------------------------------------------------
+  VISUAL: pixel-identical to the NATIVE Dawn buy button on this template. It
+  REUSES the native classes (product-form__submit button button--full-width
+  button--primary / product-form__submit-text-atc / product-form__price-wrapper-
+  b-plus / product-form__price-sale / product-form__price-regular), whose CSS
+  already loads via section-main-product.css. No visual duplication.
+
+  LOGIC: the VP - Product Hero self-contained model, NOT the native one:
+    - Owns the hidden <product-form id="vp2-product-form-{{ section.id }}"> that
+      the SEPARATE vp_variant_picker block's radios attach to (form="…").
+    - On bundle change our JS writes the variant id into name="id" — NO Section
+      Rendering re-render, NO ?variant= URL rewrite.
+    - Subscribe checkbox is a PROXY for the Loop app widget (clicks Loop's
+      selling-plan group / one-time option; toggles the pricing class).
+    - ATC price rows are server-rendered per variant from metafields; only the
+      pre-selected one is visible on first paint (no flash). JS swaps on change.
+
+  COORDINATION: shared form id + data-vp2-group="{{ section.id }}". The subs /
+  one-time toggle is a class on the SECTION wrapper (vp2-single_purchase_option)
+  so BOTH blocks' prices switch together.
+  ============================================================================
+{% endcomment %}
+
+{%- liquid
+  assign vp2_form_id = 'vp2-product-form-' | append: section.id
+
+  # Resolve the pre-selected variant the SAME way the picker snippet does, so the
+  # server-rendered ATC price matches the checked pill. Duplicated (not shared)
+  # because Liquid renders snippets in isolation.
+  assign opt = product.options_with_values | first
+  assign value_count = opt.values | size
+  assign preselect_option = block.settings.preselect_option | default: 'auto'
+
+  assign has_shopify_selected = false
+  if preselect_option == 'auto'
+    for value in opt.values
+      if value.selected
+        assign has_shopify_selected = true
+        break
+      endif
+    endfor
+  endif
+
+  assign target_idx = 0
+  if preselect_option != 'auto'
+    assign target_idx = preselect_option | times: 1
+    if target_idx > value_count
+      assign target_idx = 0
+    endif
+  endif
+
+  if target_idx > 0
+    assign target_pos = target_idx | minus: 1
+    assign target_value = opt.values[target_pos]
+    unless target_value.available
+      assign target_idx = 0
+    endunless
+  endif
+
+  if target_idx == 0 and has_shopify_selected == false
+    for value in opt.values
+      if value.available
+        assign target_idx = forloop.index
+        break
+      endif
+    endfor
+  endif
+
+  assign vp2_selected_variant_id = 0
+  for value in opt.values
+    assign v = value.variant
+    assign is_checked = false
+    if preselect_option == 'auto' and value.selected
+      assign is_checked = true
+    elsif forloop.index == target_idx
+      assign is_checked = true
+    endif
+    if is_checked
+      assign vp2_selected_variant_id = v.id
+    endif
+  endfor
+
+  assign vp2_initial_variant_id = vp2_selected_variant_id | default: product.selected_or_first_available_variant.id
+-%}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  /* Namespaced helpers only. The button + price styling comes from the native
+     classes already loaded by section-main-product.css. */
+  #shopify-section-{{ section.id }} .vp2-buy { display: block; }
+
+  /* Show only the selected variant's ATC price row (native template hides all
+     b-plus rows by default and reveals via JS; we do the same, namespaced). */
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus-inner { display: none; }
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus-inner.vp2-active { display: flex; }
+
+  /* subs / one-time toggle — class lives on the section wrapper so the picker
+     block's prices switch in lockstep. */
+  #shopify-section-{{ section.id }} .vp2-buy [vp2-single-purchase-pricings] { display: none; }
+  #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-buy [vp2-subs-purchase-pricings] { display: none !important; }
+  #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-buy [vp2-single-purchase-pricings] { display: inline !important; }
+
+  /* ---- SUBSCRIBE CARD (kept from the hero; namespaced) ---- */
+  #shopify-section-{{ section.id }} .vp2-subscribe { display: flex; align-items: center; gap: 14px; width: 100%; padding: 9px 14px; background: #f6f6f6; border: 1px dashed #9da197; border-radius: 8px; cursor: pointer; margin-top: 15px; box-sizing: border-box; font-family: inherit; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-check { -webkit-appearance: none; appearance: none; width: 25px !important; min-width: 25px; height: 25px; border: 2px solid #5a815b; border-radius: 8px; background: #fff; flex-shrink: 0; cursor: pointer; position: relative; margin: 0; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-check:checked { background-color: #5a815b; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-check:checked::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 14px; height: 11px; background-repeat: no-repeat; background-position: center; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='11' viewBox='0 0 14 11' fill='none'%3E%3Cpath d='M1 6.25L4.75 10L13 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  #shopify-section-{{ section.id }} .vp2-subscribe-text { display: flex; flex-direction: column; gap: 0; min-width: 0; flex: 1 0 0; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-title { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-meta > span { display: flex; align-items: center; gap: 6px; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-meta img { width: 18px; height: 18px; }
+  #shopify-section-{{ section.id }} .vp2-subscribe-meta p { margin: 0; font-size: 12px; color: #534c44; letter-spacing: -0.24px; }
+
+  /* Loop (@app) widget mount — hidden; our subscribe card is the UI. */
+  #shopify-section-{{ section.id }} .vp2-app-block { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .vp2-subscribe-meta { flex-wrap: nowrap; gap: 8px; }
+    #shopify-section-{{ section.id }} .vp2-subscribe-meta > span { gap: 4px; min-width: 0; }
+    #shopify-section-{{ section.id }} .vp2-subscribe-meta img { width: 16px; height: 16px; }
+    #shopify-section-{{ section.id }} .vp2-subscribe-meta p { font-size: 11px; white-space: nowrap; }
+  }
+</style>
+
+<div class="vp2-buy product-form-main-container" data-vp2-group="{{ section.id }}" {{ block.shopify_attributes }}>
+  <product-form class="product-form" data-section-id="{{ section.id }}">
+    <div class="product-form__error-message-wrapper" role="alert" hidden>
+      <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
+      <span class="product-form__error-message"></span>
+    </div>
+
+    {%- form 'product', product, id: vp2_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ vp2_initial_variant_id }}" class="vp2-variant-id">
+
+      {%- comment -%}
+        SUBSCRIBE CARD — Loop proxy (see header comment). Optional via setting.
+      {%- endcomment -%}
+      {%- if block.settings.show_subscribe -%}
+        <label class="vp2-subscribe" for="vp2-auto_refill-{{ section.id }}">
+          <input type="checkbox" class="vp2-subscribe-check" id="vp2-auto_refill-{{ section.id }}" data-vp2-auto-refill checked>
+          <span class="vp2-subscribe-text">
+            <span class="vp2-subscribe-title">{{ block.settings.subscribe_title | default: 'Subscribe for an extra 20% off' }}</span>
+            <span class="vp2-subscribe-meta">
+              <span>
+                {%- if block.settings.subscribe_icon_1 -%}<img src="{{ block.settings.subscribe_icon_1 | image_url: width: 36 }}" alt="">{%- endif -%}
+                <p>Shipped every <span class="vp2-freq-label">{{ block.settings.subscribe_frequency_label | default: '30 days' }}</span></p>
+              </span>
+              <span>
+                {%- if block.settings.subscribe_icon_2 -%}<img src="{{ block.settings.subscribe_icon_2 | image_url: width: 36 }}" alt="">{%- endif -%}
+                <p>Cancel/adjust anytime</p>
+              </span>
+            </span>
+          </span>
+        </label>
+      {%- endif -%}
+
+      {%- comment -%} Fallback Loop mount target. {%- endcomment -%}
+      <div class="vp2-loop-target" data-vp2-loop-target hidden></div>
+
+      <div class="product-form__buttons">
+        <button
+          id="vp2-ProductSubmitButton-{{ section.id }}"
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+          {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+        >
+          {%- comment -%}
+            First span = ONLY the CTA text: product-form.js overwrites the first
+            <span>'s textContent, so prices must live in a SEPARATE sibling span.
+          {%- endcomment -%}
+          <span class="product-form__submit-text-atc">{{ block.settings.atc_text | default: 'ADD TO CART' }}</span>
+
+          <span class="product-form__price-wrapper-b-plus vp2-atc-prices">
+            {%- for v in product.variants -%}
+              <div
+                class="product-form__price-wrapper-b-plus-inner vp2-price-row{% if v.id == vp2_initial_variant_id %} vp2-active{% endif %}"
+                data-vp2-variant-prices="{{ v.id }}"
+              >
+                <span class="product-form__price-sale" vp2-subs-purchase-pricings>
+                  {%- if v.metafields.custom.single_jar_price_subscription_full_price.value != blank -%}
+                    {{ v.metafields.custom.single_jar_price_subscription_full_price.value | money }}
+                  {%- else -%}
+                    {{ v.metafields.custom.single_jar_price.value | money }}
+                  {%- endif -%}
+                </span>
+                <span class="product-form__price-sale" vp2-single-purchase-pricings>
+                  {%- if v.metafields.custom.single_jar_price_subscription_full_price.value != blank -%}
+                    {{ v.price | money }}
+                  {%- else -%}
+                    {{ v.metafields.custom.single_jar_price_one_time_purchase.value | money }}
+                  {%- endif -%}
+                </span>
+                <span class="product-form__price-regular">{{ v.compare_at_price | money }}</span>
+              </div>
+            {%- endfor -%}
+          </span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      </div>
+    {%- endform -%}
+  </product-form>
+
+  {%- if block.settings.label != blank -%}
+    <div class="product__buy-buttons-label">
+      {% render 'checkmark-yes' %}
+      {{ block.settings.label }}
+    </div>
+  {%- endif -%}
+</div>
+
+<script defer="defer">
+  (function () {
+    var SECTION_ID = '{{ section.id }}';
+    var FORM_ID = '{{ vp2_form_id }}';
+    var section = document.getElementById('shopify-section-' + SECTION_ID);
+    var group = section && section.querySelector('.vp2-buy[data-vp2-group="' + SECTION_ID + '"]');
+    if (!section || !group) return;
+
+    var form = document.getElementById(FORM_ID);
+    var variantIdInput = section.querySelector('.vp2-variant-id');
+    var bundleInputs = section.querySelectorAll('[data-vp2-bundle-input][data-vp2-group="' + SECTION_ID + '"]');
+
+    function showVariantPrice(variantId) {
+      section.querySelectorAll('[data-vp2-variant-prices]').forEach(function (row) {
+        if (row.getAttribute('data-vp2-variant-prices') === String(variantId)) {
+          row.classList.add('vp2-active');
+        } else {
+          row.classList.remove('vp2-active');
+        }
+      });
+    }
+    function slideToMedia(mediaId) {
+      if (!mediaId) return;
+      var main = window['vpMainSwiper_' + SECTION_ID];   // reuse gallery swiper if present
+      if (!main) return;
+      var slides = main.slides;
+      for (var i = 0; i < slides.length; i++) {
+        if (slides[i].getAttribute('data-media-id') === String(mediaId)) { main.slideTo(i); break; }
+      }
+    }
+
+    /* ---------- SUBSCRIPTION (Loop widget proxy) ---------- */
+    var autoRefill = section.querySelector('[data-vp2-auto-refill]');
+
+    function loopOnetimeEl() {
+      return (form && form.querySelector('.loop-widget-purchase-option-onetime'))
+        || document.querySelector('.loop-widget-purchase-option-onetime');
+    }
+    function loopSubEl() {
+      return (form && form.querySelector('[data-loop-widget-selling-plan-group]'))
+        || document.querySelector('[data-loop-widget-selling-plan-group]');
+    }
+    function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
+
+    function setPriceMode() {
+      if (!autoRefill) { section.classList.add('vp2-single_purchase_option'); return; }
+      if (isSubscribed()) {
+        section.classList.remove('vp2-single_purchase_option');
+      } else {
+        section.classList.add('vp2-single_purchase_option');
+      }
+    }
+    function syncLoopWidget() {
+      var subEl = loopSubEl();
+      var oneEl = loopOnetimeEl();
+      if (isSubscribed()) {
+        if (subEl) subEl.click();
+      } else {
+        if (oneEl) oneEl.click();
+      }
+    }
+    function applyPurchaseMode() { setPriceMode(); syncLoopWidget(); }
+    function watchLoopWidget() {
+      if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); return; }
+      var obs = new MutationObserver(function () {
+        if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); obs.disconnect(); }
+      });
+      obs.observe(document.body, { childList: true, subtree: true });
+    }
+
+    /* Subscribe frequency follows the picked bundle (data-vp2-freq). */
+    var freqLabels = section.querySelectorAll('.vp2-freq-label');
+    function setFreqLabel(input) {
+      var freq = input && input.getAttribute('data-vp2-freq');
+      if (!freq) return;
+      freqLabels.forEach(function (el) { el.textContent = freq; });
+    }
+
+    function selectVariant(input) {
+      var id = input.getAttribute('data-vp2-variant-id');
+      if (variantIdInput) variantIdInput.value = id;
+      window.currenSelectedVariantId = id;
+      showVariantPrice(id);
+      slideToMedia(input.getAttribute('data-vp2-featured-media'));
+      setFreqLabel(input);
+      setPriceMode();
+      syncLoopWidget();
+    }
+    bundleInputs.forEach(function (input) {
+      input.addEventListener('change', function () { if (input.checked) selectVariant(input); });
+    });
+
+    if (autoRefill) autoRefill.addEventListener('change', applyPurchaseMode);
+
+    /* initialise from the checked bundle */
+    var checked = section.querySelector('[data-vp2-bundle-input][data-vp2-group="' + SECTION_ID + '"]:checked');
+    if (checked) {
+      var cid = checked.getAttribute('data-vp2-variant-id');
+      if (variantIdInput) variantIdInput.value = cid;
+      window.currenSelectedVariantId = cid;
+      showVariantPrice(cid);
+      slideToMedia(checked.getAttribute('data-vp2-featured-media'));
+      setFreqLabel(checked);
+    }
+    setPriceMode();
+    watchLoopWidget();
+  })();
+</script>

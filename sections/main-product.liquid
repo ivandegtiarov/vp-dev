@@ -891,6 +891,11 @@
                   {% endif %}
                 </div>
 
+              {%- when 'vp_variant_picker' -%}
+                {% render 'vp2-variant-picker', product: product, block: block, section: section %}
+              {%- when 'vp_buy_buttons' -%}
+                {% render 'vp2-buy-buttons', product: product, block: block, section: section %}
+
               {%- when 'doctor_review' -%}
                 {% render 'product-quick-review', block: block %}
               {%- when 'rating' -%}
@@ -1408,6 +1413,67 @@
           "id": "free_gifts_title",
           "label": "Free Gifts Title",
           "default": "3 FREE gifts for subscribers!"
+        }
+      ]
+    },
+    {
+      "type": "vp_variant_picker",
+      "name": "VP Variant Picker (bundles)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Native pill design, VP-Hero self-contained logic (no URL rewrite, no section re-render). Pairs with the 'VP Buy Buttons' block (which owns the form)."
+        },
+        { "type": "text", "id": "option_label", "label": "Option label (blank = variant option name)", "info": "The 'Size:' style legend above the pills." },
+        { "type": "header", "content": "Pre-selected bundle", "info": "Choose which pill is selected by default. Works on any product." },
+        {
+          "type": "select",
+          "id": "preselect_option",
+          "label": "Default selected option",
+          "default": "auto",
+          "options": [
+            { "value": "auto", "label": "Automatic (first available)" },
+            { "value": "1", "label": "Option 1" },
+            { "value": "2", "label": "Option 2" },
+            { "value": "3", "label": "Option 3" }
+          ]
+        },
+        { "type": "checkbox", "id": "show_jars", "label": "Show jar thumbnails (from size_featured_image metafield)", "default": true },
+        { "type": "image_picker", "id": "bundle_image_override", "label": "Jar image (override)", "info": "Optional. Overrides the per-variant 'size_featured_image' metafield for every pill." },
+        { "type": "text", "id": "price_suffix", "label": "Per-jar price suffix", "default": "/jar", "info": "The 'Most Popular' / 'Best Value' ribbons on the 2nd/3rd pills are inherited from the native pill CSS." }
+      ]
+    },
+    {
+      "type": "vp_buy_buttons",
+      "name": "VP Buy Buttons (ATC)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Native primary-button design, VP-Hero self-contained logic. Owns the hidden product form the 'VP Variant Picker' block attaches to. Loop app handles subscriptions via its auto-injected widget."
+        },
+        { "type": "header", "content": "Add to cart" },
+        { "type": "text", "id": "atc_text", "label": "Add-to-cart text", "default": "ADD TO CART" },
+        { "type": "text", "id": "label", "label": "Under-button label (blank = hidden)", "default": "30 Day Money-Back Guarantee" },
+        { "type": "header", "content": "Subscribe card (Loop proxy)" },
+        { "type": "checkbox", "id": "show_subscribe", "label": "Show subscribe card", "default": true },
+        { "type": "image_picker", "id": "subscribe_icon_1", "label": "Subscribe icon 1 (shipping)" },
+        { "type": "image_picker", "id": "subscribe_icon_2", "label": "Subscribe icon 2 (cancel)" },
+        { "type": "text", "id": "subscribe_title", "label": "Subscribe title", "default": "Subscribe for an extra 20% off" },
+        { "type": "text", "id": "subscribe_frequency_label", "label": "Subscribe meta — frequency text", "default": "30 days" },
+        { "type": "header", "content": "Pre-selected bundle", "info": "Must match the VP Variant Picker setting so the first-paint ATC price is correct." },
+        {
+          "type": "select",
+          "id": "preselect_option",
+          "label": "Default selected option",
+          "default": "auto",
+          "options": [
+            { "value": "auto", "label": "Automatic (first available)" },
+            { "value": "1", "label": "Option 1" },
+            { "value": "2", "label": "Option 2" },
+            { "value": "3", "label": "Option 3" }
+          ]
         }
       ]
     },
