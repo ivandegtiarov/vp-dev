@@ -93,10 +93,26 @@
      classes already loaded by section-main-product.css. */
   #shopify-section-{{ section.id }} .vp2-buy { display: block; }
 
-  /* Show only the selected variant's ATC price row (native template hides all
-     b-plus rows by default and reveals via JS; we do the same, namespaced). */
+  /* ATC button lays out as: [ CTA text ][ price group ] centered on one row. */
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__submit-text-atc { display: inline-flex; }
+
+  /* Show only the selected variant's ATC price row; align its parts inline. */
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus { display: inline-flex; align-items: center; }
   #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus-inner { display: none; }
-  #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus-inner.vp2-active { display: flex; }
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus-inner.vp2-active {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus-inner .product-form__price-sale { font-size: 20px; font-weight: 700; line-height: 1; }
+  #shopify-section-{{ section.id }} .vp2-buy .product-form__price-wrapper-b-plus-inner .product-form__price-regular { line-height: 1; }
 
   /* subs / one-time toggle — class lives on the section wrapper so the picker
      block's prices switch in lockstep. */
@@ -104,26 +120,41 @@
   #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-buy [vp2-subs-purchase-pricings] { display: none !important; }
   #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-buy [vp2-single-purchase-pricings] { display: inline !important; }
 
-  /* ---- SUBSCRIBE CARD (kept from the hero; namespaced) ---- */
-  #shopify-section-{{ section.id }} .vp2-subscribe { display: flex; align-items: center; gap: 14px; width: 100%; padding: 9px 14px; background: #f6f6f6; border: 1px dashed #9da197; border-radius: 8px; cursor: pointer; margin-top: 15px; box-sizing: border-box; font-family: inherit; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-check { -webkit-appearance: none; appearance: none; width: 25px !important; min-width: 25px; height: 25px; border: 2px solid #5a815b; border-radius: 8px; background: #fff; flex-shrink: 0; cursor: pointer; position: relative; margin: 0; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-check:checked { background-color: #5a815b; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-check:checked::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 14px; height: 11px; background-repeat: no-repeat; background-position: center; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='11' viewBox='0 0 14 11' fill='none'%3E%3Cpath d='M1 6.25L4.75 10L13 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
-  #shopify-section-{{ section.id }} .vp2-subscribe-text { display: flex; flex-direction: column; gap: 0; min-width: 0; flex: 1 0 0; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-title { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-meta > span { display: flex; align-items: center; gap: 6px; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-meta img { width: 18px; height: 18px; }
-  #shopify-section-{{ section.id }} .vp2-subscribe-meta p { margin: 0; font-size: 12px; color: #534c44; letter-spacing: -0.24px; }
+  /* ---- SUBSCRIBE CARD — copied from the initial setup (.auto-refill) ---- */
+  #shopify-section-{{ section.id }} .vp2-auto-refill {
+    display: flex;
+    background-color: #f8f8f8;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px dashed #b9b9b9;
+    border-radius: 4px;
+    margin-top: 2rem;
+  }
+  #shopify-section-{{ section.id }} .vp2-auto-refill input[type="checkbox"] {
+    -webkit-appearance: none; -moz-appearance: none; appearance: none;
+    width: 25px; height: 25px;
+    border: 2px solid #7BBC72FF; border-radius: 4px;
+    margin: 0; outline: none; cursor: pointer; background: #fff;
+    flex-shrink: 0; position: relative;
+  }
+  #shopify-section-{{ section.id }} .vp2-auto-refill input[type="checkbox"]:checked { background-color: #7BBC72FF; }
+  #shopify-section-{{ section.id }} .vp2-auto-refill input[type="checkbox"]:checked::after {
+    content: '✓'; font-size: 14px; color: #fff;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: sans-serif;
+  }
+  #shopify-section-{{ section.id }} .vp2-auto-refill label {
+    display: flex; flex-direction: column; cursor: pointer; gap: 2px; padding-left: 12px;
+  }
+  #shopify-section-{{ section.id }} .vp2-auto-refill-title { margin: 0; line-height: 1; font-size: 15px; font-weight: 700; color: #000; }
+  #shopify-section-{{ section.id }} .vp2-subs-content { display: flex; gap: 8px; align-items: center; justify-content: flex-start; }
+  #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { font-style: italic; display: flex; align-items: center; gap: 6px; }
+  #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons p { margin: 0; }
 
-  /* Loop (@app) widget mount — hidden; our subscribe card is the UI. */
-  #shopify-section-{{ section.id }} .vp2-app-block { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-
-  @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .vp2-subscribe-meta { flex-wrap: nowrap; gap: 8px; }
-    #shopify-section-{{ section.id }} .vp2-subscribe-meta > span { gap: 4px; min-width: 0; }
-    #shopify-section-{{ section.id }} .vp2-subscribe-meta img { width: 16px; height: 16px; }
-    #shopify-section-{{ section.id }} .vp2-subscribe-meta p { font-size: 11px; white-space: nowrap; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .vp2-auto-refill { margin-top: 2rem; padding: 12px; }
+    #shopify-section-{{ section.id }} .vp2-auto-refill-title { font-size: 15px; }
+    #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { font-size: 12px; }
   }
 </style>
 
@@ -141,22 +172,30 @@
         SUBSCRIBE CARD — Loop proxy (see header comment). Optional via setting.
       {%- endcomment -%}
       {%- if block.settings.show_subscribe -%}
-        <label class="vp2-subscribe" for="vp2-auto_refill-{{ section.id }}">
-          <input type="checkbox" class="vp2-subscribe-check" id="vp2-auto_refill-{{ section.id }}" data-vp2-auto-refill checked>
-          <span class="vp2-subscribe-text">
-            <span class="vp2-subscribe-title">{{ block.settings.subscribe_title | default: 'Subscribe for an extra 20% off' }}</span>
-            <span class="vp2-subscribe-meta">
-              <span>
-                {%- if block.settings.subscribe_icon_1 -%}<img src="{{ block.settings.subscribe_icon_1 | image_url: width: 36 }}" alt="">{%- endif -%}
+        <div class="vp2-auto-refill">
+          <input type="checkbox" id="vp2-auto_refill-{{ section.id }}" name="vp2-auto-refill" data-vp2-auto-refill checked>
+          <label for="vp2-auto_refill-{{ section.id }}">
+            <p class="vp2-auto-refill-title">{{ block.settings.subscribe_title | default: 'Subscribe for an extra 20% off' }}</p>
+            <div class="vp2-subs-content">
+              <div class="vp2-subs-icons">
+                {%- if block.settings.subscribe_icon_1 -%}
+                  <img src="{{ block.settings.subscribe_icon_1 | image_url: width: 50 }}" alt="Fast delivery" width="20" height="20">
+                {%- else -%}
+                  <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/fast-delivery.png?v=1733337974&width=50" alt="Fast delivery" width="20" height="20">
+                {%- endif -%}
                 <p>Shipped every <span class="vp2-freq-label">{{ block.settings.subscribe_frequency_label | default: '30 days' }}</span></p>
-              </span>
-              <span>
-                {%- if block.settings.subscribe_icon_2 -%}<img src="{{ block.settings.subscribe_icon_2 | image_url: width: 36 }}" alt="">{%- endif -%}
+              </div>
+              <div class="vp2-subs-icons">
+                {%- if block.settings.subscribe_icon_2 -%}
+                  <img src="{{ block.settings.subscribe_icon_2 | image_url: width: 50 }}" alt="Cancel anytime" width="20" height="20">
+                {%- else -%}
+                  <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/pause.png?v=1733337974&width=50" alt="Cancel anytime" width="20" height="20">
+                {%- endif -%}
                 <p>Cancel/adjust anytime</p>
-              </span>
-            </span>
-          </span>
-        </label>
+              </div>
+            </div>
+          </label>
+        </div>
       {%- endif -%}
 
       {%- comment -%} Fallback Loop mount target. {%- endcomment -%}
