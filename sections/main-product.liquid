@@ -131,7 +131,11 @@
           </div>
         {% endif %}
 
-        {% render 'product-media-gallery', variant_images: variant_images %}
+        {% if section.settings.enable_vp_gallery %}
+          {% render 'vp2-media-gallery', product: product, section: section %}
+        {% else %}
+          {% render 'product-media-gallery', variant_images: variant_images %}
+        {% endif %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
@@ -3042,6 +3046,13 @@
       "id": "enable_sticky_info",
       "default": true,
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_vp_gallery",
+      "default": false,
+      "label": "Show new gallery type (VP Swiper)",
+      "info": "Replaces the default product gallery with the VP Product Hero Swiper gallery (main image + thumbnail row)."
     },
     {
       "type": "color_scheme",

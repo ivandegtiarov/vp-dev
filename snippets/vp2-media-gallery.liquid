@@ -1,0 +1,145 @@
+{% comment %}
+  ============================================================================
+  VP2 - Media Gallery  — snippet
+  ----------------------------------------------------------------------------
+  The VP - Product Hero Swiper gallery (main image + thumbnail row), extracted
+  so main-product.liquid can render it instead of the default Dawn gallery when
+  the section setting `enable_vp_gallery` is on.
+
+  - Self-contained: Swiper 11 CDN + CSS + markup + init JS (keyed to section.id).
+  - The main swiper is stored as window['vpMainSwiper_' + section.id] — the SAME
+    handle the vp2-buy-buttons block's slideToMedia() looks for, so selecting a
+    bundle auto-slides this gallery to that variant's featured media.
+  - All classes are `vp2-gal-` namespaced so nothing collides with the native
+    gallery or the vp-product-hero section.
+
+  Accepts: product, section
+  ============================================================================
+{% endcomment %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<style>
+  #shopify-section-{{ section.id }} .vp2-gal { width: 100%; }
+  #shopify-section-{{ section.id }} .vp2-gal-inner { display: flex; flex-direction: column; gap: 10px; }
+
+  #shopify-section-{{ section.id }} .vp2-gal-main {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  #shopify-section-{{ section.id }} .vp2-gal-main .swiper-slide {
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f6f6f6;
+  }
+  #shopify-section-{{ section.id }} .vp2-gal-main .swiper-slide img,
+  #shopify-section-{{ section.id }} .vp2-gal-main .swiper-slide video,
+  #shopify-section-{{ section.id }} .vp2-gal-main .swiper-slide iframe {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+  }
+
+  #shopify-section-{{ section.id }} .vp2-gal-thumbs { width: 100%; }
+  #shopify-section-{{ section.id }} .vp2-gal-thumbs .swiper-wrapper { align-items: stretch; }
+  #shopify-section-{{ section.id }} .vp2-gal-thumbs .swiper-slide {
+    width: 117px;
+    height: 117px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 1;
+    border: 1.5px solid transparent;
+    transition: border-color 0.18s ease;
+    background: #f6f6f6;
+  }
+  #shopify-section-{{ section.id }} .vp2-gal-thumbs .swiper-slide img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  #shopify-section-{{ section.id }} .vp2-gal-thumbs .swiper-slide-thumb-active { border-color: #577558; }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .vp2-gal-inner { gap: 5px; }
+    #shopify-section-{{ section.id }} .vp2-gal-thumbs .swiper-slide { width: 55px; height: 55px; }
+  }
+</style>
+
+<div class="vp2-gal" data-vp2-gallery>
+  <div class="vp2-gal-inner">
+    <div class="vp2-gal-main swiper" id="vp2-gal-main-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            <div class="swiper-slide" data-media-id="{{ media.id }}">
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="1200" height="1200">
+                {%- when 'video', 'external_video' -%}
+                  {%- if media.media_type == 'video' -%}
+                    {{ media | video_tag: image_size: '1200x', controls: true, playsinline: true }}
+                  {%- else -%}
+                    {{ media | external_video_tag }}
+                  {%- endif -%}
+                {%- else -%}
+                  <img src="{{ media.preview_image | image_url: width: 1200 }}" alt="{{ media.alt | escape }}" loading="lazy">
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="swiper-slide">{{ 'product-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if product.media.size > 1 -%}
+      <div class="vp2-gal-thumbs swiper" id="vp2-gal-thumbs-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {%- for media in product.media -%}
+            <div class="swiper-slide" data-media-id="{{ media.id }}">
+              <img src="{{ media.preview_image | image_url: width: 234 }}" alt="{{ media.alt | escape }}" loading="lazy" width="117" height="117">
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script defer="defer">
+  (function () {
+    var SECTION_ID = '{{ section.id }}';
+
+    function buildGallery() {
+      if (typeof window.Swiper === 'undefined') { setTimeout(buildGallery, 100); return; }
+
+      var thumbsEl = document.getElementById('vp2-gal-thumbs-' + SECTION_ID);
+      var thumbs = null;
+      if (thumbsEl) {
+        thumbs = new Swiper(thumbsEl, {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+          watchSlidesProgress: true,
+          breakpoints: { 0: { spaceBetween: 5 }, 750: { spaceBetween: 10 } }
+        });
+      }
+
+      var mainEl = document.getElementById('vp2-gal-main-' + SECTION_ID);
+      if (!mainEl) return;
+
+      // Stored under the SAME handle the vp2-buy-buttons block uses, so bundle
+      // selection auto-slides this gallery to the variant's featured media.
+      window['vpMainSwiper_' + SECTION_ID] = new Swiper(mainEl, {
+        // A small peek of the next image on mobile so users see it's swipeable.
+        slidesPerView: 1.05,
+        spaceBetween: 6,
+        breakpoints: {
+          750: { slidesPerView: 1.05, spaceBetween: 11 }
+        },
+        thumbs: thumbs ? { swiper: thumbs } : undefined
+      });
+    }
+    buildGallery();
+  })();
+</script>
