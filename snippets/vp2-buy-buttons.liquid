@@ -149,15 +149,15 @@
   }
   #shopify-section-{{ section.id }} .vp2-auto-refill-title { margin: 0; line-height: 1; font-size: 15px; font-weight: 700; color: #000; }
   #shopify-section-{{ section.id }} .vp2-subs-content { display: flex; gap: 8px; align-items: center; justify-content: flex-start; }
-  #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { font-style: italic; display: flex; align-items: center; gap: 6px; font-size: 13px; }
-  #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons p { margin: 0; }
+  #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { font-style: italic; display: flex; align-items: center; gap: 6px; }
+  #shopify-section-{{ section.id }} .vp2-subs-text { margin: 0; font-size: 13px; }
 
   @media screen and (max-width: 768px) {
     #shopify-section-{{ section.id }} .vp2-auto-refill { margin-top: 2rem; padding: 12px; }
     #shopify-section-{{ section.id }} .vp2-auto-refill-title { font-size: 15px; }
     #shopify-section-{{ section.id }} .vp2-subs-content { flex-wrap: nowrap; gap: 6px; }
-    #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { font-size: 12px; gap: 4px; min-width: 0; }
-    #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons p { white-space: nowrap; }
+    #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { gap: 4px; min-width: 0; }
+    #shopify-section-{{ section.id }} .vp2-subs-text { font-size: 12px; white-space: nowrap; }
   }
 </style>
 
@@ -186,7 +186,7 @@
                 {%- else -%}
                   <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/fast-delivery.png?v=1733337974&width=50" alt="Fast delivery" width="20" height="20">
                 {%- endif -%}
-                <p>Shipped every <span class="vp2-freq-label">{{ block.settings.subscribe_frequency_label | default: '30 days' }}</span></p>
+                <p class="vp2-subs-text vp2-subs-text--shipped">Shipped every <span class="vp2-freq-label">{{ block.settings.subscribe_frequency_label | default: '30 days' }}</span></p>
               </div>
               <div class="vp2-subs-icons">
                 {%- if block.settings.subscribe_icon_2 -%}
@@ -194,7 +194,7 @@
                 {%- else -%}
                   <img src="https://cdn.shopify.com/s/files/1/0856/4110/1578/files/pause.png?v=1733337974&width=50" alt="Cancel anytime" width="20" height="20">
                 {%- endif -%}
-                <p>Cancel/adjust anytime</p>
+                <p class="vp2-subs-text vp2-subs-text--cancel">Cancel/adjust anytime</p>
               </div>
             </div>
           </label>
