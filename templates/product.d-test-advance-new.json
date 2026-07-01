@@ -63,27 +63,27 @@
             "text": "94.8% of customers noticed improvements in their dogs within 4-6 weeks."
           }
         },
-        "variant_picker_769JVD": {
-          "type": "variant_picker",
+        "vp_variant_picker_vp2pick": {
+          "type": "vp_variant_picker",
           "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
+            "preselect_option": "auto",
+            "show_jars": true,
+            "price_suffix": "/jar"
           }
         },
         "loop_subscriptions_loop_widget_QCfnwa": {
           "type": "shopify://apps/loop-subscriptions/blocks/loop_widget/267a7c64-5cb3-4552-b817-5485165f0a0b",
           "settings": {}
         },
-        "buy_buttons": {
-          "type": "buy_buttons",
+        "vp_buy_buttons_vp2buy": {
+          "type": "vp_buy_buttons",
           "settings": {
-            "show_dynamic_checkout": false,
-            "show_gift_card_recipient": false,
+            "atc_text": "ADD TO CART",
             "label": "30 Day Money-Back Guarantee",
-            "change_to_dropdown": true,
-            "vet_name": "Dr. Jane Smith, DVM",
-            "vet_review": "A high-quality multivitamin like this should be part of every dog’s daily routine.",
-            "free_gifts_title": "3 FREE gifts for subscribers!"
+            "show_subscribe": true,
+            "subscribe_title": "Subscribe for an extra 20% off",
+            "subscribe_frequency_label": "30 days",
+            "preselect_option": "auto"
           }
         },
         "guarantee_banner_N3CpR6": {
@@ -170,9 +170,9 @@
         "description",
         "dosage_banner_wweckf",
         "custom_content_dMdhtg",
-        "variant_picker_769JVD",
+        "vp_variant_picker_vp2pick",
         "loop_subscriptions_loop_widget_QCfnwa",
-        "buy_buttons",
+        "vp_buy_buttons_vp2buy",
         "guarantee_banner_N3CpR6",
         "doctor_review_AQzdae",
         "collapsible_tab_WF7kNH",
