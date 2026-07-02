@@ -67,7 +67,7 @@
           "type": "vp_variant_picker",
           "settings": {
             "option_label": "",
-            "preselect_option": "3",
+            "preselect_option": "2",
             "show_jars": true,
             "price_suffix": "/jar"
           }
