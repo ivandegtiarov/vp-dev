@@ -84,6 +84,22 @@
   endfor
 
   assign vp2_initial_variant_id = vp2_selected_variant_id | default: product.selected_or_first_available_variant.id
+
+  # Native selling-plan fallback: when the Loop app widget is NOT in the DOM
+  # (e.g. this block runs off a product page, inside 'vp-featured-product'),
+  # there is no widget to proxy-click, so ATC would always add a one-time
+  # purchase. We resolve the product's first selling plan here and submit it
+  # directly via a hidden name="selling_plan" input that the JS toggles ON only
+  # when Loop's widget is absent. On a real PDP the Loop widget is present, this
+  # input stays disabled, and Loop owns the selling_plan exactly as before.
+  assign vp2_selling_plan_id = ''
+  assign vp2_sp_group = product.selling_plan_groups | first
+  if vp2_sp_group != blank
+    assign vp2_sp = vp2_sp_group.selling_plans | first
+    if vp2_sp != blank
+      assign vp2_selling_plan_id = vp2_sp.id
+    endif
+  endif
 -%}
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
@@ -170,6 +186,16 @@
 
     {%- form 'product', product, id: vp2_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
       <input type="hidden" name="id" value="{{ vp2_initial_variant_id }}" class="vp2-variant-id">
+
+      {%- comment -%}
+        Native selling-plan fallback input (see header/liquid comment). Rendered
+        `disabled` so it is NOT submitted by default — the JS enables it only when
+        Loop's widget is absent AND the subscribe checkbox is checked. On a PDP
+        (Loop widget present) this never activates.
+      {%- endcomment -%}
+      {%- if vp2_selling_plan_id != blank -%}
+        <input type="hidden" name="selling_plan" value="{{ vp2_selling_plan_id }}" class="vp2-selling-plan" data-vp2-selling-plan disabled>
+      {%- endif -%}
 
       {%- comment -%}
         SUBSCRIBE CARD — Loop proxy (see header comment). Optional via setting.
@@ -310,6 +336,9 @@
 
     /* ---------- SUBSCRIPTION (Loop widget proxy) ---------- */
     var autoRefill = section.querySelector('[data-vp2-auto-refill]');
+    /* Native selling-plan fallback input — present only when the product has a
+       selling plan (rendered disabled; enabled only when Loop is absent). */
+    var sellingPlanInput = form && form.querySelector('[data-vp2-selling-plan]');
 
     function loopOnetimeEl() {
       return (form && form.querySelector('.loop-widget-purchase-option-onetime'))
@@ -319,6 +348,8 @@
       return (form && form.querySelector('[data-loop-widget-selling-plan-group]'))
         || document.querySelector('[data-loop-widget-selling-plan-group]');
     }
+    /* Loop widget is "present" once EITHER of its controls has mounted. */
+    function loopPresent() { return !!(loopOnetimeEl() || loopSubEl()); }
     function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
 
     function setPriceMode() {
@@ -330,17 +361,34 @@
       }
     }
     function syncLoopWidget() {
-      var subEl = loopSubEl();
-      var oneEl = loopOnetimeEl();
-      if (isSubscribed()) {
-        if (subEl) subEl.click();
-      } else {
-        if (oneEl) oneEl.click();
+      /* Preferred path: proxy-click Loop's real widget (PDP behaviour). */
+      if (loopPresent()) {
+        /* Loop owns the selling_plan — make sure our fallback input never
+           double-submits it. */
+        if (sellingPlanInput) sellingPlanInput.disabled = true;
+        var subEl = loopSubEl();
+        var oneEl = loopOnetimeEl();
+        if (isSubscribed()) {
+          if (subEl) subEl.click();
+        } else {
+          if (oneEl) oneEl.click();
+        }
+        return;
+      }
+      /* Fallback path: no Loop widget (off-PDP, e.g. vp-featured-product).
+         Submit the selling_plan natively by toggling the hidden input. */
+      if (sellingPlanInput) {
+        sellingPlanInput.disabled = !isSubscribed();
       }
     }
     function applyPurchaseMode() { setPriceMode(); syncLoopWidget(); }
     function watchLoopWidget() {
       if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); return; }
+      /* No selling-plan fallback available and no Loop widget yet → just wait. */
+      /* Apply the native fallback now so the initial subscribe state is honoured
+         even if Loop's widget never mounts (off-PDP). It re-syncs if Loop later
+         appears. */
+      syncLoopWidget();
       var obs = new MutationObserver(function () {
         if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); obs.disconnect(); }
       });
