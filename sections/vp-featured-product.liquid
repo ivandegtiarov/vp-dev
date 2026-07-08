@@ -74,35 +74,78 @@
       }
     }
 
-    /* ---------------------------------------------------------------------
-       Smaller-desktop layout fix (scoped to THIS section only).
-       On the real PDP the media/info two-column split only kicks in at 990px,
-       so between 750-989px this featured section looked "mobile" (cramped /
-       stacked). Here we bring the desktop split forward to 750px so mid-size
-       desktops get the proper side-by-side layout. Scoped by section id so the
-       PDP is never affected.
-       --------------------------------------------------------------------- */
-    @media screen and (min-width: 750px) and (max-width: 989px) {
-      #shopify-section-{{ section.id }} .product--large:not(.product--no-media) .product__media-wrapper {
-        max-width: 60%;
-        width: calc(60% - var(--grid-desktop-horizontal-spacing) / 2);
+    /* =====================================================================
+       FEATURED PRODUCT — full responsive layout (scoped to THIS section).
+       The shared product CSS is tuned for a full-width PDP where the 2-column
+       split only starts at 990px. Off-PDP that leaves 750-989px looking half
+       broken. Below we define one coherent layout for every range, scoped by
+       section id so the PDP is never touched.
+       ===================================================================== */
+
+    /* ---- MOBILE (< 750px): single column, media on top ---- */
+    @media screen and (max-width: 749px) {
+      #shopify-section-{{ section.id }} .product {
+        display: flex;
+        flex-direction: column;
       }
-      #shopify-section-{{ section.id }} .product--large:not(.product--no-media) .product__info-wrapper {
+      #shopify-section-{{ section.id }} .product__media-wrapper,
+      #shopify-section-{{ section.id }} .product__info-wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
+      #shopify-section-{{ section.id }} .product__info-wrapper { margin-top: 1.5rem; }
+    }
+
+    /* ---- TABLET + SMALL DESKTOP (750px+): clean 2-column side by side ---- */
+    @media screen and (min-width: 750px) {
+      #shopify-section-{{ section.id }} .product {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+      }
+      /* Media column */
+      #shopify-section-{{ section.id }} .product__media-wrapper {
+        flex: 0 0 auto;
+        width: 55%;
+        max-width: 55%;
+        padding: 0;
+      }
+      /* Info column */
+      #shopify-section-{{ section.id }} .product__info-wrapper {
+        flex: 1 1 auto;
+        width: 45%;
+        max-width: 45%;
         padding: 0 0 0 3rem;
-        max-width: 40%;
-        width: calc(40% - var(--grid-desktop-horizontal-spacing) / 2);
+        margin-top: 0;
       }
-      #shopify-section-{{ section.id }} .product--large:not(.product--no-media).product--right .product__info-wrapper {
+      #shopify-section-{{ section.id }}.product--right .product__info-wrapper,
+      #shopify-section-{{ section.id }} .product--right .product__info-wrapper {
         padding: 0 3rem 0 0;
       }
-      /* Keep the desktop title/stars/description visible (not the mobile block)
-         and hide the mobile-only duplicates in this range. */
-      #shopify-section-{{ section.id }} .product-mobile-content { display: none; }
+      /* Never show the mobile-only duplicate content on 750px+. */
+      #shopify-section-{{ section.id }} .product-mobile-content { display: none !important; }
       #shopify-section-{{ section.id }} .product__info-wrapper .product__title,
       #shopify-section-{{ section.id }} .product__info-wrapper .stars-with-rating,
-      #shopify-section-{{ section.id }} .product__info-wrapper .product__description { display: block; }
-      #shopify-section-{{ section.id }} .product-free-items-text-mobile { display: none; }
-      #shopify-section-{{ section.id }} .product-free-items-text-desktop { display: block; }
+      #shopify-section-{{ section.id }} .product__info-wrapper .product__description { display: block !important; }
+      #shopify-section-{{ section.id }} .product-free-items-text-mobile { display: none !important; }
+      #shopify-section-{{ section.id }} .product-free-items-text-desktop { display: block !important; }
+    }
+
+    /* ---- LARGE DESKTOP (990px+): give media a touch more room, like the PDP ---- */
+    @media screen and (min-width: 990px) {
+      #shopify-section-{{ section.id }} .product__media-wrapper {
+        width: 60%;
+        max-width: 60%;
+      }
+      #shopify-section-{{ section.id }} .product__info-wrapper {
+        width: 40%;
+        max-width: 40%;
+        padding: 0 0 0 4rem;
+      }
+      #shopify-section-{{ section.id }} .product--right .product__info-wrapper {
+        padding: 0 4rem 0 0;
+      }
     }
   {%- endstyle -%}
 
@@ -192,7 +235,13 @@
         {% if section.settings.enable_vp_gallery %}
           {% render 'vp2-media-gallery', product: product, section: section %}
         {% else %}
-          {% render 'product-media-gallery', variant_images: variant_images %}
+          {%- comment -%}
+            Must pass `product:` explicitly — this section reassigns `product`
+            from a setting, and `assign`ed vars don't leak into rendered
+            snippets. Without it the snippet falls back to the (empty) page
+            product on non-PDP pages and renders nothing.
+          {%- endcomment -%}
+          {% render 'product-media-gallery', product: product, variant_images: variant_images %}
         {% endif %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -1183,7 +1232,7 @@
       </div>
     </div>
 
-    {% render 'product-media-modal', variant_images: variant_images %}
+    {% render 'product-media-modal', product: product, variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}

@@ -55,11 +55,16 @@
 
   {%- comment -%}
     Optional (opt-in via `hide_badges` render param — used by the featured
-    product section only). Hides the native "Most Popular / Best Value" ::after
-    ribbons on the 2nd/3rd pills. Scoped to this section id, so other places
-    (e.g. the PDP, which renders without the param) keep their badges.
+    product section only). Hides BOTH:
+      1. the green "% OFF!" pills (.product-form__input--pill-percentages), and
+      2. the native "Most Popular / Best Value" ::after corner ribbons.
+    Scoped to this section id, so the PDP (rendered without the param) keeps
+    its percentages and ribbons.
   {%- endcomment -%}
   {%- if hide_badges -%}
+  #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input--pill-percentages {
+    display: none !important;
+  }
   #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input-size-2::after,
   #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input-size-3::after {
     content: none !important;
