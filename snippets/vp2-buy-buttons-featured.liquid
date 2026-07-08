@@ -80,16 +80,35 @@
 
   assign vp2_initial_variant_id = vp2_selected_variant_id | default: product.selected_or_first_available_variant.id
 
-  # Native selling-plan (subscription) for the off-PDP fallback. We take the
-  # first selling plan of the product's first selling plan group. Rendered as a
-  # hidden input that the subscribe checkbox toggles on/off.
-  assign vp2_selling_plan_id = ''
-  assign vp2_sp_group = product.selling_plan_groups | first
-  if vp2_sp_group != blank
-    assign vp2_sp = vp2_sp_group.selling_plans | first
-    if vp2_sp != blank
-      assign vp2_selling_plan_id = vp2_sp.id
+  # Native selling-plan (subscription) for the off-PDP setup. A selling plan is
+  # PER-VARIANT: each variant has its own selling_plan_allocations. Submitting a
+  # plan that doesn't belong to the selected variant makes Shopify reject it
+  # ("Cannot apply selling plan to variant"). So we resolve the plan for EACH
+  # variant and hand the JS a variantId -> sellingPlanId map; the JS swaps the
+  # submitted plan whenever the bundle changes — exactly like the PDP widget.
+  assign vp2_has_selling_plans = false
+  assign vp2_plan_pairs = ''
+  for v in product.variants
+    assign alloc = v.selling_plan_allocations | first
+    if alloc != blank
+      assign vp2_has_selling_plans = true
+      assign pair = '"' | append: v.id | append: '":"' | append: alloc.selling_plan.id | append: '"'
+      if vp2_plan_pairs == ''
+        assign vp2_plan_pairs = pair
+      else
+        assign vp2_plan_pairs = vp2_plan_pairs | append: ',' | append: pair
+      endif
     endif
+  endfor
+  assign vp2_selling_plan_map = '{' | append: vp2_plan_pairs | append: '}'
+-%}
+{%- liquid
+  # Plan for the initially-selected variant (for first-paint before any change).
+  assign vp2_initial_variant = product.variants | where: 'id', vp2_initial_variant_id | first
+  assign vp2_initial_alloc = vp2_initial_variant.selling_plan_allocations | first
+  assign vp2_selling_plan_id = ''
+  if vp2_initial_alloc != blank
+    assign vp2_selling_plan_id = vp2_initial_alloc.selling_plan.id
   endif
 -%}
 
@@ -179,12 +198,13 @@
       <input type="hidden" name="id" value="{{ vp2_initial_variant_id }}" class="vp2-variant-id">
 
       {%- comment -%}
-        Native selling-plan input. Submitted when the subscribe checkbox is on
-        (the JS toggles `disabled`). Only rendered when the product actually has
-        a selling plan; otherwise the section behaves as one-time only.
+        Native selling-plan input. The JS sets its value to the SELECTED
+        variant's plan and toggles `disabled` (subscribed ↔ one-time). Rendered
+        `disabled` initially so a wrong/stale plan can never be submitted before
+        JS runs. Only present when AT LEAST ONE variant has a selling plan.
       {%- endcomment -%}
-      {%- if vp2_selling_plan_id != blank -%}
-        <input type="hidden" name="selling_plan" value="{{ vp2_selling_plan_id }}" class="vp2-selling-plan" data-vp2-selling-plan>
+      {%- if vp2_has_selling_plans -%}
+        <input type="hidden" name="selling_plan" value="{{ vp2_selling_plan_id }}" class="vp2-selling-plan" data-vp2-selling-plan disabled>
       {%- endif -%}
 
       {%- comment -%}
@@ -325,13 +345,23 @@
     }
 
     /* ---------- SUBSCRIPTION (native selling_plan, off-PDP) ----------
-       No Loop widget here — we submit the product's selling_plan directly by
-       enabling/disabling a hidden input. When subscribed → input enabled →
-       Shopify adds the line with the subscription. When one-time → disabled →
-       plain purchase. */
+       No Loop widget here — we submit the selling_plan directly via a hidden
+       input. A selling plan is PER-VARIANT, so we keep a variantId->planId map
+       and set the input's value to match the CURRENTLY selected variant before
+       enabling it. Enabled only when subscribed AND the variant has a plan. */
     var autoRefill = section.querySelector('[data-vp2-auto-refill]');
     var sellingPlanInput = form && form.querySelector('[data-vp2-selling-plan]');
+    var SELLING_PLAN_MAP = {};
+    try { SELLING_PLAN_MAP = {{ vp2_selling_plan_map }} || {}; } catch (e) { SELLING_PLAN_MAP = {}; }
 
+    function currentVariantId() {
+      return (variantIdInput && variantIdInput.value)
+        || window.currenSelectedVariantId
+        || '';
+    }
+    function planForCurrentVariant() {
+      return SELLING_PLAN_MAP[String(currentVariantId())] || '';
+    }
     function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
 
     function setPriceMode() {
@@ -343,9 +373,16 @@
       }
     }
     function syncSellingPlan() {
-      /* Only submit the selling_plan when subscribing. If the product has no
-         selling plan the input isn't rendered and this is a no-op. */
-      if (sellingPlanInput) sellingPlanInput.disabled = !isSubscribed();
+      if (!sellingPlanInput) return;
+      var plan = planForCurrentVariant();
+      /* Submit the plan only when subscribing AND this variant actually has one,
+         otherwise disable the input so it's a plain one-time purchase. */
+      if (isSubscribed() && plan) {
+        sellingPlanInput.value = plan;
+        sellingPlanInput.disabled = false;
+      } else {
+        sellingPlanInput.disabled = true;
+      }
     }
     function applyPurchaseMode() { setPriceMode(); syncSellingPlan(); }
     /* Kept name-compatible with the shared snippet's call sites below. */
