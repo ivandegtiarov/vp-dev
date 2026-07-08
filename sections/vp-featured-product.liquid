@@ -645,6 +645,12 @@
                       {% else %}
                         {{ block.settings.content }}
                         {{ block.settings.page.content }}
+                        {%- comment -%}
+                          Also render the block's Liquid code field so 'default'
+                          style tabs (e.g. Shipping info, FAQ) can use custom
+                          Liquid/HTML — it was previously ignored here.
+                        {%- endcomment -%}
+                        {{ block.settings.custom_liquid }}
                       {% endif %}
                     </div>
                   </details>
