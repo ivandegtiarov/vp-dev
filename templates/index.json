@@ -375,7 +375,7 @@
       ],
       "custom_css": [
         ".product__tax {display: none;}",
-        "#variant-selects-template--26096468918538__main .product-form__input--pill:first-child {display: none !important;}",
+        "#variant-selects .product-form__input--pill:first-child {display: none !important;}",
         ".product-form__input.product-form__input--pill:not(.product-form__input-size) {display: none !important;}",
         ".progress-info {display: none;}",
         ".custom-content-labels-container {display: none;}",
