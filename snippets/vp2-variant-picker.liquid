@@ -57,6 +57,20 @@
   #shopify-section-{{ section.id }} .vp2-pill-picker [vp2-single-purchase-pricings] { display: none; }
   #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-pill-picker [vp2-subs-purchase-pricings] { display: none !important; }
   #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-pill-picker [vp2-single-purchase-pricings] { display: block !important; }
+
+  {%- comment -%}
+    Optional (opt-in via `hide_badges` render param — used by the featured
+    product section only). Hides the native "Most Popular / Best Value" ::after
+    ribbons on the 2nd/3rd pills. Scoped to this section id, so other places
+    (e.g. the PDP, which renders without the param) keep their badges.
+  {%- endcomment -%}
+  {%- if hide_badges -%}
+  #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input-size-2::after,
+  #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input-size-3::after {
+    content: none !important;
+    display: none !important;
+  }
+  {%- endif -%}
 </style>
 
 <div class="vp2-pill-picker" data-vp2-group="{{ section.id }}" {{ block.shopify_attributes }}>
@@ -111,6 +125,14 @@
         endif
 
         assign price_suffix = block.settings.price_suffix | default: '/jar'
+        {%- comment -%}
+          `hide_price_suffix` render param (featured product section only) forces
+          the per-jar suffix off, regardless of the block setting. On the PDP the
+          param is absent so the setting (default '/jar') applies as before.
+        {%- endcomment -%}
+        if hide_price_suffix
+          assign price_suffix = ''
+        endif
       -%}
 
       {%- for value in opt.values -%}
