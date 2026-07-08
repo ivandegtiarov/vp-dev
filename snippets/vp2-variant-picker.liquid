@@ -34,11 +34,6 @@
 -%}
 
 <style>
-  /* The native picker styles the pill via `.product-form__input--pill input[type=radio] + label`
-     and `.product-form__input-size ...`. Our radios are visually hidden and sit
-     as previous-siblings of the label exactly like native, so those selectors
-     apply verbatim. Only thing native relies on that we must re-assert: hide the
-     raw radio (native does this globally for pills). */
   #shopify-section-{{ section.id }} .vp2-pill-picker { display: block; }
   #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input {
     display: flex;
@@ -125,11 +120,7 @@
         endif
 
         assign price_suffix = block.settings.price_suffix | default: '/jar'
-        {%- comment -%}
-          `hide_price_suffix` render param (featured product section only) forces
-          the per-jar suffix off, regardless of the block setting. On the PDP the
-          param is absent so the setting (default '/jar') applies as before.
-        {%- endcomment -%}
+
         if hide_price_suffix
           assign price_suffix = ''
         endif
