@@ -1,26 +1,21 @@
 {% comment %}
   ============================================================================
-  VP2 - Buy Buttons  (block type: vp_buy_buttons)  — snippet
+  VP2 - Buy Buttons (FEATURED)  (block type: vp_buy_buttons)  — snippet
   ----------------------------------------------------------------------------
-  VISUAL: pixel-identical to the NATIVE Dawn buy button on this template. It
-  REUSES the native classes (product-form__submit button button--full-width
-  button--primary / product-form__submit-text-atc / product-form__price-wrapper-
-  b-plus / product-form__price-sale / product-form__price-regular), whose CSS
-  already loads via section-main-product.css. No visual duplication.
+  This is the OFF-PDP variant of 'vp2-buy-buttons', used ONLY by the
+  'vp-featured-product' section. It is IDENTICAL to that snippet except for the
+  subscription mechanism:
 
-  LOGIC: the VP - Product Hero self-contained model, NOT the native one:
-    - Owns the hidden <product-form id="vp2-product-form-{{ section.id }}"> that
-      the SEPARATE vp_variant_picker block's radios attach to (form="…").
-    - On bundle change our JS writes the variant id into name="id" — NO Section
-      Rendering re-render, NO ?variant= URL rewrite.
-    - Subscribe checkbox is a PROXY for the Loop app widget (clicks Loop's
-      selling-plan group / one-time option; toggles the pricing class).
-    - ATC price rows are server-rendered per variant from metafields; only the
-      pre-selected one is visible on first paint (no flash). JS swaps on change.
+    - On a real product page, the Loop app widget mounts and the standard
+      'vp2-buy-buttons' snippet proxy-clicks it. That is unchanged.
+    - Off a product page (this section on home/regular pages) the Loop widget
+      does NOT mount — there is no page-product for it to bind to. So instead of
+      proxying a widget that isn't there, we submit the product's selling_plan
+      DIRECTLY via a hidden name="selling_plan" input the subscribe checkbox
+      toggles. This is native Shopify subscription behaviour, no widget needed.
 
-  COORDINATION: shared form id + data-vp2-group="{{ section.id }}". The subs /
-  one-time toggle is a class on the SECTION wrapper (vp2-single_purchase_option)
-  so BOTH blocks' prices switch together.
+  Everything else (variant picker coordination, price rows, styling, session
+  restore) is the same as 'vp2-buy-buttons'.
   ============================================================================
 {% endcomment %}
 
@@ -84,6 +79,18 @@
   endfor
 
   assign vp2_initial_variant_id = vp2_selected_variant_id | default: product.selected_or_first_available_variant.id
+
+  # Native selling-plan (subscription) for the off-PDP fallback. We take the
+  # first selling plan of the product's first selling plan group. Rendered as a
+  # hidden input that the subscribe checkbox toggles on/off.
+  assign vp2_selling_plan_id = ''
+  assign vp2_sp_group = product.selling_plan_groups | first
+  if vp2_sp_group != blank
+    assign vp2_sp = vp2_sp_group.selling_plans | first
+    if vp2_sp != blank
+      assign vp2_selling_plan_id = vp2_sp.id
+    endif
+  endif
 -%}
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
@@ -170,6 +177,15 @@
 
     {%- form 'product', product, id: vp2_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
       <input type="hidden" name="id" value="{{ vp2_initial_variant_id }}" class="vp2-variant-id">
+
+      {%- comment -%}
+        Native selling-plan input. Submitted when the subscribe checkbox is on
+        (the JS toggles `disabled`). Only rendered when the product actually has
+        a selling plan; otherwise the section behaves as one-time only.
+      {%- endcomment -%}
+      {%- if vp2_selling_plan_id != blank -%}
+        <input type="hidden" name="selling_plan" value="{{ vp2_selling_plan_id }}" class="vp2-selling-plan" data-vp2-selling-plan>
+      {%- endif -%}
 
       {%- comment -%}
         SUBSCRIBE CARD — Loop proxy (see header comment). Optional via setting.
@@ -308,17 +324,14 @@
       }
     }
 
-    /* ---------- SUBSCRIPTION (Loop widget proxy) ---------- */
+    /* ---------- SUBSCRIPTION (native selling_plan, off-PDP) ----------
+       No Loop widget here — we submit the product's selling_plan directly by
+       enabling/disabling a hidden input. When subscribed → input enabled →
+       Shopify adds the line with the subscription. When one-time → disabled →
+       plain purchase. */
     var autoRefill = section.querySelector('[data-vp2-auto-refill]');
+    var sellingPlanInput = form && form.querySelector('[data-vp2-selling-plan]');
 
-    function loopOnetimeEl() {
-      return (form && form.querySelector('.loop-widget-purchase-option-onetime'))
-        || document.querySelector('.loop-widget-purchase-option-onetime');
-    }
-    function loopSubEl() {
-      return (form && form.querySelector('[data-loop-widget-selling-plan-group]'))
-        || document.querySelector('[data-loop-widget-selling-plan-group]');
-    }
     function isSubscribed() { return autoRefill ? autoRefill.checked : false; }
 
     function setPriceMode() {
@@ -329,23 +342,15 @@
         section.classList.add('vp2-single_purchase_option');
       }
     }
-    function syncLoopWidget() {
-      var subEl = loopSubEl();
-      var oneEl = loopOnetimeEl();
-      if (isSubscribed()) {
-        if (subEl) subEl.click();
-      } else {
-        if (oneEl) oneEl.click();
-      }
+    function syncSellingPlan() {
+      /* Only submit the selling_plan when subscribing. If the product has no
+         selling plan the input isn't rendered and this is a no-op. */
+      if (sellingPlanInput) sellingPlanInput.disabled = !isSubscribed();
     }
-    function applyPurchaseMode() { setPriceMode(); syncLoopWidget(); }
-    function watchLoopWidget() {
-      if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); return; }
-      var obs = new MutationObserver(function () {
-        if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); obs.disconnect(); }
-      });
-      obs.observe(document.body, { childList: true, subtree: true });
-    }
+    function applyPurchaseMode() { setPriceMode(); syncSellingPlan(); }
+    /* Kept name-compatible with the shared snippet's call sites below. */
+    function syncLoopWidget() { syncSellingPlan(); }
+    function watchLoopWidget() { syncSellingPlan(); }
 
     /* Subscribe frequency follows the picked bundle (data-vp2-freq). */
     var freqLabels = section.querySelectorAll('.vp2-freq-label');
