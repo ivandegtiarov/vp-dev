@@ -73,6 +73,23 @@
     content: none !important;
     display: none !important;
   }
+
+  {%- comment -%} Featured-section mobile pill type scale (this section only). {%- endcomment -%}
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input--pill-title-text {
+      font-size: 17px;
+    }
+    #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input-size-2::after,
+    #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input-size-3::after {
+      font-size: 13px;
+    }
+    #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input--pill-title-text-desc {
+      font-size: 14px;
+    }
+    #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input--pill-title-text-price-current {
+      font-size: 18px;
+    }
+  }
   {%- endif -%}
 </style>
 
