@@ -272,7 +272,7 @@
           "type": "vp_buy_buttons",
           "settings": {
             "atc_text": "ADD TO CART",
-            "label": "30 Day Money-Back Guarantee",
+            "label": "",
             "show_subscribe": true,
             "subscribe_title": "Subscribe for an extra 20% off",
             "subscribe_frequency_label": "30 days",
