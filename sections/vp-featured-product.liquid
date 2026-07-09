@@ -86,13 +86,13 @@
        --------------------------------------------------------------------- */
     @media screen and (min-width: 750px) {
       #shopify-section-{{ section.id }} .product:not(.product--no-media) .product__media-wrapper {
-        max-width: 58%;
-        width: calc(58% - var(--grid-desktop-horizontal-spacing) / 2);
+        max-width: 56%;
+        width: calc(56% - var(--grid-desktop-horizontal-spacing) / 2);
         min-width: 0;
       }
       #shopify-section-{{ section.id }} .product:not(.product--no-media) .product__info-wrapper {
-        max-width: 42%;
-        width: calc(42% - var(--grid-desktop-horizontal-spacing) / 2);
+        max-width: 44%;
+        width: calc(44% - var(--grid-desktop-horizontal-spacing) / 2);
         /* Reset the shared `min-width: 490px` that (with media--medium) pushes
            the two columns past 100% and wraps them at 990-1180px. */
         min-width: 0;
@@ -100,22 +100,6 @@
       }
       #shopify-section-{{ section.id }} .product:not(.product--no-media).product--right .product__info-wrapper {
         padding: 0 3rem 0 0;
-      }
-    }
-
-    /* Slightly more room for media on large desktops, matching the PDP feel. */
-    @media screen and (min-width: 1200px) {
-      #shopify-section-{{ section.id }} .product:not(.product--no-media) .product__media-wrapper {
-        max-width: 62%;
-        width: calc(62% - var(--grid-desktop-horizontal-spacing) / 2);
-      }
-      #shopify-section-{{ section.id }} .product:not(.product--no-media) .product__info-wrapper {
-        max-width: 38%;
-        width: calc(38% - var(--grid-desktop-horizontal-spacing) / 2);
-        padding: 0 0 0 4rem;
-      }
-      #shopify-section-{{ section.id }} .product:not(.product--no-media).product--right .product__info-wrapper {
-        padding: 0 4rem 0 0;
       }
     }
   {%- endstyle -%}
