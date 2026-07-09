@@ -53,14 +53,8 @@
   #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-pill-picker [vp2-subs-purchase-pricings] { display: none !important; }
   #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-pill-picker [vp2-single-purchase-pricings] { display: block !important; }
 
-  {%- comment -%}
-    Optional (opt-in via `hide_badges` render param — used by the featured
-    product section only). Hides BOTH:
-      1. the green "% OFF!" pills (.product-form__input--pill-percentages), and
-      2. the native "Most Popular / Best Value" ::after corner ribbons.
-    Scoped to this section id, so the PDP (rendered without the param) keeps
-    its percentages and ribbons.
-  {%- endcomment -%}
+
+
   {%- if hide_badges -%}
   #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input--pill-percentages {
     display: none !important;
@@ -84,7 +78,7 @@
         {%- endif -%}
       </legend>
 
-      {%- comment -%} Pre-selection resolution — identical to vp-product-hero. {%- endcomment -%}
+
       {%- liquid
         assign preselect_option = block.settings.preselect_option | default: 'auto'
         assign value_count = opt.values | size
@@ -151,17 +145,7 @@
           assign freq_days = jar_count | times: 30
           assign freq_label = freq_days | append: ' days'
 
-          {%- comment -%}
-            Featured-section override (opt-in via `freq_by_position`): the
-            bundle variant titles here are "Buy 1 / Buy 2 + get 1 FREE / ..."
-            so the jar-count math above always resolves to 1 ("30 days"). Off
-            the PDP there's no Loop widget to rewrite the "Shipped every X"
-            label, so derive it from the pill POSITION instead — matching the
-            supply shown on the pills (1-Month / 3-Month / 5-Month).
-              pill 1 -> 30 days, pill 2 -> 3 months, pill 3 -> 5 months.
-            Any extra pills fall back to (idx*2 - 1) months, continuing the
-            1/3/5 pattern. Scoped to the featured render; the PDP is unchanged.
-          {%- endcomment -%}
+
           if freq_by_position
             if idx == 1
               assign freq_label = '30 days'
