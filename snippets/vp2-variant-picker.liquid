@@ -151,6 +151,26 @@
           assign freq_days = jar_count | times: 30
           assign freq_label = freq_days | append: ' days'
 
+          {%- comment -%}
+            Featured-section override (opt-in via `freq_by_position`): the
+            bundle variant titles here are "Buy 1 / Buy 2 + get 1 FREE / ..."
+            so the jar-count math above always resolves to 1 ("30 days"). Off
+            the PDP there's no Loop widget to rewrite the "Shipped every X"
+            label, so derive it from the pill POSITION instead — matching the
+            supply shown on the pills (1-Month / 3-Month / 5-Month).
+              pill 1 -> 30 days, pill 2 -> 3 months, pill 3 -> 5 months.
+            Any extra pills fall back to (idx*2 - 1) months, continuing the
+            1/3/5 pattern. Scoped to the featured render; the PDP is unchanged.
+          {%- endcomment -%}
+          if freq_by_position
+            if idx == 1
+              assign freq_label = '30 days'
+            else
+              assign freq_months = idx | times: 2 | minus: 1
+              assign freq_label = freq_months | append: ' months'
+            endif
+          endif
+
           assign jar_image = block.settings.bundle_image_override
           if jar_image == blank
             assign jar_image = v.metafields.custom.size_featured_image
