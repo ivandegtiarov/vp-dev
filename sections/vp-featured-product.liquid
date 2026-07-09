@@ -965,11 +965,12 @@
 
               {%- when 'vp_variant_picker' -%}
                 {% comment %}
-                  Featured section overrides: no '/jar' price suffix, no
-                  "Most Popular / Best Value" badges, and position-based
-                  subscribe frequency (30 days / 3 months / 5 months) since
-                  there's no Loop widget off the PDP to drive it. Passed as
-                  render params so the shared snippet's PDP behaviour is unchanged.
+                  Featured section overrides: no '/jar' price suffix, hide the
+                  "% OFF!" badges (but KEEP the "Most Popular / Best Value"
+                  ribbons), and position-based subscribe frequency (30 days /
+                  3 months / 5 months) since there's no Loop widget off the PDP
+                  to drive it. Passed as render params so the shared snippet's
+                  PDP behaviour is unchanged.
                 {% endcomment %}
                 {% render 'vp2-variant-picker', product: product, block: block, section: section, hide_price_suffix: true, hide_badges: true, freq_by_position: true %}
               {%- when 'vp_buy_buttons' -%}
