@@ -56,7 +56,16 @@
 
 
   {%- if hide_badges -%}
-  #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input--pill-percentages {
+  {%- comment -%}
+    Hide the "% OFF!" badges ALWAYS in this section. A plain class rule loses to
+    the one-time toggle above (`…vp2-single_purchase_option … [vp2-single-purchase-pricings]
+    { display:block !important }`), so the single-purchase badge reappeared in
+    one-time mode. We give the badges a unique `vp2-pct-hidden` class and hide it
+    with rules specific enough to win in BOTH subscribe and one-time modes.
+  {%- endcomment -%}
+  #shopify-section-{{ section.id }} .vp2-pill-picker .vp2-pct-hidden,
+  #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-pill-picker .vp2-pct-hidden[vp2-single-purchase-pricings],
+  #shopify-section-{{ section.id }}.vp2-single_purchase_option .vp2-pill-picker .vp2-pct-hidden[vp2-subs-purchase-pricings] {
     display: none !important;
   }
   #shopify-section-{{ section.id }} .vp2-pill-picker .product-form__input-size-2::after,
@@ -188,10 +197,10 @@
             {%- endif -%}
           </div>
           {%- if v.metafields.custom.size_jar_discount_value != blank -%}
-            <div class="product-form__input--pill-percentages" vp2-subs-purchase-pricings>{{ v.metafields.custom.size_jar_discount_value }}% OFF!</div>
+            <div class="product-form__input--pill-percentages{% if hide_badges %} vp2-pct-hidden{% endif %}" vp2-subs-purchase-pricings>{{ v.metafields.custom.size_jar_discount_value }}% OFF!</div>
           {%- endif -%}
           {%- if v.metafields.custom.size_jar_dicount_value_one_time_purchase != blank -%}
-            <div class="product-form__input--pill-percentages" vp2-single-purchase-pricings>{{ v.metafields.custom.size_jar_dicount_value_one_time_purchase }}% OFF!</div>
+            <div class="product-form__input--pill-percentages{% if hide_badges %} vp2-pct-hidden{% endif %}" vp2-single-purchase-pricings>{{ v.metafields.custom.size_jar_dicount_value_one_time_purchase }}% OFF!</div>
           {%- endif -%}
           <div class="product-form__input--pill-price">
             <div class="product-form__input--pill-title-text-price-compare">{{ product.variants[0].compare_at_price | money }}{{ price_suffix }}</div>
