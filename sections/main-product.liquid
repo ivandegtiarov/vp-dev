@@ -899,11 +899,14 @@
                 {%- comment -%}
                   The 5-option test template uses position-based subscribe
                   frequency (30 days / 3 / 5 / 7 / 9 months) like the featured
-                  section, instead of the default jar-count × 30 days. Scoped by
-                  template suffix so every other PDP keeps the default.
+                  section, instead of the default jar-count × 30 days. It also
+                  hides the "% OFF!" badges in BOTH subscribe and one-time modes
+                  (hide_badges) — a plain hide loses to the one-time toggle's
+                  !important, so without this the badge reappears when sub is
+                  turned off. Scoped by template suffix so other PDPs are unchanged.
                 {%- endcomment -%}
                 {%- if template.suffix == 'd-test-with-5-option' -%}
-                  {% render 'vp2-variant-picker', product: product, block: block, section: section, freq_by_position: true %}
+                  {% render 'vp2-variant-picker', product: product, block: block, section: section, freq_by_position: true, hide_badges: true %}
                 {%- else -%}
                   {% render 'vp2-variant-picker', product: product, block: block, section: section %}
                 {%- endif -%}
