@@ -896,7 +896,17 @@
                 </div>
 
               {%- when 'vp_variant_picker' -%}
-                {% render 'vp2-variant-picker', product: product, block: block, section: section %}
+                {%- comment -%}
+                  The 5-option test template uses position-based subscribe
+                  frequency (30 days / 3 / 5 / 7 / 9 months) like the featured
+                  section, instead of the default jar-count × 30 days. Scoped by
+                  template suffix so every other PDP keeps the default.
+                {%- endcomment -%}
+                {%- if template.suffix == 'd-test-with-5-option' -%}
+                  {% render 'vp2-variant-picker', product: product, block: block, section: section, freq_by_position: true %}
+                {%- else -%}
+                  {% render 'vp2-variant-picker', product: product, block: block, section: section %}
+                {%- endif -%}
               {%- when 'vp_buy_buttons' -%}
                 {% render 'vp2-buy-buttons', product: product, block: block, section: section %}
 
