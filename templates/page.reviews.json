@@ -1,1 +1,376 @@
-{"sections":{"ss_hero_16_BBBtn8":{"type":"ss-hero-16","blocks":{"heading_KtiQXL":{"type":"heading","settings":{"heading":"<h1>Reviews<\/h1>","heading_custom":true,"heading_font":"dm_serif_text_i4","heading_size":72,"heading_size_mobile":52,"heading_height":130,"heading_mt":24,"heading_mt_mobile":24,"heading_color":"#264826"}},"text_T9qEzA":{"type":"text","settings":{"text":"<p><strong>Real stories <\/strong>from pet parents just like you,<br\/>who decided to take action 💚.<\/p>","text_custom":false,"text_font":"josefin_sans_n4","text_size":18,"text_size_mobile":16,"text_height":150,"text_mt":16,"text_mt_mobile":10,"text_color":"#000000"}},"review_xk63xb":{"type":"review","settings":{"review_padding_horizontal":0,"review_padding_horizontal_mobile":14,"review_padding_vertical":14,"review_padding_vertical_mobile":14,"review_radius":10,"review_bg_opacity":0.4,"review_mt":16,"review_mt_mobile":0,"stars_count":4.5,"stars_size":18,"stars_size_mobile":14,"review":"<p>(40,000+ Customers)<\/p>","review_custom":false,"review_font":"josefin_sans_n4","review_size":16,"review_size_mobile":14,"review_height":130,"review_color":"#000000","stars_color":"#ffffff","stars_bg_color":"#00b67a","review_bg_color":"#f3f9f3"}},"feature_XpV7AF":{"type":"feature","settings":{"feature_gap":12,"feature_gap_mobile":6,"feature_mt":0,"feature_mt_mobile":6,"hide_mobile":false,"icon":"shield","icon_size":20,"icon_size_mobile":16,"text":"Sourced via Trustpilot & Facebook","text_custom":false,"text_font":"josefin_sans_n4","text_size":12,"text_size_mobile":12,"text_height":100,"icon_color":"#000000","text_color":"#000000"}}},"block_order":["heading_KtiQXL","text_T9qEzA","review_xk63xb","feature_XpV7AF"],"custom_css":[".hero-image-template--27984710828298__ss_hero_16_BBBtn8 {display: none;}"],"name":"SS - Hero #16","settings":{"hero_height":"auto","hero_fixed_height":600,"body_layout":"text_image","body_layout_mobile":"text_image","body_gap":30,"body_gap_mobile":24,"content_align":"left","content_align_mobile":"center","content_vertical_align":"start","image_width":40,"image_ratio_mobile":"landscape","image_radius":16,"background_overlay":0,"background_color":"#f3f9f3","background_overlay_color":"#000000","background_gradient":"","border_color":"#000000","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":32,"padding_bottom":40,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":false,"content_width":1200,"border_thickness":0,"section_radius":0,"lazy":false}},"custom_liquid_VjdVjA":{"type":"custom-liquid","custom_css":[".video-slide-template--27984710828298__ss_product_vidoes_DFhwxn {max-width: 200px;}",".swiper-wrapper {max-width: 1100px !important; margin: auto;}"],"name":"t:sections.custom-liquid.presets.name","settings":{"custom_liquid":"<div id='ss-product-videos'><\/div>","color_scheme":"","padding_top":20,"padding_bottom":12}},"main":{"type":"main-page","custom_css":[".main-page-title {display: none;}",".page-width--narrow {max-width: 100% !important;}"],"settings":{"padding_top":0,"padding_bottom":0}},"ss_product_vidoes_DFhwxn":{"type":"ss-product-vidoes","blocks":{"video_E8y3Kx":{"type":"video","settings":{"video":"shopify:\/\/files\/videos\/fdown.world_file_69dbd42f9d597_20260412_171943.mp4","video_url":"https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc","modal_heading":"<h4>Heading<\/h4>","modal_text":"<p>Text<\/p>"}},"video_nzHx7e":{"type":"video","settings":{"video":"shopify:\/\/files\/videos\/6a8db2fb-cfaa-44cf-a0e5-8efb19e936f4.mp4","video_url":"https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc","modal_heading":"<h4>Heading<\/h4>","modal_text":"<p>Text<\/p>"}},"video_77BMU8":{"type":"video","settings":{"video":"shopify:\/\/files\/videos\/fdown.world_file_69dbd41d97f48_20260412_171925.mp4","video_url":"https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc","modal_heading":"<h4>Heading<\/h4>","modal_text":"<p>Text<\/p>"}}},"block_order":["video_E8y3Kx","video_nzHx7e","video_77BMU8"],"custom_css":[],"name":"SS - Product videos","settings":{"videos_position":"above_description","use_metafield":false,"heading":"","heading_custom":false,"heading_font":"josefin_sans_n4","heading_size":18,"heading_size_mobile":18,"heading_height":130,"heading_align":"left","heading_align_mobile":"center","slider_view":3,"slider_view_mobile":3,"slider_gap":16,"slider_gap_mobile":10,"slider_mt":0,"slider_mt_mobile":0,"card_radius":10,"card_border_thickness":0,"video_ratio":"portrait","video_ratio_mobile":"portrait","video_overlay":0.3,"card_shadow":true,"icon_size":34,"icon_size_mobile":34,"icon_border_thickness":1,"icon_position":"bottom_left","icon_position_mobile":"bottom_left","hide_icon":false,"arrow_size":35,"arrow_size_mobile":35,"arrow_radius":5,"arrow_border_thickness":0,"arrow_hover_shadow":true,"arrow_show_desktop":true,"arrow_show_mobile":true,"show_content":false,"modal_width":30,"modal_width_mobile":95,"padding_advanced":false,"modal_padding_vertical":0,"modal_padding_vertical_mobile":0,"modal_padding_horizontal":0,"modal_padding_horizontal_mobile":0,"modal_radius":16,"modal_border_thickness":0,"modal_overlay":0.5,"close_size":42,"close_size_mobile":42,"close_radius":8,"close_border_thickness":0,"buttons_size":48,"buttons_size_mobile":48,"buttons_radius":8,"buttons_border_thickness":0,"modal_video_radius":0,"modal_video_border_thickness":0,"modal_video_ratio":"portrait","modal_video_ratio_mobile":"portrait","modal_heading_custom":false,"modal_heading_font":"josefin_sans_n4","modal_heading_size":28,"modal_heading_size_mobile":28,"modal_heading_height":130,"modal_heading_align":"center","modal_heading_align_mobile":"center","modal_text_custom":false,"modal_text_font":"josefin_sans_n4","modal_text_size":16,"modal_text_size_mobile":16,"modal_text_height":150,"modal_text_align":"center","modal_text_align_mobile":"center","modal_text_mt":16,"modal_text_mt_mobile":16,"card_bg_color":"#ffffff","card_border_color":"#000000","video_overlay_color":"#000000","card_shadow_color":"#000000","icon_color":"#ffffff","icon_bg_color":"#000000","icon_border_color":"#ffffff","arrow_icon_color":"#1c1c1c","arrow_icon_hover_color":"#1c1c1c","arrow_bg_color":"#ffffff","arrow_bg_hover_color":"#ffffff","arrow_border_color":"#000000","arrow_border_hover_color":"#000000","modal_heading_color":"#000000","modal_text_color":"#000000","modal_content_bg_color":"#ffffff","modal_border_color":"#000000","modal_overlay_color":"#000000","modal_bg_color":"#ffffff","modal_video_border_color":"#000000","buttons_icon_color":"#ffffff","buttons_bg_color":"#ffffff","buttons_border_color":"#000000","close_icon_color":"#ffffff","close_bg_color":"#ffffff","close_border_color":"#000000","heading_color":"#000000","background_color":"","background_gradient":"","border_color":"#000000","margin_top":0,"margin_bottom":0,"padding_top":0,"padding_bottom":8,"padding_horizontal":1,"padding_horizontal_mobile":1,"border_thickness":0,"lazy":true}},"vp_collection_grid_wFQwfN":{"type":"vp-collection-grid","blocks":{"collection_card_ae6KEe":{"type":"collection_card","settings":{"product":"joint-serum-complex-for-dogs","custom_image":"shopify:\/\/shop_images\/joint_serum_2_14.56.26.png","custom_title":"","category_label":"","badge":"NEW!","show_stars":true,"star_count":"5","description":"Daily advanced joint support drops for improved mobility, less stiffness, and reduced inflammation.","free_gift_text":"100% premium ingredients","btn_label":"Shop Now →"}},"collection_card_Y8jNw9":{"type":"collection_card","settings":{"product":"vitalpaws-multivitamin-chews","custom_image":"shopify:\/\/shop_images\/VitalPaws-multivitamin-product-img.webp","custom_title":"","category_label":"","badge":"MOST POPULAR!","show_stars":true,"star_count":"5","description":"Daily Soft chews for key nutritional support & long-term health in a daily treat.","free_gift_text":"100% premium ingredients","btn_label":"Shop Now →"}}},"block_order":["collection_card_ae6KEe","collection_card_Y8jNw9"],"name":"VP - Collection Grid","settings":{"eyebrow":"","heading":"","subheading":"","header_position":"right","columns_desktop":2,"card_gap":20,"card_border_radius":8,"show_view_all":false,"view_all_url":"","view_all_label":"View All Products","bg_color":"#ffffff","card_bg_color":"#faf9f7","padding_top":20,"padding_bottom":12}}},"order":["ss_hero_16_BBBtn8","custom_liquid_VjdVjA","main","ss_product_vidoes_DFhwxn","vp_collection_grid_wFQwfN"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ss_hero_16_BBBtn8": {
+      "type": "ss-hero-16",
+      "blocks": {
+        "heading_KtiQXL": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h1>Reviews</h1>",
+            "heading_custom": true,
+            "heading_font": "dm_serif_text_i4",
+            "heading_size": 72,
+            "heading_size_mobile": 52,
+            "heading_height": 130,
+            "heading_mt": 24,
+            "heading_mt_mobile": 24,
+            "heading_color": "#264826"
+          }
+        },
+        "text_T9qEzA": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Real stories </strong>from pet parents just like you,<br/>who decided to take action 💚.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_height": 150,
+            "text_mt": 16,
+            "text_mt_mobile": 10,
+            "text_color": "#000000"
+          }
+        },
+        "review_xk63xb": {
+          "type": "review",
+          "settings": {
+            "review_padding_horizontal": 0,
+            "review_padding_horizontal_mobile": 14,
+            "review_padding_vertical": 14,
+            "review_padding_vertical_mobile": 14,
+            "review_radius": 10,
+            "review_bg_opacity": 0.4,
+            "review_mt": 16,
+            "review_mt_mobile": 0,
+            "stars_count": 4.5,
+            "stars_size": 18,
+            "stars_size_mobile": 14,
+            "review": "<p>(40,000+ Customers)</p>",
+            "review_custom": false,
+            "review_font": "josefin_sans_n4",
+            "review_size": 16,
+            "review_size_mobile": 14,
+            "review_height": 130,
+            "review_color": "#000000",
+            "stars_color": "#ffffff",
+            "stars_bg_color": "#00b67a",
+            "review_bg_color": "#f3f9f3"
+          }
+        },
+        "feature_XpV7AF": {
+          "type": "feature",
+          "settings": {
+            "feature_gap": 12,
+            "feature_gap_mobile": 6,
+            "feature_mt": 0,
+            "feature_mt_mobile": 6,
+            "hide_mobile": false,
+            "icon": "shield",
+            "icon_size": 20,
+            "icon_size_mobile": 16,
+            "text": "Sourced via Trustpilot & Facebook",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 12,
+            "text_size_mobile": 12,
+            "text_height": 100,
+            "icon_color": "#000000",
+            "text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "heading_KtiQXL",
+        "text_T9qEzA",
+        "review_xk63xb",
+        "feature_XpV7AF"
+      ],
+      "custom_css": [
+        ".hero-image-template--27984710828298__ss_hero_16_BBBtn8 {display: none;}"
+      ],
+      "name": "SS - Hero #16",
+      "settings": {
+        "hero_height": "auto",
+        "hero_fixed_height": 600,
+        "body_layout": "text_image",
+        "body_layout_mobile": "text_image",
+        "body_gap": 30,
+        "body_gap_mobile": 24,
+        "content_align": "left",
+        "content_align_mobile": "center",
+        "content_vertical_align": "start",
+        "image_width": 40,
+        "image_ratio_mobile": "landscape",
+        "image_radius": 16,
+        "background_overlay": 0,
+        "background_color": "#f3f9f3",
+        "background_overlay_color": "#000000",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 32,
+        "padding_bottom": 40,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": false
+      }
+    },
+    "custom_liquid_VjdVjA": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".video-slide-template--27984710828298__ss_product_vidoes_DFhwxn {max-width: 200px;}",
+        ".swiper-wrapper {max-width: 1100px !important; margin: auto;}"
+      ],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div id='ss-product-videos'></div>",
+        "color_scheme": "",
+        "padding_top": 20,
+        "padding_bottom": 12
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "custom_css": [
+        ".main-page-title {display: none;}",
+        ".page-width--narrow {max-width: 100% !important;}"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ss_product_vidoes_DFhwxn": {
+      "type": "ss-product-vidoes",
+      "blocks": {
+        "video_E8y3Kx": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/fdown.world_file_69dbd42f9d597_20260412_171943.mp4",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "modal_heading": "<h4>Heading</h4>",
+            "modal_text": "<p>Text</p>"
+          }
+        },
+        "video_nzHx7e": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/6a8db2fb-cfaa-44cf-a0e5-8efb19e936f4.mp4",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "modal_heading": "<h4>Heading</h4>",
+            "modal_text": "<p>Text</p>"
+          }
+        },
+        "video_77BMU8": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/fdown.world_file_69dbd41d97f48_20260412_171925.mp4",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "modal_heading": "<h4>Heading</h4>",
+            "modal_text": "<p>Text</p>"
+          }
+        }
+      },
+      "block_order": [
+        "video_E8y3Kx",
+        "video_nzHx7e",
+        "video_77BMU8"
+      ],
+      "custom_css": [],
+      "name": "SS - Product videos",
+      "settings": {
+        "videos_position": "above_description",
+        "use_metafield": false,
+        "heading": "",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 18,
+        "heading_size_mobile": 18,
+        "heading_height": 130,
+        "heading_align": "left",
+        "heading_align_mobile": "center",
+        "slider_view": 3,
+        "slider_view_mobile": 3,
+        "slider_gap": 16,
+        "slider_gap_mobile": 10,
+        "slider_mt": 0,
+        "slider_mt_mobile": 0,
+        "card_radius": 10,
+        "card_border_thickness": 0,
+        "video_ratio": "portrait",
+        "video_ratio_mobile": "portrait",
+        "video_overlay": 0.3,
+        "card_shadow": true,
+        "icon_size": 34,
+        "icon_size_mobile": 34,
+        "icon_border_thickness": 1,
+        "icon_position": "bottom_left",
+        "icon_position_mobile": "bottom_left",
+        "hide_icon": false,
+        "arrow_size": 35,
+        "arrow_size_mobile": 35,
+        "arrow_radius": 5,
+        "arrow_border_thickness": 0,
+        "arrow_hover_shadow": true,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": true,
+        "show_content": false,
+        "modal_width": 30,
+        "modal_width_mobile": 95,
+        "padding_advanced": false,
+        "modal_padding_vertical": 0,
+        "modal_padding_vertical_mobile": 0,
+        "modal_padding_horizontal": 0,
+        "modal_padding_horizontal_mobile": 0,
+        "modal_radius": 16,
+        "modal_border_thickness": 0,
+        "modal_overlay": 0.5,
+        "close_size": 42,
+        "close_size_mobile": 42,
+        "close_radius": 8,
+        "close_border_thickness": 0,
+        "buttons_size": 48,
+        "buttons_size_mobile": 48,
+        "buttons_radius": 8,
+        "buttons_border_thickness": 0,
+        "modal_video_radius": 0,
+        "modal_video_border_thickness": 0,
+        "modal_video_ratio": "portrait",
+        "modal_video_ratio_mobile": "portrait",
+        "modal_heading_custom": false,
+        "modal_heading_font": "josefin_sans_n4",
+        "modal_heading_size": 28,
+        "modal_heading_size_mobile": 28,
+        "modal_heading_height": 130,
+        "modal_heading_align": "center",
+        "modal_heading_align_mobile": "center",
+        "modal_text_custom": false,
+        "modal_text_font": "josefin_sans_n4",
+        "modal_text_size": 16,
+        "modal_text_size_mobile": 16,
+        "modal_text_height": 150,
+        "modal_text_align": "center",
+        "modal_text_align_mobile": "center",
+        "modal_text_mt": 16,
+        "modal_text_mt_mobile": 16,
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#000000",
+        "video_overlay_color": "#000000",
+        "card_shadow_color": "#000000",
+        "icon_color": "#ffffff",
+        "icon_bg_color": "#000000",
+        "icon_border_color": "#ffffff",
+        "arrow_icon_color": "#1c1c1c",
+        "arrow_icon_hover_color": "#1c1c1c",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#ffffff",
+        "arrow_border_color": "#000000",
+        "arrow_border_hover_color": "#000000",
+        "modal_heading_color": "#000000",
+        "modal_text_color": "#000000",
+        "modal_content_bg_color": "#ffffff",
+        "modal_border_color": "#000000",
+        "modal_overlay_color": "#000000",
+        "modal_bg_color": "#ffffff",
+        "modal_video_border_color": "#000000",
+        "buttons_icon_color": "#ffffff",
+        "buttons_bg_color": "#ffffff",
+        "buttons_border_color": "#000000",
+        "close_icon_color": "#ffffff",
+        "close_bg_color": "#ffffff",
+        "close_border_color": "#000000",
+        "heading_color": "#000000",
+        "background_color": "",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 8,
+        "padding_horizontal": 1,
+        "padding_horizontal_mobile": 1,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "vp_collection_grid_wFQwfN": {
+      "type": "vp-collection-grid",
+      "blocks": {
+        "collection_card_ae6KEe": {
+          "type": "collection_card",
+          "settings": {
+            "product": "joint-serum-complex-for-dogs",
+            "custom_image": "shopify://shop_images/joint_serum_2_14.56.26.png",
+            "custom_title": "",
+            "category_label": "",
+            "badge": "NEW!",
+            "show_stars": true,
+            "star_count": "5",
+            "description": "Daily advanced joint support drops for improved mobility, less stiffness, and reduced inflammation.",
+            "free_gift_text": "100% premium ingredients",
+            "btn_label": "Shop Now →"
+          }
+        },
+        "collection_card_Y8jNw9": {
+          "type": "collection_card",
+          "settings": {
+            "product": "vitalpaws-multivitamin-chews-1-3-6",
+            "custom_image": "shopify://shop_images/VitalPaws-multivitamin-product-img.webp",
+            "custom_title": "",
+            "category_label": "",
+            "badge": "MOST POPULAR!",
+            "show_stars": true,
+            "star_count": "5",
+            "description": "Daily Soft chews for key nutritional support & long-term health in a daily treat.",
+            "free_gift_text": "100% premium ingredients",
+            "btn_label": "Shop Now →"
+          }
+        }
+      },
+      "block_order": [
+        "collection_card_ae6KEe",
+        "collection_card_Y8jNw9"
+      ],
+      "name": "VP - Collection Grid",
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "subheading": "",
+        "header_position": "right",
+        "columns_desktop": 2,
+        "card_gap": 20,
+        "card_border_radius": 8,
+        "show_view_all": false,
+        "view_all_url": "",
+        "view_all_label": "View All Products",
+        "bg_color": "#ffffff",
+        "card_bg_color": "#faf9f7",
+        "padding_top": 20,
+        "padding_bottom": 12
+      }
+    }
+  },
+  "order": [
+    "ss_hero_16_BBBtn8",
+    "custom_liquid_VjdVjA",
+    "main",
+    "ss_product_vidoes_DFhwxn",
+    "vp_collection_grid_wFQwfN"
+  ]
+}
