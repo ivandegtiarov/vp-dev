@@ -152,11 +152,20 @@
   #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { font-style: italic; display: flex; align-items: center; gap: 6px; }
   #shopify-section-{{ section.id }} .vp2-subs-text { margin: 0; font-size: 13px; }
 
+  .product-box-modal-label-option-icons img {
+    width: 15px;
+    height: 15px;
+  }
+
   @media screen and (max-width: 768px) {
     #shopify-section-{{ section.id }} .vp2-auto-refill { margin-top: 2rem; padding: 12px; }
     #shopify-section-{{ section.id }} .vp2-auto-refill-title { font-size: 15px; }
     #shopify-section-{{ section.id }} .vp2-subs-content { flex-wrap: nowrap; gap: 6px; }
     #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons { gap: 4px; min-width: 0; }
+    #shopify-section-{{ section.id }} .vp2-subs-content .vp2-subs-icons img {
+      width: 15px;
+      height: 15px;
+    }
     #shopify-section-{{ section.id }} .vp2-subs-text { font-size: 12px; white-space: nowrap; }
   }
 </style>
@@ -264,6 +273,20 @@
     var group = section && section.querySelector('.vp2-buy[data-vp2-group="' + SECTION_ID + '"]');
     if (!section || !group) return;
 
+    /* ---------- DEBUG LOGGER (auto, no manual console commands) ----------
+       Enable by adding ?vp2debug=1 to the URL. Every step of the Loop proxy
+       chain logs to the console with a [VP2] prefix, so the full trace prints
+       on initial load and on each interaction. Off by default = silent for
+       real customers. */
+    var VP2_DEBUG = false;
+    try { VP2_DEBUG = /[?&]vp2debug=1(&|$)/.test(window.location.search); } catch (e) {}
+    function dbg() {
+      if (!VP2_DEBUG) return;
+      var args = ['%c[VP2 ' + SECTION_ID + ']', 'color:#58a6ff;font-weight:700'];
+      for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+      console.log.apply(console, args);
+    }
+
     var form = document.getElementById(FORM_ID);
     var variantIdInput = section.querySelector('.vp2-variant-id');
     var bundleInputs = section.querySelectorAll('[data-vp2-bundle-input][data-vp2-group="' + SECTION_ID + '"]');
@@ -332,19 +355,43 @@
     function syncLoopWidget() {
       var subEl = loopSubEl();
       var oneEl = loopOnetimeEl();
-      if (isSubscribed()) {
-        if (subEl) subEl.click();
+      var wantSub = isSubscribed();
+      dbg('syncLoopWidget →', {
+        wantSubscribe: wantSub,
+        selectedVariant: variantIdInput ? variantIdInput.value : null,
+        subEl: subEl ? 'FOUND' : 'NULL (no subscribe option for this variant!)',
+        oneEl: oneEl ? 'FOUND' : 'NULL',
+        totalLoopGroups: document.querySelectorAll('[data-loop-widget-selling-plan-group]').length
+      });
+      if (wantSub) {
+        if (subEl) { dbg('→ clicking Loop SUBSCRIBE element'); subEl.click(); }
+        else { dbg('%c→ CANNOT subscribe: no Loop sub element present. Item will add as ONE-TIME.', 'color:#f85149;font-weight:700'); }
       } else {
-        if (oneEl) oneEl.click();
+        if (oneEl) { dbg('→ clicking Loop ONE-TIME element'); oneEl.click(); }
+        else { dbg('→ no one-time element to click (ok if Loop defaults to one-time)'); }
       }
     }
     function applyPurchaseMode() { setPriceMode(); syncLoopWidget(); }
     function watchLoopWidget() {
-      if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); return; }
+      dbg('watchLoopWidget: waiting for Loop to render both sub + one-time elements…');
+      if (loopOnetimeEl() && loopSubEl()) { dbg('watchLoopWidget: both present immediately'); syncLoopWidget(); return; }
+      var start = null;
       var obs = new MutationObserver(function () {
-        if (loopOnetimeEl() && loopSubEl()) { syncLoopWidget(); obs.disconnect(); }
+        if (loopOnetimeEl() && loopSubEl()) {
+          dbg('watchLoopWidget: Loop finished rendering (elements appeared) → syncing now');
+          syncLoopWidget(); obs.disconnect();
+        }
       });
       obs.observe(document.body, { childList: true, subtree: true });
+      /* Warn if Loop never renders both within a reasonable window. */
+      setTimeout(function () {
+        if (!(loopOnetimeEl() && loopSubEl())) {
+          dbg('%cwatchLoopWidget: after 5s Loop still missing sub and/or one-time element — subscribe proxy has nothing to click.', 'color:#f85149;font-weight:700', {
+            subEl: loopSubEl() ? 'FOUND' : 'NULL',
+            oneEl: loopOnetimeEl() ? 'FOUND' : 'NULL'
+          });
+        }
+      }, 5000);
     }
 
     /* Subscribe frequency follows the picked bundle (data-vp2-freq). */
@@ -357,6 +404,7 @@
 
     function selectVariant(input) {
       var id = input.getAttribute('data-vp2-variant-id');
+      dbg('selectVariant → bundle:', input.value, '| variantId:', id, '| freq:', input.getAttribute('data-vp2-freq'));
       if (variantIdInput) variantIdInput.value = id;
       window.currenSelectedVariantId = id;
       saveSelection(id);
@@ -370,11 +418,42 @@
       input.addEventListener('change', function () { if (input.checked) selectVariant(input); });
     });
 
-    if (autoRefill) autoRefill.addEventListener('change', applyPurchaseMode);
+    if (autoRefill) autoRefill.addEventListener('change', function () {
+      dbg('checkbox toggled →', autoRefill.checked ? 'SUBSCRIBE' : 'ONE-TIME');
+      applyPurchaseMode();
+    });
 
-    /* initialise: prefer a previously-saved selection (if still available),
-       otherwise fall back to the server-rendered checked bundle. */
-    var saved = inputForVariant(readSelection());
+    /* ---------- OPTIONAL URL OVERRIDE (?pill=first) ---------- */
+    /* Landing-page / ad-link helper: adding ?pill=first to the product URL
+       forces the FIRST bundle pill to be preselected, beating both the saved
+       sessionStorage pick and the server-rendered `checked` pill. With NO such
+       param present this is a no-op — the existing auto / 1 / 2 / 3 theme
+       setting and sessionStorage behaviour are completely untouched.
+       Accepts a word (not a number) so links stay readable, e.g.
+         /products/soft-chews?pill=first
+       A sold-out first pill is ignored, so we never force an unbuyable bundle. */
+    function forcedPillFromUrl() {
+      var m;
+      try { m = /[?&]pill=([^&#]+)/.exec(window.location.search); } catch (e) { return null; }
+      if (!m) return null;
+      var want = decodeURIComponent(m[1]).toLowerCase();
+      var idx = -1;
+      if (want === 'first') idx = 0;
+      else if (want === 'last') idx = bundleInputs.length - 1;
+      if (idx < 0) { dbg('?pill= value not recognised →', want); return null; }
+      var input = bundleInputs[idx];
+      if (!input || input.classList.contains('disabled')) {
+        dbg('?pill=' + want + ' → target missing or sold out, ignoring');
+        return null;
+      }
+      dbg('?pill=' + want + ' → forcing bundle:', input.value);
+      return input;
+    }
+
+    /* initialise: an explicit ?pill= override wins; otherwise prefer a
+       previously-saved selection (if still available), otherwise fall back to
+       the server-rendered checked bundle. */
+    var saved = forcedPillFromUrl() || inputForVariant(readSelection());
     if (saved && !saved.checked) {
       /* Restore the pill visually and run the full selection routine. */
       saved.checked = true;
@@ -391,6 +470,16 @@
       }
     }
     setPriceMode();
+
+    dbg('INIT complete', {
+      initialVariantId: variantIdInput ? variantIdInput.value : null,
+      subscribedOnLoad: isSubscribed(),
+      bundleInputCount: bundleInputs.length,
+      loopScriptPresent: !!(window.loani || document.querySelector('[class*="loop"]')),
+      loopSubElNow: loopSubEl() ? 'FOUND' : 'NULL',
+      loopOneElNow: loopOnetimeEl() ? 'FOUND' : 'NULL'
+    });
+
     watchLoopWidget();
   })();
 </script>
